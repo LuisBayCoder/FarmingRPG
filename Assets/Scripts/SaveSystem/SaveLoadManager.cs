@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class SaveLoadManager : SingletonMonobehaviour<SaveLoadManager>
 {
 
-    //public GameSave gameSave;
+    public GameSave gameSave;
     public List<ISaveable> iSaveableObjectList;
 
     protected override void Awake()
@@ -16,7 +16,7 @@ public class SaveLoadManager : SingletonMonobehaviour<SaveLoadManager>
 
         iSaveableObjectList = new List<ISaveable>();
     }
-    /*
+
     public void LoadDataFromFile()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -69,7 +69,7 @@ public class SaveLoadManager : SingletonMonobehaviour<SaveLoadManager>
         file.Close();
 
         UIManager.Instance.DisablePauseMenu();
-    }*/
+    }
 
     public void StoreCurrentSceneData()
     {

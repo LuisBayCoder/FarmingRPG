@@ -75,12 +75,12 @@ public class SceneItemsManager : SingletonMonobehaviour<SceneItemsManager>, ISav
         ISaveableRegister();
         EventHandler.AfterSceneLoadEvent += AfterSceneLoad;
     }
-    
+
     public void ISaveableDeregister()
     {
         SaveLoadManager.Instance.iSaveableObjectList.Remove(this);
     }
-    /*
+
     public void ISaveableLoad(GameSave gameSave)
     {
         if (gameSave.gameObjectData.TryGetValue(ISaveableUniqueID, out GameObjectSave gameObjectSave))
@@ -91,7 +91,7 @@ public class SceneItemsManager : SingletonMonobehaviour<SceneItemsManager>, ISav
             ISaveableRestoreScene(SceneManager.GetActiveScene().name);
         }
     }
-    */
+
 
 
     public void ISaveableRestoreScene(string sceneName)
@@ -108,7 +108,7 @@ public class SceneItemsManager : SingletonMonobehaviour<SceneItemsManager>, ISav
             }
         }
     }
-     
+
     public void ISaveableRegister()
     {
         SaveLoadManager.Instance.iSaveableObjectList.Add(this);
@@ -121,7 +121,7 @@ public class SceneItemsManager : SingletonMonobehaviour<SceneItemsManager>, ISav
 
         return GameObjectSave;
     }
-   
+
 
 
     public void ISaveableStoreScene(string sceneName)
