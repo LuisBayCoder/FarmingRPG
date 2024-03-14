@@ -354,6 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 43968869}
   - component: {fileID: 43968868}
+  - component: {fileID: 43968870}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -387,6 +388,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &43968870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43968867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf48fd48014af244983dd57b212def9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gUID: 90f4c93d-dd2b-4e92-b9e8-b25d7f48b821
 --- !u!1001 &46637671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1153,6 +1167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 136463590}
   - component: {fileID: 136463591}
+  - component: {fileID: 136463592}
   m_Layer: 0
   m_Name: CharacterCustomiser
   m_TagString: Untagged
@@ -1232,6 +1247,27 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 209d8112adf110143bb4a2b87a6a431d, type: 2}
   - {fileID: 11400000, guid: ea4dc5bc2f8c7be40a956e8c5c457749, type: 2}
   - {fileID: 11400000, guid: 682f076f92d170743a52b3f6fc117296, type: 2}
+--- !u!114 &136463592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136463589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035f8457d1a73b04fbad1cb7d4632e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maleFarmerBaseTexture: {fileID: 2800000, guid: c4e8a25a818969f4faa9e0679d36d253,
+    type: 3}
+  femaleFarmerBaseTexture: {fileID: 2800000, guid: c4e8a25a818969f4faa9e0679d36d253,
+    type: 3}
+  shirtsBaseTexture: {fileID: 2800000, guid: bae27de6a19db3443894c2350fec9717, type: 3}
+  farmerBaseCustomised: {fileID: 2800000, guid: 73946c4cd19968e4486ca15a2e699ab6,
+    type: 3}
+  inputShirtStyleNo: 1
+  inputSex: 0
 --- !u!1001 &191660862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8767,6 +8803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1132214117}
   - component: {fileID: 1132214116}
+  - component: {fileID: 1132214118}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -8802,6 +8839,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1132214118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132214115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf48fd48014af244983dd57b212def9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gUID: 2cc38abe-12f5-47cb-86d4-8dc50da1cec1
 --- !u!1001 &1147525375
 PrefabInstance:
   m_ObjectHideFlags: 0

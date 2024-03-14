@@ -139,3 +139,11 @@ public enum ItemType
     count
 }
 
+public enum Facing
+{
+    none,
+    front,
+    back,
+    right
+}
+
