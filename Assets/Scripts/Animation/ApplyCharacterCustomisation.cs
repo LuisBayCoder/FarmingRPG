@@ -22,26 +22,61 @@ public class ApplyCharacterCustomisation : MonoBehaviour
     [SerializeField] private Texture2D maleFarmerBaseTexture = null;
     [SerializeField] private Texture2D femaleFarmerBaseTexture = null;
     [SerializeField] private Texture2D shirtsBaseTexture = null;
+    [SerializeField] private Texture2D hairBaseTexture = null;
+    [SerializeField] private Texture2D hatsBaseTexture = null;
+    [SerializeField] private Texture2D adornmentsBaseTexture = null;
     private Texture2D farmerBaseTexture;
 
     // Created Textures
     [Header("OutputBase Texture To Be Used For Animation")]
     [SerializeField] private Texture2D farmerBaseCustomised = null;
+    [SerializeField] private Texture2D hairCustomised = null;
+    [SerializeField] private Texture2D hatsCustomised = null;
     private Texture2D farmerBaseShirtsUpdated;
+    private Texture2D farmerBaseAdornmentsUpdated;
     private Texture2D selectedShirt;
+    private Texture2D selectedAdornment;
 
     // Select Shirt Style
     [Header("Select Shirt Style")]
     [Range(0, 1)]
     [SerializeField] private int inputShirtStyleNo = 0;
 
+    // Select Hair Style
+    [Header("Select Hair Style")]
+    [Range(0, 2)]
+    [SerializeField] private int inputHairStyleNo = 0;
+
+    // Select Hat Style
+    [Header("Select Hat Style")]
+    [Range(0, 1)]
+    [SerializeField] private int inputHatStyleNo = 0;
+
+    // Select Adornments Style
+    [Header("Select Adornments Style")]
+    [Range(0, 2)]
+    [SerializeField] private int inputAdornmentsStyleNo = 0;
+
+    // Select Skin Type
+    [Header("Select Skin Type")]
+    [Range(0, 3)]
+    [SerializeField] private int inputSkinType = 0;
+
     // Select Sex
     [Header("Select Sex: 0=Male, 1=Female")]
     [Range(0, 1)]
     [SerializeField] private int inputSex = 0;
 
+    // Select Hair Color
+    [SerializeField] private Color inputHairColor = Color.black;
+
+    // Select Trouser Color
+    [SerializeField] private Color inputTrouserColor = Color.blue;
+
+
     private Facing[,] bodyFacingArray;
     private Vector2Int[,] bodyShirtOffsetArray;
+    private Vector2Int[,] bodyAdornmentsOffsetArray;
 
     // Dimensions
     private int bodyRows = 21;
@@ -54,12 +89,33 @@ public class ApplyCharacterCustomisation : MonoBehaviour
     private int shirtSpriteHeight = 9;
     private int shirtStylesInSpriteWidth = 16;
 
+    private int hairTextureWidth = 16;
+    private int hairTextureHeight = 96;
+    private int hairStylesInSpriteWidth = 8;
+
+    private int hatTextureWidth = 20;
+    private int hatTextureHeight = 80;
+    private int hatStylesInSpriteWidth = 12;
+
+    private int adornmentsTextureWidth = 16;
+    private int adornmentsTextureHeight = 32;
+    private int adornmentsStylesInSpriteWidth = 8;
+    private int adornmentsSpriteWidth = 16;
+    private int adornmentsSpriteHeight = 16;
+
     private List<colorSwap> colorSwapList;
 
     // Target arm colours for color replacement
     private Color32 armTargetColor1 = new Color32(77, 13, 13, 255);  // darkest
     private Color32 armTargetColor2 = new Color32(138, 41, 41, 255); // next darkest
     private Color32 armTargetColor3 = new Color32(172, 50, 50, 255); // lightest
+
+    // Target skin colours for color replacement
+    private Color32 skinTargetColor1 = new Color32(145, 117, 90, 255);  // darkest
+    private Color32 skinTargetColor2 = new Color32(204, 155, 108, 255);  // next darkest
+    private Color32 skinTargetColor3 = new Color32(207, 166, 128, 255);  // next darkest
+    private Color32 skinTargetColor4 = new Color32(238, 195, 154, 255);  // lightest
+
 
     private void Awake()
     {
@@ -77,6 +133,16 @@ public class ApplyCharacterCustomisation : MonoBehaviour
         ProcessShirt();
 
         ProcessArms();
+
+        ProcessTrousers();
+
+        ProcessHair();
+
+        ProcessSkin();
+
+        ProcessHat();
+
+        ProcessAdornments();
 
         MergeCustomisations();
     }
@@ -140,18 +206,98 @@ public class ApplyCharacterCustomisation : MonoBehaviour
         farmerBaseCustomised.Apply();
     }
 
+    private void ProcessTrousers()
+    {
+        // Get trouser pixels to recolor
+        Color[] farmerTrouserPixels = farmerBaseTexture.GetPixels(288, 0, 96, farmerBaseTexture.height);
+
+        // Change trouser colours
+        TintPixelColors(farmerTrouserPixels, inputTrouserColor);
+
+        // Set changed trouser pixels
+        farmerBaseCustomised.SetPixels(288, 0, 96, farmerBaseTexture.height, farmerTrouserPixels);
+
+        // Apply texture changes
+        farmerBaseCustomised.Apply();
+
+    }
+
+    private void ProcessHair()
+    {
+        // Create Selected Hair Texture
+        AddHairToTexture(inputHairStyleNo);
+
+        // Get hair pixels to recolor
+        Color[] farmerSelectedHairPixels = hairCustomised.GetPixels();
+
+        // Tint hair pixels
+        TintPixelColors(farmerSelectedHairPixels, inputHairColor);
+
+        hairCustomised.SetPixels(farmerSelectedHairPixels);
+        hairCustomised.Apply();
+    }
+
+
+    private void ProcessSkin()
+    {
+        // Get skin pixels to recolor
+        Color[] farmerPixelsToRecolour = farmerBaseCustomised.GetPixels(0, 0, 288, farmerBaseTexture.height);
+
+        // Populate Skin Color Swap List
+        PopulateSkinColorSwapList(inputSkinType);
+
+        // Change skin colours
+        ChangePixelColors(farmerPixelsToRecolour, colorSwapList);
+
+        // Set recoloured pixels
+        farmerBaseCustomised.SetPixels(0, 0, 288, farmerBaseTexture.height, farmerPixelsToRecolour);
+
+        // Apply texture changes
+        farmerBaseCustomised.Apply();
+    }
+
+    private void ProcessHat()
+    {
+        // Create Selected Hat Texture
+        AddHatToTexture(inputHatStyleNo);
+    }
+
+    private void ProcessAdornments()
+    {
+        // Initialise body adornments offset array;
+        bodyAdornmentsOffsetArray = new Vector2Int[bodyColumns, bodyRows];
+
+        // Populate body adornments offset array
+        PopulateBodyAdornmentsOffsetArray();
+
+        // Create Selected Adornments Texture
+        AddAdornmentsToTexture(inputAdornmentsStyleNo);
+
+        //Create new adornments base texture
+        farmerBaseAdornmentsUpdated = new Texture2D(farmerBaseTexture.width, farmerBaseTexture.height);
+        farmerBaseAdornmentsUpdated.filterMode = FilterMode.Point;
+
+        // Set adornments base texture to transparent
+        SetTextureToTransparent(farmerBaseAdornmentsUpdated);
+        ApplyAdornmentsTextureToBase();
+    }
+
+
     private void MergeCustomisations()
     {
         // Farmer Shirt Pixels
         Color[] farmerShirtPixels = farmerBaseShirtsUpdated.GetPixels(0, 0, bodyColumns * farmerSpriteWidth, farmerBaseTexture.height);
         // Farmer Trouser Pixels
-        Color[] farmerTrouserPixelsSelection = farmerBaseTexture.GetPixels(288, 0, 96, farmerBaseTexture.height);
+        Color[] farmerTrouserPixelsSelection = farmerBaseCustomised.GetPixels(288, 0, 96, farmerBaseTexture.height);
+        // Farmer Adornments Pixels
+        Color[] farmerAdornmentsPixels = farmerBaseAdornmentsUpdated.GetPixels(0, 0, bodyColumns * farmerSpriteWidth, farmerBaseTexture.height);
 
         // Farmer Body Pixels
         Color[] farmerBodyPixels = farmerBaseCustomised.GetPixels(0, 0, bodyColumns * farmerSpriteWidth, farmerBaseTexture.height);
 
         MergeColourArray(farmerBodyPixels, farmerTrouserPixelsSelection);
         MergeColourArray(farmerBodyPixels, farmerShirtPixels);
+        MergeColourArray(farmerBodyPixels, farmerAdornmentsPixels);
 
         // Paste merged  pixels
         farmerBaseCustomised.SetPixels(0, 0, bodyColumns * farmerSpriteWidth, farmerBaseTexture.height, farmerBodyPixels);
@@ -160,6 +306,66 @@ public class ApplyCharacterCustomisation : MonoBehaviour
         farmerBaseCustomised.Apply();
     }
 
+    private void ApplyAdornmentsTextureToBase()
+    {
+        Color[] frontAdornmentsPixels;
+        Color[] rightAdornmentsPixels;
+
+        frontAdornmentsPixels = selectedAdornment.GetPixels(0, adornmentsSpriteHeight * 1, adornmentsSpriteWidth, adornmentsSpriteHeight);
+
+        rightAdornmentsPixels = selectedAdornment.GetPixels(0, adornmentsSpriteHeight * 0, adornmentsSpriteWidth, adornmentsSpriteHeight);
+
+        // Loop through base texture and apply adornments pixels
+
+        for (int x = 0; x < bodyColumns; x++)
+        {
+            for (int y = 0; y < bodyRows; y++)
+            {
+                int pixelX = x * farmerSpriteWidth;
+                int pixelY = y * farmerSpriteHeight;
+
+                if (bodyAdornmentsOffsetArray[x, y] != null)
+                {
+                    pixelX += bodyAdornmentsOffsetArray[x, y].x;
+                    pixelY += bodyAdornmentsOffsetArray[x, y].y;
+                }
+
+                // Switch on facing direction
+                switch (bodyFacingArray[x, y])
+                {
+                    case Facing.none:
+                        break;
+
+                    case Facing.front:
+                        // Populate front adornments pixels
+                        farmerBaseAdornmentsUpdated.SetPixels(pixelX, pixelY, adornmentsSpriteWidth, adornmentsSpriteHeight, frontAdornmentsPixels);
+                        break;
+
+                    case Facing.right:
+                        // Populate right adornments pixels
+                        farmerBaseAdornmentsUpdated.SetPixels(pixelX, pixelY, adornmentsSpriteWidth, adornmentsSpriteHeight, rightAdornmentsPixels);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+        // Apply adornments texture pixels
+        farmerBaseAdornmentsUpdated.Apply();
+    }
+
+    private void TintPixelColors(Color[] basePixelArray, Color tintColor)
+    {
+        // Loop through pixels to tint
+        for (int i = 0; i < basePixelArray.Length; i++)
+        {
+            basePixelArray[i].r = basePixelArray[i].r * tintColor.r;
+            basePixelArray[i].g = basePixelArray[i].g * tintColor.g;
+            basePixelArray[i].b = basePixelArray[i].b * tintColor.b;
+        }
+    }
 
     private void PopulateArmColorSwapList()
     {
@@ -171,6 +377,53 @@ public class ApplyCharacterCustomisation : MonoBehaviour
         colorSwapList.Add(new colorSwap(armTargetColor2, selectedShirt.GetPixel(0, 6)));
         colorSwapList.Add(new colorSwap(armTargetColor3, selectedShirt.GetPixel(0, 5)));
     }
+
+    private void PopulateSkinColorSwapList(int skinType)
+    {
+        // Clear color swap list
+        colorSwapList.Clear();
+
+        // Skin replacement colors
+        // Switch on skin type
+        switch (skinType)
+        {
+            case 0:
+                colorSwapList.Add(new colorSwap(skinTargetColor1, skinTargetColor1));
+                colorSwapList.Add(new colorSwap(skinTargetColor2, skinTargetColor2));
+                colorSwapList.Add(new colorSwap(skinTargetColor3, skinTargetColor3));
+                colorSwapList.Add(new colorSwap(skinTargetColor4, skinTargetColor4));
+                break;
+
+            case 1:
+                colorSwapList.Add(new colorSwap(skinTargetColor1, new Color32(187, 157, 128, 255)));
+                colorSwapList.Add(new colorSwap(skinTargetColor2, new Color32(231, 187, 144, 255)));
+                colorSwapList.Add(new colorSwap(skinTargetColor3, new Color32(221, 186, 154, 255)));
+                colorSwapList.Add(new colorSwap(skinTargetColor4, new Color32(213, 189, 167, 255)));
+                break;
+
+            case 2:
+                colorSwapList.Add(new colorSwap(skinTargetColor1, new Color32(105, 69, 2, 255)));
+                colorSwapList.Add(new colorSwap(skinTargetColor2, new Color32(128, 87, 12, 255)));
+                colorSwapList.Add(new colorSwap(skinTargetColor3, new Color32(145, 103, 26, 255)));
+                colorSwapList.Add(new colorSwap(skinTargetColor4, new Color32(161, 114, 25, 255)));
+                break;
+
+            case 3:
+                colorSwapList.Add(new colorSwap(skinTargetColor1, new Color32(151, 132, 0, 255)));
+                colorSwapList.Add(new colorSwap(skinTargetColor2, new Color32(187, 166, 15, 255)));
+                colorSwapList.Add(new colorSwap(skinTargetColor3, new Color32(209, 188, 39, 255)));
+                colorSwapList.Add(new colorSwap(skinTargetColor4, new Color32(211, 199, 112, 255)));
+                break;
+
+            default:
+                colorSwapList.Add(new colorSwap(skinTargetColor1, skinTargetColor1));
+                colorSwapList.Add(new colorSwap(skinTargetColor2, skinTargetColor2));
+                colorSwapList.Add(new colorSwap(skinTargetColor3, skinTargetColor3));
+                colorSwapList.Add(new colorSwap(skinTargetColor4, skinTargetColor4));
+                break;
+        }
+    }
+
 
     private void ChangePixelColors(Color[] baseArray, List<colorSwap> colorSwapList)
     {
@@ -227,6 +480,54 @@ public class ApplyCharacterCustomisation : MonoBehaviour
             }
         }
     }
+
+    private void AddHairToTexture(int hairStyleNo)
+    {
+        // Calculate coordinates for hair pixels
+        int y = (hairStyleNo / hairStylesInSpriteWidth) * hairTextureHeight;
+        int x = (hairStyleNo % hairStylesInSpriteWidth) * hairTextureWidth;
+
+        // Get hair pixels
+        Color[] hairPixels = hairBaseTexture.GetPixels(x, y, hairTextureWidth, hairTextureHeight);
+
+        // Apply selected hair pixels to texture
+        hairCustomised.SetPixels(hairPixels);
+        hairCustomised.Apply();
+    }
+
+
+    private void AddHatToTexture(int hatStyleNo)
+    {
+        // Calculate coordinates for hat pixels
+        int y = (hatStyleNo / hatStylesInSpriteWidth) * hatTextureHeight;
+        int x = (hatStyleNo % hatStylesInSpriteWidth) * hatTextureWidth;
+
+        // Get hat pixels
+        Color[] hatPixels = hatsBaseTexture.GetPixels(x, y, hatTextureWidth, hatTextureHeight);
+
+        // Apply selected hat pixels to texture
+        hatsCustomised.SetPixels(hatPixels);
+        hatsCustomised.Apply();
+    }
+
+    private void AddAdornmentsToTexture(int adornmentsStyleNo)
+    {
+        // Create adornment texture
+        selectedAdornment = new Texture2D(adornmentsTextureWidth, adornmentsTextureHeight);
+        selectedAdornment.filterMode = FilterMode.Point;
+
+        // Calculate coordinates for adornments pixels
+        int y = (adornmentsStyleNo / adornmentsStylesInSpriteWidth) * adornmentsTextureHeight;
+        int x = (adornmentsStyleNo % adornmentsStylesInSpriteWidth) * adornmentsTextureWidth;
+
+        // Get adornments pixels
+        Color[] adornmentsPixels = adornmentsBaseTexture.GetPixels(x, y, adornmentsTextureWidth, adornmentsTextureHeight);
+
+        // Apply selected adornments pixels to texture
+        selectedAdornment.SetPixels(adornmentsPixels);
+        selectedAdornment.Apply();
+    }
+
 
 
     private void AddShirtToTexture(int shirtStyleNo)
@@ -472,6 +773,156 @@ public class ApplyCharacterCustomisation : MonoBehaviour
         bodyFacingArray[3, 20] = Facing.back;
         bodyFacingArray[4, 20] = Facing.back;
         bodyFacingArray[5, 20] = Facing.back;
+    }
+
+    private void PopulateBodyAdornmentsOffsetArray()
+    {
+        bodyAdornmentsOffsetArray[0, 0] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 0] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 0] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 0] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 0] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 0] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 1] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 1] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 1] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 1] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 1] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 1] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 2] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 2] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 2] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 2] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 2] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 2] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 3] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 3] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 3] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 3] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 3] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 3] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 4] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 4] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 4] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 4] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 4] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 4] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 5] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 5] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 5] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 5] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 5] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 5] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 6] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 6] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 6] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 6] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 6] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 6] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 7] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 7] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 7] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 7] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 7] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 7] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 8] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 8] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 8] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 8] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 8] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 8] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 9] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 9] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 9] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 9] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 9] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 9] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 10] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 10] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 10] = new Vector2Int(0, 1 + 16);
+        bodyAdornmentsOffsetArray[3, 10] = new Vector2Int(0, 2 + 16);
+        bodyAdornmentsOffsetArray[4, 10] = new Vector2Int(0, 1 + 16);
+        bodyAdornmentsOffsetArray[5, 10] = new Vector2Int(0, 0 + 16);
+
+        bodyAdornmentsOffsetArray[0, 11] = new Vector2Int(0, 1 + 16);
+        bodyAdornmentsOffsetArray[1, 11] = new Vector2Int(0, 2 + 16);
+        bodyAdornmentsOffsetArray[2, 11] = new Vector2Int(0, 1 + 16);
+        bodyAdornmentsOffsetArray[3, 11] = new Vector2Int(0, 0 + 16);
+        bodyAdornmentsOffsetArray[4, 11] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 11] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 12] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 12] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 12] = new Vector2Int(0, 0 + 16);
+        bodyAdornmentsOffsetArray[3, 12] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[4, 12] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[5, 12] = new Vector2Int(0, -1 + 16);
+
+        bodyAdornmentsOffsetArray[0, 13] = new Vector2Int(0, 0 + 16);
+        bodyAdornmentsOffsetArray[1, 13] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[2, 13] = new Vector2Int(1, -1 + 16);
+        bodyAdornmentsOffsetArray[3, 13] = new Vector2Int(1, -1 + 16);
+        bodyAdornmentsOffsetArray[4, 13] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 13] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 14] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 14] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 14] = new Vector2Int(0, -3 + 16);
+        bodyAdornmentsOffsetArray[3, 14] = new Vector2Int(0, -5 + 16);
+        bodyAdornmentsOffsetArray[4, 14] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[5, 14] = new Vector2Int(0, 1 + 16);
+
+        bodyAdornmentsOffsetArray[0, 15] = new Vector2Int(0, -2 + 16);
+        bodyAdornmentsOffsetArray[1, 15] = new Vector2Int(0, -5 + 16);
+        bodyAdornmentsOffsetArray[2, 15] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[3, 15] = new Vector2Int(0, 2 + 16);
+        bodyAdornmentsOffsetArray[4, 15] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 15] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 16] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 16] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 16] = new Vector2Int(0, -3 + 16);
+        bodyAdornmentsOffsetArray[3, 16] = new Vector2Int(0, -2 + 16);
+        bodyAdornmentsOffsetArray[4, 16] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[5, 16] = new Vector2Int(0, 0 + 16);
+
+        bodyAdornmentsOffsetArray[0, 17] = new Vector2Int(0, -3 + 16);
+        bodyAdornmentsOffsetArray[1, 17] = new Vector2Int(0, -2 + 16);
+        bodyAdornmentsOffsetArray[2, 17] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[3, 17] = new Vector2Int(0, 0 + 16);
+        bodyAdornmentsOffsetArray[4, 17] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 17] = new Vector2Int(99, 99);
+
+        bodyAdornmentsOffsetArray[0, 18] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[1, 18] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[2, 18] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[3, 18] = new Vector2Int(0, 0 + 16);
+        bodyAdornmentsOffsetArray[4, 18] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[5, 18] = new Vector2Int(0, -1 + 16);
+
+        bodyAdornmentsOffsetArray[0, 19] = new Vector2Int(0, 0 + 16);
+        bodyAdornmentsOffsetArray[1, 19] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[2, 19] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[3, 19] = new Vector2Int(0, 0 + 16);
+        bodyAdornmentsOffsetArray[4, 19] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[5, 19] = new Vector2Int(0, -1 + 16);
+
+        bodyAdornmentsOffsetArray[0, 20] = new Vector2Int(0, 0 + 16);
+        bodyAdornmentsOffsetArray[1, 20] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[2, 20] = new Vector2Int(0, -1 + 16);
+        bodyAdornmentsOffsetArray[3, 20] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[4, 20] = new Vector2Int(99, 99);
+        bodyAdornmentsOffsetArray[5, 20] = new Vector2Int(99, 99);
     }
 
     private void PopulateBodyShirtOffsetArray()

@@ -1264,10 +1264,22 @@ MonoBehaviour:
   femaleFarmerBaseTexture: {fileID: 2800000, guid: c4e8a25a818969f4faa9e0679d36d253,
     type: 3}
   shirtsBaseTexture: {fileID: 2800000, guid: bae27de6a19db3443894c2350fec9717, type: 3}
+  hairBaseTexture: {fileID: 2800000, guid: 9982bf9edb0201b4583055eb8b80c925, type: 3}
+  hatsBaseTexture: {fileID: 2800000, guid: bfd5930cb171ad448883f9eca56c9e08, type: 3}
+  adornmentsBaseTexture: {fileID: 2800000, guid: 2a21c56faaf4afd479c55eda19270d74,
+    type: 3}
   farmerBaseCustomised: {fileID: 2800000, guid: 73946c4cd19968e4486ca15a2e699ab6,
     type: 3}
+  hairCustomised: {fileID: 2800000, guid: 3fdea510f6c395642bec63c0e92feb05, type: 3}
+  hatsCustomised: {fileID: 2800000, guid: 3f98ab3abed1cec40b1c2e61bead43d6, type: 3}
   inputShirtStyleNo: 1
+  inputHairStyleNo: 1
+  inputHatStyleNo: 1
+  inputAdornmentsStyleNo: 1
+  inputSkinType: 1
   inputSex: 0
+  inputHairColor: {r: 1, g: 0.27877468, b: 0, a: 1}
+  inputTrouserColor: {r: 0.25698647, g: 0.32455772, b: 0.3301887, a: 1}
 --- !u!1001 &191660862
 PrefabInstance:
   m_ObjectHideFlags: 0
