@@ -64,6 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AStar\AStar.cs" />
+    <Compile Include="Assets\Scripts\AStar\AStarTest.cs" />
+    <Compile Include="Assets\Scripts\AStar\GridNodes.cs" />
+    <Compile Include="Assets\Scripts\AStar\Node.cs" />
     <Compile Include="Assets\Scripts\Animation\AnimationOverrides.cs" />
     <Compile Include="Assets\Scripts\Animation\ApplyCharacterCustomisation.cs" />
     <Compile Include="Assets\Scripts\Animation\CharacterAttribute.cs" />
@@ -95,6 +99,7 @@
     <Compile Include="Assets\Scripts\Misc\SingletonMonobehaviour.cs" />
     <Compile Include="Assets\Scripts\Misc\Tags.cs" />
     <Compile Include="Assets\Scripts\Misc\Vector3Serializable.cs" />
+    <Compile Include="Assets\Scripts\NPC\NPCMovementStep.cs" />
     <Compile Include="Assets\Scripts\Player\ItemPickUp.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAnimationTest.cs" />
