@@ -791,4 +791,3 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
         DisplayGridPropertyDetails();
     }
 }
-
