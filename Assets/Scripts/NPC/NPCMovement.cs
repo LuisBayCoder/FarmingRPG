@@ -10,12 +10,12 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(BoxCollider2D))]
 public class NPCMovement : MonoBehaviour
 {
-    [HideInInspector] public SceneName npcCurrentScene;
+    public SceneName npcCurrentScene;
     [HideInInspector] public SceneName npcTargetScene;
     [HideInInspector] public Vector3Int npcCurrentGridPosition;
     [HideInInspector] public Vector3Int npcTargetGridPosition;
     [HideInInspector] public Vector3 npcTargetWorldPosition;
-    [HideInInspector] public Direction npcFacingDirectionAtDestination;
+    public Direction npcFacingDirectionAtDestination;
 
     private SceneName npcPreviousMovementStepScene;
     private Vector3Int npcNextGridPosition;
@@ -286,6 +286,33 @@ public class NPCMovement : MonoBehaviour
         // Get centre of grid square
         return new Vector3(worldPosition.x + Settings.gridCellSize / 2f, worldPosition.y + Settings.gridCellSize / 2f, worldPosition.z);
     }
+
+    public void CancelNPCMovement()
+    {
+        npcPath.ClearPath();
+        npcNextGridPosition = Vector3Int.zero;
+        npcNextWorldPosition = Vector3.zero;
+        npcIsMoving = false;
+
+        if (moveToGridPositionRoutine != null)
+        {
+            StopCoroutine(moveToGridPositionRoutine);
+        }
+
+        // Reset move animation
+        ResetMoveAnimation();
+
+        // Clear event animation
+        ClearNPCEventAnimation();
+        npcTargetAnimationClip = null;
+
+        // Reset idle animation
+        ResetIdleAnimation();
+
+        // Set idle animation
+        SetIdleAnimation();
+    }
+
 
     private void InitialiseNPC()
     {
