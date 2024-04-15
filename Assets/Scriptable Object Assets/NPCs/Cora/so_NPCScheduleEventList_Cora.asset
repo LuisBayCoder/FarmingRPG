@@ -12,4 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7eb726f37b6c894d8d161eb8c95800a, type: 3}
   m_Name: so_NPCScheduleEventList_Cora
   m_EditorClassIdentifier: 
-  npcScheduleEventList: []
+  npcScheduleEventList:
+  - hour: 6
+    minute: 45
+    priority: 0
+    day: 0
+    weather: 3
+    season: 4
+    toSceneName: 0
+    toGridCoordinate:
+      x: 4
+      y: 2
+    npcFacingDirectionAtDestination: 1
+    animationAtDestination: {fileID: 0}
+  - hour: 8
+    minute: 0
+    priority: 10
+    day: 0
+    weather: 3
+    season: 4
+    toSceneName: 0
+    toGridCoordinate:
+      x: -15
+      y: 13
+    npcFacingDirectionAtDestination: 3
+    animationAtDestination: {fileID: 0}
+  - hour: 9
+    minute: 30
+    priority: 10
+    day: 0
+    weather: 3
+    season: 4
+    toSceneName: 1
+    toGridCoordinate:
+      x: 35
+      y: 3
+    npcFacingDirectionAtDestination: 3
+    animationAtDestination: {fileID: 0}
