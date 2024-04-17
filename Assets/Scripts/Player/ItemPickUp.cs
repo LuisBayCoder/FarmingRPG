@@ -9,6 +9,7 @@ public class ItemPickUp : MonoBehaviour
 
         if (item != null)
         {
+            // Get item details
             ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(item.ItemCode);
 
             // if item can be picked up
@@ -16,6 +17,10 @@ public class ItemPickUp : MonoBehaviour
             {
                 // Add item to inventory
                 InventoryManager.Instance.AddItem(InventoryLocation.player, item, collision.gameObject);
+
+                // Play pick up sound
+                AudioManager.Instance.PlaySound(SoundName.effectPickupSound);
+
             }
         }
     }

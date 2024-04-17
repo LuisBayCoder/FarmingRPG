@@ -360,10 +360,10 @@ public class NPCMovement : MonoBehaviour
             float timeToMove = (float)(npcMovementStepTime.TotalSeconds - gameTime.TotalSeconds);
 
             // Calculate speed
-            float npcCalculatedSpeed = Vector3.Distance(transform.position, npcNextWorldPosition) / timeToMove / Settings.secondsPerGameSecond;
+            float npcCalculatedSpeed = Mathf.Max(npcMinSpeed, Vector3.Distance(transform.position, npcNextWorldPosition) / timeToMove / Settings.secondsPerGameSecond);
 
             //// If speed is at least npc min speed and less than npc max speed  then process, otherwise skip and move NPC immediately to position
-            if (npcCalculatedSpeed >= npcMinSpeed && npcCalculatedSpeed <= npcMaxSpeed)
+            if (npcCalculatedSpeed <= npcMaxSpeed)
             {
                 while (Vector3.Distance(transform.position, npcNextWorldPosition) > Settings.pixelSize)
                 {
