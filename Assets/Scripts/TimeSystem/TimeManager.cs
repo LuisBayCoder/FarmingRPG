@@ -183,6 +183,11 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         return gameTime;
     }
 
+    public Season GetGameSeason()
+    {
+        return gameSeason;
+    }
+
 
     //TODO:Remove
     /// <summary>

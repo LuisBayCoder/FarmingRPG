@@ -9,6 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1783831268660029103, guid: 5e580e999e7e08e40acfd5f604f5d603,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783831268660029103, guid: 5e580e999e7e08e40acfd5f604f5d603,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -24,6 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1783831268660029103, guid: 5e580e999e7e08e40acfd5f604f5d603,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783831268660029103, guid: 5e580e999e7e08e40acfd5f604f5d603,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -35,16 +45,6 @@ PrefabInstance:
     - target: {fileID: 1783831268660029103, guid: 5e580e999e7e08e40acfd5f604f5d603,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783831268660029103, guid: 5e580e999e7e08e40acfd5f604f5d603,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783831268660029103, guid: 5e580e999e7e08e40acfd5f604f5d603,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1783831268660029103, guid: 5e580e999e7e08e40acfd5f604f5d603,
@@ -64,15 +64,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3388894519111935663, guid: 5e580e999e7e08e40acfd5f604f5d603,
         type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388894519111935663, guid: 5e580e999e7e08e40acfd5f604f5d603,
+        type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -2243126732310486641, guid: 5d22327a2a3d2a049a8a59a708d527fe,
         type: 3}
-    - target: {fileID: 3388894519111935663, guid: 5e580e999e7e08e40acfd5f604f5d603,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3388894519111935663, guid: 5e580e999e7e08e40acfd5f604f5d603,
         type: 3}
       propertyPath: m_WasSpriteAssigned
