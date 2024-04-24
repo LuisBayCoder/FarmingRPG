@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\NPC\NPCMovementStep.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCScheduleEventSort.cs" />
     <Compile Include="Assets\Scripts\Item\ItemDetails.cs" />
+    <Compile Include="Assets\Scripts\Lighting\LightingControl.cs" />
     <Compile Include="Assets\Scripts\Enums\Enums.cs" />
     <Compile Include="Assets\Scripts\VFX\PoolManager.cs" />
     <Compile Include="Assets\Scripts\Item\ObscuringItemFader.cs" />
@@ -140,7 +141,6 @@
     <Compile Include="Assets\Scripts\Sounds\Sound.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCSchedule.cs" />
     <Compile Include="Assets\Scripts\Lighting\LightingSchedule.cs" />
-    <Compile Include="Assets\Scripts\Lighting\LightingControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
