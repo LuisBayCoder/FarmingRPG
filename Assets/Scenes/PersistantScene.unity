@@ -6751,18 +6751,146 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 799363435}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &799363437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4156620909928231200, guid: e3d56d9e8146d204987941fbc158912f,
+    type: 3}
+  m_PrefabInstance: {fileID: 799363435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &799363438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799363437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5145a52ccbad050458190335535faa5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factionManager: {fileID: 979582122}
+  factionDatabase: {fileID: 11400000, guid: 7f244c634cef64b47a815ef2a46e730d, type: 2}
+  factionID: 0
+  pad:
+    happiness: 0
+    pleasure: 0
+    arousal: 0
+    dominance: 0
+    excitabilityThreshold: 20
+  impressionability: 0
+  traitAlignmentImportance: 50
+  arousalImportance: 50
+  deedImpactThreshold: 5
+  acclimatizationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 20
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  powerDifferenceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -10
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxMemories: 50
+  shortTermMemoryDuration: 300
+  longTermMemoryDuration: 3600
+  memoryCleanupFrequency: 2
+  sortMemories: 0
+  shortTermMemory: []
+  longTermMemory: []
+  eyes: {fileID: 0}
+  sightLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  sharePlayerAffinityWithRumors: 1
+  debugEvalFunc: 0
 --- !u!114 &799363439 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 799363439, guid: e3d56d9e8146d204987941fbc158912f,
     type: 3}
   m_PrefabInstance: {fileID: 799363435}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 799363437}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d388dd3ee664cd14fac44d01400f1186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &799363440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799363437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a05f6a7b82b4e4f47989b777408c7261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheSize: 32
+  timeBetweenGreetings: 300
+  greetings:
+  - triggerParameter: 
+    min: -100
+    max: -25
+    temperament: 511
+  - triggerParameter: 
+    min: -25
+    max: 25
+    temperament: 511
+  - triggerParameter: 
+    min: 25
+    max: 100
+    temperament: 511
 --- !u!1 &810560370
 GameObject:
   m_ObjectHideFlags: 0
@@ -7686,6 +7814,39 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
+--- !u!1 &921669832 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4156620909928231200, guid: e3d56d9e8146d204987941fbc158912f,
+    type: 3}
+  m_PrefabInstance: {fileID: 921669831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &921669833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921669832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a05f6a7b82b4e4f47989b777408c7261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheSize: 32
+  timeBetweenGreetings: 300
+  greetings:
+  - triggerParameter: 
+    min: -100
+    max: -25
+    temperament: 511
+  - triggerParameter: 
+    min: -25
+    max: 25
+    temperament: 511
+  - triggerParameter: 
+    min: 25
+    max: 100
+    temperament: 511
 --- !u!1 &924917200
 GameObject:
   m_ObjectHideFlags: 0
@@ -8483,6 +8644,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8683e42838a14474dbbe43998c9a12d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &979582121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 979582123}
+  - component: {fileID: 979582122}
+  m_Layer: 0
+  m_Name: Faction Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &979582122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979582121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5996e32c82a2fd048b39f217e75512de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factionDatabase: {fileID: 11400000, guid: 7f244c634cef64b47a815ef2a46e730d, type: 2}
+  witnessesPerUpdate: 60
+  canWitnessSelf: 0
+  allowOnlyOneFactionManager: 0
+  debug: 0
+--- !u!4 &979582123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979582121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1016992046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9491,6 +9700,8 @@ GameObject:
   - component: {fileID: 1117205239}
   - component: {fileID: 1117205240}
   - component: {fileID: 1117205241}
+  - component: {fileID: 1117205243}
+  - component: {fileID: 1117205242}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -9667,6 +9878,116 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gUID: 2634a6f9-3fd3-4ca0-a14f-b3a2baf1fb48
+--- !u!114 &1117205242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117205232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 733275cc048824246942ffd0fe2bc77a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dimension: 0
+  deedTemplateLibrary: {fileID: 11400000, guid: db220bc0a5504a9469210650dfdce0bf,
+    type: 2}
+--- !u!114 &1117205243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117205232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7468bb9b02a3772469c3ab5af4662f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factionManager: {fileID: 979582122}
+  factionDatabase: {fileID: 11400000, guid: 7f244c634cef64b47a815ef2a46e730d, type: 2}
+  factionID: 0
+  pad:
+    happiness: 0
+    pleasure: 0
+    arousal: 0
+    dominance: 0
+    excitabilityThreshold: 20
+  impressionability: 0
+  traitAlignmentImportance: 50
+  arousalImportance: 50
+  deedImpactThreshold: 5
+  acclimatizationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 20
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  powerDifferenceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -10
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxMemories: 50
+  shortTermMemoryDuration: 300
+  longTermMemoryDuration: 3600
+  memoryCleanupFrequency: 2
+  sortMemories: 0
+  shortTermMemory: []
+  longTermMemory: []
+  eyes: {fileID: 0}
+  sightLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  sharePlayerAffinityWithRumors: 1
+  debugEvalFunc: 0
 --- !u!1 &1132214115
 GameObject:
   m_ObjectHideFlags: 0
@@ -11516,7 +11837,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -1,0 +1,244 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a188b433183989440a69ac3b2d2e653a, type: 3}
+  m_Name: FarmerMegaOCEAN Faction Database Template
+  m_EditorClassIdentifier: 
+  personalityTraitDefinitions:
+  - name: Openness
+    description: General appreciation for art, emotion adventure, and variety
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Imagination
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Artistic Interests
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Emotionality
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Adventurousness
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Intellect
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Liberalism
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Conscientiousness
+    description: Self-discipline, duty, and meeting outside expectations
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Self-efficacy
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Orderliness
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Dutifulness
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Achievement-striving
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Self-discipline
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Cautiousness
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Extraversion
+    description: Engagement with the external world, interacting with people
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Friendliness
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Gregariousness
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Assertiveness
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Activity Level
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Excitement-seeking
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Cheerfulness
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Agreeableness
+    description: Considerate, kind, generous, trusting and trustworthy, helpful
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Trust
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Morality
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Altruism
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Cooperation
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Modesty
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Sympathy
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Neuroticism
+    description: Tendency to feel anger, anxiety, or depression
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Anxiety
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Anger
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Depression
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Self-consciousness
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Immoderation
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  - name: Vulnerability
+    description: 
+    minValue: -100
+    maxValue: 100
+    customData: 
+  relationshipTraitDefinitions:
+  - name: Affinity
+    description: (Required)
+    minValue: -100
+    maxValue: 100
+    customData: 
+  presets: []
+  factions:
+  - id: 0
+    name: Player
+    description: 
+    color: 0
+    parents: 
+    traits:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    relationships: []
+    percentJudgeParents: 0
+  traitInheritanceType: 0
+  relationshipInheritanceType: 0
+  nextID: 1
