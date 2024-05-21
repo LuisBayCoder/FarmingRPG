@@ -7950,6 +7950,18 @@ MonoBehaviour:
     min: 25
     max: 100
     temperament: 511
+--- !u!114 &921669834 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f,
+    type: 3}
+  m_PrefabInstance: {fileID: 921669831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921669832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f9d98fc66f86643a9795c2a9205ceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &924917200
 GameObject:
   m_ObjectHideFlags: 0
@@ -9010,7 +9022,19 @@ MonoBehaviour:
         m_Calls: []
     onUse:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 921669834}
+          m_TargetAssemblyTypeName: NPCMovement, Assembly-CSharp
+          m_MethodName: CancelNPCMovement
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1016992046
 PrefabInstance:
   m_ObjectHideFlags: 0

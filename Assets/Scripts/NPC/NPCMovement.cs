@@ -48,6 +48,7 @@ public class NPCMovement : MonoBehaviour
     private bool sceneLoaded = false;
 
     private Coroutine moveToGridPositionRoutine;
+    private bool npcStopped = false; // New flag to track if NPC is stopped
 
     private void OnEnable()
     {
@@ -78,11 +79,9 @@ public class NPCMovement : MonoBehaviour
         npcTargetWorldPosition = transform.position;
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         waitForFixedUpdate = new WaitForFixedUpdate();
-
         SetIdleAnimation();
     }
 
@@ -90,6 +89,13 @@ public class NPCMovement : MonoBehaviour
     {
         if (sceneLoaded)
         {
+            if (npcStopped)
+            {
+                // Set idle down animation if the NPC is stopped
+                SetIdleDownAnimation();
+                return;
+            }
+
             if (npcIsMoving == false)
             {
                 // set npc current and next grid position - to take into account the npc might be animating
@@ -99,10 +105,8 @@ public class NPCMovement : MonoBehaviour
                 if (npcPath.npcMovementStepStack.Count > 0)
                 {
                     NPCMovementStep npcMovementStep = npcPath.npcMovementStepStack.Peek();
-
                     npcCurrentScene = npcMovementStep.sceneName;
 
-                    // If NPC is about the move to a new scene reset position to starting point in new scene and update the step times
                     if (npcCurrentScene != npcPreviousMovementStepScene)
                     {
                         npcCurrentGridPosition = (Vector3Int)npcMovementStep.gridCoordinate;
@@ -112,53 +116,35 @@ public class NPCMovement : MonoBehaviour
                         npcPath.UpdateTimesOnPath();
                     }
 
-
-                    // If NPC is in current scene then set NPC to active to make visible, pop the movement step off the stack and then call method to move NPC
                     if (npcCurrentScene.ToString() == SceneManager.GetActiveScene().name)
                     {
                         SetNPCActiveInScene();
-
                         npcMovementStep = npcPath.npcMovementStepStack.Pop();
-
                         npcNextGridPosition = (Vector3Int)npcMovementStep.gridCoordinate;
-
                         TimeSpan npcMovementStepTime = new TimeSpan(npcMovementStep.hour, npcMovementStep.minute, npcMovementStep.second);
-
                         MoveToGridPosition(npcNextGridPosition, npcMovementStepTime, TimeManager.Instance.GetGameTime());
                     }
-
-                    // else if NPC is not in current scene then set NPC to inactive to make invisible
-                    // - once the movement step time is less than game time (in the past) then pop movement step off the stack and set NPC position to movement step position
                     else
                     {
                         SetNPCInactiveInScene();
-
                         npcCurrentGridPosition = (Vector3Int)npcMovementStep.gridCoordinate;
                         npcNextGridPosition = npcCurrentGridPosition;
                         transform.position = GetWorldPosition(npcCurrentGridPosition);
-
                         TimeSpan npcMovementStepTime = new TimeSpan(npcMovementStep.hour, npcMovementStep.minute, npcMovementStep.second);
-
                         TimeSpan gameTime = TimeManager.Instance.GetGameTime();
-
                         if (npcMovementStepTime < gameTime)
                         {
                             npcMovementStep = npcPath.npcMovementStepStack.Pop();
-
                             npcCurrentGridPosition = (Vector3Int)npcMovementStep.gridCoordinate;
                             npcNextGridPosition = npcCurrentGridPosition;
                             transform.position = GetWorldPosition(npcCurrentGridPosition);
                         }
                     }
-
                 }
-                // else if no more NPC movement steps
                 else
                 {
                     ResetMoveAnimation();
-
                     SetNPCFacingDirection();
-
                     SetNPCEventAnimation();
                 }
             }
@@ -194,36 +180,28 @@ public class NPCMovement : MonoBehaviour
     {
         animatorOverrideController[blankAnimation] = blankAnimation;
         animator.SetBool(Settings.eventAnimation, false);
-
-        // Clear any rotation on npc
         transform.rotation = Quaternion.identity;
     }
 
     private void SetNPCFacingDirection()
     {
         ResetIdleAnimation();
-
         switch (npcFacingDirectionAtDestination)
         {
             case Direction.up:
                 animator.SetBool(Settings.idleUp, true);
                 break;
-
             case Direction.down:
                 animator.SetBool(Settings.idleDown, true);
                 break;
-
             case Direction.left:
                 animator.SetBool(Settings.idleLeft, true);
                 break;
-
             case Direction.right:
                 animator.SetBool(Settings.idleRight, true);
                 break;
-
             case Direction.none:
                 break;
-
             default:
                 break;
         }
@@ -246,13 +224,11 @@ public class NPCMovement : MonoBehaviour
     private void AfterSceneLoad()
     {
         grid = GameObject.FindObjectOfType<Grid>();
-
         if (!npcInitialised)
         {
             InitialiseNPC();
             npcInitialised = true;
         }
-
         sceneLoaded = true;
     }
 
@@ -261,9 +237,6 @@ public class NPCMovement : MonoBehaviour
         sceneLoaded = false;
     }
 
-    /// <summary>
-    /// returns the grid position given the worldPosition
-    /// </summary>
     private Vector3Int GetGridPosition(Vector3 worldPosition)
     {
         if (grid != null)
@@ -276,14 +249,9 @@ public class NPCMovement : MonoBehaviour
         }
     }
 
-    /// <summary>
-    ///  returns the world position (centre of grid square) from gridPosition
-    /// </summary>
     public Vector3 GetWorldPosition(Vector3Int gridPosition)
     {
         Vector3 worldPosition = grid.CellToWorld(gridPosition);
-
-        // Get centre of grid square
         return new Vector3(worldPosition.x + Settings.gridCellSize / 2f, worldPosition.y + Settings.gridCellSize / 2f, worldPosition.z);
     }
 
@@ -309,10 +277,18 @@ public class NPCMovement : MonoBehaviour
         // Reset idle animation
         ResetIdleAnimation();
 
-        // Set idle animation
-        SetIdleAnimation();
+        // Set idle down animation
+        SetIdleDownAnimation();
+
+        // Set the NPC stopped flag to true
+        npcStopped = true;
     }
 
+    private void SetIdleDownAnimation()
+    {
+        ResetIdleAnimation();
+        animator.SetBool(Settings.idleDown, true);
+    }
 
     private void InitialiseNPC()
     {
@@ -442,5 +418,60 @@ public class NPCMovement : MonoBehaviour
         animator.SetBool(Settings.idleLeft, false);
         animator.SetBool(Settings.idleUp, false);
         animator.SetBool(Settings.idleDown, false);
+    }
+
+    public void OnConversationEnd()
+    {
+        // Resume NPC movement after conversation ends
+        ResumeNPCMovement();
+    }
+
+    public void ResumeNPCMovement()
+    {
+        // Clear the NPC stopped flag
+        npcStopped = false;
+
+        // Set idle animation to down to ensure proper state before resuming
+        SetIdleDownAnimation();
+
+        // Check if there are any movement steps remaining
+        if (npcPath.npcMovementStepStack.Count > 0)
+        {
+            NPCMovementStep npcMovementStep = npcPath.npcMovementStepStack.Peek();
+            npcCurrentScene = npcMovementStep.sceneName;
+
+            if (npcCurrentScene.ToString() == SceneManager.GetActiveScene().name)
+            {
+                SetNPCActiveInScene();
+
+                npcMovementStep = npcPath.npcMovementStepStack.Pop();
+
+                npcNextGridPosition = (Vector3Int)npcMovementStep.gridCoordinate;
+
+                TimeSpan npcMovementStepTime = new TimeSpan(npcMovementStep.hour, npcMovementStep.minute, npcMovementStep.second);
+
+                MoveToGridPosition(npcNextGridPosition, npcMovementStepTime, TimeManager.Instance.GetGameTime());
+            }
+            else
+            {
+                SetNPCInactiveInScene();
+
+                npcCurrentGridPosition = (Vector3Int)npcMovementStep.gridCoordinate;
+                npcNextGridPosition = npcCurrentGridPosition;
+                transform.position = GetWorldPosition(npcCurrentGridPosition);
+
+                TimeSpan npcMovementStepTime = new TimeSpan(npcMovementStep.hour, npcMovementStep.minute, npcMovementStep.second);
+                TimeSpan gameTime = TimeManager.Instance.GetGameTime();
+
+                if (npcMovementStepTime < gameTime)
+                {
+                    npcMovementStep = npcPath.npcMovementStepStack.Pop();
+
+                    npcCurrentGridPosition = (Vector3Int)npcMovementStep.gridCoordinate;
+                    npcNextGridPosition = npcCurrentGridPosition;
+                    transform.position = GetWorldPosition(npcCurrentGridPosition);
+                }
+            }
+        }
     }
 }
