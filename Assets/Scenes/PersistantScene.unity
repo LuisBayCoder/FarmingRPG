@@ -12039,13 +12039,48 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
+      propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
       propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 799363444}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
+      propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1825219347}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
       propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CancelNPCMovement
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154406, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
