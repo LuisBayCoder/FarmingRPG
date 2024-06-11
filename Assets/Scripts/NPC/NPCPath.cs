@@ -33,8 +33,6 @@ public class NPCPath : MonoBehaviour
 
             // Build path and add movement steps to movement step stack
             NPCManager.Instance.BuildPath(npcScheduleEvent.toSceneName, npcCurrentGridPosition, npcTargetGridPosition, npcMovementStepStack);
-
-
         }
         // else if the schedule event is for a location in another scene
         else if (npcScheduleEvent.toSceneName != npcMovement.npcCurrentScene)
@@ -84,7 +82,6 @@ public class NPCPath : MonoBehaviour
                     }
 
                     Vector2Int fromGridPosition = new Vector2Int(fromGridX, fromGridY);
-
                     Vector2Int toGridPosition = new Vector2Int(toGridX, toGridY);
 
                     // Build path and add movement steps to movement step stack
@@ -92,7 +89,6 @@ public class NPCPath : MonoBehaviour
                 }
             }
         }
-
 
         // If stack count >1, update times and then pop off 1st item which is the starting position
         if (npcMovementStepStack.Count > 1)
@@ -103,12 +99,8 @@ public class NPCPath : MonoBehaviour
             // Set schedule event details in NPC movement
             npcMovement.SetScheduleEventDetails(npcScheduleEvent);
         }
-
     }
 
-    /// <summary>
-    /// Update the path movement steps with expected gametime
-    /// </summary>
     public void UpdateTimesOnPath()
     {
         // Get current game time
@@ -141,21 +133,22 @@ public class NPCPath : MonoBehaviour
 
             previousNPCMovementStep = npcMovementStep;
         }
-
     }
 
-    /// <summary>
-    /// returns true if the previous movement step is diagonal to movement step, else returns false
-    /// </summary>
     private bool MovementIsDiagonal(NPCMovementStep npcMovementStep, NPCMovementStep previousNPCMovementStep)
     {
-        if ((npcMovementStep.gridCoordinate.x != previousNPCMovementStep.gridCoordinate.x) && (npcMovementStep.gridCoordinate.y != previousNPCMovementStep.gridCoordinate.y))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return npcMovementStep.gridCoordinate.x != previousNPCMovementStep.gridCoordinate.x && npcMovementStep.gridCoordinate.y != previousNPCMovementStep.gridCoordinate.y;
+    }
+
+    public void Pause()
+    {
+        npcMovement.Pause();
+    }
+
+    public void Unpause()
+    {
+        npcMovement.Unpause();
     }
 }
+
+
