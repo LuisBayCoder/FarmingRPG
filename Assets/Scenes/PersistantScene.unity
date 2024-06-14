@@ -6680,6 +6680,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
+      propertyPath: childBoxCollider2D
+      value: 
+      objectReference: {fileID: 1458501155}
+    - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
       propertyPath: npcFacingDirectionAtDestination
       value: 1
       objectReference: {fileID: 0}
@@ -6987,34 +6991,10 @@ MonoBehaviour:
   events:
     onSelect:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 799363444}
-          m_TargetAssemblyTypeName: NPCMovement, Assembly-CSharp
-          m_MethodName: StartConversation
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     onDeselect:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 799363444}
-          m_TargetAssemblyTypeName: NPCMovement, Assembly-CSharp
-          m_MethodName: EndConversation
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     onUse:
       m_PersistentCalls:
         m_Calls: []
@@ -7866,6 +7846,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
+      propertyPath: childBoxCollider2D
+      value: 
+      objectReference: {fileID: 1549368612}
+    - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
       propertyPath: npcFacingDirectionAtDestination
       value: 1
       objectReference: {fileID: 0}
@@ -7882,7 +7866,7 @@ PrefabInstance:
     - target: {fileID: 4156620909928231200, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4156620909928231203, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
@@ -12110,7 +12094,7 @@ PrefabInstance:
         type: 3}
       propertyPath: events.onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 799363444}
+      objectReference: {fileID: 1458501157}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onUse.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -12130,7 +12114,7 @@ PrefabInstance:
         type: 3}
       propertyPath: events.onDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 799363444}
+      objectReference: {fileID: 1458501157}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -12139,7 +12123,7 @@ PrefabInstance:
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Pause
+      value: PauseOnMouseOver
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
@@ -12149,7 +12133,7 @@ PrefabInstance:
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Unpause
+      value: UnPauseOnMouseOver
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
@@ -12159,12 +12143,12 @@ PrefabInstance:
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NPCMovement, Assembly-CSharp
+      value: NPCConversationHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NPCMovement, Assembly-CSharp
+      value: NPCConversationHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
@@ -13378,6 +13362,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8683e42838a14474dbbe43998c9a12d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1458501151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8724088706476154427, guid: c962b046586e6044fa9f5b43d8a2c414,
+    type: 3}
+  m_PrefabInstance: {fileID: 1290819490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1458501155 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8724088706476154425, guid: c962b046586e6044fa9f5b43d8a2c414,
+    type: 3}
+  m_PrefabInstance: {fileID: 1290819490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1458501157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458501151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49d5f1b3dfd0c5408544e48c78c2998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcMovement: {fileID: 799363444}
 --- !u!1001 &1483235748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14507,6 +14516,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8683e42838a14474dbbe43998c9a12d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1549368608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8724088706476154427, guid: c962b046586e6044fa9f5b43d8a2c414,
+    type: 3}
+  m_PrefabInstance: {fileID: 8724088706937557590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1549368612 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8724088706476154425, guid: c962b046586e6044fa9f5b43d8a2c414,
+    type: 3}
+  m_PrefabInstance: {fileID: 8724088706937557590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1549368614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549368608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49d5f1b3dfd0c5408544e48c78c2998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcMovement: {fileID: 921669834}
 --- !u!1 &1558987560
 GameObject:
   m_ObjectHideFlags: 0
@@ -20312,14 +20346,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
+      propertyPath: events.onDeselect.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
       propertyPath: events.onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 921669834}
+      objectReference: {fileID: 1549368614}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 921669834}
+      objectReference: {fileID: 1549368614}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: events.onDeselect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -20328,7 +20372,7 @@ PrefabInstance:
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartConversation
+      value: PauseOnMouseOver
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
@@ -20337,18 +20381,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
+      propertyPath: events.onDeselect.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
       propertyPath: events.onDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnConversationEnd
+      value: UnPauseOnMouseOver
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NPCMovement, Assembly-CSharp
+      value: NPCConversationHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: events.onDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NPCMovement, Assembly-CSharp
+      value: NPCConversationHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154404, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}

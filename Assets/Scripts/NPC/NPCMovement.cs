@@ -37,6 +37,7 @@ public class NPCMovement : MonoBehaviour
     private Grid grid;
     private Rigidbody2D rigidBody2D;
     private BoxCollider2D boxCollider2D;
+    public BoxCollider2D childBoxCollider2D;  // Reference to the child BoxCollider2D
     private WaitForFixedUpdate waitForFixedUpdate;
     private Animator animator;
     private AnimatorOverrideController animatorOverrideController;
@@ -65,6 +66,7 @@ public class NPCMovement : MonoBehaviour
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        //childBoxCollider2D = GetComponentInChildren<BoxCollider2D>(); // Assign the child BoxCollider2D
         animator = GetComponent<Animator>();
         npcPath = GetComponent<NPCPath>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -202,6 +204,7 @@ public class NPCMovement : MonoBehaviour
     {
         spriteRenderer.enabled = true;
         boxCollider2D.enabled = true;
+        if (childBoxCollider2D != null) childBoxCollider2D.enabled = true; // Enable the child BoxCollider2D
         npcActiveInScene = true;
     }
 
@@ -209,6 +212,7 @@ public class NPCMovement : MonoBehaviour
     {
         spriteRenderer.enabled = false;
         boxCollider2D.enabled = false;
+        if (childBoxCollider2D != null) childBoxCollider2D.enabled = false; // Disable the child BoxCollider2D
         npcActiveInScene = false;
     }
 
@@ -365,6 +369,10 @@ public class NPCMovement : MonoBehaviour
     {
         paused = true;
         CancelNPCMovement();
+
+        // Set NPC to idle down animation when paused
+        ResetIdleAnimation();
+        animator.SetBool(Settings.idleDown, true);
     }
 
     public void Unpause()
@@ -372,5 +380,4 @@ public class NPCMovement : MonoBehaviour
         paused = false;
     }
 }
-
 
