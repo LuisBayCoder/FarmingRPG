@@ -16,4 +16,6 @@ public class ItemDetails
     public bool canBeDropped;
     public bool canBeEaten;
     public bool canBeCarried;
+    public bool isWeapon;
+    public int damage;
 }

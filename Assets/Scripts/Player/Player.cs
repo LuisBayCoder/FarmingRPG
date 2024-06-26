@@ -708,8 +708,10 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void UseToolInPlayerDirection(ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
+
         if (Input.GetMouseButton(0))
         {
+            WeaponAction(equippedItemDetails, playerDirection);
             switch (equippedItemDetails.itemType)
             {
                 case ItemType.Reaping_tool:
@@ -771,6 +773,23 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
     }
 
+    private void WeaponAction(ItemDetails itemDetails, Vector3Int cursorGridPosition)
+    {
+        
+        // Implement your weapon action logic here
+        Debug.Log("Weapon action at position: " + cursorGridPosition);
+
+        // Assuming you have a reference to the AttackController component
+        AttackController attackController = GetComponent<AttackController>();
+        if (attackController != null && itemDetails.isWeapon)
+        {
+            // Convert Vector3Int to Vector3 for normalization
+            Vector3 attackDirectionVector3 = (cursorGridPosition - new Vector3Int((int)rigidBody2D.position.x, (int)rigidBody2D.position.y, 0));
+            Vector2 attackDirection = new Vector2(attackDirectionVector3.x, attackDirectionVector3.y).normalized;
+            
+            attackController.Attack(itemDetails.damage, attackDirection); 
+        }
+    }
 
     /// <summary>
     /// Method processes crop with equipped item in player direction
@@ -1067,5 +1086,4 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 break;
         }
     }
-
 }
