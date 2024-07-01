@@ -35,14 +35,12 @@ public class GridCursor : MonoBehaviour
         EventHandler.AfterSceneLoadEvent += SceneLoaded;
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         mainCamera = Camera.main;
         canvas = GetComponentInParent<Canvas>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (CursorIsEnabled)
@@ -55,18 +53,10 @@ public class GridCursor : MonoBehaviour
     {
         if (grid != null)
         {
-            // Get grid position for cursor
             Vector3Int gridPosition = GetGridPositionForCursor();
-
-            // Get grid position for player
             Vector3Int playerGridPosition = GetGridPositionForPlayer();
-
-            // Set cursor sprite
             SetCursorValidity(gridPosition, playerGridPosition);
-
-            // Get rect transform position for cursor
             cursorRectTransform.position = GetRectTransformPositionForCursor(gridPosition);
-
             return gridPosition;
         }
         else
@@ -82,9 +72,6 @@ public class GridCursor : MonoBehaviour
 
     private void SetCursorValidity(Vector3Int cursorGridPosition, Vector3Int playerGridPosition)
     {
-        SetCursorToValid();
-
-        // Check item use radius is valid
         if (Mathf.Abs(cursorGridPosition.x - playerGridPosition.x) > ItemUseGridRadius
             || Mathf.Abs(cursorGridPosition.y - playerGridPosition.y) > ItemUseGridRadius)
         {
@@ -92,7 +79,6 @@ public class GridCursor : MonoBehaviour
             return;
         }
 
-        // Get selected item details
         ItemDetails itemDetails = InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
 
         if (itemDetails == null)
@@ -101,12 +87,16 @@ public class GridCursor : MonoBehaviour
             return;
         }
 
-        // Get grid property details at cursor position
+        if (IsCursorOverEnemyWithWeapon())
+        {
+            SetCursorToValid();
+            return;
+        }
+
         GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(cursorGridPosition.x, cursorGridPosition.y);
 
         if (gridPropertyDetails != null)
         {
-            // Determine cursor validity based on inventory item selected and grid property details
             switch (itemDetails.itemType)
             {
                 case ItemType.Seed:
@@ -118,7 +108,6 @@ public class GridCursor : MonoBehaviour
                     break;
 
                 case ItemType.Commodity:
-
                     if (!IsCursorValidForCommodity(gridPropertyDetails))
                     {
                         SetCursorToInvalid();
@@ -139,15 +128,11 @@ public class GridCursor : MonoBehaviour
                     }
                     break;
 
-                case ItemType.none:
-                    break;
-
-                case ItemType.count:
-                    break;
-
                 default:
-                    break;
+                    SetCursorToInvalid();
+                    return;
             }
+            SetCursorToValid(); // Cursor is valid for the checked item type and grid property details
         }
         else
         {
@@ -156,64 +141,39 @@ public class GridCursor : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Set the cursor to be invalid
-    /// </summary>
     private void SetCursorToInvalid()
     {
         cursorImage.sprite = redCursorSprite;
         CursorPositionIsValid = false;
     }
 
-    /// <summary>
-    /// Set the cursor to be valid
-    /// </summary>
     private void SetCursorToValid()
     {
         cursorImage.sprite = greenCursorSprite;
         CursorPositionIsValid = true;
     }
 
-    /// <summary>
-    /// Test cursor validity for a commodity for the target gridPropertyDetails. Returns true if valid, false if invalid
-    /// </summary>
     private bool IsCursorValidForCommodity(GridPropertyDetails gridPropertyDetails)
     {
         return gridPropertyDetails.canDropItem;
     }
 
-    /// <summary>
-    /// Set cursor validity for a seed for the target gridPropertyDetails. Returns true if valid, false if invalid
-    /// </summary>
     private bool IsCursorValidForSeed(GridPropertyDetails gridPropertyDetails)
     {
         return gridPropertyDetails.canDropItem;
     }
 
-    /// <summary>
-    /// Sets the cursor as either valid or invalid for the tool for the target gridPropertyDetails. Returns true if valid or false if invalid
-    /// </summary>
     private bool IsCursorValidForTool(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails)
     {
-        // Switch on tool
         switch (itemDetails.itemType)
         {
             case ItemType.Hoeing_tool:
                 if (gridPropertyDetails.isDiggable == true && gridPropertyDetails.daysSinceDug == -1)
                 {
-                    #region Need to get any items at location so we can check if they are reapable
-
-                    // Get world position for cursor
                     Vector3 cursorWorldPosition = new Vector3(GetWorldPositionForCursor().x + 0.5f, GetWorldPositionForCursor().y + 0.5f, 0f);
-
-                    // Get list of items at cursor location
                     List<Item> itemList = new List<Item>();
-
                     HelperMethods.GetComponentsAtBoxLocation<Item>(out itemList, cursorWorldPosition, Settings.cursorSize, 0f);
 
-                    #endregion Need to get any items at location so we can check if they are reapable
-
-                    // Loop through items found to see if any are reapable type - we are not going to let the player dig where there are reapable scenary items
                     bool foundReapable = false;
 
                     foreach (Item item in itemList)
@@ -225,14 +185,7 @@ public class GridCursor : MonoBehaviour
                         }
                     }
 
-                    if (foundReapable)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
+                    return !foundReapable;
                 }
                 else
                 {
@@ -240,52 +193,22 @@ public class GridCursor : MonoBehaviour
                 }
 
             case ItemType.Watering_tool:
-                if (gridPropertyDetails.daysSinceDug > -1 && gridPropertyDetails.daysSinceWatered == -1)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return gridPropertyDetails.daysSinceDug > -1 && gridPropertyDetails.daysSinceWatered == -1;
 
             case ItemType.Chopping_tool:
             case ItemType.Collecting_tool:
             case ItemType.Breaking_tool:
-
-                // Check if item can be harvested with item selected, check item is fully grown
-
-                // Check if seed planted
                 if (gridPropertyDetails.seedItemCode != -1)
                 {
-                    // Get crop details for seed
                     CropDetails cropDetails = so_CropDetailsList.GetCropDetails(gridPropertyDetails.seedItemCode);
 
-                    // if crop details found
-                    if (cropDetails != null)
+                    if (cropDetails != null && gridPropertyDetails.growthDays >= cropDetails.growthDays[cropDetails.growthDays.Length - 1])
                     {
-                        // Check if crop fully grown
-                        if (gridPropertyDetails.growthDays >= cropDetails.growthDays[cropDetails.growthDays.Length - 1])
-                        {
-                            // Check if crop can be harvested with tool selected
-                            if (cropDetails.CanUseToolToHarvestCrop(itemDetails.itemCode))
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        return cropDetails.CanUseToolToHarvestCrop(itemDetails.itemCode);
                     }
                 }
 
                 return false;
-
 
             default:
                 return false;
@@ -295,7 +218,6 @@ public class GridCursor : MonoBehaviour
     public void DisableCursor()
     {
         cursorImage.color = Color.clear;
-
         CursorIsEnabled = false;
     }
 
@@ -307,7 +229,7 @@ public class GridCursor : MonoBehaviour
 
     public Vector3Int GetGridPositionForCursor()
     {
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mainCamera.transform.position.z));  // z is how far the objects are in front of the camera - camera is at -10 so objects are (-)-10 in front = 10
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mainCamera.transform.position.z));
         return grid.WorldToCell(worldPosition);
     }
 
@@ -325,6 +247,55 @@ public class GridCursor : MonoBehaviour
 
     public Vector3 GetWorldPositionForCursor()
     {
-        return grid.CellToWorld(GetGridPositionForCursor());
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mainCamera.transform.position.z));
+        Debug.Log($"Cursor world position: {worldPosition}");
+        return grid.CellToWorld(grid.WorldToCell(worldPosition));
+    }
+
+
+    private bool IsCursorOverEnemyWithWeapon()
+    {
+        // Get the world position of the cursor
+        Vector3 cursorWorldPosition = GetWorldPositionForCursor();
+
+        // Check for colliders at the cursor position
+        Collider2D hit = Physics2D.OverlapPoint(cursorWorldPosition);
+
+        // Check if a collider was hit
+        if (hit != null)
+        {
+            Debug.Log($"Hit object: {hit.gameObject.name}");
+
+            // Check if the object has the tag "Enemy"
+            if (hit.CompareTag("Enemy"))
+            {
+                // Get the selected item details
+                ItemDetails itemDetails = InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
+
+                // Check if the item details are not null and the item is a weapon
+                if (itemDetails != null && itemDetails.isWeapon)
+                {
+                    Debug.Log("Cursor is over an enemy and player is holding a weapon");
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("Cursor is over an enemy but player is not holding a weapon");
+                }
+            }
+            else
+            {
+                Debug.Log("Cursor is not over an enemy");
+            }
+        }
+        else
+        {
+            Debug.Log("No collider hit");
+        }
+
+        return false;
     }
 }
+
+
+

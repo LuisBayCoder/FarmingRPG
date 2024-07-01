@@ -775,7 +775,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void WeaponAction(ItemDetails itemDetails, Vector3Int cursorGridPosition)
     {
-        
+
         // Implement your weapon action logic here
         Debug.Log("Weapon action at position: " + cursorGridPosition);
 
@@ -784,10 +784,10 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         if (attackController != null && itemDetails.isWeapon)
         {
             // Convert Vector3Int to Vector3 for normalization
-            Vector3 attackDirectionVector3 = (cursorGridPosition - new Vector3Int((int)rigidBody2D.position.x, (int)rigidBody2D.position.y, 0));
+            Vector3 attackDirectionVector3 = cursorGridPosition - new Vector3Int((int)rigidBody2D.position.x, (int)rigidBody2D.position.y, 0);
             Vector2 attackDirection = new Vector2(attackDirectionVector3.x, attackDirectionVector3.y).normalized;
-            
-            attackController.Attack(itemDetails.damage, attackDirection); 
+
+            attackController.Attack(itemDetails.damage, attackDirection);
         }
     }
 

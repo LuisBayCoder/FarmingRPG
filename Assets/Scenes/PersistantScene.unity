@@ -5163,6 +5163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd5174793055ca45aaf9375cee954c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textPrefab: {fileID: 2204855065964313628, guid: a88bf1258d6306e44843fcca35a1e5d2,
+    type: 3}
+  levitationSpeed: 0.5
+  messageDuration: 2
 --- !u!4 &554824283
 Transform:
   m_ObjectHideFlags: 0
@@ -5548,7 +5552,7 @@ GameObject:
   - component: {fileID: 577050957}
   m_Layer: 0
   m_Name: Old Man_0
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5577,6 +5581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0d07a420c9b904a925842f4b0ab785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 100
 --- !u!61 &577050959
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5641,9 +5646,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 63569325
-  m_SortingLayer: 8
-  m_SortingOrder: 1
+  m_SortingLayerID: -1897448895
+  m_SortingLayer: 6
+  m_SortingOrder: 0
   m_Sprite: {fileID: 2887393811725299369, guid: c44807a4111dc43248353acf5e058a39,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5664,7 +5669,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577050956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.92, y: -0.97, z: 0}
+  m_LocalPosition: {x: 0.67, y: -1.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10495,6 +10500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bfa39ddce7a7184e897c75ee36d13bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onScreenMessageSystem: {fileID: 554824282}
   offsetDistance: 1.2
   attackAreaSize: {x: 1, y: 1}
 --- !u!224 &1123555449 stripped
