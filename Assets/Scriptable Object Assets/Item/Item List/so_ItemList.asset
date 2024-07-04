@@ -241,7 +241,7 @@ MonoBehaviour:
     damage: 0
   - itemCode: 10016
     itemType: 0
-    itemDescription: Stone 2 Seed
+    itemDescription: pumpkin
     itemSprite: {fileID: 21300000, guid: f0d720006ae6c9e468cc99a9f1713ba1, type: 3}
     itemLongDescription: Juicy Pumpkin
     itemUseGridRadius: 0
@@ -349,5 +349,19 @@ MonoBehaviour:
     canBeDropped: 0
     canBeEaten: 0
     canBeCarried: 0
+    isWeapon: 0
+    damage: 0
+  - itemCode: 10024
+    itemType: 1
+    itemDescription: Stone
+    itemSprite: {fileID: 21300000, guid: 7700e9e59e6f58e4598ea8f2e5a84cc1, type: 3}
+    itemLongDescription: Used for crafting and building
+    itemUseGridRadius: 2
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 1
+    canBeDropped: 1
+    canBeEaten: 0
+    canBeCarried: 1
     isWeapon: 0
     damage: 0

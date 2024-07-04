@@ -61,5 +61,4 @@ public class CropDetails
         }
         return -1;
     }
-
 }
