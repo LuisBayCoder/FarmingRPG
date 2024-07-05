@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Crop : MonoBehaviour
 {
-    private int harvestActionCount = 0;
+    private int cumulativeDamage = 0;
 
     [Tooltip("This should be populated from child transform gameobject showing harvest effect spawn point")]
     [SerializeField] private Transform harvestActionEffectTransform = null;
@@ -13,7 +13,6 @@ public class Crop : MonoBehaviour
 
     [HideInInspector]
     public Vector2Int cropGridPosition;
-
 
     public void ProcessToolAction(ItemDetails equippedItemDetails, bool isToolRight, bool isToolLeft, bool isToolDown, bool isToolUp)
     {
@@ -33,10 +32,16 @@ public class Crop : MonoBehaviour
         if (cropDetails == null)
             return;
 
-        // Get animator for crop if present
-        Animator animator = GetComponentInChildren<Animator>();
+        // Get the required harvest actions for the tool
+        int requiredHarvestActions = cropDetails.RequiredHarvestActionsForTool(equippedItemDetails.itemCode);
+        if (requiredHarvestActions == -1)
+            return; // this tool can't be used to harvest this crop
+
+        // Add the tool's damage to the cumulative damage
+        cumulativeDamage += equippedItemDetails.damage;
 
         // Trigger tool animation
+        Animator animator = GetComponentInChildren<Animator>();
         if (animator != null)
         {
             if (isToolRight || isToolUp)
@@ -55,24 +60,13 @@ public class Crop : MonoBehaviour
             EventHandler.CallHarvestActionEffectEvent(harvestActionEffectTransform.position, cropDetails.harvestActionEffect);
         }
 
-
-        // Get required harvest actions for tool
-        int requiredHarvestActions = cropDetails.RequiredHarvestActionsForTool(equippedItemDetails.itemCode);
-        if (requiredHarvestActions == -1)
-            return; // this tool can't be used to harvest this crop
-
-
-        // Increment harvest action count
-        harvestActionCount += 1;
-
-        // Check if required harvest actions made
-        if (harvestActionCount >= requiredHarvestActions)
+        // Check if cumulative damage meets or exceeds required harvest actions
+        if (cumulativeDamage >= requiredHarvestActions)
             HarvestCrop(isToolRight, isToolUp, cropDetails, gridPropertyDetails, animator);
     }
 
     private void HarvestCrop(bool isUsingToolRight, bool isUsingToolUp, CropDetails cropDetails, GridPropertyDetails gridPropertyDetails, Animator animator)
     {
-
         // Is there a harvested animation
         if (cropDetails.isHarvestedAnimation && animator != null)
         {
@@ -100,7 +94,6 @@ public class Crop : MonoBehaviour
         {
             AudioManager.Instance.PlaySound(cropDetails.harvestSound);
         }
-
 
         // Delete crop from grid properties
         gridPropertyDetails.seedItemCode = -1;
@@ -134,7 +127,6 @@ public class Crop : MonoBehaviour
         }
         else
         {
-
             HarvestActions(cropDetails, gridPropertyDetails);
         }
     }
@@ -158,7 +150,6 @@ public class Crop : MonoBehaviour
         {
             CreateHarvestedTransformCrop(cropDetails, gridPropertyDetails);
         }
-
 
         Destroy(gameObject);
     }
@@ -186,7 +177,7 @@ public class Crop : MonoBehaviour
                 Vector3 spawnPosition;
                 if (cropDetails.spawnCropProducedAtPlayerPosition)
                 {
-                    //  Add item to the players inventory
+                    // Add item to the players inventory
                     InventoryManager.Instance.AddItem(InventoryLocation.player, cropDetails.cropProducedItemCode[i]);
                 }
                 else
@@ -212,6 +203,8 @@ public class Crop : MonoBehaviour
         // Display planted crop
         GridPropertiesManager.Instance.DisplayPlantedCrop(gridPropertyDetails);
     }
-
-
 }
+
+
+
+

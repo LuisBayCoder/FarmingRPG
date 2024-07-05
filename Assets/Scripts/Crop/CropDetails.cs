@@ -22,30 +22,20 @@ public class CropDetails
 
     [ItemCodeDescription]
     public int[] harvestToolItemCode; // array of item codes for the tools that can harvest or 0 array elements if no tool required
-    public int[] requiredHarvestActions; // number of harvest actions required for corressponding tool in harvest tool item code array
+    public int[] requiredHarvestActions; // number of harvest actions required for corresponding tool in harvest tool item code array
     [ItemCodeDescription]
     public int[] cropProducedItemCode; // array of item codes produced for the harvested crop
     public int[] cropProducedMinQuantity; // array of minimum quantities produced for the harvested crop
     public int[] cropProducedMaxQuantity; // if max quantity is > min quantity then a random number of crops between min and max are produced
     public int daysToRegrow; // days to regrow next crop or -1 if a single crop
 
-
     /// <summary>
     /// returns true if the tool item code can be used to harvest this crop, else returns false
     /// </summary>
     public bool CanUseToolToHarvestCrop(int toolItemCode)
     {
-        if (RequiredHarvestActionsForTool(toolItemCode) == -1)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-
+        return RequiredHarvestActionsForTool(toolItemCode) > 0;
     }
-
 
     /// <summary>
     /// returns -1 if the tool can't be used to harvest this crop, else returns the number of harvest actions required by this tool
@@ -62,3 +52,4 @@ public class CropDetails
         return -1;
     }
 }
+

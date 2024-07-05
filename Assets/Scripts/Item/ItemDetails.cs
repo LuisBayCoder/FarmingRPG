@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class ItemDetails
@@ -17,5 +16,6 @@ public class ItemDetails
     public bool canBeEaten;
     public bool canBeCarried;
     public bool isWeapon;
-    public int damage;
+    public int damage; // This will be used as the hit damage for tools
 }
+
