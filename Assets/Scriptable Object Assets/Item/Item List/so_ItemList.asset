@@ -26,7 +26,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10001
     itemType: 1
     itemDescription: Pumpkin
@@ -40,7 +40,7 @@ MonoBehaviour:
     canBeEaten: 1
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10002
     itemType: 1
     itemDescription: Corn
@@ -54,7 +54,7 @@ MonoBehaviour:
     canBeEaten: 1
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10003
     itemType: 2
     itemDescription: A basic Watering Can
@@ -68,7 +68,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10004
     itemType: 3
     itemDescription: A Basic Hoe
@@ -82,7 +82,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 1
-    damage: 1
+    damageAmount: 7
   - itemCode: 10005
     itemType: 4
     itemDescription: A Basic Axe
@@ -96,7 +96,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 1
-    damage: 5
+    damageAmount: 10
   - itemCode: 10006
     itemType: 0
     itemDescription: ParsnipSeed
@@ -110,7 +110,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10007
     itemType: 1
     itemDescription: Parsnip
@@ -124,7 +124,7 @@ MonoBehaviour:
     canBeEaten: 1
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10008
     itemType: 1
     itemDescription: Wood
@@ -138,7 +138,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10009
     itemType: 0
     itemDescription: Blue Spruce Pine Cone
@@ -152,7 +152,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10010
     itemType: 0
     itemDescription: Cayon Oak Tree Stump
@@ -167,7 +167,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10011
     itemType: 0
     itemDescription: Blue Sprue Tree Stump
@@ -182,7 +182,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10012
     itemType: 7
     itemDescription: Wicker Basket
@@ -196,7 +196,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10013
     itemType: 5
     itemDescription: A Basic Pickaxe
@@ -210,7 +210,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 1
-    damage: 5
+    damageAmount: 13
   - itemCode: 10014
     itemType: 0
     itemDescription: Stone 1 Seed
@@ -224,7 +224,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10015
     itemType: 1
     itemDescription: Stone
@@ -238,7 +238,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10016
     itemType: 0
     itemDescription: pumpkin
@@ -252,13 +252,13 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10017
     itemType: 6
     itemDescription: 'A basic scythe '
     itemSprite: {fileID: 21300506, guid: 853ac38383c680342ac7e688bf29b197, type: 3}
     itemLongDescription: Great for cutting grass
-    itemUseGridRadius: 0
+    itemUseGridRadius: 1
     itemUseRadius: 1.5
     isStartingItem: 1
     canBePickedUp: 1
@@ -266,7 +266,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 1
-    damage: 5
+    damageAmount: 8
   - itemCode: 10018
     itemType: 8
     itemDescription: Grass 1
@@ -280,7 +280,7 @@ MonoBehaviour:
     canBeEaten: 1
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10019
     itemType: 8
     itemDescription: Grass 2
@@ -294,7 +294,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10020
     itemType: 1
     itemDescription: Weed1
@@ -308,7 +308,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10021
     itemType: 8
     itemDescription: Prickly Cactus
@@ -322,7 +322,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10022
     itemType: 9
     itemDescription: Chair
@@ -336,7 +336,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10023
     itemType: 9
     itemDescription: Table
@@ -350,7 +350,7 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 0
-    damage: 0
+    damageAmount: 0
   - itemCode: 10024
     itemType: 1
     itemDescription: Stone
@@ -364,4 +364,4 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 1
     isWeapon: 0
-    damage: 0
+    damageAmount: 0

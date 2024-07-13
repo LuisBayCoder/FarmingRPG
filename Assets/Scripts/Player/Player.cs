@@ -253,7 +253,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     {
         if (!playerToolUseDisabled)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0)) // Left mouse button click
             {
                 if (gridCursor.CursorIsEnabled || cursor.CursorIsEnabled)
                 {
@@ -275,7 +275,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         Vector3Int playerDirection = GetPlayerClickDirection(cursorGridPosition, playerGridPosition);
 
-        // Get Grid property details at cursor position (the GridCursor validation routine ensures that grid property details are not null)
+        // Get Grid property details at cursor position
         GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(cursorGridPosition.x, cursorGridPosition.y);
 
         // Get Selected item details
@@ -299,26 +299,28 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                     }
                     break;
 
+                // Handle Tool usage on left mouse button click
+                case ItemType.Hoeing_tool:
                 case ItemType.Watering_tool:
                 case ItemType.Breaking_tool:
                 case ItemType.Chopping_tool:
-                case ItemType.Hoeing_tool:
                 case ItemType.Reaping_tool:
                 case ItemType.Collecting_tool:
-                    ProcessPlayerClickInputTool(gridPropertyDetails, itemDetails, playerDirection);
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        ProcessPlayerClickInputTool(gridPropertyDetails, itemDetails, playerDirection);
+                    }
                     break;
 
                 case ItemType.none:
-                    break;
-
                 case ItemType.count:
-                    break;
-
                 default:
                     break;
             }
         }
     }
+
+
 
     private Vector3Int GetPlayerClickDirection(Vector3Int cursorGridPosition, Vector3Int playerGridPosition)
     {
@@ -419,53 +421,32 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void ProcessPlayerClickInputTool(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails, Vector3Int playerDirection)
     {
-        // Switch on tool
         switch (itemDetails.itemType)
         {
             case ItemType.Hoeing_tool:
-                if (gridCursor.CursorPositionIsValid)
-                {
-                    HoeGroundAtCursor(gridPropertyDetails, playerDirection);
-                }
+                HoeGroundAtCursor(gridPropertyDetails, playerDirection);
                 break;
 
             case ItemType.Watering_tool:
-                if (gridCursor.CursorPositionIsValid)
-                {
-                    WaterGroundAtCursor(gridPropertyDetails, playerDirection);
-                }
+                WaterGroundAtCursor(gridPropertyDetails, playerDirection);
                 break;
 
             case ItemType.Chopping_tool:
-                if (gridCursor.CursorPositionIsValid)
-                {
-                    ChopInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
-                }
+                ChopInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
                 break;
 
-
             case ItemType.Collecting_tool:
-                if (gridCursor.CursorPositionIsValid)
-                {
-                    CollectInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
-                }
+                CollectInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
                 break;
 
             case ItemType.Breaking_tool:
-                if (gridCursor.CursorPositionIsValid)
-                {
-                    BreakInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
-                }
+                BreakInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
                 break;
 
             case ItemType.Reaping_tool:
-                if (cursor.CursorPositionIsValid)
-                {
-                    playerDirection = GetPlayerDirection(cursor.GetWorldPositionForCursor(), GetPlayerCentrePosition());
-                    ReapInPlayerDirectionAtCursor(itemDetails, playerDirection);
-                }
+                playerDirection = GetPlayerDirection(cursor.GetWorldPositionForCursor(), GetPlayerCentrePosition());
+                ReapInPlayerDirectionAtCursor(itemDetails, playerDirection);
                 break;
-
 
             default:
                 break;
@@ -474,12 +455,62 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void HoeGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
     {
-        //Play sound
-        AudioManager.Instance.PlaySound(SoundName.effectHoe);
-
         // Trigger animation
-        StartCoroutine(HoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails));
+        StartCoroutine(HoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails, gridPropertyDetails != null && gridPropertyDetails.daysSinceDug == -1 && gridPropertyDetails.isDiggable));
     }
+
+    private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails, bool isDiggable)
+    {
+        PlayerInputIsDisabled = true;
+        playerToolUseDisabled = true;
+
+        // Set tool animation to hoe in override animation
+        toolCharacterAttribute.partVariantType = PartVariantType.hoe;
+        characterAttributeCustomisationList.Clear();
+        characterAttributeCustomisationList.Add(toolCharacterAttribute);
+        animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
+
+        if (playerDirection == Vector3Int.right)
+        {
+            isUsingToolRight = true;
+        }
+        else if (playerDirection == Vector3Int.left)
+        {
+            isUsingToolLeft = true;
+        }
+        else if (playerDirection == Vector3Int.up)
+        {
+            isUsingToolUp = true;
+        }
+        else if (playerDirection == Vector3Int.down)
+        {
+            isUsingToolDown = true;
+        }
+
+        yield return useToolAnimationPause;
+
+        if (isDiggable)
+        {
+            // Set Grid property details for dug ground
+            if (gridPropertyDetails.daysSinceDug == -1)
+            {
+                gridPropertyDetails.daysSinceDug = 0;
+            }
+
+            // Set grid property to dug
+            GridPropertiesManager.Instance.SetGridPropertyDetails(gridPropertyDetails.gridX, gridPropertyDetails.gridY, gridPropertyDetails);
+
+            // Display dug grid tiles
+            GridPropertiesManager.Instance.DisplayDugGround(gridPropertyDetails);
+        }
+
+        // After animation pause
+        yield return afterUseToolAnimationPause;
+
+        PlayerInputIsDisabled = false;
+        playerToolUseDisabled = false;
+    }
+
 
     private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails)
     {
@@ -533,7 +564,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void WaterGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
     {
-        //Play sound
+        // Play sound
         AudioManager.Instance.PlaySound(SoundName.effectWateringCan);
 
         // Trigger animation
@@ -775,7 +806,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void WeaponAction(ItemDetails itemDetails, Vector3Int cursorGridPosition)
     {
-
         // Implement your weapon action logic here
         Debug.Log("Weapon action at position: " + cursorGridPosition);
 
@@ -787,7 +817,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             Vector3 attackDirectionVector3 = cursorGridPosition - new Vector3Int((int)rigidBody2D.position.x, (int)rigidBody2D.position.y, 0);
             Vector2 attackDirection = new Vector2(attackDirectionVector3.x, attackDirectionVector3.y).normalized;
 
-            attackController.Attack(itemDetails.damage, attackDirection);
+            attackController.Attack(itemDetails.damageAmount, attackDirection);
         }
     }
 

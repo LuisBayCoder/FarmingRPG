@@ -38,7 +38,7 @@ public class Crop : MonoBehaviour
             return; // this tool can't be used to harvest this crop
 
         // Add the tool's damage to the cumulative damage
-        cumulativeDamage += equippedItemDetails.damage;
+        cumulativeDamage += equippedItemDetails.damageAmount;
 
         // Trigger tool animation
         Animator animator = GetComponentInChildren<Animator>();

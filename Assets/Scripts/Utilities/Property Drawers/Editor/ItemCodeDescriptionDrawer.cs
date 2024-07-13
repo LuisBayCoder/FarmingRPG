@@ -75,7 +75,7 @@ public class ItemCodeDescriptionDrawer : PropertyDrawer
         if (itemDetail != null)
         {
             // Debug log for new fields
-            Debug.Log($"ItemCode: {itemDetail.itemCode}, IsWeapon: {itemDetail.isWeapon}, Damage: {itemDetail.damage}");
+            Debug.Log($"ItemCode: {itemDetail.itemCode}, IsWeapon: {itemDetail.isWeapon}, Damage: {itemDetail.damageAmount}");
             return itemDetail.itemDescription;
         }
         else
@@ -84,4 +84,3 @@ public class ItemCodeDescriptionDrawer : PropertyDrawer
         }
     }
 }
-

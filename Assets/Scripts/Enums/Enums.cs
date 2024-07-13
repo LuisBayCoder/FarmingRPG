@@ -171,6 +171,7 @@ public enum ItemType
     Collecting_tool,
     Reapable_scenary,
     Furniture,
+    Weapon,
     none,
     count
 }
