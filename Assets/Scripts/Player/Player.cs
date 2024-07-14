@@ -421,43 +421,75 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void ProcessPlayerClickInputTool(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails, Vector3Int playerDirection)
     {
+        WeaponAction(itemDetails, playerDirection); // Add this to ensure damage application for all tools
         switch (itemDetails.itemType)
         {
             case ItemType.Hoeing_tool:
                 HoeGroundAtCursor(gridPropertyDetails, playerDirection);
                 break;
-
             case ItemType.Watering_tool:
                 WaterGroundAtCursor(gridPropertyDetails, playerDirection);
                 break;
-
             case ItemType.Chopping_tool:
                 ChopInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
                 break;
-
             case ItemType.Collecting_tool:
                 CollectInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
                 break;
-
             case ItemType.Breaking_tool:
                 BreakInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
                 break;
-
             case ItemType.Reaping_tool:
                 playerDirection = GetPlayerDirection(cursor.GetWorldPositionForCursor(), GetPlayerCentrePosition());
                 ReapInPlayerDirectionAtCursor(itemDetails, playerDirection);
                 break;
-
             default:
                 break;
         }
     }
 
+
     private void HoeGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
     {
         // Trigger animation
         StartCoroutine(HoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails, gridPropertyDetails != null && gridPropertyDetails.daysSinceDug == -1 && gridPropertyDetails.isDiggable));
+
+        // Apply damage logic here
+        ApplyToolDamage(ItemType.Hoeing_tool, playerDirection);
     }
+
+    private void ApplyToolDamage(ItemType toolType, Vector3Int cursorGridPosition)
+    {
+        Vector2 point = new Vector2(cursorGridPosition.x, cursorGridPosition.y);
+        Vector2 size = new Vector2(1, 1); // Adjust the size as needed
+        Item[] itemArray = HelperMethods.GetComponentsAtBoxLocationNonAlloc<Item>(Settings.maxCollidersToTestPerReapSwing, point, size, 0f);
+
+        foreach (var item in itemArray)
+        {
+            if (item != null)
+            {
+                ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(item.ItemCode);
+                if (itemDetails != null && itemDetails.itemType == toolType)
+                {
+                    ApplyToolDamage(itemDetails.itemType, cursorGridPosition);
+                }
+
+                /*AttackController attackController = GetComponent<AttackController>();
+                if (attackController != null && itemDetails.isWeapon)
+                {
+                    Vector3 attackDirectionVector3 = cursorGridPosition - new Vector3Int((int)rigidBody2D.position.x, (int)rigidBody2D.position.y, 0);
+                    Vector2 attackDirection = new Vector2(attackDirectionVector3.x, attackDirectionVector3.y).normalized;
+
+                    attackController.Attack(itemDetails.damageAmount, attackDirection);
+                }
+
+                ApplyToolDamage(itemDetails.itemType, cursorGridPosition);*/
+            }
+        }
+    }
+
+
+
 
     private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails, bool isDiggable)
     {
@@ -628,6 +660,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Play sound
         AudioManager.Instance.PlaySound(SoundName.effectAxe);
 
+        WeaponAction(equippedItemDetails, playerDirection);
         // Trigger animation
         StartCoroutine(ChopInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection));
     }
@@ -685,9 +718,10 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     {
         // Play sound
         AudioManager.Instance.PlaySound(SoundName.effectPickaxe);
-
         StartCoroutine(BreakInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection));
+        WeaponAction(equippedItemDetails, playerDirection);
     }
+
 
     private IEnumerator BreakInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
@@ -739,6 +773,8 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void UseToolInPlayerDirection(ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
+        // Common weapon action logic
+        WeaponAction(equippedItemDetails, playerDirection);
 
         if (Input.GetMouseButton(0))
         {
@@ -806,20 +842,20 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void WeaponAction(ItemDetails itemDetails, Vector3Int cursorGridPosition)
     {
-        // Implement your weapon action logic here
         Debug.Log("Weapon action at position: " + cursorGridPosition);
 
-        // Assuming you have a reference to the AttackController component
         AttackController attackController = GetComponent<AttackController>();
         if (attackController != null && itemDetails.isWeapon)
         {
-            // Convert Vector3Int to Vector3 for normalization
             Vector3 attackDirectionVector3 = cursorGridPosition - new Vector3Int((int)rigidBody2D.position.x, (int)rigidBody2D.position.y, 0);
             Vector2 attackDirection = new Vector2(attackDirectionVector3.x, attackDirectionVector3.y).normalized;
 
             attackController.Attack(itemDetails.damageAmount, attackDirection);
         }
+
+        ApplyToolDamage(itemDetails.itemType, cursorGridPosition);
     }
+
 
     /// <summary>
     /// Method processes crop with equipped item in player direction
