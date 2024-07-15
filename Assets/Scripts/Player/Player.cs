@@ -473,17 +473,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 {
                     ApplyToolDamage(itemDetails.itemType, cursorGridPosition);
                 }
-
-                /*AttackController attackController = GetComponent<AttackController>();
-                if (attackController != null && itemDetails.isWeapon)
-                {
-                    Vector3 attackDirectionVector3 = cursorGridPosition - new Vector3Int((int)rigidBody2D.position.x, (int)rigidBody2D.position.y, 0);
-                    Vector2 attackDirection = new Vector2(attackDirectionVector3.x, attackDirectionVector3.y).normalized;
-
-                    attackController.Attack(itemDetails.damageAmount, attackDirection);
-                }
-
-                ApplyToolDamage(itemDetails.itemType, cursorGridPosition);*/
             }
         }
     }
