@@ -404,13 +404,8 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
             // Make planting sound
             AudioManager.Instance.PlaySound(SoundName.effectPlantingSound);
-
         }
-
     }
-
-
-
     private void ProcessPlayerClickInputCommodity(ItemDetails itemDetails)
     {
         if (itemDetails.canBeDropped && gridCursor.CursorPositionIsValid)
@@ -448,13 +443,12 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
     }
 
-
     private void HoeGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
     {
         // Trigger animation
-        StartCoroutine(HoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails, gridPropertyDetails != null && gridPropertyDetails.daysSinceDug == -1 && gridPropertyDetails.isDiggable));
+        StartCoroutine(HoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails, gridCursor.CursorPositionIsValid));
 
-        // Apply damage logic here
+        // Apply damage logic here if needed
         ApplyToolDamage(ItemType.Hoeing_tool, playerDirection);
     }
 
@@ -477,10 +471,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
     }
 
-
-
-
-    private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails, bool isDiggable)
+    private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails, bool isCursorPositionValid)
     {
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
@@ -510,13 +501,10 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         yield return useToolAnimationPause;
 
-        if (isDiggable)
+        if (isCursorPositionValid && gridPropertyDetails != null && gridPropertyDetails.daysSinceDug == -1 && gridPropertyDetails.isDiggable)
         {
             // Set Grid property details for dug ground
-            if (gridPropertyDetails.daysSinceDug == -1)
-            {
-                gridPropertyDetails.daysSinceDug = 0;
-            }
+            gridPropertyDetails.daysSinceDug = 0;
 
             // Set grid property to dug
             GridPropertiesManager.Instance.SetGridPropertyDetails(gridPropertyDetails.gridX, gridPropertyDetails.gridY, gridPropertyDetails);
@@ -524,57 +512,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             // Display dug grid tiles
             GridPropertiesManager.Instance.DisplayDugGround(gridPropertyDetails);
         }
-
-        // After animation pause
-        yield return afterUseToolAnimationPause;
-
-        PlayerInputIsDisabled = false;
-        playerToolUseDisabled = false;
-    }
-
-
-    private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails)
-    {
-        PlayerInputIsDisabled = true;
-        playerToolUseDisabled = true;
-
-        // Set tool animation to hoe in override animation
-        toolCharacterAttribute.partVariantType = PartVariantType.hoe;
-        characterAttributeCustomisationList.Clear();
-        characterAttributeCustomisationList.Add(toolCharacterAttribute);
-        animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
-
-        if (playerDirection == Vector3Int.right)
-        {
-            isUsingToolRight = true;
-        }
-        else if (playerDirection == Vector3Int.left)
-        {
-            isUsingToolLeft = true;
-        }
-        else if (playerDirection == Vector3Int.up)
-        {
-            isUsingToolUp = true;
-        }
-        else if (playerDirection == Vector3Int.down)
-        {
-            isUsingToolDown = true;
-        }
-
-        yield return useToolAnimationPause;
-
-        // Set Grid property details for dug ground
-        if (gridPropertyDetails.daysSinceDug == -1)
-        {
-            gridPropertyDetails.daysSinceDug = 0;
-        }
-
-        // Set grid property to dug
-        GridPropertiesManager.Instance.SetGridPropertyDetails(gridPropertyDetails.gridX, gridPropertyDetails.gridY, gridPropertyDetails);
-
-        // Display dug grid tiles
-        GridPropertiesManager.Instance.DisplayDugGround(gridPropertyDetails);
-
 
         // After animation pause
         yield return afterUseToolAnimationPause;
@@ -676,8 +613,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         playerToolUseDisabled = false;
     }
 
-
-
     private void CollectInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
         // Play sound
@@ -685,7 +620,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         StartCoroutine(CollectInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection));
     }
-
 
     private IEnumerator CollectInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
@@ -845,7 +779,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         ApplyToolDamage(itemDetails.itemType, cursorGridPosition);
     }
 
-
     /// <summary>
     /// Method processes crop with equipped item in player direction
     /// </summary>
@@ -874,7 +807,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                     isUsingToolDown = true;
                 }
                 break;
-
 
             case ItemType.Collecting_tool:
 
@@ -921,7 +853,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
     }
 
-
     // TODO: Remove
     /// <summary>
     /// Temp routine for test input
@@ -939,7 +870,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         {
             TimeManager.Instance.TestAdvanceGameDay();
         }
-
     }
 
     private void ResetMovement()
@@ -1059,7 +989,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         return GameObjectSave;
     }
 
-
     public void ISaveableLoad(GameSave gameSave)
     {
         if (gameSave.gameObjectData.TryGetValue(ISaveableUniqueID, out GameObjectSave gameObjectSave))
@@ -1103,13 +1032,10 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Nothing required here since the player is on a persistent scene;
     }
 
-
     public void ISaveableRestoreScene(string sceneName)
     {
         // Nothing required here since the player is on a persistent scene;
     }
-
-
 
     private void SetPlayerDirection(Direction playerDirection)
     {
