@@ -49,9 +49,10 @@ public class OnScreenMessageSystem : MonoBehaviour
         }
     }
 
-    public void PostMessage(Vector3 worldPosition, string message)
+    public void PostMessage(Vector3 worldPosition, string message, float heightOffset = 0f)
     {
         worldPosition.z = -1f;
+        worldPosition.y += heightOffset;
 
         GameObject textGo = Instantiate(textPrefab, transform);
         textGo.transform.position = worldPosition;
@@ -64,4 +65,5 @@ public class OnScreenMessageSystem : MonoBehaviour
         onScreenMessageList.Add(onScreenMessage);
     }
 }
+
 

@@ -526,10 +526,10 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         AudioManager.Instance.PlaySound(SoundName.effectWateringCan);
 
         // Trigger animation
-        StartCoroutine(WaterGroundAtCursorRoutine(playerDirection, gridPropertyDetails));
+        StartCoroutine(WaterGroundAtCursorRoutine(playerDirection, gridPropertyDetails, gridCursor.CursorPositionIsValid));
     }
 
-    private IEnumerator WaterGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails)
+    private IEnumerator WaterGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails, bool isCursorPositionValid)
     {
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
@@ -540,7 +540,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
 
-        // TODO: If there is water in the watering can
         toolEffect = ToolEffect.watering;
 
         if (playerDirection == Vector3Int.right)
@@ -562,19 +561,18 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         yield return liftToolAnimationPause;
 
-        // Set Grid property details for watered ground
-        if (gridPropertyDetails.daysSinceWatered == -1)
+        if (isCursorPositionValid && gridPropertyDetails != null && gridPropertyDetails.daysSinceWatered == -1)
         {
+            // Set Grid property details for watered ground
             gridPropertyDetails.daysSinceWatered = 0;
+
+            // Set grid property to watered
+            GridPropertiesManager.Instance.SetGridPropertyDetails(gridPropertyDetails.gridX, gridPropertyDetails.gridY, gridPropertyDetails);
+
+            // Display watered grid tiles
+            GridPropertiesManager.Instance.DisplayWateredGround(gridPropertyDetails);
         }
 
-        // Set grid property to watered
-        GridPropertiesManager.Instance.SetGridPropertyDetails(gridPropertyDetails.gridX, gridPropertyDetails.gridY, gridPropertyDetails);
-
-        // Display watered grid tiles
-        GridPropertiesManager.Instance.DisplayWateredGround(gridPropertyDetails);
-
-        // After animation pause
         yield return afterLiftToolAnimationPause;
 
         PlayerInputIsDisabled = false;
@@ -588,10 +586,10 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         WeaponAction(equippedItemDetails, playerDirection);
         // Trigger animation
-        StartCoroutine(ChopInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection));
+        StartCoroutine(ChopInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection, gridCursor.CursorPositionIsValid));
     }
 
-    private IEnumerator ChopInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
+    private IEnumerator ChopInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection, bool isCursorPositionValid)
     {
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
@@ -602,11 +600,30 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
 
-        ProcessCropWithEquippedItemInPlayerDirection(playerDirection, equippedItemDetails, gridPropertyDetails);
+        if (playerDirection == Vector3Int.right)
+        {
+            isUsingToolRight = true;
+        }
+        else if (playerDirection == Vector3Int.left)
+        {
+            isUsingToolLeft = true;
+        }
+        else if (playerDirection == Vector3Int.up)
+        {
+            isUsingToolUp = true;
+        }
+        else if (playerDirection == Vector3Int.down)
+        {
+            isUsingToolDown = true;
+        }
+
+        if (isCursorPositionValid)
+        {
+            ProcessCropWithEquippedItemInPlayerDirection(playerDirection, equippedItemDetails, gridPropertyDetails);
+        }
 
         yield return useToolAnimationPause;
 
-        // After animation pause
         yield return afterUseToolAnimationPause;
 
         PlayerInputIsDisabled = false;
@@ -618,19 +635,38 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Play sound
         AudioManager.Instance.PlaySound(SoundName.effectBasket);
 
-        StartCoroutine(CollectInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection));
+        StartCoroutine(CollectInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection, gridCursor.CursorPositionIsValid));
     }
 
-    private IEnumerator CollectInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
+    private IEnumerator CollectInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection, bool isCursorPositionValid)
     {
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
 
-        ProcessCropWithEquippedItemInPlayerDirection(playerDirection, equippedItemDetails, gridPropertyDetails);
+        if (playerDirection == Vector3Int.right)
+        {
+            isUsingToolRight = true;
+        }
+        else if (playerDirection == Vector3Int.left)
+        {
+            isUsingToolLeft = true;
+        }
+        else if (playerDirection == Vector3Int.up)
+        {
+            isUsingToolUp = true;
+        }
+        else if (playerDirection == Vector3Int.down)
+        {
+            isUsingToolDown = true;
+        }
+
+        if (isCursorPositionValid)
+        {
+            ProcessCropWithEquippedItemInPlayerDirection(playerDirection, equippedItemDetails, gridPropertyDetails);
+        }
 
         yield return pickAnimationPause;
 
-        // After animation pause
         yield return afterPickAnimationPause;
 
         PlayerInputIsDisabled = false;
@@ -641,12 +677,11 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     {
         // Play sound
         AudioManager.Instance.PlaySound(SoundName.effectPickaxe);
-        StartCoroutine(BreakInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection));
+        StartCoroutine(BreakInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection, gridCursor.CursorPositionIsValid));
         WeaponAction(equippedItemDetails, playerDirection);
     }
 
-
-    private IEnumerator BreakInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
+    private IEnumerator BreakInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection, bool isCursorPositionValid)
     {
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
@@ -657,16 +692,37 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
 
-        ProcessCropWithEquippedItemInPlayerDirection(playerDirection, equippedItemDetails, gridPropertyDetails);
+        if (playerDirection == Vector3Int.right)
+        {
+            isUsingToolRight = true;
+        }
+        else if (playerDirection == Vector3Int.left)
+        {
+            isUsingToolLeft = true;
+        }
+        else if (playerDirection == Vector3Int.up)
+        {
+            isUsingToolUp = true;
+        }
+        else if (playerDirection == Vector3Int.down)
+        {
+            isUsingToolDown = true;
+        }
+
+        if (isCursorPositionValid)
+        {
+            ProcessCropWithEquippedItemInPlayerDirection(playerDirection, equippedItemDetails, gridPropertyDetails);
+        }
 
         yield return useToolAnimationPause;
 
-        // After animation pause
         yield return afterUseToolAnimationPause;
 
         PlayerInputIsDisabled = false;
         playerToolUseDisabled = false;
     }
+
+
 
 
     private void ReapInPlayerDirectionAtCursor(ItemDetails itemDetails, Vector3Int playerDirection)

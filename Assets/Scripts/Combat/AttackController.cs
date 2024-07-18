@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
     [SerializeField] private OnScreenMessageSystem onScreenMessageSystem; // Reference to OnScreenMessageSystem
-    [SerializeField] float offsetDistance = 1.2f;
+    [SerializeField] float offsetDistance = 1.5f;
     [SerializeField] Vector2 attackAreaSize = new Vector2(1f, 1f);
 
     Rigidbody2D rgbd2d;
@@ -31,7 +31,7 @@ public class AttackController : MonoBehaviour
                 // Show damage message
                 Vector3 messagePosition = c.transform.position;
                 string damageMessage = damage.ToString();
-                onScreenMessageSystem.PostMessage(messagePosition, damageMessage);
+                onScreenMessageSystem.PostMessage(messagePosition, damageMessage,2f);
             }
         }
     }
