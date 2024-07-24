@@ -87,11 +87,11 @@ public class GridCursor : MonoBehaviour
             return;
         }
 
-        if (IsCursorOverEnemyWithWeapon())
+        /*if (IsCursorOverEnemyWithWeapon())
         {
             SetCursorToValid();
             return;
-        }
+        }*/
 
         GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(cursorGridPosition.x, cursorGridPosition.y);
 
@@ -248,12 +248,11 @@ public class GridCursor : MonoBehaviour
     public Vector3 GetWorldPositionForCursor()
     {
         Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mainCamera.transform.position.z));
-        Debug.Log($"Cursor world position: {worldPosition}");
         return grid.CellToWorld(grid.WorldToCell(worldPosition));
     }
 
 
-    private bool IsCursorOverEnemyWithWeapon()
+   /* private bool IsCursorOverEnemyWithWeapon()
     {
         // Get the world position of the cursor
         Vector3 cursorWorldPosition = GetWorldPositionForCursor();
@@ -294,7 +293,7 @@ public class GridCursor : MonoBehaviour
         }
 
         return false;
-    }
+    }*/
 }
 
 

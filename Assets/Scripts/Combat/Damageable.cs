@@ -14,7 +14,6 @@ public class Damageable : MonoBehaviour
             Die();
         }
     }
-
     private void Die()
     {
         // Handle death (destroy the game object, play animation, etc.)

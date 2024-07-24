@@ -48,7 +48,6 @@ public class OnScreenMessageSystem : MonoBehaviour
             }
         }
     }
-
     public void PostMessage(Vector3 worldPosition, string message, float heightOffset = 0f)
     {
         worldPosition.z = -1f;

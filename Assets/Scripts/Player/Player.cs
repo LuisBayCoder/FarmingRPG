@@ -279,7 +279,13 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(cursorGridPosition.x, cursorGridPosition.y);
 
         // Get Selected item details
+       
         ItemDetails itemDetails = InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
+
+        Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        cursorPosition.z = 0; // Ensure z is 0 for 2D
+        //WeaponAction(itemDetails, cursorPosition); // Updated to use cursorPosition
+        //IsCursorOverEnemy(cursorPosition);
 
         if (itemDetails != null)
         {
@@ -319,9 +325,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             }
         }
     }
-
-
-
     private Vector3Int GetPlayerClickDirection(Vector3Int cursorGridPosition, Vector3Int playerGridPosition)
     {
         if (cursorGridPosition.x > playerGridPosition.x)
@@ -416,7 +419,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void ProcessPlayerClickInputTool(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails, Vector3Int playerDirection)
     {
-        WeaponAction(itemDetails, playerDirection); // Add this to ensure damage application for all tools
+        //WeaponAction(itemDetails, playerDirection); // Add this to ensure damage application for all tools
         switch (itemDetails.itemType)
         {
             case ItemType.Hoeing_tool:
@@ -449,28 +452,60 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         StartCoroutine(HoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails, gridCursor.CursorPositionIsValid));
 
         // Apply damage logic here if needed
-        ApplyToolDamage(ItemType.Hoeing_tool, playerDirection);
+        //ApplyToolDamage(ItemType.Hoeing_tool, playerDirection);
     }
+    /* private bool IsCursorOverEnemy(Vector3 cursorPosition)
+     {
+         RaycastHit2D hit = Physics2D.Raycast(cursorPosition, Vector2.zero);
+         if (hit.collider != null && hit.collider.CompareTag("Enemy"))
+         {
+             return true;
+         }
+         return false;
+     }
+     private void ApplyToolDamage(ItemType toolType, Vector3Int cursorGridPosition)
+     {
+         Vector2 point = new Vector2(cursorGridPosition.x, cursorGridPosition.y);
+         Vector2 size = new Vector2(1, 1); // Adjust the size as needed
+         Item[] itemArray = HelperMethods.GetComponentsAtBoxLocationNonAlloc<Item>(Settings.maxCollidersToTestPerReapSwing, point, size, 0f);
 
-    private void ApplyToolDamage(ItemType toolType, Vector3Int cursorGridPosition)
-    {
-        Vector2 point = new Vector2(cursorGridPosition.x, cursorGridPosition.y);
-        Vector2 size = new Vector2(1, 1); // Adjust the size as needed
-        Item[] itemArray = HelperMethods.GetComponentsAtBoxLocationNonAlloc<Item>(Settings.maxCollidersToTestPerReapSwing, point, size, 0f);
+         foreach (var item in itemArray)
+         {
+             if (item != null)
+             {
+                 ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(item.ItemCode);
+                 if (itemDetails != null && itemDetails.itemType == toolType)
+                 {
+                     ApplyToolDamage(itemDetails.itemType, cursorGridPosition);
+                 }
+             }
+         }
+     }
+     private void WeaponAction(ItemDetails itemDetails, Vector3 cursorPosition)
+     {
+         Debug.Log("Weapon action initiated.");
 
-        foreach (var item in itemArray)
-        {
-            if (item != null)
-            {
-                ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(item.ItemCode);
-                if (itemDetails != null && itemDetails.itemType == toolType)
-                {
-                    ApplyToolDamage(itemDetails.itemType, cursorGridPosition);
-                }
-            }
-        }
-    }
+         AttackController attackController = GetComponent<AttackController>();
+         if (attackController != null && itemDetails.isWeapon && IsCursorOverEnemy(cursorPosition))
+         {
+             Vector3 playerPosition = GetPlayerCentrePosition();
+             Vector3Int playerDirection = GetPlayerDirection(cursorPosition, playerPosition);
 
+             // Calculate the attack direction using the player direction
+             Vector2 attackDirection = new Vector2(playerDirection.x, playerDirection.y).normalized;
+             Debug.Log($"Attack direction: {attackDirection}");
+
+             attackController.Attack(itemDetails.damageAmount, attackDirection);
+         }
+
+         if (IsCursorOverEnemy(cursorPosition))// remove this
+         {
+             Debug.Log("Cursor is over an enemy!");
+             // Convert cursorPosition to Vector3Int for ApplyToolDamage
+             Vector3Int cursorGridPosition = Vector3Int.FloorToInt(cursorPosition);
+             //ApplyToolDamage(itemDetails.itemType, cursorGridPosition); not working, need to look closer
+         }
+     }*/
     private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails, bool isCursorPositionValid)
     {
         PlayerInputIsDisabled = true;
@@ -584,7 +619,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Play sound
         AudioManager.Instance.PlaySound(SoundName.effectAxe);
 
-        WeaponAction(equippedItemDetails, playerDirection);
+        //WeaponAction(equippedItemDetails, playerDirection);
         // Trigger animation
         StartCoroutine(ChopInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection, gridCursor.CursorPositionIsValid));
     }
@@ -678,7 +713,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Play sound
         AudioManager.Instance.PlaySound(SoundName.effectPickaxe);
         StartCoroutine(BreakInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection, gridCursor.CursorPositionIsValid));
-        WeaponAction(equippedItemDetails, playerDirection);
+        //WeaponAction(equippedItemDetails, playerDirection);
     }
 
     private IEnumerator BreakInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection, bool isCursorPositionValid)
@@ -721,10 +756,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = false;
         playerToolUseDisabled = false;
     }
-
-
-
-
     private void ReapInPlayerDirectionAtCursor(ItemDetails itemDetails, Vector3Int playerDirection)
     {
         StartCoroutine(ReapInPlayerDirectionAtCursorRoutine(itemDetails, playerDirection));
@@ -753,11 +784,11 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     private void UseToolInPlayerDirection(ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
         // Common weapon action logic
-        WeaponAction(equippedItemDetails, playerDirection);
+       // WeaponAction(equippedItemDetails, playerDirection);
 
         if (Input.GetMouseButton(0))
         {
-            WeaponAction(equippedItemDetails, playerDirection);
+            //WeaponAction(equippedItemDetails, playerDirection);
             switch (equippedItemDetails.itemType)
             {
                 case ItemType.Reaping_tool:
@@ -818,23 +849,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             }
         }
     }
-
-    private void WeaponAction(ItemDetails itemDetails, Vector3Int cursorGridPosition)
-    {
-        Debug.Log("Weapon action at position: " + cursorGridPosition);
-
-        AttackController attackController = GetComponent<AttackController>();
-        if (attackController != null && itemDetails.isWeapon)
-        {
-            Vector3 attackDirectionVector3 = cursorGridPosition - new Vector3Int((int)rigidBody2D.position.x, (int)rigidBody2D.position.y, 0);
-            Vector2 attackDirection = new Vector2(attackDirectionVector3.x, attackDirectionVector3.y).normalized;
-
-            attackController.Attack(itemDetails.damageAmount, attackDirection);
-        }
-
-        ApplyToolDamage(itemDetails.itemType, cursorGridPosition);
-    }
-
     /// <summary>
     /// Method processes crop with equipped item in player direction
     /// </summary>
