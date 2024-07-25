@@ -10370,12 +10370,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   attackRange: 3
-  attackWidth: 2
+  attackWidth: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
   attackDuration: 0.5
   attackOffset: {x: 0, y: 1}
+  messageSystem: {fileID: 554824282}
 --- !u!224 &1123555449 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6972984204641241321, guid: e956df6dfa7ed8b4eb82f9591fab1a80,

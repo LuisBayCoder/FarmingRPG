@@ -279,13 +279,10 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(cursorGridPosition.x, cursorGridPosition.y);
 
         // Get Selected item details
-       
         ItemDetails itemDetails = InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
 
         Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         cursorPosition.z = 0; // Ensure z is 0 for 2D
-        //WeaponAction(itemDetails, cursorPosition); // Updated to use cursorPosition
-        //IsCursorOverEnemy(cursorPosition);
 
         if (itemDetails != null)
         {
@@ -419,7 +416,11 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void ProcessPlayerClickInputTool(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails, Vector3Int playerDirection)
     {
-        //WeaponAction(itemDetails, playerDirection); // Add this to ensure damage application for all tools
+        if (itemDetails.isWeapon)
+        {
+            WeaponAction(itemDetails, playerDirection);
+        }
+
         switch (itemDetails.itemType)
         {
             case ItemType.Hoeing_tool:
@@ -443,6 +444,21 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 break;
             default:
                 break;
+        }
+    }
+
+    private void WeaponAction(ItemDetails itemDetails, Vector3Int playerDirection)
+    {
+        Debug.Log("Weapon action initiated.");
+
+        AttackController attackController = GetComponent<AttackController>();
+        if (attackController != null && itemDetails.isWeapon)
+        {
+            // Calculate the attack direction using the player direction
+            Vector2 attackDirection = new Vector2(playerDirection.x, playerDirection.y).normalized;
+            Debug.Log($"Attack direction: {attackDirection}");
+
+            attackController.Attack(itemDetails.damageAmount, attackDirection);
         }
     }
 
