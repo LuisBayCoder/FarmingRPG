@@ -1,5 +1,4 @@
 ﻿
-
 using UnityEngine;
 
 public class AStarTest : MonoBehaviour
@@ -39,4 +38,3 @@ public class AStarTest : MonoBehaviour
 
     }
 }
-

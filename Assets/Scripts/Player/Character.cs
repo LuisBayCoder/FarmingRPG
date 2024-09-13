@@ -101,7 +101,7 @@ public class Character : MonoBehaviour
         UpdateStaminaBar();
     }
 
-    private void Update()
+    private void Update() //for testing purposes
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

@@ -27,6 +27,7 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10001
     itemType: 1
     itemDescription: Pumpkin
@@ -41,6 +42,7 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10002
     itemType: 1
     itemDescription: Corn
@@ -55,6 +57,7 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10003
     itemType: 2
     itemDescription: A basic Watering Can
@@ -69,6 +72,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 2
   - itemCode: 10004
     itemType: 3
     itemDescription: A Basic Hoe
@@ -83,13 +87,14 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 1
     damageAmount: 7
+    staminaAmount: 6
   - itemCode: 10005
     itemType: 4
     itemDescription: A Basic Axe
     itemSprite: {fileID: 21300010, guid: 853ac38383c680342ac7e688bf29b197, type: 3}
     itemLongDescription: A sharp basic axe
     itemUseGridRadius: 1
-    itemUseRadius: 0
+    itemUseRadius: 7
     isStartingItem: 1
     canBePickedUp: 1
     canBeDropped: 0
@@ -97,6 +102,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 1
     damageAmount: 10
+    staminaAmount: 5
   - itemCode: 10006
     itemType: 0
     itemDescription: ParsnipSeed
@@ -111,6 +117,7 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10007
     itemType: 1
     itemDescription: Parsnip
@@ -125,6 +132,7 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10008
     itemType: 1
     itemDescription: Wood
@@ -139,6 +147,7 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10009
     itemType: 0
     itemDescription: Blue Spruce Pine Cone
@@ -153,6 +162,7 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10010
     itemType: 0
     itemDescription: Cayon Oak Tree Stump
@@ -168,6 +178,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10011
     itemType: 0
     itemDescription: Blue Sprue Tree Stump
@@ -183,6 +194,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10012
     itemType: 7
     itemDescription: Wicker Basket
@@ -197,6 +209,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 1
   - itemCode: 10013
     itemType: 5
     itemDescription: A Basic Pickaxe
@@ -210,7 +223,8 @@ MonoBehaviour:
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 1
-    damageAmount: 13
+    damageAmount: 15
+    staminaAmount: 9
   - itemCode: 10014
     itemType: 0
     itemDescription: Stone 1 Seed
@@ -225,6 +239,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10015
     itemType: 1
     itemDescription: Stone
@@ -239,6 +254,7 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10016
     itemType: 0
     itemDescription: pumpkin
@@ -253,6 +269,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10017
     itemType: 6
     itemDescription: 'A basic scythe '
@@ -267,6 +284,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 1
     damageAmount: 8
+    staminaAmount: 6
   - itemCode: 10018
     itemType: 8
     itemDescription: Grass 1
@@ -281,6 +299,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10019
     itemType: 8
     itemDescription: Grass 2
@@ -295,6 +314,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10020
     itemType: 1
     itemDescription: Weed1
@@ -309,6 +329,7 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10021
     itemType: 8
     itemDescription: Prickly Cactus
@@ -323,6 +344,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10022
     itemType: 9
     itemDescription: Chair
@@ -337,6 +359,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10023
     itemType: 9
     itemDescription: Table
@@ -351,6 +374,7 @@ MonoBehaviour:
     canBeCarried: 0
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0
   - itemCode: 10024
     itemType: 1
     itemDescription: Stone
@@ -365,3 +389,4 @@ MonoBehaviour:
     canBeCarried: 1
     isWeapon: 0
     damageAmount: 0
+    staminaAmount: 0

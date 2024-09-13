@@ -17,5 +17,6 @@ public class ItemDetails
     public bool canBeCarried;
     public bool isWeapon;
     public int damageAmount; // This will be used as the hit damage for tools
+    public int staminaAmount;
 }
 

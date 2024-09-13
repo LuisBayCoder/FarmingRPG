@@ -35,10 +35,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1")) // Change to your attack input
         {
-            if (IsCursorOverEnemy()) // Check if the cursor is over an enemy
-            {
-                Attack();
-            }
+            
         }
 
         // Check if the attack visualization should end
@@ -65,9 +62,11 @@ public class PlayerAttack : MonoBehaviour
             attackDamage = 0; // No weapon equipped or invalid item
         }
     }
-    void Attack()
+    public void Attack()
     {
-        // Calculate the attack box center position with the offset
+        if (IsCursorOverEnemy()) // Check if the cursor is over an enemy
+        {
+            // Calculate the attack box center position with the offset
         Vector2 attackCenter = (Vector2)transform.position + attackOffset;
 
         // Perform an overlap box to detect enemies in the attack range around the adjusted position
@@ -92,6 +91,7 @@ public class PlayerAttack : MonoBehaviour
         // Set the attack visualization
         isAttacking = true;
         attackEndTime = Time.time + attackDuration;
+        } 
     }
     public void PerformAttack(Vector2 direction)
     {

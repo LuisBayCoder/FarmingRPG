@@ -70,8 +70,8 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     private GameObjectSave _gameObjectSave;
     public GameObjectSave GameObjectSave { get { return _gameObjectSave; } set { _gameObjectSave = value; } }
 
-
-
+    private Character playerCharacter;
+    private PlayerAttack playerAttack;
     protected override void Awake()
     {
         base.Awake();
@@ -124,6 +124,8 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         afterUseToolAnimationPause = new WaitForSeconds(Settings.afterUseToolAnimationPause);
         afterLiftToolAnimationPause = new WaitForSeconds(Settings.afterLiftToolAnimationPause);
         afterPickAnimationPause = new WaitForSeconds(Settings.afterPickAnimationPause);
+        playerCharacter = GetComponent<Character>(); // Get the Character component from the player
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     private void Update()
@@ -416,49 +418,62 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void ProcessPlayerClickInputTool(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails, Vector3Int playerDirection)
     {
-        if (itemDetails.isWeapon)
+        // Check if player has enough stamina
+        if (playerCharacter.stamina.currVal >= itemDetails.staminaAmount)
         {
-            WeaponAction(itemDetails, playerDirection);
-        }
+            // Deduct stamina
+            playerCharacter.GetTired(itemDetails.staminaAmount);
 
-        switch (itemDetails.itemType)
+            if (itemDetails.isWeapon)
+            {
+                WeaponAction(itemDetails, playerDirection);
+            }
+
+            switch (itemDetails.itemType)
+            {
+                case ItemType.Hoeing_tool:
+                    HoeGroundAtCursor(gridPropertyDetails, playerDirection);
+                    break;
+                case ItemType.Watering_tool:
+                    WaterGroundAtCursor(gridPropertyDetails, playerDirection);
+                    break;
+                case ItemType.Chopping_tool:
+                    ChopInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
+                    break;
+                case ItemType.Collecting_tool:
+                    CollectInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
+                    break;
+                case ItemType.Breaking_tool:
+                    BreakInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
+                    break;
+                case ItemType.Reaping_tool:
+                    playerDirection = GetPlayerDirection(cursor.GetWorldPositionForCursor(), GetPlayerCentrePosition());
+                    ReapInPlayerDirectionAtCursor(itemDetails, playerDirection);
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
         {
-            case ItemType.Hoeing_tool:
-                HoeGroundAtCursor(gridPropertyDetails, playerDirection);
-                break;
-            case ItemType.Watering_tool:
-                WaterGroundAtCursor(gridPropertyDetails, playerDirection);
-                break;
-            case ItemType.Chopping_tool:
-                ChopInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
-                break;
-            case ItemType.Collecting_tool:
-                CollectInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
-                break;
-            case ItemType.Breaking_tool:
-                BreakInPlayerDirection(gridPropertyDetails, itemDetails, playerDirection);
-                break;
-            case ItemType.Reaping_tool:
-                playerDirection = GetPlayerDirection(cursor.GetWorldPositionForCursor(), GetPlayerCentrePosition());
-                ReapInPlayerDirectionAtCursor(itemDetails, playerDirection);
-                break;
-            default:
-                break;
+            // Notify the player that they don't have enough stamina
+            Debug.Log("Not enough stamina to use this tool.");
         }
     }
 
     private void WeaponAction(ItemDetails itemDetails, Vector3Int playerDirection)
     {
         Debug.Log("Weapon action initiated.");
-
-        AttackController attackController = GetComponent<AttackController>();
-        if (attackController != null && itemDetails.isWeapon)
+        
+        //AttackController attackController = GetComponent<AttackController>();
+        if (playerAttack != null && itemDetails.isWeapon)
         {
             // Calculate the attack direction using the player direction
             Vector2 attackDirection = new Vector2(playerDirection.x, playerDirection.y).normalized;
             Debug.Log($"Attack direction: {attackDirection}");
 
-            attackController.Attack(itemDetails.damageAmount, attackDirection);
+            // Call the Attack method
+            playerAttack.Attack();
         }
     }
 
@@ -470,58 +485,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Apply damage logic here if needed
         //ApplyToolDamage(ItemType.Hoeing_tool, playerDirection);
     }
-    /* private bool IsCursorOverEnemy(Vector3 cursorPosition)
-     {
-         RaycastHit2D hit = Physics2D.Raycast(cursorPosition, Vector2.zero);
-         if (hit.collider != null && hit.collider.CompareTag("Enemy"))
-         {
-             return true;
-         }
-         return false;
-     }
-     private void ApplyToolDamage(ItemType toolType, Vector3Int cursorGridPosition)
-     {
-         Vector2 point = new Vector2(cursorGridPosition.x, cursorGridPosition.y);
-         Vector2 size = new Vector2(1, 1); // Adjust the size as needed
-         Item[] itemArray = HelperMethods.GetComponentsAtBoxLocationNonAlloc<Item>(Settings.maxCollidersToTestPerReapSwing, point, size, 0f);
-
-         foreach (var item in itemArray)
-         {
-             if (item != null)
-             {
-                 ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(item.ItemCode);
-                 if (itemDetails != null && itemDetails.itemType == toolType)
-                 {
-                     ApplyToolDamage(itemDetails.itemType, cursorGridPosition);
-                 }
-             }
-         }
-     }
-     private void WeaponAction(ItemDetails itemDetails, Vector3 cursorPosition)
-     {
-         Debug.Log("Weapon action initiated.");
-
-         AttackController attackController = GetComponent<AttackController>();
-         if (attackController != null && itemDetails.isWeapon && IsCursorOverEnemy(cursorPosition))
-         {
-             Vector3 playerPosition = GetPlayerCentrePosition();
-             Vector3Int playerDirection = GetPlayerDirection(cursorPosition, playerPosition);
-
-             // Calculate the attack direction using the player direction
-             Vector2 attackDirection = new Vector2(playerDirection.x, playerDirection.y).normalized;
-             Debug.Log($"Attack direction: {attackDirection}");
-
-             attackController.Attack(itemDetails.damageAmount, attackDirection);
-         }
-
-         if (IsCursorOverEnemy(cursorPosition))// remove this
-         {
-             Debug.Log("Cursor is over an enemy!");
-             // Convert cursorPosition to Vector3Int for ApplyToolDamage
-             Vector3Int cursorGridPosition = Vector3Int.FloorToInt(cursorPosition);
-             //ApplyToolDamage(itemDetails.itemType, cursorGridPosition); not working, need to look closer
-         }
-     }*/
+ 
     private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails, bool isCursorPositionValid)
     {
         PlayerInputIsDisabled = true;

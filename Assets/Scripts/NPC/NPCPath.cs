@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(NPCMovement))]
+//[RequireComponent(typeof(NPCMovement))]
 public class NPCPath : MonoBehaviour
 {
     public Stack<NPCMovementStep> npcMovementStepStack;

@@ -99,8 +99,8 @@ public class NPCManager : SingletonMonobehaviour<NPCManager>
             return true;
         }
         else
-        {
-            return false;
+        { 
+            return false; 
         }
     }
 }
