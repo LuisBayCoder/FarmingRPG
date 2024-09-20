@@ -150,5 +150,3 @@ public class NPCPath : MonoBehaviour
         npcMovement.Unpause();
     }
 }
-
-
