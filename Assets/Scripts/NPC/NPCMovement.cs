@@ -26,7 +26,7 @@ public class NPCMovement : MonoBehaviour
 
     [SerializeField] private float npcMinSpeed = 1f;
     [SerializeField] private float npcMaxSpeed = 3f;
-    private bool npcIsMoving = false;
+    public bool npcIsMoving = false;
     private bool paused = false;
 
     [HideInInspector] public AnimationClip npcTargetAnimationClip;

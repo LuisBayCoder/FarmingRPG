@@ -2,25 +2,24 @@ using UnityEngine;
 
 public class E_EnemyAI : MonoBehaviour
 {
-    [SerializeField] private NPCPath npcPath = null;
-    [SerializeField] private bool moveEnemy = false;
-    [SerializeField] private SceneName sceneName = SceneName.Scene1_Farm;
-    [SerializeField] private Vector2Int finishPosition; // The target destination (player position)
-    [SerializeField] private AnimationClip idleDownAnimationClip = null;
-    [SerializeField] private AnimationClip chaseAnimationClip = null;
-    [SerializeField] private AnimationClip attackAnimationClip = null; // Add attack animation clip
-    [SerializeField] private float detectionRadius = 5f; // Radius within which the player will be detected
-    [SerializeField] private float attackRange = 1.5f; // Range to trigger the attack
-    private NPCMovement npcMovement;
+   // [SerializeField] private Transform[] attackPositions; // The 4 positions around the player (left, right, up, down)
+    [SerializeField] private float detectionRadius = 5f; // Detection radius
+    [SerializeField] private float minAttackDistance = 0.1f; // Minimum distance to trigger attack
+    [SerializeField] private float maxAttackDistance = 0.3f; // Maximum distance to trigger attack
+    [SerializeField] private float attackDistance = 0.2f;
+    [SerializeField] private float pathUpdateDelay = 0.5f; // Time between path recalculations
+    [SerializeField] private NPCPath npcPath = null; // A* pathfinding script
+
     private Transform player;
     private Animator animator;
+    private Transform targetPosition; // The current target position for the enemy
+    private Vector2Int finishPosition; // Target grid position for pathfinding
+    private bool playerDetected = false; // Flag to check if the player is detected
+    private float pathUpdateTimer; // Timer to control path updates
+    public bool isInAttackRange = false;
 
     private void Start()
     {
-        npcMovement = npcPath.GetComponent<NPCMovement>();
-        npcMovement.npcFacingDirectionAtDestination = Direction.down;
-        npcMovement.npcTargetAnimationClip = idleDownAnimationClip;
-
         // Find player in the scene
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -30,59 +29,166 @@ public class E_EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        // Calculate the distance between the enemy and the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // Check if player is within detection radius
         if (distanceToPlayer <= detectionRadius)
         {
-            // Trigger enemy to chase the player
-            ChasePlayer();
-        }
+            // Set playerDetected to true
+            playerDetected = true;
 
-        // Check if enemy is within attack range
-        if (distanceToPlayer <= attackRange)
+            // If the enemy is within the max attack distance, stop updating the path
+            if (distanceToPlayer <= maxAttackDistance)
+            {
+                isInAttackRange = true;
+                targetPosition = player; // Set the target to the player's position
+            }
+            else
+            {
+                isInAttackRange = false;
+
+                if (targetPosition == null || Vector3.Distance(transform.position, targetPosition.position) > maxAttackDistance)
+                {
+                    UpdatePathToPlayer();
+                }
+            }
+        }
+        else
         {
-            AttackPlayer();
+            // Reset player detection when out of range
+            playerDetected = false;
+            isInAttackRange = false;
         }
-
-        // If moveEnemy is true, trigger the pathfinding towards the player
-        if (moveEnemy)
+        // Check distance to target and stop if within attack range
+        if (targetPosition != null)
         {
-            moveEnemy = false;
+            float distanceToTarget = Vector3.Distance(transform.position, targetPosition.position);
 
-            // Get the player's grid position
-            Vector2Int playerGridPosition = new Vector2Int(Mathf.RoundToInt(player.position.x), Mathf.RoundToInt(player.position.y));
-            finishPosition = playerGridPosition;
-
-            // Create an NPC event to start the chase
-            NPCScheduleEvent enemyChaseEvent = new NPCScheduleEvent(0, 0, 0, 0, Weather.none, Season.none, sceneName, new GridCoordinate(finishPosition.x, finishPosition.y), chaseAnimationClip);
-
-            // Build the path towards the player using A*
-            npcPath.BuildPath(enemyChaseEvent);
+            // Check if the enemy is within the attack range
+            if (distanceToTarget <= minAttackDistance)
+            {
+                Debug.Log("Attack player called");
+                AttackPlayer(); // Trigger the attack
+                npcPath.ClearPath(); // Stop moving once attacking
+                targetPosition = null; // Clear the target to stop movement
+            }
         }
     }
 
-    // Call this to trigger enemy movement
-    public void ChasePlayer()
+    private void UpdatePathToPlayer()
     {
-        moveEnemy = true;
+        // Exit if the enemy is in attack range
+        if (isInAttackRange)
+        {
+            return;
+        }
+
+        pathUpdateTimer -= Time.deltaTime;
+
+        // Only update the path if the distance to the target is significant
+        if (pathUpdateTimer <= 0f)
+        {
+            float distanceToTarget = Vector3.Distance(transform.position, targetPosition != null ? targetPosition.position : player.position);
+
+            // Update the path only if the enemy is far from the target
+            if (distanceToTarget >= attackDistance) // Adding a buffer
+            {
+                pathUpdateTimer = pathUpdateDelay; // Reset the timer
+                targetPosition = player; // Set the target to the player's position
+
+                if (targetPosition != null)
+                {
+                    Vector2Int gridPosition = new Vector2Int(
+                        Mathf.RoundToInt(targetPosition.position.x),
+                        Mathf.RoundToInt(targetPosition.position.y)
+                    );
+
+                    finishPosition = gridPosition;
+
+                    NPCScheduleEvent enemyChaseEvent = new NPCScheduleEvent(
+                        0, 0, 0, 0, Weather.none, Season.none, SceneName.Scene1_Farm,
+                        new GridCoordinate(finishPosition.x, finishPosition.y), null
+                    );
+
+                    npcPath.BuildPath(enemyChaseEvent); // Build the path using A*
+                }
+            }
+        }
     }
 
-    // Call this to attack the player
-    public void AttackPlayer()
+    // Trigger attack animation when the enemy is in range
+    private void AttackPlayer()
     {
-        npcMovement.CancelNPCMovement(); // Stop the enemy from moving
-        animator.Play(attackAnimationClip.name); // Play the attack animation
+        animator.SetBool("isAttacking", true); // Play attack animation
+        npcPath.ClearPath(); // Stop moving once the enemy attacks
+        DeterminePlayerDirection();//move this to attack player when working. 
     }
 
-    // Optional: visualize the detection radius in the Scene view
+    // Visualize detection radius and attack range in the Scene view
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        Gizmos.DrawWireSphere(transform.position, detectionRadius); // Detection radius
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, maxAttackDistance); // Maximum attack range
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, minAttackDistance); // Minimum attack range
+    }
+
+    private void DeterminePlayerDirection()
+    {
+        Vector3 directionToPlayer = player.position - transform.position;
+
+        // Check the horizontal and vertical direction to determine the quadrant
+        if (directionToPlayer.x > 0 && directionToPlayer.y > 0)
+        {
+            Debug.Log("Player is above and to the right");
+            // Handle logic when the player is above and to the right
+        }
+        else if (directionToPlayer.x < 0 && directionToPlayer.y > 0)
+        {
+            Debug.Log("Player is above and to the left");
+            // Handle logic when the player is above and to the left
+        }
+        else if (directionToPlayer.x > 0 && directionToPlayer.y < 0)
+        {
+            Debug.Log("Player is below and to the right");
+            // Handle logic when the player is below and to the right
+        }
+        else if (directionToPlayer.x < 0 && directionToPlayer.y < 0)
+        {
+            Debug.Log("Player is below and to the left");
+            // Handle logic when the player is below and to the left
+        }
+        else if (Mathf.Abs(directionToPlayer.x) > Mathf.Abs(directionToPlayer.y))
+        {
+            // The player is directly to the left or right
+            if (directionToPlayer.x > 0)
+            {
+                Debug.Log("Player is directly to the right");
+                // Handle logic when the player is directly to the right
+            }
+            else
+            {
+                Debug.Log("Player is directly to the left");
+                // Handle logic when the player is directly to the left
+            }
+        }
+        else
+        {
+            // The player is directly above or below
+            if (directionToPlayer.y > 0)
+            {
+                Debug.Log("Player is directly above");
+                // Handle logic when the player is directly above
+            }
+            else
+            {
+                Debug.Log("Player is directly below");
+                // Handle logic when the player is directly below
+            }
+        }
     }
 }
-
