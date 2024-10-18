@@ -291,11 +291,15 @@ public class UIInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 inventoryBar.inventoryTextBoxGameobject.transform.position = new Vector3(transform.position.x, transform.position.y - 50f, transform.position.z);
             }
         }
+        // Enable player input
+        Player.Instance.DisablePlayerInput();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         DestroyInventoryTextBox();
+        // Enable player input
+        Player.Instance.EnablePlayerInput();
     }
 
     public void DestroyInventoryTextBox()

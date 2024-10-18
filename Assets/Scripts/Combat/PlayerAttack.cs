@@ -12,73 +12,57 @@ public class PlayerAttack : MonoBehaviour
     public Vector2 attackOffset = Vector2.zero; // Offset for attack position
     public OnScreenMessageSystem messageSystem; // Reference to OnScreenMessageSystem
     private ItemDetails equippedItemDetails;
-
     private bool isAttacking = false;
     private float attackEndTime;
     private Camera mainCamera;
-
-    // Reference to InventoryManager or wherever equipped items are managed
     private InventoryManager inventoryManager;
 
     private void Start()
     {
         mainCamera = Camera.main;
-
-        // Find the OnScreenMessageSystem in the scene
         messageSystem = FindObjectOfType<OnScreenMessageSystem>();
-
         inventoryManager = InventoryManager.Instance; // Assume singleton pattern
         UpdateEquippedTool();
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1")) // Change to your attack input
-        {
-            
-        }
-
         // Check if the attack visualization should end
         if (isAttacking && Time.time >= attackEndTime)
         {
             isAttacking = false;
         }
 
-        // You can call this in an event or on input to update equipped tool
+        // Call this in an event or on input to update equipped tool
         UpdateEquippedTool();
     }
+
     private void UpdateEquippedTool()
     {
-        // Get currently equipped item details from inventory
         equippedItemDetails = inventoryManager.GetSelectedInventoryItemDetails(InventoryLocation.player);
-
         if (equippedItemDetails != null && equippedItemDetails.isWeapon)
         {
-            // Update attack damage to match the equipped tool's damageAmount
             attackDamage = equippedItemDetails.damageAmount;
         }
         else
         {
-            attackDamage = 0; // No weapon equipped or invalid item
+            attackDamage = 0;
         }
     }
-    public void Attack()
-    {
-        if (IsCursorOverEnemy()) // Check if the cursor is over an enemy
-        {
-            // Calculate the attack box center position with the offset
-        Vector2 attackCenter = (Vector2)transform.position + attackOffset;
 
-        // Perform an overlap box to detect enemies in the attack range around the adjusted position
+    public void Attack(Vector2 attackDirection)
+    {
+        AdjustAttackCollider(attackDirection); // Adjust the collider based on the direction
+
+        Vector2 attackCenter = (Vector2)transform.position + attackOffset;
         Collider2D[] hits = Physics2D.OverlapBoxAll(attackCenter, new Vector2(attackRange, attackWidth), 0, enemyLayer);
+
         foreach (Collider2D hit in hits)
         {
             Damageable enemy = hit.GetComponent<Damageable>();
             if (enemy != null)
             {
                 enemy.TakeDamage(attackDamage);
-
-                // Post a message on the screen when an enemy is hit
                 if (messageSystem != null)
                 {
                     Vector3 messagePosition = hit.transform.position;
@@ -88,63 +72,46 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
-        // Set the attack visualization
         isAttacking = true;
         attackEndTime = Time.time + attackDuration;
-        } 
     }
-    public void PerformAttack(Vector2 direction)
+
+    private void AdjustAttackCollider(Vector2 attackDirection)
     {
-        if (attackDamage > 0)
+        // Adjust the attack box based on the direction of the attack
+        if (attackDirection == Vector2.up)
         {
-            // Perform attack with the current attackDamage
-            Debug.Log($"Attacking with {attackDamage} damage in direction {direction}");
-            // Call your attack logic here
+            attackOffset = new Vector2(0, attackRange / 2);
+            attackRange = 2f; // Long vertical attack
+            attackWidth = 1f; // Narrow horizontal width
         }
-    }
-    private bool IsCursorOverEnemy()
-    {
-        // Get the world position of the cursor
-        Vector3 cursorWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mainCamera.transform.position.z));
-
-        // Check for colliders at the cursor position
-        Collider2D hit = Physics2D.OverlapPoint(cursorWorldPosition, enemyLayer);
-
-        // Check if a collider was hit
-        if (hit != null)
+        else if (attackDirection == Vector2.down)
         {
-            Debug.Log($"Hit object: {hit.gameObject.name}");
-
-            // Check if the object has the tag "Enemy"
-            if (hit.CompareTag("Enemy"))
-            {
-                Debug.Log("Cursor is over an enemy");
-                return true;
-            }
-            else
-            {
-                Debug.Log("Cursor is not over an enemy");
-            }
+            attackOffset = new Vector2(0, -attackRange / 2);
+            attackRange = 2f;
+            attackWidth = 1f;
         }
-        else
+        else if (attackDirection == Vector2.left)
         {
-            Debug.Log("No collider hit");
+            attackOffset = new Vector2(-attackWidth / 2, 0);
+            attackRange = 1f; // Short horizontal attack
+            attackWidth = 2f; // Wide vertical width
         }
-
-        return false;
+        else if (attackDirection == Vector2.right)
+        {
+            attackOffset = new Vector2(attackWidth / 2, 0);
+            attackRange = 1f;
+            attackWidth = 2f;
+        }
     }
 
     private void OnDrawGizmos()
     {
         if (isAttacking)
         {
-            // Calculate the attack box center position with the offset for visualization
             Vector2 attackCenter = (Vector2)transform.position + attackOffset;
-
-            // Draw a box in the editor to visualize the attack range around the adjusted position
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(attackCenter, new Vector3(attackRange, attackWidth, 1));
         }
     }
 }
-

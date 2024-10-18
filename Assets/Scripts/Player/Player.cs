@@ -464,26 +464,22 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     private void WeaponAction(ItemDetails itemDetails, Vector3Int playerDirection)
     {
         Debug.Log("Weapon action initiated.");
-        
-        //AttackController attackController = GetComponent<AttackController>();
+
         if (playerAttack != null && itemDetails.isWeapon)
         {
             // Calculate the attack direction using the player direction
             Vector2 attackDirection = new Vector2(playerDirection.x, playerDirection.y).normalized;
             Debug.Log($"Attack direction: {attackDirection}");
 
-            // Call the Attack method
-            playerAttack.Attack();
+            playerAttack.Attack(attackDirection); // Pass the attack direction to the PlayerAttack script
         }
     }
+
 
     private void HoeGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
     {
         // Trigger animation
         StartCoroutine(HoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails, gridCursor.CursorPositionIsValid));
-
-        // Apply damage logic here if needed
-        //ApplyToolDamage(ItemType.Hoeing_tool, playerDirection);
     }
  
     private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails, bool isCursorPositionValid)
@@ -763,8 +759,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void UseToolInPlayerDirection(ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
-        // Common weapon action logic
-       // WeaponAction(equippedItemDetails, playerDirection);
 
         if (Input.GetMouseButton(0))
         {
@@ -836,7 +830,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     {
         switch (equippedItemDetails.itemType)
         {
-
             case ItemType.Chopping_tool:
             case ItemType.Breaking_tool:
 

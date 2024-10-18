@@ -9,6 +9,7 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private float attackDistance = 0.2f;
     [SerializeField] private float pathUpdateDelay = 0.5f; // Time between path recalculations
     [SerializeField] private NPCPath npcPath = null; // A* pathfinding script
+    [SerializeField] private int attackDamage = 1;
 
     private Transform player;
     private Animator animator;
@@ -17,6 +18,7 @@ public class E_EnemyAI : MonoBehaviour
     private bool playerDetected = false; // Flag to check if the player is detected
     private float pathUpdateTimer; // Timer to control path updates
     public bool isInAttackRange = false;
+    
 
     private void Start()
     {
@@ -73,6 +75,10 @@ public class E_EnemyAI : MonoBehaviour
                 npcPath.ClearPath(); // Stop moving once attacking
                 targetPosition = null; // Clear the target to stop movement
             }
+            else
+            {
+                AttackPlayerFalse();
+            }
         }
     }
 
@@ -122,7 +128,22 @@ public class E_EnemyAI : MonoBehaviour
     {
         animator.SetBool("isAttacking", true); // Play attack animation
         npcPath.ClearPath(); // Stop moving once the enemy attacks
-        DeterminePlayerDirection();//move this to attack player when working. 
+        DeterminePlayerDirection(); // Determine player direction for the attack animation
+    }
+
+    public void AttackPlayerByAnimation()
+    {
+        // Deal damage to the player
+        Character playerCharacter = player.GetComponent<Character>();
+        if (playerCharacter != null)
+        {
+            playerCharacter.TakeDamage(attackDamage); // Deal 10 damage (you can adjust the damage amount as needed)
+        }
+    }
+
+    private void AttackPlayerFalse()
+    {
+        animator.SetBool("isAttacking", false);
     }
 
     // Visualize detection radius and attack range in the Scene view
@@ -146,21 +167,29 @@ public class E_EnemyAI : MonoBehaviour
         {
             Debug.Log("Player is above and to the right");
             // Handle logic when the player is above and to the right
+            animator.SetBool("isAttackingLeft", false);
+            animator.SetBool("isAttackingRight", true);
         }
         else if (directionToPlayer.x < 0 && directionToPlayer.y > 0)
         {
             Debug.Log("Player is above and to the left");
             // Handle logic when the player is above and to the left
+            animator.SetBool("isAttackingRight", false);
+            animator.SetBool("isAttackingLeft", true);
         }
         else if (directionToPlayer.x > 0 && directionToPlayer.y < 0)
         {
             Debug.Log("Player is below and to the right");
             // Handle logic when the player is below and to the right
+            animator.SetBool("isAttackingLeft", false);
+            animator.SetBool("isAttackingRight", true);
         }
         else if (directionToPlayer.x < 0 && directionToPlayer.y < 0)
         {
             Debug.Log("Player is below and to the left");
             // Handle logic when the player is below and to the left
+            animator.SetBool("isAttackingRight", false);
+            animator.SetBool("isAttackingLeft", true);
         }
         else if (Mathf.Abs(directionToPlayer.x) > Mathf.Abs(directionToPlayer.y))
         {
@@ -169,11 +198,15 @@ public class E_EnemyAI : MonoBehaviour
             {
                 Debug.Log("Player is directly to the right");
                 // Handle logic when the player is directly to the right
+                animator.SetBool("isAttackingLeft", false);
+                animator.SetBool("isAttackingRight", true);
             }
             else
             {
                 Debug.Log("Player is directly to the left");
                 // Handle logic when the player is directly to the left
+                animator.SetBool("isAttackingRight", false);
+                animator.SetBool("isAttackingLeft", true);
             }
         }
         else
