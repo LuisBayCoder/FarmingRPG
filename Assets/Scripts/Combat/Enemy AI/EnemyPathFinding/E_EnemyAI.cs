@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class E_EnemyAI : MonoBehaviour
@@ -15,10 +16,24 @@ public class E_EnemyAI : MonoBehaviour
     private Animator animator;
     private Transform targetPosition; // The current target position for the enemy
     private Vector2Int finishPosition; // Target grid position for pathfinding
-    private bool playerDetected = false; // Flag to check if the player is detected
+    public bool playerDetected = false; // Flag to check if the player is detected
     private float pathUpdateTimer; // Timer to control path updates
     public bool isInAttackRange = false;
     
+    private enum State //new
+    {
+        Roaming,
+        Chasing
+    }
+
+    private State state; //new
+    private EnemyPathfinding enemyPathfinding;//new
+
+    private void Awake()
+    {
+        enemyPathfinding = GetComponent<EnemyPathfinding>();//new
+        state = State.Roaming;
+    }
 
     private void Start()
     {
@@ -27,6 +42,23 @@ public class E_EnemyAI : MonoBehaviour
 
         // Get the Animator component
         animator = GetComponent<Animator>();
+
+        StartCoroutine(RoamingRoutine());
+    }
+
+    private IEnumerator RoamingRoutine()//new
+    {
+        while (state == State.Roaming)
+        {
+            Vector2 roamPosition = GetRoamingPosition();
+            enemyPathfinding.MoveTo(roamPosition);
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    private Vector2 GetRoamingPosition()
+    {
+        return new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1)).normalized; 
     }
 
     private void Update()
@@ -37,9 +69,10 @@ public class E_EnemyAI : MonoBehaviour
         // Check if player is within detection radius
         if (distanceToPlayer <= detectionRadius)
         {
+            state = State.Chasing; //new
             // Set playerDetected to true
             playerDetected = true;
-
+            
             // If the enemy is within the max attack distance, stop updating the path
             if (distanceToPlayer <= maxAttackDistance)
             {
@@ -59,8 +92,11 @@ public class E_EnemyAI : MonoBehaviour
         else
         {
             // Reset player detection when out of range
+            if (playerDetected == false) return;
             playerDetected = false;
             isInAttackRange = false;
+            state = State.Roaming;//new
+            StartCoroutine(RoamingRoutine());
         }
         // Check distance to target and stop if within attack range
         if (targetPosition != null)
