@@ -13,21 +13,29 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private int attackDamage = 1;
 
     private Transform player;
+    public float checkInterval = 2f; // Time between overlap checks
+    public float moveDistance = 1f; // Distance to move away if overlapping
+
+    private Collider2D enemyCollider;
     private Animator animator;
     private Transform targetPosition; // The current target position for the enemy
     private Vector2Int finishPosition; // Target grid position for pathfinding
     public bool playerDetected = false; // Flag to check if the player is detected
     private float pathUpdateTimer; // Timer to control path updates
     public bool isInAttackRange = false;
-    
-    private enum State //new
+    public SceneName npcCurrentScene;
+    private bool isAvoidingCollision = false;
+
+    private enum State
     {
         Roaming,
-        Chasing
+        Chasing,
+        Avoiding
     }
 
     private State state; //new
     private EnemyPathfinding enemyPathfinding;//new
+    private Vector3 originalTargetPosition; // Store the target position before avoiding
 
     private void Awake()
     {
@@ -38,14 +46,69 @@ public class E_EnemyAI : MonoBehaviour
     private void Start()
     {
         // Find player in the scene
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform; 
 
         // Get the Animator component
         animator = GetComponent<Animator>();
 
         StartCoroutine(RoamingRoutine());
+
+        enemyCollider = GetComponent<Collider2D>();
+
+        // Start periodic checks
+        InvokeRepeating(nameof(CheckForCollision), checkInterval, checkInterval);
     }
 
+    private void CheckForCollision()
+    {
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, enemyCollider.bounds.size, 0);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider != enemyCollider && collider.CompareTag("Enemy")) 
+            {
+                ResolveCollision(collider);
+                break; // Only handle the first collision for simplicity
+            }
+        }
+    }
+    private void ResolveCollision(Collider2D otherCollider)
+    {
+        isAvoidingCollision = true;
+
+        // Move away from the collider
+        Vector2 directionAway = (transform.position - otherCollider.transform.position).normalized;
+        Vector3 targetPosition = transform.position + (Vector3)(directionAway * moveDistance);
+
+        // Smoothly move to the target position
+        StartCoroutine(MoveToAvoid(targetPosition));
+    }
+    private IEnumerator MoveToAvoid(Vector3 targetPosition)
+    {
+        float elapsedTime = 0f;
+        float duration = 1f; // Duration of the avoidance movement
+        Vector3 initialPosition = transform.position;
+
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPosition;
+        isAvoidingCollision = false; // Resume normal behavior
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Visualize the overlap area for debugging
+        if (enemyCollider != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(transform.position, enemyCollider.bounds.size);
+        }
+    }
     private IEnumerator RoamingRoutine()//new
     {
         while (state == State.Roaming)
@@ -58,11 +121,14 @@ public class E_EnemyAI : MonoBehaviour
 
     private Vector2 GetRoamingPosition()
     {
-        return new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1)).normalized; 
+        return new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1f)).normalized; 
     }
 
     private void Update()
     {
+       // if (isAvoidingCollision)
+       //     return; // Skip pathfinding and attacking while avoiding collision
+
         // Calculate the distance between the enemy and the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -72,7 +138,6 @@ public class E_EnemyAI : MonoBehaviour
             state = State.Chasing; //new
             // Set playerDetected to true
             playerDetected = true;
-            
             // If the enemy is within the max attack distance, stop updating the path
             if (distanceToPlayer <= maxAttackDistance)
             {
@@ -106,7 +171,6 @@ public class E_EnemyAI : MonoBehaviour
             // Check if the enemy is within the attack range
             if (distanceToTarget <= minAttackDistance)
             {
-                Debug.Log("Attack player called");
                 AttackPlayer(); // Trigger the attack
                 npcPath.ClearPath(); // Stop moving once attacking
                 targetPosition = null; // Clear the target to stop movement
@@ -149,7 +213,7 @@ public class E_EnemyAI : MonoBehaviour
                     finishPosition = gridPosition;
 
                     NPCScheduleEvent enemyChaseEvent = new NPCScheduleEvent(
-                        0, 0, 0, 0, Weather.none, Season.none, SceneName.Scene1_Farm,
+                        0, 0, 0, 0, Weather.none, Season.none, npcCurrentScene,
                         new GridCoordinate(finishPosition.x, finishPosition.y), null
                     );
 

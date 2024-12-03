@@ -185,3 +185,11 @@ public enum Facing
     right
 }
 
+public enum EnemyType //new for enemytype
+{
+    easy,
+    normal,
+    hard,
+    legendary,
+    none
+}

@@ -1,5 +1,4 @@
-﻿
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class GameClock : MonoBehaviour
@@ -8,7 +7,6 @@ public class GameClock : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dateText = null;
     [SerializeField] private TextMeshProUGUI seasonText = null;
     [SerializeField] private TextMeshProUGUI yearText = null;
-
 
     private void OnEnable()
     {

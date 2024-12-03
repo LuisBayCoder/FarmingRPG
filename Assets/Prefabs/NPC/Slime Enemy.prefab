@@ -64,7 +64,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5265656417562702201}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.72, y: -12.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -82,7 +82,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.01617384, y: -0.25791097}
@@ -112,6 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 35
   deathVFXPrefab: {fileID: 2060918961789929383, guid: c0ccde9bbe1c479409f1038ce0e3ff23,
+    type: 3}
+  objectDrop: {fileID: 209166390327561047, guid: 494973c7a7ba5df4c859966ea1ec1990,
     type: 3}
 --- !u!212 &5265656417562702192
 SpriteRenderer:
@@ -230,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f9d98fc66f86643a9795c2a9205ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcCurrentScene: 0
+  npcCurrentScene: 3
   npcTargetScene: 0
   npcCurrentGridPosition: {x: 0, y: 0, z: 0}
   npcTargetGridPosition: {x: 0, y: 0, z: 0}
@@ -263,8 +265,11 @@ MonoBehaviour:
   pathUpdateDelay: 0.5
   npcPath: {fileID: 5265656417562702205}
   attackDamage: 1
+  checkInterval: 2
+  moveDistance: 0.5
   playerDetected: 0
   isInAttackRange: 1
+  npcCurrentScene: 3
 --- !u!114 &5265656417562702202
 MonoBehaviour:
   m_ObjectHideFlags: 0
