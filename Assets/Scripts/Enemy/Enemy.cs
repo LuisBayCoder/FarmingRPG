@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [ItemCodeDescription]
+    //[EnemyCodeDescription] fix this later
     [SerializeField]
     private int _enemyCode;
 
     //private SpriteRenderer spriteRenderer; don't need?
-
     public int EnemyCode { get { return _enemyCode; } set { _enemyCode = value; } }
 
     private void Awake()
@@ -26,23 +25,22 @@ public class Enemy : MonoBehaviour
     }
 
    
-    public void Init(int itemCodeParam)
+    public void Init(int enemyCodeParam)//maybe use this to get the enemy and check if it's dead or alive
     {
-        /*
-        if (itemCodeParam != 0)
+        
+        if (enemyCodeParam != 0) 
         {
-            EnemyCode = itemCodeParam;
+            ///EnemyCode = enemyCodeParam;
 
-            ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(EnemyCode);
-
-            spriteRenderer.sprite = itemDetails.itemSprite;
+            //EnemyDetails enemyDetails = InventoryManager.Instance.GetEnemyDetails(EnemyCode);
+            
+            //spriteRenderer.sprite = itemDetails.itemSprite;
 
             // If item type is reapable then add nudgeable component
-            if (itemDetails.itemType == ItemType.Reapable_scenary)
-            {
-                gameObject.AddComponent<ItemNudge>();
-            }
+            //if (itemDetails.itemType == ItemType.Reapable_scenary)
+            //{
+            //    gameObject.AddComponent<ItemNudge>();
+            //}
         }
-        */
     }
 }

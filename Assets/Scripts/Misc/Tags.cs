@@ -6,4 +6,7 @@
     public const string GroundDecoration2 = "GroundDecoration2";
 
     public const string ItemsParentTransform = "ItemsParentTransform";
+
+    //new for enemy
+    public const string EnemiesParentTransform = "EnemiesParentTransform";
 }

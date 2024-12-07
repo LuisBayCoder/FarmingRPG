@@ -10145,6 +10145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryListCapacityIntArray: 
   itemList: {fileID: 11400000, guid: 1e06c4771ceb7f5498b5a8bf95bc8eed, type: 2}
+  enemyList: {fileID: 11400000, guid: eea0ca588b0b04b409aaf0eac3f05d12, type: 2}
 --- !u!4 &1132214117
 Transform:
   m_ObjectHideFlags: 0
@@ -13655,6 +13656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1486817095}
   - component: {fileID: 1486817094}
+  - component: {fileID: 1486817096}
   m_Layer: 0
   m_Name: SceneEnemiesManager
   m_TagString: Untagged
@@ -13674,6 +13676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4699ac7e0fd24843bf8c1f219fcad32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 996038853678716217, guid: 451e3d0c1f36467409f4d32c84d168cf,
+    type: 3}
 --- !u!4 &1486817095
 Transform:
   m_ObjectHideFlags: 0
@@ -13688,6 +13692,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1486817096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486817093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf48fd48014af244983dd57b212def9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gUID: 841ac3a4-1895-4784-8265-5e21c85ba28a
 --- !u!1 &1491452322
 GameObject:
   m_ObjectHideFlags: 0

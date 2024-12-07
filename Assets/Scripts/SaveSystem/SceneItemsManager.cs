@@ -45,6 +45,7 @@ public class SceneItemsManager : SingletonMonobehaviour<SceneItemsManager>, ISav
 
     public void InstantiateSceneItem(int itemCode, Vector3 itemPosition)
     {
+        //this is called when braking rocks
         GameObject itemGameObject = Instantiate(itemPrefab, itemPosition, Quaternion.identity, parentItem);
         Item item = itemGameObject.GetComponent<Item>();
         item.Init(itemCode);
@@ -56,6 +57,7 @@ public class SceneItemsManager : SingletonMonobehaviour<SceneItemsManager>, ISav
 
         foreach (SceneItem sceneItem in sceneItemList)
         {
+            //the instantiated object is just a clone of the itemPrefab with no special properties or data.
             itemGameObject = Instantiate(itemPrefab, new Vector3(sceneItem.position.x, sceneItem.position.y, sceneItem.position.z), Quaternion.identity, parentItem);
 
             Item item = itemGameObject.GetComponent<Item>();
@@ -83,6 +85,7 @@ public class SceneItemsManager : SingletonMonobehaviour<SceneItemsManager>, ISav
 
     public void ISaveableLoad(GameSave gameSave)
     {
+        
         if (gameSave.gameObjectData.TryGetValue(ISaveableUniqueID, out GameObjectSave gameObjectSave))
         {
             GameObjectSave = gameObjectSave;

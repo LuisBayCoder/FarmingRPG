@@ -9,6 +9,7 @@ public class SceneSave
     public Dictionary<string, Vector3Serializable> vector3Dictionary;
     public Dictionary<string, int[]> intArrayDictionary;
     public List<SceneItem> listSceneItem;
+    public List<SceneEnemy> listSceneEnemy;
     public Dictionary<string, GridPropertyDetails> gridPropertyDetailsDictionary;
     public List<InventoryItem>[] listInvItemArray;
 }
