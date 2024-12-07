@@ -17,20 +17,6 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
     private void AfterSceneLoad()
     {
         parentEnemy = GameObject.FindGameObjectWithTag(Tags.EnemiesParentTransform).transform;
-        InstantiateEnemy();
-    }
-
-    private void InstantiateEnemy()
-    {
-        if (enemyPrefab != null && parentEnemy != null)
-        {
-            GameObject enemy = Instantiate(enemyPrefab, parentEnemy);
-            enemy.transform.localPosition = Vector3.zero; // Adjust position as needed
-        }
-        else
-        {
-            Debug.LogError("Enemy prefab or parent enemy transform is not set.");
-        }
     }
 
     protected override void Awake()
