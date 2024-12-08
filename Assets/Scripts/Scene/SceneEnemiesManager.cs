@@ -6,63 +6,130 @@ using UnityEngine.SceneManagement;
 public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, ISaveable
 {
     private Transform parentEnemy;
-    [SerializeField] private GameObject enemyPrefab = null;
+    [SerializeField] private SO_EnemyList enemyListSO = null; // Reference to the ScriptableObject
+    [SerializeField] private GameObject enemyPrefab = null; // Default enemy prefab
 
     private string _iSaveableUniqueID;
-    public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
+    public string ISaveableUniqueID 
+    { 
+        get { return _iSaveableUniqueID; } 
+        set { _iSaveableUniqueID = value; } 
+    }
 
     private GameObjectSave _gameObjectSave;
-    public GameObjectSave GameObjectSave { get { return _gameObjectSave; } set { _gameObjectSave = value; } }
+    public GameObjectSave GameObjectSave 
+    { 
+        get { return _gameObjectSave; } 
+        set { _gameObjectSave = value; } 
+    }
+
+    private GameObject currentEnemy;
+    private Vector3 savedPosition;
+    private int savedEnemyCode;
 
     private void AfterSceneLoad()
     {
         parentEnemy = GameObject.FindGameObjectWithTag(Tags.EnemiesParentTransform).transform;
+        SaveCurrentEnemy();
+        RemoveCurrentEnemy();
+        InstantiateEnemyFromSO();
     }
 
-    protected override void Awake()
+    private void SaveCurrentEnemy()
     {
-        base.Awake();
-
-        ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
-        GameObjectSave = new GameObjectSave();
-    }
-
-    /// <summary>
-    /// Destroy all enemies currently in the scene
-    /// </summary>
-    private void DestroySceneEnemies()
-    {
-       // Get all enemies in the scene
-        Enemy[] enemiesInScene = GameObject.FindObjectsOfType<Enemy>();
-
-        // Loop through all scene enemies and destroy them
-        for (int i = enemiesInScene.Length - 1; i > -1; i--)
+        if (currentEnemy != null)
         {
-            Destroy(enemiesInScene[i].gameObject);
+            // Save the current enemy's position and enemyCode
+            savedPosition = currentEnemy.transform.position;
+            savedEnemyCode = currentEnemy.GetComponent<Enemy>().EnemyCode;
+            Debug.Log($"Saved enemy code: {savedEnemyCode}");
+        }
+        else
+        {
+            // If there is no current enemy, use the parent's position
+            savedPosition = parentEnemy.position;
+            savedEnemyCode = 0; // Default to 0 if no current enemy
+            Debug.Log("No current enemy found. Using default enemy code: 0");
         }
     }
 
-    //places the type and enemy in the location 
-    //This method is ideal for spawning a single enemy on demand, such as during runtime events like triggers or player actions.
+    private void RemoveCurrentEnemy()
+    {
+        if (currentEnemy != null)
+        {
+            Destroy(currentEnemy);
+        }
+    }
+
+    private void InstantiateEnemyFromSO()
+    {
+        if (enemyListSO != null && enemyListSO.enemyDetails.Count > 0 && parentEnemy != null)
+        {
+            // Find the enemy with the saved enemyCode
+            EnemyDetails enemyDetail = enemyListSO.enemyDetails.Find(ed => ed.enemyCode == savedEnemyCode);
+            if (enemyDetail != null && enemyDetail.enemyPrefab != null)
+            {
+                currentEnemy = Instantiate(enemyDetail.enemyPrefab, savedPosition, Quaternion.identity, parentEnemy);
+                Debug.Log($"Instantiated enemy with code: {savedEnemyCode}");
+                // No need to set the enemyCode here, as it is already used to find the correct prefab
+            }
+            else
+            {
+                Debug.LogError($"Enemy with the specified code {savedEnemyCode} not found or prefab is not assigned.");
+            }
+        }
+        else
+        {
+            Debug.LogError("ScriptableObject or prefab is not assigned.");
+        }
+    }
+
+    // This method is ideal for spawning a single enemy on demand, such as during runtime events like triggers or player actions.
     public void InstantiateSceneEnemy(int enemyType, Vector3 enemyPosition)
     {
         GameObject enemyGameObject = Instantiate(enemyPrefab, enemyPosition, Quaternion.identity, parentEnemy);
         Enemy enemy = enemyGameObject.GetComponent<Enemy>();
         enemy.Init(enemyType);
     }
-    
-    private void InstantiateSceneEnemies(List<SceneEnemy> sceneEnemyList)
-    {
-        GameObject enemyGameObject;
 
-        foreach (SceneEnemy sceneEnemy in sceneEnemyList)
+    private void InstantiateSceneEnemies()
+    {
+        // Get all enemies in the scene
+        Enemy[] enemiesInScene = FindObjectsOfType<Enemy>();
+
+        foreach (Enemy enemy in enemiesInScene)
         {
-           
-            enemyGameObject = Instantiate(enemyPrefab, new Vector3(sceneEnemy.position.x, sceneEnemy.position.y, sceneEnemy.position.z), Quaternion.identity, parentEnemy);
-            Enemy enemy = enemyGameObject.GetComponent<Enemy>();
-            enemy.EnemyCode = sceneEnemy.enemyCode;
-            enemy.name = sceneEnemy.enemyName;
+            // Save the current enemy's position and enemyCode
+            savedPosition = enemy.transform.position;
+            savedEnemyCode = enemy.EnemyCode;
+            Debug.Log($"Found enemy in scene with code: {savedEnemyCode}");
+
+            // Find the enemy with the saved enemyCode
+            EnemyDetails enemyDetail = enemyListSO.enemyDetails.Find(ed => ed.enemyCode == savedEnemyCode);
+            if (enemyDetail != null && enemyDetail.enemyPrefab != null)
+            {
+                // Instantiate the enemy prefab at the saved position
+                GameObject newEnemy = Instantiate(enemyDetail.enemyPrefab, savedPosition, Quaternion.identity, parentEnemy);
+                Debug.Log($"Instantiated enemy with code: {savedEnemyCode}");
+            }
+            else
+            {
+                Debug.LogError($"Enemy with the specified code {savedEnemyCode} not found or prefab is not assigned.");
+            }
         }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
+        GameObjectSave = new GameObjectSave();
+    }
+
+    private void OnEnable()
+    {
+        ISaveableRegister();
+        EventHandler.AfterSceneLoadEvent += AfterSceneLoad;
     }
 
     private void OnDisable()
@@ -71,10 +138,9 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
         EventHandler.AfterSceneLoadEvent -= AfterSceneLoad;
     }
 
-    private void OnEnable()
+    public void ISaveableRegister()
     {
-        ISaveableRegister();
-        EventHandler.AfterSceneLoadEvent += AfterSceneLoad;
+        SaveLoadManager.Instance.iSaveableObjectList.Add(this);
     }
 
     public void ISaveableDeregister()
@@ -92,10 +158,9 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
             ISaveableRestoreScene(SceneManager.GetActiveScene().name);
         }
     }
-    
+
     public void ISaveableRestoreScene(string sceneName)
     {
-        
         if (GameObjectSave.sceneData.TryGetValue(sceneName, out SceneSave sceneSave))
         {
             if (sceneSave.listSceneEnemy != null)
@@ -104,14 +169,9 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
                 DestroySceneEnemies();
 
                 // Instantiate the list of enemies
-                InstantiateSceneEnemies(sceneSave.listSceneEnemy);
+                InstantiateSceneEnemies();
             }
         }
-    }
-
-    public void ISaveableRegister()
-    {
-        SaveLoadManager.Instance.iSaveableObjectList.Add(this);
     }
 
     public GameObjectSave ISaveableSave()
@@ -147,5 +207,20 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
         sceneSave.listSceneEnemy = sceneEnemyList;
 
         GameObjectSave.sceneData.Add(sceneName, sceneSave);
+    }
+
+    /// <summary>
+    /// Destroy all enemies currently in the scene
+    /// </summary>
+    private void DestroySceneEnemies()
+    {
+       // Get all enemies in the scene
+        Enemy[] enemiesInScene = GameObject.FindObjectsOfType<Enemy>();
+
+        // Loop through all scene enemies and destroy them
+        for (int i = enemiesInScene.Length - 1; i > -1; i--)
+        {
+            Destroy(enemiesInScene[i].gameObject);
+        }
     }
 }
