@@ -30,27 +30,7 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
     private void AfterSceneLoad()
     {
         parentEnemy = GameObject.FindGameObjectWithTag(Tags.EnemiesParentTransform).transform;
-        SaveCurrentEnemy();
         RemoveCurrentEnemy();
-        InstantiateEnemyFromSO();
-    }
-
-    private void SaveCurrentEnemy()
-    {
-        if (currentEnemy != null)
-        {
-            // Save the current enemy's position and enemyCode
-            savedPosition = currentEnemy.transform.position;
-            savedEnemyCode = currentEnemy.GetComponent<Enemy>().EnemyCode;
-            Debug.Log($"Saved enemy code: {savedEnemyCode}");
-        }
-        else
-        {
-            // If there is no current enemy, use the parent's position
-            savedPosition = parentEnemy.position;
-            savedEnemyCode = 0; // Default to 0 if no current enemy
-            Debug.Log("No current enemy found. Using default enemy code: 0");
-        }
     }
 
     private void RemoveCurrentEnemy()
@@ -58,29 +38,6 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
         if (currentEnemy != null)
         {
             Destroy(currentEnemy);
-        }
-    }
-
-    private void InstantiateEnemyFromSO()
-    {
-        if (enemyListSO != null && enemyListSO.enemyDetails.Count > 0 && parentEnemy != null)
-        {
-            // Find the enemy with the saved enemyCode
-            EnemyDetails enemyDetail = enemyListSO.enemyDetails.Find(ed => ed.enemyCode == savedEnemyCode);
-            if (enemyDetail != null && enemyDetail.enemyPrefab != null)
-            {
-                currentEnemy = Instantiate(enemyDetail.enemyPrefab, savedPosition, Quaternion.identity, parentEnemy);
-                Debug.Log($"Instantiated enemy with code: {savedEnemyCode}");
-                // No need to set the enemyCode here, as it is already used to find the correct prefab
-            }
-            else
-            {
-                Debug.LogError($"Enemy with the specified code {savedEnemyCode} not found or prefab is not assigned.");
-            }
-        }
-        else
-        {
-            Debug.LogError("ScriptableObject or prefab is not assigned.");
         }
     }
 

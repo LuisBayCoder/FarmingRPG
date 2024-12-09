@@ -51,6 +51,8 @@ public class E_EnemyAI : MonoBehaviour
         // Get the Animator component
         animator = GetComponent<Animator>();
 
+        npcPath = GetComponent<NPCPath>();
+
         StartCoroutine(RoamingRoutine());
 
         enemyCollider = GetComponent<Collider2D>();
@@ -126,16 +128,13 @@ public class E_EnemyAI : MonoBehaviour
 
     private void Update()
     {
-       // if (isAvoidingCollision)
-       //     return; // Skip pathfinding and attacking while avoiding collision
-
         // Calculate the distance between the enemy and the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // Check if player is within detection radius
         if (distanceToPlayer <= detectionRadius)
         {
-            state = State.Chasing; //new
+            state = State.Chasing; 
             // Set playerDetected to true
             playerDetected = true;
             // If the enemy is within the max attack distance, stop updating the path
