@@ -5,6 +5,7 @@ public class EnemyDetails //new code for enemies
 {
     public int enemyCode;
     public EnemyType enemyType;
+    public bool isDead;
     public string enemyDescription;
     public GameObject enemyPrefab;
 }

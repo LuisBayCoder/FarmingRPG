@@ -90,22 +90,6 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
 
                 // Ensure the Animator component is initialized
                 Animator animator = newEnemy.GetComponent<Animator>();
-                if (animator == null)
-                {
-                    Debug.LogError("Animator component not found on the instantiated enemy.");
-                }
-                else
-                {
-                    Debug.Log("Animator component found and initialized on the instantiated enemy.");
-                    if (animator.runtimeAnimatorController == null)
-                    {
-                        Debug.LogError("Animator Controller is not assigned to the instantiated enemy.");
-                    }
-                    else
-                    {
-                        Debug.Log("Animator Controller is assigned to the instantiated enemy.");
-                    }
-                }
             }
             else
             {

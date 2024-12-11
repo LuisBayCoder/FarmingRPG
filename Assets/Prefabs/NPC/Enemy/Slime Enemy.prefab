@@ -40,10 +40,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5265656417562702195}
   - component: {fileID: 5265656417562702194}
-  - component: {fileID: 5265656417562702193}
   - component: {fileID: 5265656417562702192}
   - component: {fileID: 5265656417562702207}
   - component: {fileID: 5265656417562702206}
+  - component: {fileID: 5265656417562702193}
   - component: {fileID: 5265656417562702205}
   - component: {fileID: 5265656417562702204}
   - component: {fileID: 5265656417562702203}
@@ -99,23 +99,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.741218, y: 0.68295336}
   m_EdgeRadius: 0
---- !u!114 &5265656417562702193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5265656417562702201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0d07a420c9b904a925842f4b0ab785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 35
-  deathVFXPrefab: {fileID: 2060918961789929383, guid: c0ccde9bbe1c479409f1038ce0e3ff23,
-    type: 3}
-  objectDrop: {fileID: 209166390327561047, guid: 494973c7a7ba5df4c859966ea1ec1990,
-    type: 3}
 --- !u!212 &5265656417562702192
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -209,6 +192,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5265656417562702193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5265656417562702201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0d07a420c9b904a925842f4b0ab785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 35
+  deathVFXPrefab: {fileID: 2060918961789929383, guid: c0ccde9bbe1c479409f1038ce0e3ff23,
+    type: 3}
+  objectDrop: {fileID: 209166390327561047, guid: 494973c7a7ba5df4c859966ea1ec1990,
+    type: 3}
 --- !u!114 &5265656417562702205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,3 +325,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyCode: 10001
+  enemyList: {fileID: 11400000, guid: eea0ca588b0b04b409aaf0eac3f05d12, type: 2}

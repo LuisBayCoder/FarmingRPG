@@ -34,6 +34,20 @@ public class Damageable : MonoBehaviour
     {
         Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
         Instantiate(objectDrop, transform.position, Quaternion.identity);
+
+        // Get the Enemy script
+        Enemy enemy = GetComponent<Enemy>();
+        if (enemy != null && enemy.enemyList != null)
+        {
+            // Find the corresponding EnemyDetails in the SO_EnemyList
+            EnemyDetails enemyDetails = enemy.enemyList.enemyDetails.Find(e => e.enemyCode == enemy.EnemyCode);
+            if (enemyDetails != null)
+            {
+                // Set the isDead property to true
+                enemyDetails.isDead = true;
+            }
+        }
+
         // Handle death (destroy the game object, play animation, etc.)
         Destroy(gameObject);
     }
