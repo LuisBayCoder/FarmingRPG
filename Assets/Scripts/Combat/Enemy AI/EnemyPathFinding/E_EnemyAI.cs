@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 public class E_EnemyAI : MonoBehaviour
 {
@@ -33,13 +34,25 @@ public class E_EnemyAI : MonoBehaviour
         Avoiding
     }
 
-    private State state; //new
-    private EnemyPathfinding enemyPathfinding;//new
+    private State state; // Current state of the enemy
+    private EnemyPathfinding enemyPathfinding;
     private Vector3 originalTargetPosition; // Store the target position before avoiding
 
     private void Awake()
     {
-        enemyPathfinding = GetComponent<EnemyPathfinding>();//new
+        // Get the Animator component
+        animator = GetComponent<Animator>();
+
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found in Awake.");
+        }
+        else
+        {
+            Debug.Log("Animator component found in Awake.");
+        }
+
+        enemyPathfinding = GetComponent<EnemyPathfinding>();
         state = State.Roaming;
     }
 
@@ -48,8 +61,7 @@ public class E_EnemyAI : MonoBehaviour
         // Find player in the scene
         player = GameObject.FindGameObjectWithTag("Player").transform; 
 
-        // Get the Animator component
-        animator = GetComponent<Animator>();
+        GetComponent<NPCMovement>().EnemyAfterSceneLoad();
 
         npcPath = GetComponent<NPCPath>();
 
@@ -128,12 +140,14 @@ public class E_EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("current state: " + state);
         // Calculate the distance between the enemy and the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // Check if player is within detection radius
         if (distanceToPlayer <= detectionRadius)
         {
+            Debug.Log("Player detected within detection radius.");
             state = State.Chasing; 
             // Set playerDetected to true
             playerDetected = true;
@@ -157,9 +171,10 @@ public class E_EnemyAI : MonoBehaviour
         {
             // Reset player detection when out of range
             if (playerDetected == false) return;
+            Debug.Log("Player out of detection radius.");
             playerDetected = false;
             isInAttackRange = false;
-            state = State.Roaming;//new
+            state = State.Roaming;
             StartCoroutine(RoamingRoutine());
         }
         // Check distance to target and stop if within attack range
@@ -181,6 +196,23 @@ public class E_EnemyAI : MonoBehaviour
         }
     }
 
+    private string GetStateNameFromHash(int hash)
+    {
+        if (hash == Animator.StringToHash("Base Layer.AttackStateName")) // Replace "Base Layer.AttackStateName" with the actual state name
+        {
+            return "AttackStateName";
+        }
+        else if (hash == Animator.StringToHash("Base Layer.IdleStateName")) // Replace "Base Layer.IdleStateName" with the actual state name
+        {
+            return "IdleStateName";
+        }
+        // Add more states as needed
+        else
+        {
+            return "Unknown State";
+        }
+    }
+
     private void UpdatePathToPlayer()
     {
         // Exit if the enemy is in attack range
@@ -195,6 +227,7 @@ public class E_EnemyAI : MonoBehaviour
         if (pathUpdateTimer <= 0f)
         {
             float distanceToTarget = Vector3.Distance(transform.position, targetPosition != null ? targetPosition.position : player.position);
+
 
             // Update the path only if the enemy is far from the target
             if (distanceToTarget >= attackDistance) // Adding a buffer
@@ -217,6 +250,7 @@ public class E_EnemyAI : MonoBehaviour
                     );
 
                     npcPath.BuildPath(enemyChaseEvent); // Build the path using A*
+                    Debug.Log("Path to player updated.");
                 }
             }
         }
@@ -225,7 +259,18 @@ public class E_EnemyAI : MonoBehaviour
     // Trigger attack animation when the enemy is in range
     private void AttackPlayer()
     {
-        animator.SetBool("isAttacking", true); // Play attack animation
+        if (animator != null)
+        {
+            animator.SetBool("isAttacking", true); // Play attack animation
+            Debug.Log("Setting isAttacking to true");
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
+        }
+        else
+        {
+            Debug.LogError("Animator component is null.");
+        }
+        
         npcPath.ClearPath(); // Stop moving once the enemy attacks
         DeterminePlayerDirection(); // Determine player direction for the attack animation
     }
@@ -242,7 +287,17 @@ public class E_EnemyAI : MonoBehaviour
 
     private void AttackPlayerFalse()
     {
-        animator.SetBool("isAttacking", false);
+        if (animator != null)
+        {
+            animator.SetBool("isAttacking", false);
+            Debug.Log("Setting isAttacking to false");
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
+        }
+        else
+        {
+            Debug.LogError("Animator component is null.");
+        }
     }
 
     // Visualize detection radius and attack range in the Scene view

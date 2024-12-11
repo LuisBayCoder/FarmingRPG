@@ -46,7 +46,26 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
     {
         GameObject enemyGameObject = Instantiate(enemyPrefab, enemyPosition, Quaternion.identity, parentEnemy);
         Enemy enemy = enemyGameObject.GetComponent<Enemy>();
-        enemy.Init(enemyType);
+        //enemy.Init(enemyType);
+
+        // Ensure the Animator component is initialized
+        Animator animator = enemyGameObject.GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found on the instantiated enemy.");
+        }
+        else
+        {
+            Debug.Log("Animator component found and initialized on the instantiated enemy.");
+            if (animator.runtimeAnimatorController == null)
+            {
+                Debug.LogError("Animator Controller is not assigned to the instantiated enemy.");
+            }
+            else
+            {
+                Debug.Log("Animator Controller is assigned to the instantiated enemy.");
+            }
+        }
     }
 
     private void InstantiateSceneEnemies()
@@ -68,6 +87,25 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
                 // Instantiate the enemy prefab at the saved position
                 GameObject newEnemy = Instantiate(enemyDetail.enemyPrefab, savedPosition, Quaternion.identity, parentEnemy);
                 Debug.Log($"Instantiated enemy with code: {savedEnemyCode}");
+
+                // Ensure the Animator component is initialized
+                Animator animator = newEnemy.GetComponent<Animator>();
+                if (animator == null)
+                {
+                    Debug.LogError("Animator component not found on the instantiated enemy.");
+                }
+                else
+                {
+                    Debug.Log("Animator component found and initialized on the instantiated enemy.");
+                    if (animator.runtimeAnimatorController == null)
+                    {
+                        Debug.LogError("Animator Controller is not assigned to the instantiated enemy.");
+                    }
+                    else
+                    {
+                        Debug.Log("Animator Controller is assigned to the instantiated enemy.");
+                    }
+                }
             }
             else
             {

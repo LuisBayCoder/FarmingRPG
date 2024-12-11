@@ -71,8 +71,27 @@ public class NPCMovement : MonoBehaviour
         npcPath = GetComponent<NPCPath>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found in Awake.");
+        }
+        else
+        {
+            Debug.Log("Animator component found in Awake.");
+            if (animator.runtimeAnimatorController == null)
+            {
+                Debug.LogError("Animator Controller is not assigned in Awake.");
+            }
+            else
+            {
+                Debug.Log("Animator Controller is assigned in Awake.");
+            }
+        }
+
+        Debug.Log("Before assigning Animator Override Controller: " + animator.runtimeAnimatorController);
         animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = animatorOverrideController;
+        Debug.Log("After assigning Animator Override Controller: " + animator.runtimeAnimatorController);
 
         npcTargetScene = npcCurrentScene;
         npcTargetGridPosition = npcCurrentGridPosition;
@@ -83,6 +102,23 @@ public class NPCMovement : MonoBehaviour
     {
         waitForFixedUpdate = new WaitForFixedUpdate();
         SetIdleAnimation();
+
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found in Start.");
+        }
+        else
+        {
+            Debug.Log("Animator component found in Start.");
+            if (animator.runtimeAnimatorController == null)
+            {
+                Debug.LogError("Animator Controller is not assigned in Start.");
+            }
+            else
+            {
+                Debug.Log("Animator Controller is assigned in Start.");
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -214,6 +250,11 @@ public class NPCMovement : MonoBehaviour
         boxCollider2D.enabled = false;
         if (childBoxCollider2D != null) childBoxCollider2D.enabled = false; // Disable the child BoxCollider2D
         npcActiveInScene = false;
+    }
+
+    public void EnemyAfterSceneLoad()
+    {
+        AfterSceneLoad();
     }
 
     private void AfterSceneLoad()
