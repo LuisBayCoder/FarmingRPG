@@ -30,14 +30,20 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
     private void AfterSceneLoad()
     {
         parentEnemy = GameObject.FindGameObjectWithTag(Tags.EnemiesParentTransform).transform;
-        RemoveCurrentEnemy();
     }
 
-    private void RemoveCurrentEnemy()
+     /// <summary>
+    /// Destroy all enemies currently in the scene
+    /// </summary>
+    private void DestroySceneEnemies()
     {
-        if (currentEnemy != null)
+       // Get all enemies in the scene
+        Enemy[] enemiesInScene = GameObject.FindObjectsOfType<Enemy>();
+
+        // Loop through all scene enemies and destroy them
+        for (int i = enemiesInScene.Length - 1; i > -1; i--)
         {
-            Destroy(currentEnemy);
+            Destroy(enemiesInScene[i].gameObject);
         }
     }
 
@@ -186,20 +192,5 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
         sceneSave.listSceneEnemy = sceneEnemyList;
 
         GameObjectSave.sceneData.Add(sceneName, sceneSave);
-    }
-
-    /// <summary>
-    /// Destroy all enemies currently in the scene
-    /// </summary>
-    private void DestroySceneEnemies()
-    {
-       // Get all enemies in the scene
-        Enemy[] enemiesInScene = GameObject.FindObjectsOfType<Enemy>();
-
-        // Loop through all scene enemies and destroy them
-        for (int i = enemiesInScene.Length - 1; i > -1; i--)
-        {
-            Destroy(enemiesInScene[i].gameObject);
-        }
     }
 }
