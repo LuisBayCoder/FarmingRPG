@@ -76,30 +76,50 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
 
     private void InstantiateSceneEnemies()
     {
-        // Get all enemies in the scene
-        Enemy[] enemiesInScene = FindObjectsOfType<Enemy>();
-
-        foreach (Enemy enemy in enemiesInScene)
+        if (GameObjectSave.sceneData.TryGetValue(SceneManager.GetActiveScene().name, out SceneSave sceneSave))
         {
-            // Save the current enemy's position and enemyCode
-            savedPosition = enemy.transform.position;
-            savedEnemyCode = enemy.EnemyCode;
-            Debug.Log($"Found enemy in scene with code: {savedEnemyCode}");
-
-            // Find the enemy with the saved enemyCode
-            EnemyDetails enemyDetail = enemyListSO.enemyDetails.Find(ed => ed.enemyCode == savedEnemyCode);
-            if (enemyDetail != null && enemyDetail.enemyPrefab != null)
+            foreach (SceneEnemy sceneEnemy in sceneSave.listSceneEnemy)
             {
-                // Instantiate the enemy prefab at the saved position
-                GameObject newEnemy = Instantiate(enemyDetail.enemyPrefab, savedPosition, Quaternion.identity, parentEnemy);
-                Debug.Log($"Instantiated enemy with code: {savedEnemyCode}");
+                if (!sceneEnemy.isDead)
+                {
+                    // Find the enemy with the saved enemyCode
+                    EnemyDetails enemyDetail = enemyListSO.enemyDetails.Find(ed => ed.enemyCode == sceneEnemy.enemyCode);
+                    if (enemyDetail != null && enemyDetail.enemyPrefab != null)
+                    {
+                        // Instantiate the enemy prefab at the saved position
+                        GameObject newEnemy = Instantiate(enemyDetail.enemyPrefab, new Vector3(sceneEnemy.position.x, sceneEnemy.position.y, sceneEnemy.position.z), Quaternion.identity, parentEnemy);
+                        Debug.Log($"Instantiated enemy with code: {sceneEnemy.enemyCode}");
 
-                // Ensure the Animator component is initialized
-                Animator animator = newEnemy.GetComponent<Animator>();
-            }
-            else
-            {
-                Debug.LogError($"Enemy with the specified code {savedEnemyCode} not found or prefab is not assigned.");
+                        // Ensure the Animator component is initialized
+                        Animator animator = newEnemy.GetComponent<Animator>();
+                        if (animator == null)
+                        {
+                            Debug.LogError("Animator component not found on the instantiated enemy.");
+                        }
+                        else
+                        {
+                            Debug.Log("Animator component found and initialized on the instantiated enemy.");
+                            if (animator.runtimeAnimatorController == null)
+                            {
+                                Debug.LogError("Animator Controller is not assigned to the instantiated enemy.");
+                            }
+                            else
+                            {
+                                Debug.Log("Animator Controller is assigned to the instantiated enemy.");
+                            }
+                        }
+
+                        Damageable damageable = newEnemy.GetComponent<Damageable>();
+                        if (damageable != null)
+                        {
+                            damageable.currentHealth = sceneEnemy.currentHealth;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError($"Enemy with the specified code {sceneEnemy.enemyCode} not found or prefab is not assigned.");
+                    }
+                }
             }
         }
     }
@@ -169,11 +189,13 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
 
     public void ISaveableStoreScene(string sceneName)
     {
+        
         // Remove old scene save if it exists
         GameObjectSave.sceneData.Remove(sceneName);
 
         // Get all enemies in the scene
         List<SceneEnemy> sceneEnemyList = new List<SceneEnemy>();
+        
         Enemy[] enemiesInScene = FindObjectsOfType<Enemy>();
 
         foreach (Enemy enemy in enemiesInScene)
@@ -182,6 +204,13 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
             sceneEnemy.enemyCode = enemy.EnemyCode;
             sceneEnemy.position = new Vector3Serializable(enemy.transform.position.x, enemy.transform.position.y, enemy.transform.position.z);
             sceneEnemy.enemyName = enemy.name;
+           
+            Damageable damageable = enemy.GetComponent<Damageable>();
+            if (damageable != null)
+            {
+                sceneEnemy.isDead = damageable.isDead;
+                sceneEnemy.currentHealth = damageable.currentHealth;
+            }
 
             // Add scene enemy to list
             sceneEnemyList.Add(sceneEnemy);

@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Damageable : MonoBehaviour
-{
-    public int currentHealth = 100;
+{   
+    //fix this add a max health variable. Save the current health on save and load it back on load
+    [SerializeField] private int maxHealth = 100;
+    public int currentHealth {get{return currentHealth;} set{currentHealth = value;}}
+    public bool isDead { get { return currentHealth <= 0; } }
+
     [SerializeField] private GameObject deathVFXPrefab;
     [SerializeField] private GameObject objectDrop;
 
@@ -36,19 +40,6 @@ public class Damageable : MonoBehaviour
         Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
         Instantiate(objectDrop, transform.position, Quaternion.identity);
 
-        // Get the Enemy script
-        Enemy enemy = GetComponent<Enemy>();
-        if (enemy != null && enemy.enemyList != null)
-        {
-            // Find the corresponding EnemyDetails in the SO_EnemyList
-            EnemyDetails enemyDetails = enemy.enemyList.enemyDetails.Find(e => e.enemyCode == enemy.EnemyCode);
-            if (enemyDetails != null)
-            {
-                // Set the isDead property to true
-                enemyDetails.isDead = true;
-            }
-        }
-
         // Destroy NPCMovement first if it exists
         NPCMovement npcMovement = GetComponent<NPCMovement>();
         if (npcMovement != null)
@@ -72,10 +63,5 @@ public class Damageable : MonoBehaviour
         {
             Destroy(component);
         }
-
-        // Destroy this component last
-        Destroy(this);
-        // Handle death (destroy the game object, play animation, etc.)
-        //Destroy(gameObject);
     }
 }

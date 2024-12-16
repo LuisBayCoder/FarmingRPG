@@ -140,7 +140,6 @@ public class E_EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("current state: " + state);
         // Calculate the distance between the enemy and the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
