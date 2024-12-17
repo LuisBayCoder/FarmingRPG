@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {   
-    //fix this add a max health variable. Save the current health on save and load it back on load
+    // Add a max health variable. Save the current health on save and load it back on load
     [SerializeField] private int maxHealth = 100;
-    public int currentHealth {get{return currentHealth;} set{currentHealth = value;}}
-    public bool isDead { get { return currentHealth <= 0; } }
+    [SerializeField] private int _currentHealth;
+    public int currentHealth 
+    {
+        get { return _currentHealth; } 
+        set { _currentHealth = value; } 
+    }
+    public bool isDead { get { return _currentHealth <= 0; } }
 
     [SerializeField] private GameObject deathVFXPrefab;
     [SerializeField] private GameObject objectDrop;
@@ -17,13 +22,19 @@ public class Damageable : MonoBehaviour
     private void Awake()
     {
         flash = GetComponent<Flash>();
+        _currentHealth = maxHealth; // Initialize current health to max health on Awake
+    }
+
+    public void SetHealth(int health)
+    {
+        _currentHealth = health;
     }
 
     public void TakeDamage(int amount)
     {
-        currentHealth -= amount;
+        _currentHealth -= amount;
         StartCoroutine(flash.FlashRoutine());
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
             StartCoroutine(CheckDetectDeathRoutine());
         }

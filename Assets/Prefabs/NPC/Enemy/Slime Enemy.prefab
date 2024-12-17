@@ -204,13 +204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0d07a420c9b904a925842f4b0ab785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 35
+  maxHealth: 100
+  _currentHealth: 0
   deathVFXPrefab: {fileID: 2060918961789929383, guid: c0ccde9bbe1c479409f1038ce0e3ff23,
     type: 3}
   objectDrop: {fileID: 209166390327561047, guid: 494973c7a7ba5df4c859966ea1ec1990,
     type: 3}
-  componentsToDelete:
-  - {fileID: 5265656417562702194}
 --- !u!114 &5265656417562702205
 MonoBehaviour:
   m_ObjectHideFlags: 0
