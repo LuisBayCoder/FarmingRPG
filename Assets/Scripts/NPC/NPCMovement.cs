@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,16 +37,15 @@ public class NPCMovement : MonoBehaviour
 
     private Grid grid;
     private Rigidbody2D rigidBody2D;
-    private BoxCollider2D boxCollider2D;
-    public BoxCollider2D childBoxCollider2D;  // Reference to the child BoxCollider2D
+    [SerializeField] private BoxCollider2D boxCollider2D;
     private WaitForFixedUpdate waitForFixedUpdate;
     private Animator animator;
     private AnimatorOverrideController animatorOverrideController;
     private NPCPath npcPath;
     private bool npcInitialised = false;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [HideInInspector] public bool npcActiveInScene = false;
-
+    [SerializeField] private Component[] componentsToToggle; // Array of components to enable/disable
     private bool sceneLoaded = false;
 
     private Coroutine moveToGridPositionRoutine;
@@ -66,7 +66,6 @@ public class NPCMovement : MonoBehaviour
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        //childBoxCollider2D = GetComponentInChildren<BoxCollider2D>(); // Assign the child BoxCollider2D
         animator = GetComponent<Animator>();
         npcPath = GetComponent<NPCPath>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -240,7 +239,24 @@ public class NPCMovement : MonoBehaviour
     {
         spriteRenderer.enabled = true;
         boxCollider2D.enabled = true;
-        if (childBoxCollider2D != null) childBoxCollider2D.enabled = true; // Enable the child BoxCollider2D
+
+        // Enable all components in the array
+        foreach (Component component in componentsToToggle)
+        {
+            if (component is Behaviour behaviour)
+            {
+                behaviour.enabled = true;
+            }
+            else if (component is Renderer renderer)
+            {
+                renderer.enabled = true;
+            }
+            else if (component is Collider2D collider)
+            {
+                collider.enabled = true;
+            }
+        }
+
         npcActiveInScene = true;
     }
 
@@ -248,7 +264,24 @@ public class NPCMovement : MonoBehaviour
     {
         spriteRenderer.enabled = false;
         boxCollider2D.enabled = false;
-        if (childBoxCollider2D != null) childBoxCollider2D.enabled = false; // Disable the child BoxCollider2D
+
+        // Disable all components in the array
+        foreach (Component component in componentsToToggle)
+        {
+            if (component is Behaviour behaviour)
+            {
+                behaviour.enabled = false;
+            }
+            else if (component is Renderer renderer)
+            {
+                renderer.enabled = false;
+            }
+            else if (component is Collider2D collider)
+            {
+                collider.enabled = false;
+            }
+        }
+
         npcActiveInScene = false;
     }
 
@@ -421,4 +454,3 @@ public class NPCMovement : MonoBehaviour
         paused = false;
     }
 }
-
