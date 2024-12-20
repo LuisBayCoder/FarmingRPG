@@ -255,6 +255,10 @@ public class NPCMovement : MonoBehaviour
             {
                 collider.enabled = true;
             }
+            else
+            {
+                component.gameObject.SetActive(true);
+            }
         }
 
         npcActiveInScene = true;
@@ -279,6 +283,10 @@ public class NPCMovement : MonoBehaviour
             else if (component is Collider2D collider)
             {
                 collider.enabled = false;
+            }
+            else
+            {
+                component.gameObject.SetActive(false);
             }
         }
 
