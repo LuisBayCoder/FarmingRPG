@@ -1188,6 +1188,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1741028668}
     m_Modifications:
+    - target: {fileID: 5265656417562702193, guid: 068678dcc765bd54c86e900b0e843a31,
+        type: 3}
+      propertyPath: Message
+      value: Killed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265656417562702193, guid: 068678dcc765bd54c86e900b0e843a31,
+        type: 3}
+      propertyPath: Parameter
+      value: Slimer
+      objectReference: {fileID: 0}
     - target: {fileID: 5265656417562702195, guid: 068678dcc765bd54c86e900b0e843a31,
         type: 3}
       propertyPath: m_RootOrder
@@ -1262,6 +1272,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1741028668}
     m_Modifications:
+    - target: {fileID: 5265656417562702193, guid: 068678dcc765bd54c86e900b0e843a31,
+        type: 3}
+      propertyPath: Message
+      value: Killed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265656417562702193, guid: 068678dcc765bd54c86e900b0e843a31,
+        type: 3}
+      propertyPath: Parameter
+      value: Slimer
+      objectReference: {fileID: 0}
     - target: {fileID: 5265656417562702194, guid: 068678dcc765bd54c86e900b0e843a31,
         type: 3}
       propertyPath: m_IsTrigger
@@ -1544,6 +1564,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1741028668}
     m_Modifications:
+    - target: {fileID: 5265656417562702193, guid: 068678dcc765bd54c86e900b0e843a31,
+        type: 3}
+      propertyPath: Message
+      value: Killed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265656417562702193, guid: 068678dcc765bd54c86e900b0e843a31,
+        type: 3}
+      propertyPath: Parameter
+      value: Slimer
+      objectReference: {fileID: 0}
     - target: {fileID: 5265656417562702194, guid: 068678dcc765bd54c86e900b0e843a31,
         type: 3}
       propertyPath: m_IsTrigger
@@ -1685,6 +1715,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1741028668}
+  - component: {fileID: 1741028669}
   m_Layer: 0
   m_Name: Enemies
   m_TagString: EnemiesParentTransform
@@ -1710,6 +1741,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1741028669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741028667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a522a7e9b29567c4d9f4d154a31240a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMessage: Killed
+  defaultParameter: Slimer
 --- !u!1 &1752546349
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,6 +4943,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1741028668}
     m_Modifications:
+    - target: {fileID: 5265656417562702193, guid: 068678dcc765bd54c86e900b0e843a31,
+        type: 3}
+      propertyPath: Message
+      value: Killed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265656417562702193, guid: 068678dcc765bd54c86e900b0e843a31,
+        type: 3}
+      propertyPath: Parameter
+      value: Slimer
+      objectReference: {fileID: 0}
     - target: {fileID: 5265656417562702195, guid: 068678dcc765bd54c86e900b0e843a31,
         type: 3}
       propertyPath: m_RootOrder

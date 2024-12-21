@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers;
+using PixelCrushers.QuestMachine;
 using UnityEngine;
 
 public class Damageable : MonoBehaviour
@@ -7,6 +9,8 @@ public class Damageable : MonoBehaviour
     // Add a max health variable. Save the current health on save and load it back on load
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int _currentHealth;
+    public string Message;
+    public string Parameter;
     public int currentHealth 
     {
         get { return _currentHealth; } 
@@ -74,5 +78,16 @@ public class Damageable : MonoBehaviour
         {
             Destroy(component);
         }
+
+        // Send message to quest if Message and Parameter are not empty
+        if (!string.IsNullOrEmpty(Message) && !string.IsNullOrEmpty(Parameter))
+        {
+            SendMessageToQuest();
+        }
+    }
+
+    void SendMessageToQuest()
+    {
+        MessageSystem.SendMessage(this.gameObject, Message, Parameter);  
     }
 }
