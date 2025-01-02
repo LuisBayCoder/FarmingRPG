@@ -60,7 +60,7 @@ MonoBehaviour:
   - id: 2
     fields:
     - title: Name
-      value: NPC
+      value: Butch
       type: 0
       typeString: 
     - title: Pictures
@@ -70,7 +70,7 @@ MonoBehaviour:
     - title: Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: IsPlayer
       value: False
       type: 2
@@ -79,7 +79,37 @@ MonoBehaviour:
     spritePortrait: {fileID: 0}
     alternatePortraits: []
     spritePortraits: []
-  items: []
+  items:
+  - id: 1
+    fields:
+    - title: Name
+      value: CheckOnLivestockAndReturn
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: This is a stub to use the lua
+      type: 0
+      typeString: 
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: 
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
   locations: []
   variables:
   - id: 1
@@ -221,7 +251,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Hello!
+        value: "Hey, you notice that? The animals... they're too quiet. That ain\u2019t
+          right. Something\u2019s off. Go check the barn, see what\u2019s going on.
+          And don\u2019t drag your feet\u2014"
         type: 0
         typeString: 
       - title: Sequence
@@ -254,7 +286,7 @@ MonoBehaviour:
         destinationDialogueID: 5
         isConnector: 0
         priority: 2
-      conditionsString: 
+      conditionsString: CurrentQuestState("CheckOnLivestockAndReturn") == "unassigned"
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -310,8 +342,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 131.21138
-        y: 286.32626
+        x: 162.91872
+        y: 225.35068
         width: 160
         height: 30
     - id: 3
@@ -333,9 +365,8 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
-        value: Hey, I've noticed tools missing, skittish animals, and weird tracks
-          by the barn. Something's not right. I need to find out who's behind this
-          and stop it.
+        value: "Animals are quiet? Yeah, I\u2019ll take a look. Might be nothing...
+          might be something."
         type: 0
         typeString: 
       - title: Dialogue Text
@@ -390,9 +421,8 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
-        value: Hey, I've been thinking a lot about this farm and how much it means
-          to everyone here. I've grown to care about it too, and I want to make sure
-          it's safe and thriving.
+        value: Oh, sure. Let me just grab a pitchfork and save the farm from the
+          terrifying... silence.
         type: 0
         typeString: 
       - title: Dialogue Text
@@ -447,8 +477,8 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
-        value: Hey, I've noticed some of our livestock are missing. Tracks lead into
-          the forest. I think creatures from there took them
+        value: So... what kind of animals you keep in the barn? Cows? Chickens? Something...
+          else?
         type: 0
         typeString: 
       - title: Dialogue Text
@@ -474,8 +504,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 399.56042
-        y: 220.10988
+        x: 373.95068
+        y: 159.13428
         width: 160
         height: 30
     - id: 6
@@ -497,10 +527,8 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
-        value: "Safe and thriving, huh? You think I don't know what this farm means?
-          I've poured my heart and soul into this place for years. It\u2019s not
-          just a piece of land; it\u2019s everything. But caring? Caring doesn't
-          pay the bills or fend off the wolves. You got a plan, or are you just talking?"
+        value: "Cute. Real cute. But if something\u2019s out there, your jokes won\u2019t
+          fix it. Now get moving before we all regret it."
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
@@ -593,8 +621,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 627.24817
-        y: 317.7195
+        x: 488.22382
+        y: 286.0122
         width: 160
         height: 30
     - id: 8
@@ -791,7 +819,79 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
+        value: Now, listen up. If you're serious about helping, there's a job that
+          needs doing. I need you to gather the necessary materials to repair the
+          irrigation system. We're talking pipes, valves, tools... the whole shebang.
+          Head down to the suppliers in town, wheel and deal if you have to, but
+          get those materials back here fast. You do that, and maybe we'll start
+          to see eye to eye.
+        type: 0
+        typeString: 
+      - title: Dialogue Text
         value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 11
+        destinationConversationID: 1
+        destinationDialogueID: 12
+        isConnector: 0
+        priority: 2
+      - originConversationID: 1
+        originDialogueID: 11
+        destinationConversationID: 1
+        destinationDialogueID: 13
+        isConnector: 0
+        priority: 2
+      - originConversationID: 1
+        originDialogueID: 11
+        destinationConversationID: 1
+        destinationDialogueID: 14
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 963.51196
+        y: 253.43379
+        width: 160
+        height: 30
+    - id: 12
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: Got it, boss. On it.
         type: 0
         typeString: 
       - title: Dialogue Text
@@ -817,13 +917,111 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 963.51196
-        y: 253.43379
+        x: 827.2482
+        y: 332.00522
+        width: 160
+        height: 30
+    - id: 13
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: Can't do it.
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 903.0723
+        y: 381.45575
+        width: 160
+        height: 30
+    - id: 14
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: Not now, busy.
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1029.446
+        y: 328.7085
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 2.197815}
-    canvasZoom: 0.9100001
+    canvasScrollPosition: {x: 107.52545, y: 0}
+    canvasZoom: 0.8200002
   syncInfo:
     syncActors: 0
     syncItems: 0
