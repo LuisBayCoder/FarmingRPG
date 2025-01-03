@@ -6946,7 +6946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
       propertyPath: componentsToToggle.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
       propertyPath: npcFacingDirectionAtDestination
@@ -6959,7 +6959,7 @@ PrefabInstance:
     - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
       propertyPath: componentsToToggle.Array.data[1]
       value: 
-      objectReference: {fileID: 996191601}
+      objectReference: {fileID: 877378183}
     - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
       propertyPath: componentsToToggle.Array.data[2]
       value: 
@@ -9102,8 +9102,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 996191598}
-  - component: {fileID: 996191601}
-  - component: {fileID: 996191600}
   - component: {fileID: 996191599}
   m_Layer: 0
   m_Name: QuestGiver
@@ -9200,55 +9198,6 @@ MonoBehaviour:
   m_completedQuestDialogueMode: 0
   m_questDialogueUI: {fileID: 0}
   m_cooldownCheckFrequency: 0
---- !u!114 &996191600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996191597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b79c7719e6566674b8c4d70a6fc32d34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagMask:
-    m_tags:
-    - Player
-  m_onTriggerEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 996191599}
-        m_TargetAssemblyTypeName: PixelCrushers.QuestMachine.QuestGiver, Assembly-CSharp-firstpass
-        m_MethodName: StartDialogueWithPlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_onTriggerExit:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!58 &996191601
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996191597}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.188912}
-  serializedVersion: 2
-  m_Radius: 1.688912
 --- !u!1001 &1016992046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19851,6 +19800,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 22431250, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22431250, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22431250, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22431250, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 532.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 22431250, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 22434184, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -19896,6 +19865,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22435066, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437732, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -470
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437732, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
