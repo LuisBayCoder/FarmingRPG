@@ -15,7 +15,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>, ISavea
 
     [SerializeField] private SO_ItemList itemList = null;
 
-    [SerializeField] private SO_EnemyList enemyList = null;
+    //[SerializeField] private SO_EnemyList enemyList = null;
 
     private string _iSaveableUniqueID;
     public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
