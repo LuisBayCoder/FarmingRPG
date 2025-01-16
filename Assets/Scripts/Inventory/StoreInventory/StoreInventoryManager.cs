@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StoreManager : SingletonMonobehaviour<StoreManager>
+public class StoreInventoryManager : SingletonMonobehaviour<StoreInventoryManager>
 {
 
     private bool _storeMenuOn = false;
-    [SerializeField] private UIInventoryBar uiInventoryBar = null;
-    //[SerializeField] private PauseMenuInventoryManagement storeMenuInventoryManagement = null;
+    //[SerializeField] private UIInventoryBar uiInventoryBar = null;
+   // [SerializeField] private PauseMenuInventoryManagement storeMenuInventoryManagement = null;
     [SerializeField] private GameObject storeMenu = null;
     [SerializeField] private GameObject[] storeTabs = null;
     [SerializeField] private Button[] storeButtons = null;
@@ -49,18 +49,18 @@ public class StoreManager : SingletonMonobehaviour<StoreManager>
     private void EnableStoreMenu()
     {
         // Destroy any currently dragged items
-       // uiInventoryBar.DestroyCurrentlyDraggedItems();
+//        uiInventoryBar.DestroyCurrentlyDraggedItems();
 
         // Clear currently selected items
-        //uiInventoryBar.ClearCurrentlySelectedItems();
+  //      uiInventoryBar.ClearCurrentlySelectedItems();
 
         StoreMenuOn = true;
-       // Player.Instance.PlayerInputIsDisabled = true;
-       // Time.timeScale = 0;
+        Player.Instance.PlayerInputIsDisabled = true;
+        Time.timeScale = 0;
         storeMenu.SetActive(true);
 
         // Trigger garbage collector
-        //System.GC.Collect();
+        System.GC.Collect();
 
         // Highlight selected button
         HighlightButtonForSelectedTab();
@@ -69,11 +69,11 @@ public class StoreManager : SingletonMonobehaviour<StoreManager>
     public void DisableStoreMenu()
     {
         // Destroy any currently dragged items
-       // pauseMenuInventoryManagement.DestroyCurrentlyDraggedItems();
+       /// storeMenuInventoryManagement.DestroyCurrentlyDraggedItems();
 
         StoreMenuOn = false;
-       // Player.Instance.PlayerInputIsDisabled = false;
-       // Time.timeScale = 1;
+        Player.Instance.PlayerInputIsDisabled = false;
+        Time.timeScale = 1;
         storeMenu.SetActive(false);
     }
 
