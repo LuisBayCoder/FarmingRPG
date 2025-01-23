@@ -5,6 +5,7 @@ public class Item : MonoBehaviour
     [ItemCodeDescription]
     [SerializeField]
     private int _itemCode;
+    public int priceOfItem;
 
     private SpriteRenderer spriteRenderer;
 

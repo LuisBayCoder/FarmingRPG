@@ -4,7 +4,7 @@ using UnityEngine;
 public class StoreMenuInventoryManagement : MonoBehaviour
 {
 
-    [SerializeField] private PauseMenuInventoryManagementSlot[] inventoryManagementSlot = null;
+    [SerializeField] private StoreMenuInventoryManagementSlot[] inventoryManagementSlot = null;
 
     public GameObject inventoryManagementDraggedItemPrefab;
 
@@ -15,18 +15,22 @@ public class StoreMenuInventoryManagement : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHandler.InventoryUpdatedEvent += PopulatePlayerInventory;
-
+        EventHandler.InventoryUpdatedEvent += PopulateStoreInventory;
         // Populate player inventory
-        if (InventoryManager.Instance != null)
+        if (StoreInventoryManager.Instance != null)
         {
-            PopulatePlayerInventory(InventoryLocation.player, InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player]);
+            Debug.Log("StoreMenuInventoryManagement OnEnable");
+            PopulateStoreInventory(InventoryLocation.store, StoreInventoryManager.Instance.inventoryLists[(int)InventoryLocation.store]);
+        }
+        else
+        {
+            Debug.Log("StoreMenuInventoryManagement StoreInventoryManager.Instance is null");
         }
     }
 
     private void OnDisable()
     {
-        EventHandler.InventoryUpdatedEvent -= PopulatePlayerInventory;
+        EventHandler.InventoryUpdatedEvent -= PopulateStoreInventory;
 
         DestroyInventoryTextBoxGameobject();
     }
@@ -43,7 +47,7 @@ public class StoreMenuInventoryManagement : MonoBehaviour
     public void DestroyCurrentlyDraggedItems()
     {
         // loop through all player inventory items
-        for (int i = 0; i < InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player].Count; i++)
+        for (int i = 0; i < StoreInventoryManager.Instance.inventoryLists[(int)InventoryLocation.store].Count; i++)
         {
             if (inventoryManagementSlot[i].draggedItem != null)
             {
@@ -53,23 +57,23 @@ public class StoreMenuInventoryManagement : MonoBehaviour
         }
     }
 
-    private void PopulatePlayerInventory(InventoryLocation inventoryLocation, List<InventoryItem> playerInventoryList)
+    private void PopulateStoreInventory(InventoryLocation inventoryLocation, List<InventoryItem> playerInventoryList)
     {
-        if (inventoryLocation == InventoryLocation.player)
+        if (inventoryLocation == InventoryLocation.store)
         {
             InitialiseInventoryManagementSlots();
 
             // loop through all player inventory items
-            for (int i = 0; i < InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player].Count; i++)
+            for (int i = 0; i < StoreInventoryManager.Instance.inventoryLists[(int)InventoryLocation.store].Count; i++)
             {
                 // Get inventory item details
-                inventoryManagementSlot[i].itemDetails = InventoryManager.Instance.GetItemDetails(playerInventoryList[i].itemCode);
+                inventoryManagementSlot[i].itemDetails = StoreInventoryManager.Instance.GetItemDetails(playerInventoryList[i].itemCode);
                 inventoryManagementSlot[i].itemQuantity = playerInventoryList[i].itemQuantity;
 
                 if (inventoryManagementSlot[i].itemDetails != null)
                 {
                     // update inventory management slot with image and quantity
-                    inventoryManagementSlot[i].inventoryManagementSlotImage.sprite = inventoryManagementSlot[i].itemDetails.itemSprite;
+                    inventoryManagementSlot[i].storeInventoryManagementSlotImage.sprite = inventoryManagementSlot[i].itemDetails.itemSprite;
                     inventoryManagementSlot[i].textMeshProUGUI.text = inventoryManagementSlot[i].itemQuantity.ToString();
                 }
             }
@@ -79,19 +83,12 @@ public class StoreMenuInventoryManagement : MonoBehaviour
     private void InitialiseInventoryManagementSlots()
     {
         // Clear inventory slots
-        for (int i = 0; i < Settings.playerMaximumInventoryCapacity; i++)
+        for (int i = 0; i < 36 ; i++)
         {
-            inventoryManagementSlot[i].greyedOutImageGO.SetActive(false);
             inventoryManagementSlot[i].itemDetails = null;
             inventoryManagementSlot[i].itemQuantity = 0;
-            inventoryManagementSlot[i].inventoryManagementSlotImage.sprite = transparent16x16;
+            inventoryManagementSlot[i].storeInventoryManagementSlotImage.sprite = transparent16x16;
             inventoryManagementSlot[i].textMeshProUGUI.text = "";
-        }
-
-        // Grey out unavailable slots
-        for (int i = InventoryManager.Instance.inventoryListCapacityIntArray[(int)InventoryLocation.player]; i < Settings.playerMaximumInventoryCapacity; i++)
-        {
-            inventoryManagementSlot[i].greyedOutImageGO.SetActive(true);
         }
     }
 

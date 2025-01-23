@@ -7,7 +7,6 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
 {
     public Image storeInventoryManagementSlotImage;
     public TextMeshProUGUI textMeshProUGUI;
-    public GameObject greyedOutImageGO;
     [SerializeField] private StoreMenuInventoryManagement inventoryManagement = null;
     [SerializeField] private GameObject inventoryTextBoxPrefab = null;
 
@@ -104,6 +103,5 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
     {
         inventoryManagement.DestroyInventoryTextBoxGameobject();
     }
-
 }
 

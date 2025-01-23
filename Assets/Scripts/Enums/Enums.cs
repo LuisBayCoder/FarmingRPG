@@ -76,6 +76,7 @@ public enum InventoryLocation
 {
     player,
     chest,
+    store,
     count
 }
 

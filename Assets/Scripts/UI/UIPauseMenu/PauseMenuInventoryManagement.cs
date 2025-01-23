@@ -20,6 +20,7 @@ public class PauseMenuInventoryManagement : MonoBehaviour
         // Populate player inventory
         if (InventoryManager.Instance != null)
         {
+            Debug.Log("PauseMenuInventoryManagement OnEnable");
             PopulatePlayerInventory(InventoryLocation.player, InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player]);
         }
     }
