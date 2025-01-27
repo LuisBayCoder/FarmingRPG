@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIInventoryTextBox : MonoBehaviour
+public class StoreUIInventoryTextBox : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textMeshTop1 = null;
     [SerializeField] private TextMeshProUGUI textMeshTop2 = null;

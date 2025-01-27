@@ -1,4 +1,5 @@
-﻿using TMPro;
+using PixelCrushers.DialogueSystem.Articy.Articy_4_0;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,20 +15,30 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
     [HideInInspector] public ItemDetails itemDetails;
     [HideInInspector] public int itemQuantity;
     [SerializeField] private int slotNumber = 0;
+    [SerializeField] private bool itsInventoryUI = true;
 
     // private Vector3 startingPosition;
     public GameObject draggedItem;
     private Canvas parentCanvas;
+    private bool isPointerOver = false;
 
     private void Awake()
     {
         parentCanvas = GetComponentInParent<Canvas>();
     }
 
+    private void Update()
+    {
+        // Check if the left mouse button is clicked while the pointer is over the slot
+        if (isPointerOver && Input.GetMouseButtonDown(0))
+        {
+            MoveItemToStoreInventory();
+        }
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (itemQuantity != 0)
-
         {
             // Instatiate gameobject as dragged item
             draggedItem = Instantiate(inventoryManagement.inventoryManagementDraggedItemPrefab, inventoryManagement.transform);
@@ -71,6 +82,7 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        
         // Populate text box with item details
         if (itemQuantity != 0)
         {
@@ -78,13 +90,47 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
             inventoryManagement.inventoryTextBoxGameobject = Instantiate(inventoryTextBoxPrefab, transform.position, Quaternion.identity);
             inventoryManagement.inventoryTextBoxGameobject.transform.SetParent(parentCanvas.transform, false);
 
-            UIInventoryTextBox inventoryTextBox = inventoryManagement.inventoryTextBoxGameobject.GetComponent<UIInventoryTextBox>();
+            if (itsInventoryUI)
+            {
+                UIInventoryTextBox inventoryTextBox = inventoryManagement.inventoryTextBoxGameobject.GetComponent<UIInventoryTextBox>();
 
-            // Set item type description
-            string itemTypeDescription = InventoryManager.Instance.GetItemTypeDescription(itemDetails.itemType);
+                // Set item type description
+                string itemTypeDescription = InventoryManager.Instance.GetItemTypeDescription(itemDetails.itemType);
 
-            // Populate text box
-            inventoryTextBox.SetTextboxText(itemDetails.itemDescription, itemTypeDescription, "", itemDetails.itemLongDescription, "", "");
+                // Populate text box
+                inventoryTextBox.SetTextboxText(
+                    itemDetails.itemDescription,
+                    itemTypeDescription,
+                    "",
+                    itemDetails.itemLongDescription,
+                    "",
+                    "",
+                    "", // Example value for textBuySale
+                    "" // Example price value
+                );
+            }
+            else
+            {
+                isPointerOver = true;
+
+                //this is the player ui inventory in the store so we need to use the store ui inventory text box
+                StoreUIInventoryTextBox storeUIInventoryTextBox = inventoryManagement.inventoryTextBoxGameobject.GetComponent<StoreUIInventoryTextBox>();
+
+                // Set item type description
+                string itemTypeDescription = InventoryManager.Instance.GetItemTypeDescription(itemDetails.itemType);
+
+                // Populate text box
+                storeUIInventoryTextBox.SetTextboxText(
+                    itemDetails.itemDescription,
+                    itemTypeDescription,
+                    "",
+                    itemDetails.itemLongDescription,
+                    "",
+                    "",
+                    "Sell", // Example value for textBuySale
+                    "5" // Example price value
+                );
+            }
 
             // Set text box position
             if (slotNumber > 23)
@@ -102,7 +148,31 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        isPointerOver = false;
         inventoryManagement.DestroyInventoryTextBoxGameobject();
     }
 
+    private void MoveItemToStoreInventory()
+    {
+        // Get the item details and quantity
+        Debug.Log("MoveItemToStoreInventory" + itemDetails.itemCode);
+        int itemCode = itemDetails.itemCode;
+        int itemQuantity = this.itemQuantity;
+
+        // Access the singleton instance of StoreInventoryManager
+        StoreInventoryManager storeInventoryManager = StoreInventoryManager.Instance;
+
+        // Add the item to the store's inventory
+        // Check if the instance is not null
+        if (storeInventoryManager != null)
+        {
+            storeInventoryManager.AddItem(InventoryLocation.store, itemCode);
+        }
+
+        // Remove the item from the player's inventory
+        InventoryManager.Instance.RemoveItem(InventoryLocation.player, itemCode);
+
+        // Update the UI
+        //inventoryManagement.UpdateInventoryUI();
+    }
 }

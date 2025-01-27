@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 1228477906257917069}
   - component: {fileID: 1073766297359502911}
   - component: {fileID: 6298690761527359708}
+  - component: {fileID: 3735852992616732443}
   m_Layer: 0
   m_Name: InventoryBuySlot
   m_TagString: Untagged
@@ -211,3 +212,39 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3735852992616732443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970570646557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d0e8c9ba1792a46a69ed48286b40b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storeInventoryManagementSlotImage: {fileID: 6298690761527359708}
+  textMeshProUGUI: {fileID: 3368471551372941381}
+  inventoryManagement: {fileID: 0}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: a55de5e167abe164c981ef376c61b6aa,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+  itemQuantity: 0
+  slotNumber: 0
+  draggedItem: {fileID: 0}

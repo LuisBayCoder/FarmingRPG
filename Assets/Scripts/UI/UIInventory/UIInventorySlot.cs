@@ -275,8 +275,8 @@ public class UIInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             // Set item type description
             string itemTypeDescription = InventoryManager.Instance.GetItemTypeDescription(itemDetails.itemType);
 
-            // Populate text box
-            inventoryTextBox.SetTextboxText(itemDetails.itemDescription, itemTypeDescription, "", itemDetails.itemLongDescription, "", "");
+            // Populate text box. I need to add new parameters for the sale choices below.
+            inventoryTextBox.SetTextboxText(itemDetails.itemDescription, itemTypeDescription, "", itemDetails.itemLongDescription, "", "","",""); //I put extra "" to match the method signature. I have lines for the sale parameters.
 
             // Set text box position according to inventory bar position
             if (inventoryBar.IsInventoryBarPositionBottom)
