@@ -168,11 +168,16 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         {
             storeInventoryManager.AddItem(InventoryLocation.store, itemCode);
         }
-
+        SellItem(5);
         // Remove the item from the player's inventory
         InventoryManager.Instance.RemoveItem(InventoryLocation.player, itemCode);
 
         // Update the UI
         //inventoryManagement.UpdateInventoryUI();
+    }
+    // Example: Selling crops
+    public void SellItem(int cropValue)
+    {
+         CoinManager.Instance.AddCoins(cropValue);
     }
 }

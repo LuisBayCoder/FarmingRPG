@@ -126,6 +126,8 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
 
     private void MoveItemToInventory()
     {
+        if (CoinManager.Instance.Coins >= 5)
+        {
         // Get the item details and quantity
         int itemCode = itemDetails.itemCode;
         int itemQuantity = this.itemQuantity;
@@ -140,11 +142,27 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
             storeInventoryManager.AddItem(InventoryLocation.player, itemCode);    
         }
 
+        
+        BuyItems(5);    // Example: Selling crops
         // Remove the item from the store inventory
         StoreInventoryManager.Instance.RemoveItem(InventoryLocation.store, itemCode);
 
         // Update the UI
         //inventoryManagement.UpdateInventoryUI();
+        }  
     }
+    // Example: Buying seeds
+    public void BuyItems(int seedCost)
+    {
+        if (CoinManager.Instance.SpendCoins(seedCost))
+        {
+            Debug.Log("Seeds purchased!");
+            // Add seeds to the player's inventory
+        }
+        else
+        {
+            Debug.Log("Not enough coins to buy seeds.");
+        }
+}
 }
 
