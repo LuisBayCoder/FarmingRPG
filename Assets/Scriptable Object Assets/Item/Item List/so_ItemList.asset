@@ -28,6 +28,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 5
   - itemCode: 10001
     itemType: 1
     itemDescription: Pumpkin
@@ -43,6 +44,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 20
   - itemCode: 10002
     itemType: 1
     itemDescription: Corn
@@ -58,6 +60,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 10
   - itemCode: 10003
     itemType: 2
     itemDescription: A basic Watering Can
@@ -73,6 +76,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 2
+    itemCost: 50
   - itemCode: 10004
     itemType: 3
     itemDescription: A Basic Hoe
@@ -88,6 +92,7 @@ MonoBehaviour:
     isWeapon: 1
     damageAmount: 7
     staminaAmount: 6
+    itemCost: 70
   - itemCode: 10005
     itemType: 4
     itemDescription: A Basic Axe
@@ -103,6 +108,7 @@ MonoBehaviour:
     isWeapon: 1
     damageAmount: 10
     staminaAmount: 5
+    itemCost: 90
   - itemCode: 10006
     itemType: 0
     itemDescription: ParsnipSeed
@@ -118,6 +124,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 5
   - itemCode: 10007
     itemType: 1
     itemDescription: Parsnip
@@ -133,6 +140,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 6
   - itemCode: 10008
     itemType: 1
     itemDescription: Wood
@@ -148,6 +156,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 20
   - itemCode: 10009
     itemType: 0
     itemDescription: Blue Spruce Pine Cone
@@ -163,6 +172,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 1
   - itemCode: 10010
     itemType: 0
     itemDescription: Cayon Oak Tree Stump
@@ -179,6 +189,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 0
   - itemCode: 10011
     itemType: 0
     itemDescription: Blue Sprue Tree Stump
@@ -195,6 +206,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 0
   - itemCode: 10012
     itemType: 7
     itemDescription: Wicker Basket
@@ -210,6 +222,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 1
+    itemCost: 10
   - itemCode: 10013
     itemType: 5
     itemDescription: A Basic Pickaxe
@@ -225,6 +238,7 @@ MonoBehaviour:
     isWeapon: 1
     damageAmount: 15
     staminaAmount: 9
+    itemCost: 80
   - itemCode: 10014
     itemType: 0
     itemDescription: Stone 1 Seed
@@ -240,6 +254,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 1
   - itemCode: 10015
     itemType: 1
     itemDescription: Stone
@@ -255,6 +270,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 1
   - itemCode: 10016
     itemType: 0
     itemDescription: pumpkin
@@ -270,6 +286,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 20
   - itemCode: 10017
     itemType: 6
     itemDescription: 'A basic scythe '
@@ -285,6 +302,7 @@ MonoBehaviour:
     isWeapon: 1
     damageAmount: 8
     staminaAmount: 6
+    itemCost: 90
   - itemCode: 10018
     itemType: 8
     itemDescription: Grass 1
@@ -300,6 +318,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 1
   - itemCode: 10019
     itemType: 8
     itemDescription: Grass 2
@@ -315,6 +334,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 1
   - itemCode: 10020
     itemType: 1
     itemDescription: Weed1
@@ -330,6 +350,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 1
   - itemCode: 10021
     itemType: 8
     itemDescription: Prickly Cactus
@@ -345,6 +366,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 0
   - itemCode: 10022
     itemType: 9
     itemDescription: Chair
@@ -360,6 +382,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 0
   - itemCode: 10023
     itemType: 9
     itemDescription: Table
@@ -375,6 +398,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 0
   - itemCode: 10024
     itemType: 1
     itemDescription: Stone
@@ -390,6 +414,7 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 1
   - itemCode: 10025
     itemType: 1
     itemDescription: Green Jelly
@@ -405,3 +430,4 @@ MonoBehaviour:
     isWeapon: 0
     damageAmount: 0
     staminaAmount: 0
+    itemCost: 2

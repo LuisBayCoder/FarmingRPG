@@ -29,7 +29,8 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         // Check if the left mouse button is clicked while the pointer is over the slot
         if (isPointerOver && Input.GetMouseButtonDown(0))
         {
-            MoveItemToInventory();
+            AttemptPurchase();
+            Debug.Log("Seeds purchased!");
         }
     }
 
@@ -79,10 +80,10 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        isPointerOver = true;
         // Populate text box with item details
         if (itemQuantity != 0)
         {
+            isPointerOver = true;
             // Instantiate inventory text box
             inventoryManagement.inventoryTextBoxGameobject = Instantiate(inventoryTextBoxPrefab, transform.position, Quaternion.identity);
             inventoryManagement.inventoryTextBoxGameobject.transform.SetParent(parentCanvas.transform, false);
@@ -101,7 +102,7 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
             "", 
             "", 
             "Buy", // Example value for textBuySale
-            "5" // Example price value
+            itemDetails.itemCost.ToString() // Example price value
             );
 
             // Set text box position
@@ -124,10 +125,17 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         inventoryManagement.DestroyInventoryTextBoxGameobject();
     }
 
-    private void MoveItemToInventory()
+    private void AttemptPurchase() //call buy item if enough coins
     {
-        if (CoinManager.Instance.Coins >= 5)
+        BuyItems(itemDetails.itemCost);      
+    }
+
+    // Example: Buying items
+    public void BuyItems(int itemCost)
+    {
+        if (CoinManager.Instance.SpendCoins(itemCost)) // Check if the player has enough coins to buy the items
         {
+
         // Get the item details and quantity
         int itemCode = itemDetails.itemCode;
         int itemQuantity = this.itemQuantity;
@@ -139,30 +147,16 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         // Check if the instance is not null
         if (storeInventoryManager != null)
         {
+            // Add items to the player's inventory
             storeInventoryManager.AddItem(InventoryLocation.player, itemCode);    
         }
-
-        
-        BuyItems(5);    // Example: Selling crops
         // Remove the item from the store inventory
         StoreInventoryManager.Instance.RemoveItem(InventoryLocation.store, itemCode);
-
-        // Update the UI
-        //inventoryManagement.UpdateInventoryUI();
-        }  
-    }
-    // Example: Buying seeds
-    public void BuyItems(int seedCost)
-    {
-        if (CoinManager.Instance.SpendCoins(seedCost))
-        {
-            Debug.Log("Seeds purchased!");
-            // Add seeds to the player's inventory
         }
         else
         {
-            Debug.Log("Not enough coins to buy seeds.");
+            Debug.Log("Not enough coins to buy items.");
         }
-}
+    }
 }
 

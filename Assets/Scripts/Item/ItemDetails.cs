@@ -18,5 +18,6 @@ public class ItemDetails
     public bool isWeapon;
     public int damageAmount; // This will be used as the hit damage for tools
     public int staminaAmount;
+    public int itemCost; // This will be used as the cost to buy the item
 }
 

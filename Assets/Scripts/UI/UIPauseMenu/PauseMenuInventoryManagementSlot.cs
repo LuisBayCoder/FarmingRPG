@@ -105,8 +105,8 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
                     itemDetails.itemLongDescription,
                     "",
                     "",
-                    "", // Example value for textBuySale
-                    "" // Example price value
+                    "", 
+                    "" 
                 );
             }
             else
@@ -128,7 +128,7 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
                     "",
                     "",
                     "Sell", // Example value for textBuySale
-                    "5" // Example price value
+                    itemDetails.itemCost.ToString() // Example price value
                 );
             }
 
@@ -168,14 +168,11 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         {
             storeInventoryManager.AddItem(InventoryLocation.store, itemCode);
         }
-        SellItem(5);
+        SellItem(itemDetails.itemCost);    // Example: Selling items
         // Remove the item from the player's inventory
         InventoryManager.Instance.RemoveItem(InventoryLocation.player, itemCode);
-
-        // Update the UI
-        //inventoryManagement.UpdateInventoryUI();
     }
-    // Example: Selling crops
+    // Example: Selling items
     public void SellItem(int cropValue)
     {
          CoinManager.Instance.AddCoins(cropValue);
