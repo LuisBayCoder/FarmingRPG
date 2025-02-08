@@ -85,7 +85,8 @@ public enum SceneName
     Scene1_Farm,
     Scene2_Field,
     Scene3_Cabin,
-    Scene4_Barn
+    Scene4_Barn,
+    Scene5_Store
 }
 
 public enum Season

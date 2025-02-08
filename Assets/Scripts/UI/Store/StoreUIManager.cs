@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using PixelCrushers.DialogueSystem;
 
 public class StoreUIManager : SingletonMonobehaviour<StoreInventoryManager>
 {
@@ -9,6 +10,9 @@ public class StoreUIManager : SingletonMonobehaviour<StoreInventoryManager>
     private bool _storeMenuOn = false;
     //[SerializeField] private UIInventoryBar uiInventoryBar = null;
     //[SerializeField] private PauseMenuInventoryManagement storeMenuInventoryManagement = null;
+    [Tooltip("Typically leave unticked so temporary Dialogue Managers don't unregister your functions.")]
+    public bool unregisterOnDisable = false;
+
     [SerializeField] private GameObject storeMenu = null;
     [SerializeField] private GameObject[] storeTabs = null;
     [SerializeField] private Button[] storeButtons = null;
@@ -22,18 +26,24 @@ public class StoreUIManager : SingletonMonobehaviour<StoreInventoryManager>
         storeMenu.SetActive(false);
     }
 
-    // Update is called once per frame
+     void OnEnable()
+    {
+        // Register the StoreMenu method with Lua.
+        Lua.RegisterFunction(nameof(StoreMenu), this, SymbolExtensions.GetMethodInfo(() => StoreMenu()));
+    }
+    void OnDisable()
+    {
+        if (unregisterOnDisable)
+        {
+            // Unregister the StoreMenu method from Lua.
+            Lua.UnregisterFunction(nameof(StoreMenu));
+        }
+    }
+    
     private void Update()
     {
-        StoreMenu();
-    }
-
-
-    private void StoreMenu()
-    {
-        // Toggle pause menu if escape is pressed
-
-        if (Input.GetKeyDown(KeyCode.R))
+        // Toggle pause menu if escape is pressed this a debug key
+         if (Input.GetKeyDown(KeyCode.R))
         {
             if (StoreMenuOn)
             {
@@ -43,6 +53,19 @@ public class StoreUIManager : SingletonMonobehaviour<StoreInventoryManager>
             {
                 EnableStoreMenu();
             }
+        }
+    }
+
+    public void StoreMenu()
+    {
+        // Toggle pause menu if escape is pressed
+        if (StoreMenuOn)
+        {
+            DisableStoreMenu();
+        }
+        else
+        {
+            EnableStoreMenu();
         }
     }
 

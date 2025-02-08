@@ -82,7 +82,8 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        // Destroy any existing inventory text box
+        inventoryManagement.DestroyInventoryTextBoxGameobject();
         // Populate text box with item details
         if (itemQuantity != 0)
         {
@@ -171,6 +172,7 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         SellItem(itemDetails.itemCost);    // Example: Selling items
         // Remove the item from the player's inventory
         InventoryManager.Instance.RemoveItem(InventoryLocation.player, itemCode);
+        OnPointerEnter(null);
     }
     // Example: Selling items
     public void SellItem(int cropValue)

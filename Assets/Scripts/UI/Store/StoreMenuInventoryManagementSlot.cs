@@ -80,6 +80,9 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        // Destroy any existing inventory text box
+        inventoryManagement.DestroyInventoryTextBoxGameobject();
+
         // Populate text box with item details
         if (itemQuantity != 0)
         {
@@ -102,7 +105,8 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
             "", 
             "", 
             "Buy", // Example value for textBuySale
-            itemDetails.itemCost.ToString() // Example price value
+            // Calculate the price with markup
+            Mathf.RoundToInt(itemDetails.itemCost * StoreStanding.Instance.GetPriceMultiplier()).ToString() // Example price value
             );
 
             // Set text box position
@@ -125,12 +129,14 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         inventoryManagement.DestroyInventoryTextBoxGameobject();
     }
 
-    private void AttemptPurchase() //call buy item if enough coins
+    private void AttemptPurchase() 
     {
-        BuyItems(itemDetails.itemCost);      
+        // Calculate the price with markup
+        int price = Mathf.RoundToInt(itemDetails.itemCost * StoreStanding.Instance.GetPriceMultiplier());
+        BuyItems(price);      
     }
 
-    // Example: Buying items
+    //call buy item if enough coins
     public void BuyItems(int itemCost)
     {
         if (CoinManager.Instance.SpendCoins(itemCost)) // Check if the player has enough coins to buy the items
@@ -151,8 +157,13 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
             storeInventoryManager.AddItem(InventoryLocation.player, itemCode);    
         }
         // Remove the item from the store inventory
+
         StoreInventoryManager.Instance.RemoveItem(InventoryLocation.store, itemCode);
+
+        // Call OnPointerEnter to update the UI or perform any necessary actions
+        OnPointerEnter(null);
         }
+
         else
         {
             Debug.Log("Not enough coins to buy items.");
