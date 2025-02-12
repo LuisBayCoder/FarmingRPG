@@ -22,8 +22,9 @@ public class CoinUI : MonoBehaviour
         
         // Subscribe to the event
         CoinManager.Instance.OnCoinsChanged += UpdateCoinDisplay;
-        // Initialize the display with the current coin balance
-        UpdateCoinDisplay(CoinManager.Instance.Coins);
+        // Initialize the display with the current coin balance without playing sound
+        currentDisplayedCoins = CoinManager.Instance.Coins;
+        coinText.text = currentDisplayedCoins.ToString();
     }
 
     private void OnDestroy()
@@ -41,15 +42,15 @@ public class CoinUI : MonoBehaviour
         }
         countCoroutine = StartCoroutine(CountCoins(currentDisplayedCoins, newCoins));
 
-        // Play the initial coin sound effect
-        if (audioSource != null && initialCoinSound != null)
+        // Play the initial coin sound effect only if the coin count changes
+        if (currentDisplayedCoins != newCoins && audioSource != null && initialCoinSound != null)
         {
             audioSource.clip = initialCoinSound; // Switch to the initial coin sound
             audioSource.loop = false; // Ensure looping is disabled for the initial sound
             audioSource.Play(); // Play the initial sound effect
             Debug.Log("Playing initial coin sound: " + initialCoinSound.name);
         }
-        else
+        else if (audioSource == null || initialCoinSound == null)
         {
             Debug.LogWarning("AudioSource or initialCoinSound is missing!");
         }
