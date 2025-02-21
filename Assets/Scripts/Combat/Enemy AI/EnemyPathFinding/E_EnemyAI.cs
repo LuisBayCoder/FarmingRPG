@@ -274,6 +274,7 @@ public class E_EnemyAI : MonoBehaviour
         DeterminePlayerDirection(); // Determine player direction for the attack animation
     }
 
+    // Called by the animation event
     public void AttackPlayerByAnimation()
     {
         // Deal damage to the player
