@@ -188,9 +188,9 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &5265656417562702193
 MonoBehaviour:
@@ -206,6 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   _currentHealth: 0
+  Message: Killed
+  Parameter: Slimer
   deathVFXPrefab: {fileID: 2060918961789929383, guid: c0ccde9bbe1c479409f1038ce0e3ff23,
     type: 3}
   objectDrop: {fileID: 209166390327561047, guid: 494973c7a7ba5df4c859966ea1ec1990,
@@ -246,8 +248,10 @@ MonoBehaviour:
   npcIsMoving: 0
   npcTargetAnimationClip: {fileID: 0}
   blankAnimation: {fileID: 7400000, guid: de73329f78eb6d645a9a70faf2bddfce, type: 2}
-  childBoxCollider2D: {fileID: 5265656417562702194}
+  boxCollider2D: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   npcActiveInScene: 0
+  componentsToToggle: []
 --- !u!114 &5265656417562702203
 MonoBehaviour:
   m_ObjectHideFlags: 0

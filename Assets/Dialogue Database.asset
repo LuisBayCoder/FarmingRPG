@@ -2501,13 +2501,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Hey. Buying or selling? Try not to dump too much worthless junk on
-          me. And remember, everything you buy back comes with a 50% extra charge.
-          Now, what\u2019s it gonna be?"
+        value: "Hey. Buying or selling? And don\u2019t go calling it junk. Anything
+          you buy back\u2019s got a 50% markup. So, what\u2019s it gonna be?"
         type: 0
         typeString: 
       - title: Sequence
-        value: Audio(Audio/Merchant/buyingOrSelling); Delay(13);
+        value: Audio(Audio/Merchant/BuyingOrSelling_1); Delay(10);
         type: 0
         typeString: 
       conversationID: 2

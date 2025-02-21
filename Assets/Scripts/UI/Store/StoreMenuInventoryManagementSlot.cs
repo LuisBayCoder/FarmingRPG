@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Image storeInventoryManagementSlotImage;
     public TextMeshProUGUI textMeshProUGUI;
@@ -47,36 +47,36 @@ public class StoreMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
+    //public void OnDrag(PointerEventData eventData)
+    //{
         // move game object as dragged item
-        if (draggedItem != null)
-        {
-            draggedItem.transform.position = Input.mousePosition;
-        }
-    }
+    //    if (draggedItem != null)
+    //    {
+    //        draggedItem.transform.position = Input.mousePosition;
+    //    }
+    //}
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
+    //public void OnEndDrag(PointerEventData eventData)
+    //{
         // Destroy game object as dragged item
-        if (draggedItem != null)
-        {
-            Destroy(draggedItem);
+    //    if (draggedItem != null)
+    //    {
+    //        Destroy(draggedItem);
 
             // Get object drag is over
-            if (eventData.pointerCurrentRaycast.gameObject != null && eventData.pointerCurrentRaycast.gameObject.GetComponent<StoreMenuInventoryManagementSlot>() != null)
-            {
+    //        if (eventData.pointerCurrentRaycast.gameObject != null && eventData.pointerCurrentRaycast.gameObject.GetComponent<StoreMenuInventoryManagementSlot>() != null)
+    //        {
                 // get the slot number where the drag ended
-                int toSlotNumber = eventData.pointerCurrentRaycast.gameObject.GetComponent<StoreMenuInventoryManagementSlot>().slotNumber;
+    //            int toSlotNumber = eventData.pointerCurrentRaycast.gameObject.GetComponent<StoreMenuInventoryManagementSlot>().slotNumber;
 
                 // Swap inventory items in inventory list
-                InventoryManager.Instance.SwapInventoryItems(InventoryLocation.player, slotNumber, toSlotNumber);
+    //            InventoryManager.Instance.SwapInventoryItems(InventoryLocation.player, slotNumber, toSlotNumber);
 
                 // Destroy inventory text box
-                inventoryManagement.DestroyInventoryTextBoxGameobject();
-            }
-        }
-    }
+    //            inventoryManagement.DestroyInventoryTextBoxGameobject();
+    //        }
+    //    }
+    //}
 
     public void OnPointerEnter(PointerEventData eventData)
     {

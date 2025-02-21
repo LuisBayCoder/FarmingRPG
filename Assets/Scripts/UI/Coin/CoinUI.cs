@@ -88,7 +88,8 @@ public class CoinUI : MonoBehaviour
         {
             Debug.LogWarning("AudioSource or countingCoinSound is missing!");
         }
-            }
+        
+        }
             yield return null;
         }
 

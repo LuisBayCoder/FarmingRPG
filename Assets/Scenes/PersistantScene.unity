@@ -1963,7 +1963,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &96300875 stripped
 MonoBehaviour:
@@ -4291,12 +4291,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218968410}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.8004847, y: 1.9120183, z: -80.83516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 1779538882}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &220793769 stripped
 MonoBehaviour:
@@ -12780,7 +12780,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &699253126
 MonoBehaviour:
@@ -13534,7 +13534,7 @@ GameObject:
   - component: {fileID: 744411327}
   - component: {fileID: 744411326}
   m_Layer: 0
-  m_Name: Tab1Sale
+  m_Name: Tab1Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16399,7 +16399,7 @@ Transform:
   - {fileID: 389902582}
   - {fileID: 477578286}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &899231474
 Rigidbody2D:
@@ -20305,7 +20305,7 @@ Transform:
   - {fileID: 1658831245}
   - {fileID: 505090884}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1117205236
 MonoBehaviour:
@@ -22842,7 +22842,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1208283962
 GameObject:
@@ -22909,7 +22909,7 @@ Transform:
   - {fileID: 799363436}
   - {fileID: 1409477406}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1232401850
 PrefabInstance:
@@ -23887,7 +23887,7 @@ Transform:
   - {fileID: 912516420}
   - {fileID: 2014197447}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1271377195
 PrefabInstance:
@@ -27578,7 +27578,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1486817096
 MonoBehaviour:
@@ -27945,7 +27945,7 @@ Transform:
   m_Children:
   - {fileID: 2052627916}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1525482489
 MonoBehaviour:
@@ -29453,7 +29453,7 @@ RectTransform:
   m_Children:
   - {fileID: 1921113163}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -33344,9 +33344,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 218968413}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1789989612
 PrefabInstance:
@@ -40033,7 +40034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 424526, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 424526, guid: f907b1416ebdbf645a73183ab47aa2b8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41145,7 +41146,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sale
+  m_text: Sell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7f401d9b3e4c62a409566db668340142, type: 2}
   m_sharedMaterial: {fileID: 5099749416183627651, guid: 7f401d9b3e4c62a409566db668340142,
