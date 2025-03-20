@@ -89,7 +89,6 @@ public class StoreInventoryManager : SingletonMonobehaviour<StoreInventoryManage
         }
 
         inventoryLists[locationIndex].Add(item);
-        Debug.Log($"Added item {item.itemCode} to store inventory at location {location}");
     }
 
     /// <summary>

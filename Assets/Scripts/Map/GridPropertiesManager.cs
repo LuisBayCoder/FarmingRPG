@@ -610,21 +610,32 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
         gridDimensions = Vector2Int.zero;
         gridOrigin = Vector2Int.zero;
 
-        // loop through scenes
+        Debug.Log($"GetGridDimensions called for scene: {sceneName}");
+
+        // Log all scenes in so_gridPropertiesArray
+        Debug.Log($"Scenes in so_gridPropertiesArray: {string.Join(", ", so_gridPropertiesArray.Select(s => s.sceneName.ToString()))}");
+
+        // Loop through scenes
         foreach (SO_GridProperties so_GridProperties in so_gridPropertiesArray)
         {
+            Debug.Log($"Checking SO_GridProperties for scene: {so_GridProperties.sceneName}");
+
             if (so_GridProperties.sceneName == sceneName)
             {
+                Debug.Log($"Match found for scene: {sceneName}");
+
                 gridDimensions.x = so_GridProperties.gridWidth;
                 gridDimensions.y = so_GridProperties.gridHeight;
 
                 gridOrigin.x = so_GridProperties.originX;
                 gridOrigin.y = so_GridProperties.originY;
 
+                Debug.Log($"Grid Dimensions: {gridDimensions}, Grid Origin: {gridOrigin}");
                 return true;
             }
         }
 
+        Debug.LogError($"No matching SO_GridProperties found for scene: {sceneName}");
         return false;
     }
 

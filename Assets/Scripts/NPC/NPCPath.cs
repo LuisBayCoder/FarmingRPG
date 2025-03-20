@@ -8,10 +8,13 @@ public class NPCPath : MonoBehaviour
     public Stack<NPCMovementStep> npcMovementStepStack;
 
     private NPCMovement npcMovement;
+    public bool debugMode = false; // Set to true to show debug logs
 
     private void Awake()
     {
         npcMovement = GetComponent<NPCMovement>();
+        
+        //create a new stack of NPCMovementStep objects
         npcMovementStepStack = new Stack<NPCMovementStep>();
     }
 
@@ -22,6 +25,13 @@ public class NPCPath : MonoBehaviour
 
     public void BuildPath(NPCScheduleEvent npcScheduleEvent)
     {
+        // Check if there is no schedule event
+        if (npcScheduleEvent == null)
+        {
+            Debug.LogWarning("No schedule event provided for NPC.");
+            return;
+        }
+
         ClearPath();
 
         // If schedule event is for the same scene as the current NPC scene
@@ -32,7 +42,9 @@ public class NPCPath : MonoBehaviour
             Vector2Int npcTargetGridPosition = (Vector2Int)npcScheduleEvent.toGridCoordinate;
 
             // Build path and add movement steps to movement step stack
+            //this is the line that calls the NPCManager's BuildPath method
             NPCManager.Instance.BuildPath(npcScheduleEvent.toSceneName, npcCurrentGridPosition, npcTargetGridPosition, npcMovementStepStack);
+            if(debugMode) Debug.Log("NPCPath: BuildPath: npcMovementStepStack.Count: " + npcMovementStepStack.Count + " for " + npcScheduleEvent.toSceneName + " from " + npcMovement.npcCurrentScene);
         }
         // else if the schedule event is for a location in another scene
         else if (npcScheduleEvent.toSceneName != npcMovement.npcCurrentScene)

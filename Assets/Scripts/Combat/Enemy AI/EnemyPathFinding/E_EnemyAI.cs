@@ -12,6 +12,7 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private float pathUpdateDelay = 0.5f; // Time between path recalculations
     [SerializeField] private NPCPath npcPath = null; // A* pathfinding script
     [SerializeField] private int attackDamage = 1;
+    [SerializeField] private bool isDebugMode = false; // Debug mode flag
 
     private Transform player;
     public float checkInterval = 2f; // Time between overlap checks
@@ -45,11 +46,11 @@ public class E_EnemyAI : MonoBehaviour
 
         if (animator == null)
         {
-            Debug.LogError("Animator component not found in Awake.");
+            if (isDebugMode) Debug.LogError("Animator component not found in Awake.");
         }
         else
         {
-            Debug.Log("Animator component found in Awake.");
+            if (isDebugMode) Debug.Log("Animator component found in Awake.");
         }
 
         enemyPathfinding = GetComponent<EnemyPathfinding>();
@@ -146,7 +147,7 @@ public class E_EnemyAI : MonoBehaviour
         // Check if player is within detection radius
         if (distanceToPlayer <= detectionRadius)
         {
-            Debug.Log("Player detected within detection radius.");
+            if (isDebugMode) Debug.Log("Player detected within detection radius.");
             state = State.Chasing; 
             // Set playerDetected to true
             playerDetected = true;
@@ -162,7 +163,7 @@ public class E_EnemyAI : MonoBehaviour
 
                 if (targetPosition == null || Vector3.Distance(transform.position, targetPosition.position) > maxAttackDistance)
                 {
-                    UpdatePathToPlayer();
+                    UpdatePathToPlayer(); // Update the path to the player
                 }
             }
         }
@@ -170,7 +171,7 @@ public class E_EnemyAI : MonoBehaviour
         {
             // Reset player detection when out of range
             if (playerDetected == false) return;
-            Debug.Log("Player out of detection radius.");
+            if (isDebugMode) Debug.Log("Player out of detection radius.");
             playerDetected = false;
             isInAttackRange = false;
             state = State.Roaming;
@@ -249,7 +250,7 @@ public class E_EnemyAI : MonoBehaviour
                     );
 
                     npcPath.BuildPath(enemyChaseEvent); // Build the path using A*
-                    Debug.Log("Path to player updated.");
+                    if (isDebugMode) Debug.Log("Path to player updated." + finishPosition);
                 }
             }
         }
@@ -261,20 +262,21 @@ public class E_EnemyAI : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("isAttacking", true); // Play attack animation
-            Debug.Log("Setting isAttacking to true");
+            if (isDebugMode) Debug.Log("Setting isAttacking to true");
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
+            if (isDebugMode) Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
         }
         else
         {
-            Debug.LogError("Animator component is null.");
+            if (isDebugMode) Debug.LogError("Animator component is null.");
         }
         
         npcPath.ClearPath(); // Stop moving once the enemy attacks
         DeterminePlayerDirection(); // Determine player direction for the attack animation
     }
 
-    // Called by the animation event
+    // This method is called by the animation event when the enemy is attacking
+    //even if the player is out of range it will get hit. Fix needed.
     public void AttackPlayerByAnimation()
     {
         // Deal damage to the player
@@ -290,13 +292,13 @@ public class E_EnemyAI : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("isAttacking", false);
-            Debug.Log("Setting isAttacking to false");
+            if (isDebugMode) Debug.Log("Setting isAttacking to false");
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
+            if (isDebugMode) Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
         }
         else
         {
-            Debug.LogError("Animator component is null.");
+            if (isDebugMode) Debug.LogError("Animator component is null.");
         }
     }
 
@@ -319,28 +321,28 @@ public class E_EnemyAI : MonoBehaviour
         // Check the horizontal and vertical direction to determine the quadrant
         if (directionToPlayer.x > 0 && directionToPlayer.y > 0)
         {
-            Debug.Log("Player is above and to the right");
+            if (isDebugMode) Debug.Log("Player is above and to the right");
             // Handle logic when the player is above and to the right
             animator.SetBool("isAttackingLeft", false);
             animator.SetBool("isAttackingRight", true);
         }
         else if (directionToPlayer.x < 0 && directionToPlayer.y > 0)
         {
-            Debug.Log("Player is above and to the left");
+            if (isDebugMode) Debug.Log("Player is above and to the left");
             // Handle logic when the player is above and to the left
             animator.SetBool("isAttackingRight", false);
             animator.SetBool("isAttackingLeft", true);
         }
         else if (directionToPlayer.x > 0 && directionToPlayer.y < 0)
         {
-            Debug.Log("Player is below and to the right");
+            if (isDebugMode) Debug.Log("Player is below and to the right");
             // Handle logic when the player is below and to the right
             animator.SetBool("isAttackingLeft", false);
             animator.SetBool("isAttackingRight", true);
         }
         else if (directionToPlayer.x < 0 && directionToPlayer.y < 0)
         {
-            Debug.Log("Player is below and to the left");
+            if (isDebugMode) Debug.Log("Player is below and to the left");
             // Handle logic when the player is below and to the left
             animator.SetBool("isAttackingRight", false);
             animator.SetBool("isAttackingLeft", true);
@@ -350,14 +352,14 @@ public class E_EnemyAI : MonoBehaviour
             // The player is directly to the left or right
             if (directionToPlayer.x > 0)
             {
-                Debug.Log("Player is directly to the right");
+                if (isDebugMode) Debug.Log("Player is directly to the right");
                 // Handle logic when the player is directly to the right
                 animator.SetBool("isAttackingLeft", false);
                 animator.SetBool("isAttackingRight", true);
             }
             else
             {
-                Debug.Log("Player is directly to the left");
+                if (isDebugMode) Debug.Log("Player is directly to the left");
                 // Handle logic when the player is directly to the left
                 animator.SetBool("isAttackingRight", false);
                 animator.SetBool("isAttackingLeft", true);
@@ -368,12 +370,12 @@ public class E_EnemyAI : MonoBehaviour
             // The player is directly above or below
             if (directionToPlayer.y > 0)
             {
-                Debug.Log("Player is directly above");
+                if (isDebugMode) Debug.Log("Player is directly above");
                 // Handle logic when the player is directly above
             }
             else
             {
-                Debug.Log("Player is directly below");
+                if (isDebugMode) Debug.Log("Player is directly below");
                 // Handle logic when the player is directly below
             }
         }

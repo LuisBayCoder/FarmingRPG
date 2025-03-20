@@ -94,8 +94,13 @@ public class NPCManager : SingletonMonobehaviour<NPCManager>
 
     public bool BuildPath(SceneName sceneName, Vector2Int startGridPosition, Vector2Int endGridPosition, Stack<NPCMovementStep> npcMovementStepStack)
     {
+        Debug.Log("BuildPath: before aStar" + sceneName + " " + startGridPosition + " " + endGridPosition + " " + npcMovementStepStack.Count);
+        //the problem is here. the method is called but the npcMovementStepStack is not updated
+        
         if (aStar.BuildPath(sceneName, startGridPosition, endGridPosition, npcMovementStepStack))
         {
+            Debug.Log("NPCManager: BuildPath: Path Found" + sceneName);
+            Debug.Log("NPCManager: BuildPath: Path Found" + npcMovementStepStack.Count);
             return true;
         }
         else

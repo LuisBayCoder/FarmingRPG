@@ -34,6 +34,7 @@ public class AStar : MonoBehaviour
 
         if (PopulateGridNodesFromGridPropertiesDictionary(sceneName, startGridPosition, endGridPosition))
         {
+            Debug.Log("AStar BuildPath: after populategridnodes" + sceneName + " " + startGridPosition + " " + endGridPosition + " " + npcMovementStepStack.Count);
             if (FindShortestPath())
             {
                 UpdatePathOnNPCMovementStepStack(sceneName, npcMovementStepStack);
@@ -187,77 +188,98 @@ public class AStar : MonoBehaviour
 
     private bool PopulateGridNodesFromGridPropertiesDictionary(SceneName sceneName, Vector2Int startGridPosition, Vector2Int endGridPosition)
     {
+
         // Get grid properties dictionary for the scene
         SceneSave sceneSave;
 
         if (GridPropertiesManager.Instance.GameObjectSave.sceneData.TryGetValue(sceneName.ToString(), out sceneSave))
         {
-            // Get Dict grid property details
-            if (sceneSave.gridPropertyDetailsDictionary != null)
+            Debug.Log($"SceneSave found for scene: {sceneName}");
+            Debug.Log($"SceneSave Data: {sceneSave}");
+
+            if (sceneSave.gridPropertyDetailsDictionary == null)
             {
-                // Get grid height and width
-                if (GridPropertiesManager.Instance.GetGridDimensions(sceneName, out Vector2Int gridDimensions, out Vector2Int gridOrigin))
+                Debug.LogError($"gridPropertyDetailsDictionary is null for scene: {sceneName}");
+                return false;
+            }
+
+            if (!GridPropertiesManager.Instance.GetGridDimensions(sceneName, out Vector2Int gridDimensions, out Vector2Int gridOrigin))
+            {
+                Debug.LogError($"Failed to get grid dimensions for scene: {sceneName}");
+                
+                // Log additional details about the scene
+                Debug.Log($"SceneName: {sceneName}");
+                Debug.Log($"Available scenes in sceneData: {string.Join(", ", GridPropertiesManager.Instance.GameObjectSave.sceneData.Keys)}");
+
+                // Check if the scene has valid data in the grid properties
+                if (GridPropertiesManager.Instance.GameObjectSave.sceneData.TryGetValue(sceneName.ToString(), out SceneSave nestedSceneSave))
                 {
-                    // Create nodes grid based on grid properties dictionary
-                    gridNodes = new GridNodes(gridDimensions.x, gridDimensions.y);
-                    gridWidth = gridDimensions.x;
-                    gridHeight = gridDimensions.y;
-                    originX = gridOrigin.x;
-                    originY = gridOrigin.y;
-
-                    // Create openNodeList
-                    openNodeList = new List<Node>();
-
-                    // Create closed Node List
-                    closedNodeList = new HashSet<Node>();
+                    Debug.Log($"SceneSave found for {sceneName}. Checking grid properties...");
+                    Debug.Log($"SceneSave Data: {nestedSceneSave}");
+                    Debug.Log($"GridPropertyDetailsDictionary: {nestedSceneSave.gridPropertyDetailsDictionary}");
                 }
                 else
                 {
-                    return false;
+                    Debug.LogError($"SceneSave not found for {sceneName} in sceneData.");
                 }
 
-                // Populate start node
-                startNode = gridNodes.GetGridNode(startGridPosition.x - gridOrigin.x, startGridPosition.y - gridOrigin.y);
+                return false;
+            }
 
-                // Populate target node
-                targetNode = gridNodes.GetGridNode(endGridPosition.x - gridOrigin.x, endGridPosition.y - gridOrigin.y);
+            Debug.Log($"Grid Dimensions: {gridDimensions}, Grid Origin: {gridOrigin}");
 
-                // populate obstacle and path info for grid
-                for (int x = 0; x < gridDimensions.x; x++)
+            // Create nodes grid based on grid properties dictionary
+            gridNodes = new GridNodes(gridDimensions.x, gridDimensions.y);
+            gridWidth = gridDimensions.x;
+            gridHeight = gridDimensions.y;
+            originX = gridOrigin.x;
+            originY = gridOrigin.y;
+
+            // Create openNodeList
+            openNodeList = new List<Node>();
+
+            // Create closed Node List
+            closedNodeList = new HashSet<Node>();
+            
+            // Populate start node
+            startNode = gridNodes.GetGridNode(startGridPosition.x - gridOrigin.x, startGridPosition.y - gridOrigin.y);
+
+            // Populate target node
+            targetNode = gridNodes.GetGridNode(endGridPosition.x - gridOrigin.x, endGridPosition.y - gridOrigin.y);
+
+            // populate obstacle and path info for grid
+            for (int x = 0; x < gridDimensions.x; x++)
+            {
+                for (int y = 0; y < gridDimensions.y; y++)
                 {
-                    for (int y = 0; y < gridDimensions.y; y++)
-                    {
-                        GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(x + gridOrigin.x, y + gridOrigin.y, sceneSave.gridPropertyDetailsDictionary);
+                    GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(x + gridOrigin.x, y + gridOrigin.y, sceneSave.gridPropertyDetailsDictionary);
 
-                        if (gridPropertyDetails != null)
+                    if (gridPropertyDetails != null)
+                    {
+                        // If NPC obstacle
+                        if (gridPropertyDetails.isNPCObstacle == true)
                         {
-                            // If NPC obstacle
-                            if (gridPropertyDetails.isNPCObstacle == true)
-                            {
-                                Node node = gridNodes.GetGridNode(x, y);
-                                node.isObstacle = true;
-                            }
-                            else if (gridPropertyDetails.isPath == true)
-                            {
-                                Node node = gridNodes.GetGridNode(x, y);
-                                node.movementPenalty = pathMovementPenalty;
-                            }
-                            else
-                            {
-                                Node node = gridNodes.GetGridNode(x, y);
-                                node.movementPenalty = defaultMovementPenalty;
-                            }
+                            Node node = gridNodes.GetGridNode(x, y);
+                            node.isObstacle = true;
+                        }
+                        else if (gridPropertyDetails.isPath == true)
+                        {
+                            Node node = gridNodes.GetGridNode(x, y);
+                            node.movementPenalty = pathMovementPenalty;
+                        }
+                        else
+                        {
+                            Node node = gridNodes.GetGridNode(x, y);
+                            node.movementPenalty = defaultMovementPenalty;
                         }
                     }
                 }
             }
-            else
-            {
-                return false;
-            }
         }
         else
         {
+            Debug.LogError($"SceneName {sceneName} not found in sceneData.");
+            Debug.Log($"Available scenes in sceneData: {string.Join(", ", GridPropertiesManager.Instance.GameObjectSave.sceneData.Keys)}");
             return false;
         }
 

@@ -50,6 +50,8 @@ public class NPCMovement : MonoBehaviour
 
     private Coroutine moveToGridPositionRoutine;
 
+    public bool debugMode = false; // Set to true to show debug logs
+
     private void OnEnable()
     {
         EventHandler.AfterSceneLoadEvent += AfterSceneLoad;
@@ -72,26 +74,24 @@ public class NPCMovement : MonoBehaviour
 
         if (animator == null)
         {
-            Debug.LogError("Animator component not found in Awake.");
+            if (debugMode) Debug.LogError("Animator component not found in Awake.");
         }
         else
         {
-            Debug.Log("Animator component found in Awake.");
+            if (debugMode) Debug.Log("Animator component found in Awake.");
             if (animator.runtimeAnimatorController == null)
             {
-                Debug.LogError("Animator Controller is not assigned in Awake.");
+                if (debugMode) Debug.LogError("Animator Controller is not assigned in Awake.");
             }
             else
             {
-                Debug.Log("Animator Controller is assigned in Awake.");
+                if (debugMode) Debug.Log("Animator Controller is assigned in Awake.");
             }
         }
 
-        Debug.Log("Before assigning Animator Override Controller: " + animator.runtimeAnimatorController);
         animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = animatorOverrideController;
-        Debug.Log("After assigning Animator Override Controller: " + animator.runtimeAnimatorController);
-
+        
         npcTargetScene = npcCurrentScene;
         npcTargetGridPosition = npcCurrentGridPosition;
         npcTargetWorldPosition = transform.position;
@@ -104,24 +104,25 @@ public class NPCMovement : MonoBehaviour
 
         if (animator == null)
         {
-            Debug.LogError("Animator component not found in Start.");
+            if (debugMode) Debug.LogError("Animator component not found in Start.");
         }
         else
         {
-            Debug.Log("Animator component found in Start.");
+            if (debugMode) Debug.Log("Animator component found in Start.");
             if (animator.runtimeAnimatorController == null)
             {
-                Debug.LogError("Animator Controller is not assigned in Start.");
+                if (debugMode) Debug.LogError("Animator Controller is not assigned in Start.");
             }
             else
             {
-                Debug.Log("Animator Controller is assigned in Start.");
+                if (debugMode) Debug.Log("Animator Controller is assigned in Start.");
             }
         }
     }
 
     private void FixedUpdate()
     {
+        if(debugMode) Debug.Log("FixedUpdate" + sceneLoaded + " " + paused);
         if (sceneLoaded && !paused)
         {
             if (!npcIsMoving)
@@ -129,10 +130,12 @@ public class NPCMovement : MonoBehaviour
                 npcCurrentGridPosition = GetGridPosition(transform.position);
                 npcNextGridPosition = npcCurrentGridPosition;
 
+
+                if(debugMode) Debug.Log("npcPath.npcMovementStepStack.Count: " + npcPath.npcMovementStepStack.Count);
                 if (npcPath.npcMovementStepStack.Count > 0)
                 {
                     NPCMovementStep npcMovementStep = npcPath.npcMovementStepStack.Peek();
-
+                    if (debugMode) Debug.Log(npcMovementStep.sceneName + " " + npcMovementStep.hour + ":" + npcMovementStep.minute + ":" + npcMovementStep.second + " " + npcMovementStep.gridCoordinate);
                     npcCurrentScene = npcMovementStep.sceneName;
 
                     if (npcCurrentScene != npcPreviousMovementStepScene)
