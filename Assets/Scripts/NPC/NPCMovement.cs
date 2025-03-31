@@ -122,7 +122,6 @@ public class NPCMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(debugMode) Debug.Log("FixedUpdate" + sceneLoaded + " " + paused);
         if (sceneLoaded && !paused)
         {
             if (!npcIsMoving)
@@ -130,12 +129,9 @@ public class NPCMovement : MonoBehaviour
                 npcCurrentGridPosition = GetGridPosition(transform.position);
                 npcNextGridPosition = npcCurrentGridPosition;
 
-
-                if(debugMode) Debug.Log("npcPath.npcMovementStepStack.Count: " + npcPath.npcMovementStepStack.Count);
                 if (npcPath.npcMovementStepStack.Count > 0)
                 {
                     NPCMovementStep npcMovementStep = npcPath.npcMovementStepStack.Peek();
-                    if (debugMode) Debug.Log(npcMovementStep.sceneName + " " + npcMovementStep.hour + ":" + npcMovementStep.minute + ":" + npcMovementStep.second + " " + npcMovementStep.gridCoordinate);
                     npcCurrentScene = npcMovementStep.sceneName;
 
                     if (npcCurrentScene != npcPreviousMovementStepScene)
