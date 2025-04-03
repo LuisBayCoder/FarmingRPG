@@ -14532,7 +14532,7 @@ PrefabInstance:
     - target: {fileID: 4156620909928231200, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4156620909928231205, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
@@ -16931,7 +16931,7 @@ PrefabInstance:
     - target: {fileID: 4156620909928231200, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4156620909928231203, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
@@ -18152,6 +18152,7 @@ MonoBehaviour:
   m_addNewQuestsSinceSavedGame: 0
   m_questList:
   - {fileID: 11400000, guid: 18f1d0d3c763c554e80e88a5789c3190, type: 2}
+  - {fileID: 11400000, guid: d03b4f89cb7815342bedfaca453fb5f6, type: 2}
   m_deletedStaticQuests: []
   m_id:
     m_text: Butch
