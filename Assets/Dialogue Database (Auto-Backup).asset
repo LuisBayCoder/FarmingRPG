@@ -110,6 +110,36 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+  - id: 2
+    fields:
+    - title: Name
+      value: PetCemetery
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: 
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
   locations: []
   variables:
   - id: 1
@@ -1045,7 +1075,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 29.493546
+        x: 28.123688
         y: 109.655685
         width: 160
         height: 30
@@ -1102,7 +1132,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 269.81067
-        y: 143.01944
+        y: 140.27972
         width: 160
         height: 30
     - id: 17
@@ -1555,7 +1585,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 24
+        destinationConversationID: 1
+        destinationDialogueID: 26
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -1563,8 +1599,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1033.4176
-        y: 262.2784
+        x: 1051.6287
+        y: 251.64182
         width: 160
         height: 30
     - id: 25
@@ -1734,7 +1770,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 27
+        destinationConversationID: 1
+        destinationDialogueID: 39
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: SetQuestState("CheckOnLivestockAndReturn", "success")
       onExecute:
@@ -1742,8 +1784,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 824.5569
-        y: 417.9746
+        x: 890.37964
+        y: 491.3923
         width: 160
         height: 30
     - id: 28
@@ -1784,9 +1826,15 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 28
+        destinationConversationID: 1
+        destinationDialogueID: 39
+        isConnector: 0
+        priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetQuestState("CheckOnLivestockAndReturn", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -1836,16 +1884,22 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 29
+        destinationConversationID: 1
+        destinationDialogueID: 39
+        isConnector: 0
+        priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetQuestState("CheckOnLivestockAndReturn", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1151.139
-        y: 371.1392
+        x: 1136.1129
+        y: 356.11313
         width: 160
         height: 30
     - id: 30
@@ -2155,16 +2209,22 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 35
+        destinationConversationID: 1
+        destinationDialogueID: 39
+        isConnector: 0
+        priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetQuestState("CheckOnLivestockAndReturn", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1331.5367
-        y: 253.23688
+        x: 1334.1683
+        y: 280.86847
         width: 160
         height: 30
     - id: 37
@@ -2206,16 +2266,22 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 37
+        destinationConversationID: 1
+        destinationDialogueID: 39
+        isConnector: 0
+        priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetQuestState("CheckOnLivestockAndReturn", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1538.6796
-        y: 266.09396
+        x: 1541.3112
+        y: 281.88342
         width: 160
         height: 30
     - id: 38
@@ -2265,14 +2331,14 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetQuestState("CheckOnLivestockAndReturn", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1664.3938
-        y: 207.52258
+        x: 1742.9824
+        y: 285.93167
         width: 160
         height: 30
     - id: 39
@@ -2298,12 +2364,13 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Yeah, you're right. The less of that mess we have to deal with, the
-          better. Just don\u2019t go making more trouble."
+        value: 'How are we going to pay the montly rent for the farm. There is a
+          pet cementery take the ramains to the highest point ontop of a rock. I
+          heard stories of a reward given for sacrifices. '
         type: 0
         typeString: 
       - title: Sequence
-        value: Audio(Audio/CheckBarnQuest/moreTrouble)
+        value: 
         type: 0
         typeString: 
       conversationID: 1
@@ -2313,7 +2380,68 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 39
+        destinationConversationID: 1
+        destinationDialogueID: 42
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: GiveQuest("Butch", "PetCemetery")
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1625.1554
+        y: 410.8416
+        width: 160
+        height: 30
+    - id: 40
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 1
+      isRoot: 0
+      isGroup: 1
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 40
+        destinationConversationID: 1
+        destinationDialogueID: 41
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -2321,11 +2449,11 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1595.8223
-        y: 374.66537
+        x: 2047.8303
+        y: 139.9312
         width: 160
         height: 30
-    - id: 40
+    - id: 41
       fields:
       - title: Title
         value: 
@@ -2348,7 +2476,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 
+        value: 'Go to the pet semetery. '
         type: 0
         typeString: 
       - title: Sequence
@@ -2357,7 +2485,7 @@ MonoBehaviour:
         typeString: 
       conversationID: 1
       isRoot: 0
-      isGroup: 1
+      isGroup: 0
       nodeColor: 
       delaySimStatus: 0
       falseConditionAction: Block
@@ -2370,13 +2498,63 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 561.4924
-        y: 30.746292
+        x: 2047.2964
+        y: 211.57031
+        width: 160
+        height: 30
+    - id: 42
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 'You want me to take the animal corpses to a pet cementery and receive
+          some type of reward? Sure. '
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1540.8977
+        y: 519.04285
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 338.80545, y: 0}
-    canvasZoom: 0.67000026
+    canvasScrollPosition: {x: 1502.6852, y: 144.30374}
+    canvasZoom: 0.7900002
   - id: 2
     fields:
     - title: Title

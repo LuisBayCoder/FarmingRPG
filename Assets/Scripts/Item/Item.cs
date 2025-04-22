@@ -26,19 +26,32 @@ public class Item : MonoBehaviour
 
     public void Init(int itemCodeParam)
     {
-        if (itemCodeParam != 0)
+         if (itemCodeParam != 0)
+    {
+        ItemCode = itemCodeParam;
+
+        ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(ItemCode);
+
+        spriteRenderer.sprite = itemDetails.itemSprite;
+
+        // If item type is reapable then add nudgeable component
+        if (itemDetails.itemType == ItemType.Reapable_scenary)
         {
-            ItemCode = itemCodeParam;
-
-            ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(ItemCode);
-
-            spriteRenderer.sprite = itemDetails.itemSprite;
-
-            // If item type is reapable then add nudgeable component
-            if (itemDetails.itemType == ItemType.Reapable_scenary)
-            {
-                gameObject.AddComponent<ItemNudge>();
-            }
+            gameObject.AddComponent<ItemNudge>();
         }
+        if (itemDetails.resizable == true)
+        {
+            ItemScale itemScale = gameObject.AddComponent<ItemScale>();
+            
+            // Pass the scale factor to the ItemScale component
+            itemScale.SetScale(itemDetails.scaleFactor);
+        }
+        if (itemDetails.isNotTrigger == true)
+        {
+            BoxCollider2D boxCollider = gameObject.GetComponent<BoxCollider2D>();
+            boxCollider.isTrigger = false;
+        }
+            
     }
+}
 }

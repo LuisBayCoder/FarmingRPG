@@ -29,6 +29,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 5
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10001
     itemType: 1
     itemDescription: Pumpkin
@@ -45,6 +48,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 20
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10002
     itemType: 1
     itemDescription: Corn
@@ -61,6 +67,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 10
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10003
     itemType: 2
     itemDescription: A basic Watering Can
@@ -77,6 +86,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 2
     itemCost: 50
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10004
     itemType: 3
     itemDescription: A Basic Hoe
@@ -93,6 +105,9 @@ MonoBehaviour:
     damageAmount: 7
     staminaAmount: 6
     itemCost: 70
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10005
     itemType: 4
     itemDescription: A Basic Axe
@@ -109,6 +124,9 @@ MonoBehaviour:
     damageAmount: 10
     staminaAmount: 5
     itemCost: 90
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10006
     itemType: 0
     itemDescription: ParsnipSeed
@@ -125,6 +143,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 5
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10007
     itemType: 1
     itemDescription: Parsnip
@@ -141,6 +162,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 6
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10008
     itemType: 1
     itemDescription: Wood
@@ -157,6 +181,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 20
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10009
     itemType: 0
     itemDescription: Blue Spruce Pine Cone
@@ -173,6 +200,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 1
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10010
     itemType: 0
     itemDescription: Cayon Oak Tree Stump
@@ -190,6 +220,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 0
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10011
     itemType: 0
     itemDescription: Blue Sprue Tree Stump
@@ -207,6 +240,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 0
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10012
     itemType: 7
     itemDescription: Wicker Basket
@@ -223,6 +259,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 1
     itemCost: 10
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10013
     itemType: 5
     itemDescription: A Basic Pickaxe
@@ -239,6 +278,9 @@ MonoBehaviour:
     damageAmount: 15
     staminaAmount: 9
     itemCost: 80
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10014
     itemType: 0
     itemDescription: Stone 1 Seed
@@ -255,6 +297,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 1
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10015
     itemType: 1
     itemDescription: Stone
@@ -271,6 +316,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 1
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10016
     itemType: 0
     itemDescription: pumpkin
@@ -287,6 +335,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 20
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10017
     itemType: 6
     itemDescription: 'A basic scythe '
@@ -303,6 +354,9 @@ MonoBehaviour:
     damageAmount: 8
     staminaAmount: 6
     itemCost: 90
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10018
     itemType: 8
     itemDescription: Grass 1
@@ -319,6 +373,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 1
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10019
     itemType: 8
     itemDescription: Grass 2
@@ -335,6 +392,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 1
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10020
     itemType: 1
     itemDescription: Weed1
@@ -351,11 +411,14 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 1
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10021
     itemType: 8
     itemDescription: Prickly Cactus
     itemSprite: {fileID: 21300000, guid: 37e09848a493a0a4b89a743f73f75963, type: 3}
-    itemLongDescription: Juicy Pumpkin
+    itemLongDescription: Cactus
     itemUseGridRadius: 0
     itemUseRadius: 0
     isStartingItem: 0
@@ -367,6 +430,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 0
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10022
     itemType: 9
     itemDescription: Chair
@@ -383,6 +449,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 100
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10023
     itemType: 9
     itemDescription: Table
@@ -399,6 +468,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 200
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10024
     itemType: 1
     itemDescription: Stone
@@ -415,6 +487,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 1
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10025
     itemType: 1
     itemDescription: Green Jelly
@@ -431,6 +506,9 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 1
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
   - itemCode: 10026
     itemType: 1
     itemDescription: Flower Blossom
@@ -447,3 +525,25 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 2
+    resizable: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+  - itemCode: 10027
+    itemType: 8
+    itemDescription: 'Thorn plant shadow '
+    itemSprite: {fileID: 21300000, guid: 1eb0fa003b1497a47a48bb3ba92c76b8, type: 3}
+    itemLongDescription: No use
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 1
+    scaleFactor: 2
+    isNotTrigger: 1
