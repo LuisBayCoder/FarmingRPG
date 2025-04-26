@@ -1,5 +1,7 @@
 ﻿
+using PixelCrushers.QuestMachine;
 using UnityEngine;
+using PixelCrushers;
 
 public class ItemPickUp : MonoBehaviour
 {
@@ -21,6 +23,10 @@ public class ItemPickUp : MonoBehaviour
                 // Play pick up sound
                 AudioManager.Instance.PlaySound(SoundName.effectPickupSound);
 
+                if(itemDetails.isQuestItem == true)
+                {
+                    MessageSystem.SendMessage(this.gameObject, "Get", itemDetails.questCountName, 1);
+                } 
             }
         }
     }

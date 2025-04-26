@@ -703,6 +703,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 20
   draggedItem: {fileID: 0}
@@ -1825,6 +1827,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 11
   draggedItem: {fileID: 0}
@@ -4140,6 +4144,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 26
   draggedItem: {fileID: 0}
@@ -4198,6 +4204,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 1
   draggedItem: {fileID: 0}
@@ -4720,7 +4728,8 @@ SpriteRenderer:
   m_SortingLayerID: -1897448895
   m_SortingLayer: 6
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 3fdea510f6c395642bec63c0e92feb05, type: 3}
+  m_Sprite: {fileID: 6497621738931999816, guid: ccb2cfa8e809f4793a6ca0c3bbf71fae,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5045,6 +5054,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 18
   draggedItem: {fileID: 0}
@@ -6599,7 +6610,8 @@ SpriteRenderer:
   m_SortingLayerID: -1897448895
   m_SortingLayer: 6
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300012, guid: 73946c4cd19968e4486ca15a2e699ab6, type: 3}
+  m_Sprite: {fileID: -7653047246601133056, guid: 73a809d2a24874634b94654bad003ca0,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8723,6 +8735,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 35
   draggedItem: {fileID: 0}
@@ -10957,6 +10971,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 23
   draggedItem: {fileID: 0}
@@ -11015,6 +11031,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 10
   draggedItem: {fileID: 0}
@@ -11243,6 +11261,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 31
   draggedItem: {fileID: 0}
@@ -11471,6 +11491,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 19
   draggedItem: {fileID: 0}
@@ -12187,6 +12209,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 8
   draggedItem: {fileID: 0}
@@ -12757,6 +12781,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 34
   draggedItem: {fileID: 0}
@@ -13381,6 +13407,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 3
   draggedItem: {fileID: 0}
@@ -14435,6 +14463,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 14
   draggedItem: {fileID: 0}
@@ -15975,6 +16005,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 27
   draggedItem: {fileID: 0}
@@ -18293,6 +18325,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 17
   draggedItem: {fileID: 0}
@@ -20297,7 +20331,6 @@ GameObject:
   - component: {fileID: 1117205247}
   - component: {fileID: 1117205249}
   - component: {fileID: 1117205242}
-  - component: {fileID: 1117205243}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -20517,18 +20550,6 @@ MonoBehaviour:
   m_onlyRememberHandwrittenQuests: 0
   m_compressCompletedProcgenQuests: 0
   m_onlyTrackOneQuestAtATime: 0
---- !u!114 &1117205243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117205232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c61121385a004254ebaed4d06e120726, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1117205244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22503,6 +22524,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 13
   draggedItem: {fileID: 0}
@@ -22573,6 +22596,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 21
   draggedItem: {fileID: 0}
@@ -23733,6 +23758,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 33
   draggedItem: {fileID: 0}
@@ -27853,6 +27880,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 30
   draggedItem: {fileID: 0}
@@ -28848,6 +28877,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 2
   draggedItem: {fileID: 0}
@@ -30571,6 +30602,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 29
   draggedItem: {fileID: 0}
@@ -31532,6 +31565,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 6
   draggedItem: {fileID: 0}
@@ -32077,6 +32112,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 16
   draggedItem: {fileID: 0}
@@ -32219,6 +32256,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 4
   draggedItem: {fileID: 0}
@@ -32930,6 +32969,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 15
   draggedItem: {fileID: 0}
@@ -33249,6 +33290,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 25
   draggedItem: {fileID: 0}
@@ -33479,6 +33522,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 32
   draggedItem: {fileID: 0}
@@ -34698,6 +34743,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 7
   draggedItem: {fileID: 0}
@@ -35439,6 +35486,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 5
   draggedItem: {fileID: 0}
@@ -37762,6 +37811,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 12
   draggedItem: {fileID: 0}
@@ -38215,6 +38266,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 28
   draggedItem: {fileID: 0}
@@ -39674,6 +39727,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 9
   draggedItem: {fileID: 0}
@@ -41586,6 +41641,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 24
   draggedItem: {fileID: 0}
@@ -42464,6 +42521,8 @@ MonoBehaviour:
     resizable: 0
     scaleFactor: 0
     isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
   itemQuantity: 0
   slotNumber: 22
   draggedItem: {fileID: 0}

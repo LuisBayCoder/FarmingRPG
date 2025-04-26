@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ArmHoldIdleUp
-  serializedVersion: 7
+  serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -20,7 +20,8 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 250902890, guid: dfb8052e3b98643a5b010f79496e1e96, type: 3}
+      value: {fileID: -2314421798430575920, guid: dfb8052e3b98643a5b010f79496e1e96,
+        type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,7 +41,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 250902890, guid: dfb8052e3b98643a5b010f79496e1e96, type: 3}
+    - {fileID: -2314421798430575920, guid: dfb8052e3b98643a5b010f79496e1e96, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
