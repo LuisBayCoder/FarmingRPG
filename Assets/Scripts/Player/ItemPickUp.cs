@@ -5,6 +5,7 @@ using PixelCrushers;
 
 public class ItemPickUp : MonoBehaviour
 {
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Item item = collision.GetComponent<Item>();
@@ -25,7 +26,7 @@ public class ItemPickUp : MonoBehaviour
 
                 if(itemDetails.isQuestItem == true)
                 {
-                    MessageSystem.SendMessage(this.gameObject, "Get", itemDetails.questCountName, 1);
+                    MessageSystem.SendMessage(null, "Get", itemDetails.questCountName, 1);
                 } 
             }
         }

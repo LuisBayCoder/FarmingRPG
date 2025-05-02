@@ -8,7 +8,6 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
     private Transform parentEnemy;
     [SerializeField] private SO_EnemyList enemyListSO = null; // Reference to the ScriptableObject
     [SerializeField] private GameObject enemyPrefab = null; // Default enemy prefab
-
     private string _iSaveableUniqueID;
     public string ISaveableUniqueID 
     { 
@@ -26,6 +25,37 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
     private GameObject currentEnemy;
     private Vector3 savedPosition;
     private int savedEnemyCode;
+
+    private int questEnemyKilledCount = 0; // Track the number of enemies killed
+
+    public int QuestEnemyKilledCount
+    {
+        get { return questEnemyKilledCount; }
+        set { questEnemyKilledCount = value; }
+    }
+
+    private Dictionary<string, int> enemyKillCounts = new Dictionary<string, int>();
+
+    public void AddKill(string parameter)
+    {
+        // Increment the total kill count
+        questEnemyKilledCount++;
+
+        // Track kills by parameter
+        if (!string.IsNullOrEmpty(parameter))
+        {
+            if (enemyKillCounts.ContainsKey(parameter))
+            {
+                enemyKillCounts[parameter]++;
+            }
+            else
+            {
+                enemyKillCounts[parameter] = 1;
+            }
+        }
+
+        Debug.Log($"Kill added. Total kills: {questEnemyKilledCount}. Parameter: {parameter}");
+    }
 
     private void AfterSceneLoad()
     {
@@ -88,7 +118,6 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
                     {
                         // Instantiate the enemy prefab at the saved position
                         GameObject newEnemy = Instantiate(enemyDetail.enemyPrefab, new Vector3(sceneEnemy.position.x, sceneEnemy.position.y, sceneEnemy.position.z), Quaternion.identity, parentEnemy);
-                        Debug.Log($"Instantiated enemy with code: {sceneEnemy.enemyCode}");
 
                         // Ensure the Animator component is initialized
                         Animator animator = newEnemy.GetComponent<Animator>();
@@ -115,6 +144,7 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
                             damageable.currentHealth = sceneEnemy.currentHealth;
                         }
                     }
+
                     else
                     {
                         Debug.LogError($"Enemy with the specified code {sceneEnemy.enemyCode} not found or prefab is not assigned.");
@@ -176,6 +206,20 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
                 // Instantiate the list of enemies
                 InstantiateSceneEnemies();
             }
+
+            // Restore the questEnemyKilledCount
+            if (sceneSave.intDictionary != null && sceneSave.intDictionary.TryGetValue("QuestEnemyKilledCount", out int savedKillCount))
+            {
+                questEnemyKilledCount = savedKillCount;
+                Debug.Log($"Restored questEnemyKilledCount: {questEnemyKilledCount}");
+            }
+
+            // Restore the enemyKillCounts
+            if (sceneSave.stringIntDictionary != null)
+            {
+                enemyKillCounts = new Dictionary<string, int>(sceneSave.stringIntDictionary);
+                Debug.Log("Restored enemy kill counts.");
+            }
         }
     }
 
@@ -219,6 +263,18 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
         // Create and store scene data
         SceneSave sceneSave = new SceneSave();
         sceneSave.listSceneEnemy = sceneEnemyList;
+
+
+        Debug.Log($"Saving questEnemyKilledCount: {questEnemyKilledCount}");
+        // Save the questEnemyKilledCount
+        sceneSave.intDictionary = new Dictionary<string, int>
+        {
+            { "QuestEnemyKilledCount", questEnemyKilledCount }
+        };
+        Debug.Log("this the enemy kill count: " + Instance.QuestEnemyKilledCount);
+
+        // Save the enemyKillCounts
+        sceneSave.stringIntDictionary = new Dictionary<string, int>(enemyKillCounts);
 
         GameObjectSave.sceneData.Add(sceneName, sceneSave);
     }

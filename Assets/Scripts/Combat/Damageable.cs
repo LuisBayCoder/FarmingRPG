@@ -51,8 +51,12 @@ public class Damageable : MonoBehaviour
 
     private void Die()
     {
+        // Play death VFX and drop object
+        if (deathVFXPrefab != null)
+        {
         Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
         Instantiate(objectDrop, transform.position, Quaternion.identity);
+        }
 
         // Destroy NPCMovement first if it exists
         NPCMovement npcMovement = GetComponent<NPCMovement>();
@@ -83,6 +87,10 @@ public class Damageable : MonoBehaviour
         {
             SendMessageToQuest();
         }
+        
+       // Increment the kill count and send the Parameter to SceneEnemiesManager
+        SceneEnemiesManager.Instance.AddKill(Parameter);
+        Debug.Log($"Enemy killed. Total kills: {SceneEnemiesManager.Instance.QuestEnemyKilledCount}");
     }
 
     void SendMessageToQuest()
