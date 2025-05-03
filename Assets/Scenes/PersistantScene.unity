@@ -3532,6 +3532,22 @@ MonoBehaviour:
             m_StringArgument: Cow Bones
             m_BoolArgument: 0
           m_CallState: 2
+  - guid: d068210f-ff8f-4932-8ff3-2a30e1558134
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 886083113}
+          m_TargetAssemblyTypeName: CheckActionsBeforeQuest, Assembly-CSharp
+          m_MethodName: CheckEnemyKillCount_EventWrapper
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Scene4_Barn|Slimer
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &178380853
 Transform:
   m_ObjectHideFlags: 0
@@ -16309,6 +16325,8 @@ GameObject:
   m_Component:
   - component: {fileID: 886083114}
   - component: {fileID: 886083113}
+  - component: {fileID: 886083116}
+  - component: {fileID: 886083115}
   m_Layer: 0
   m_Name: CheckActionsBeforeQuest
   m_TagString: Untagged
@@ -16342,6 +16360,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &886083115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886083112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59ed50c223a6494ea69605b468000e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &886083116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886083112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf48fd48014af244983dd57b212def9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gUID: 5d2f5103-dc55-4fad-88e7-6c832901735d
 --- !u!114 &890010246 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7669142449902429527, guid: d17261fd65d86f44cbabe9f6056e731c,

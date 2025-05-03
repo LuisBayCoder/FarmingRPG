@@ -61,37 +61,37 @@ public int CheckEnemyKillCount(string sceneName, string parameter)
         }
     }
 
-void CheckKillCountForSpecificSceneAndParameter()
-{
-    string targetSceneName = "Scene4_Barn"; // Replace with the name of the scene you want to check
-    string targetParameter = "Slimer"; // Replace with the parameter you want to check
-
-    int killCount = CheckEnemyKillCount(targetSceneName, targetParameter);
-    Debug.Log($"Kill Count for parameter '{targetParameter}' in scene '{targetSceneName}': {killCount}");
-}
-
-
- void Update()
-{
-    if (Input.GetKeyDown(KeyCode.K))
+    void CheckKillCountForSpecificSceneAndParameter()
     {
+        string targetSceneName = "Scene4_Barn"; // Replace with the name of the scene you want to check
+        string targetParameter = "Slimer"; // Replace with the parameter you want to check
+
+        int killCount = CheckEnemyKillCount(targetSceneName, targetParameter);
+        Debug.Log($"Kill Count for parameter '{targetParameter}' in scene '{targetSceneName}': {killCount}");
+    }
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
         // Simulate enemy kill count check by parameter
         CheckKillCountForSpecificSceneAndParameter();
-    }
-}
+        }
+    }   
 
-public void SceneChecked(string sceneName)
-{
-    // I need to add a if the scene was visited before the quest started. 
-    // Check if the scene name is valid and exists in the SceneEnemiesManager
-    if (SceneEnemiesManager.Instance.GameObjectSave.sceneData.ContainsKey(sceneName))
+    public void CheckCompletedQuest(string sceneName, bool isVisited)
     {
-        Debug.Log($"Scene '{sceneName}' exists in SceneEnemiesManager.");
+        // Save the scene visit status with true or false value.
+        // Check if the scene name is valid and exists in the SceneEnemiesManager
+        // Save the scene visit status with true or false value.
     }
-    else
+
+    public void SaveCompletedQuest(string questName , bool isCompleted)
     {
-        Debug.LogWarning($"Scene '{sceneName}' does not exist in SceneEnemiesManager.");
+        // Save the completed quest with true or false value.
+        // Check if the quest name is valid and exists in the Quest Machine
+        // Save the completed quest with true or false value.
     }
-}
 
 }
