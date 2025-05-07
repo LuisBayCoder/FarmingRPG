@@ -13,7 +13,6 @@ public class SceneSave
     public Dictionary<string, GridPropertyDetails> gridPropertyDetailsDictionary;
     public List<InventoryItem>[] listInvItemArray;
     public Dictionary<string, int> stringIntDictionary { get; set; } 
-
     public Dictionary<string, string> stringBoolDictionary { get; set; } // string key is an identifier name we choose for this list
-
+    public Dictionary<string, string> completedQuestsDictionary;
 }

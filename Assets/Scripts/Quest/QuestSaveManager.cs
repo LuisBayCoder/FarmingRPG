@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using PixelCrushers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,24 +20,30 @@ public class QuestSaveManager : SingletonMonobehaviour<QuestSaveManager>, ISavea
         set => _gameObjectSave = value; 
     }
 
-    private Dictionary<string, bool> completedQuests = new Dictionary<string, bool>();
+    // Dictionary to store completed quests and their locations
+    // The key is the quest name, and the value is the location where it was completed
+    // This allows for tracking multiple quests and their respective locations
+    //I need to get this dictionary from CheckActionsBeforeQuest.cs and QuestUpdateByCollider.cs
+    // This dictionary will be used to store the completed quests and their locations
+    
+    private Dictionary<string, string> completedQuests = new Dictionary<string, string>();
 
-    // This method is called to save a completed quest
-    // It takes the quest name and location as parameters
-    public void SaveCompletedQuest(string questName, string location)
+  // This method is called to save a completed quest
+// It takes the quest name and location as parameters
+public void SaveCompletedQuest(string questName, string location)
+{
+    if (string.IsNullOrEmpty(questName)) return;
+
+    // Add the quest to the dictionary to track it as completed
+    if (!completedQuests.ContainsKey(questName))
     {
-        if (string.IsNullOrEmpty(questName)) return;
-
-        // Add the quest to the dictionary to track it as completed
-        if (!completedQuests.ContainsKey(questName))
-        {
-            completedQuests[questName] = true; // Default to true since we're removing the explicit bool
-        }
-
-        // Persist to save system
-        ISaveableStoreScene(SceneManager.GetActiveScene().name);
-        Debug.Log($"Quest '{questName}' saved as completed.");
+        completedQuests[questName] = location; // Save the quest name and location
     }
+
+    // Persist to save system
+    ISaveableStoreScene(SceneManager.GetActiveScene().name);
+    Debug.Log($"Quest '{questName}' saved as completed at location '{location}'.");
+}
 
     public bool IsQuestCompleted(string questName)
     {
@@ -45,32 +52,37 @@ public class QuestSaveManager : SingletonMonobehaviour<QuestSaveManager>, ISavea
 
     public void ISaveableStoreScene(string sceneName)
     {
-     GameObjectSave.sceneData.Remove(sceneName);
+        GameObjectSave.sceneData.Remove(sceneName);
 
         SceneSave sceneSave = new SceneSave();
-        sceneSave.stringBoolDictionary = new Dictionary<string, string>();
+        sceneSave.stringDictionary = new Dictionary<string, string>();
 
-        foreach (var quest in completedQuests.Keys)
-        {
-         sceneSave.stringBoolDictionary[quest] = "true"; // Use "true" as a placeholder value
-        }
+        // Save completed quests into the SceneSave object
+        sceneSave.completedQuestsDictionary = new Dictionary<string, string>(completedQuests);
 
         GameObjectSave.sceneData.Add(sceneName, sceneSave);
+
+        Debug.Log($"Saving scene data for scene: {sceneName}");
+        foreach (var key in sceneSave.completedQuestsDictionary.Keys)
+        {
+            Debug.Log($"Saved quest: {key}");
+        }
     }
 
    public void ISaveableRestoreScene(string sceneName)
     {
         if (GameObjectSave.sceneData.TryGetValue(sceneName, out SceneSave sceneSave))
+    {
+        if (sceneSave.completedQuestsDictionary != null)
         {
-            if (sceneSave.stringBoolDictionary != null)
+            completedQuests.Clear();
+            foreach (var quest in sceneSave.completedQuestsDictionary)
             {
-                completedQuests.Clear();
-                foreach (var quest in sceneSave.stringBoolDictionary.Keys)
-                {
-                    completedQuests[quest] = true; // Default to true since we're removing the explicit bool
-                }
+                completedQuests[quest.Key] = quest.Value;
+                Debug.Log($"Restored quest: {quest.Key} at location: {quest.Value}");
             }
         }
+    }
     }
 
     public GameObjectSave ISaveableSave()
@@ -114,5 +126,7 @@ public class QuestSaveManager : SingletonMonobehaviour<QuestSaveManager>, ISavea
     {
         ISaveableDeregister();
     }
+
+
 }
 

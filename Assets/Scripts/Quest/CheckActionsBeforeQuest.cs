@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PixelCrushers;
+using UnityEditor.SearchService;
+using PixelCrushers.QuestMachine;
 
 
 //This will only work with "Get" message used in Quest Machine.
@@ -41,7 +43,6 @@ public int CheckEnemyKillCount(string sceneName, string parameter)
         }
     }
 
-    Debug.LogWarning($"No data found for scene '{sceneName}' or parameter '{parameter}'.");
     return 0; // Default value if not found
 }
 
@@ -61,6 +62,42 @@ public int CheckEnemyKillCount(string sceneName, string parameter)
         }
     }
 
+    //the paramater is the scene name that is the name where the dictionary is saved. Like Scene4_Barn. out SceneSave returns true or false if the scene name is found in the dictionary.
+    //this works for "Checked" message used in Quest Machine.
+    //the parameter is the name of the scene
+    public void CheckCompletedQuest(string parameter)
+    {
+        //parameter take the scene name thas is the name where the dictionary is saved. Like Scene4_Barn. out SceneSave returns true or false if the scene name is found in the dictionary.
+        Debug.Log($"Quest Count for parameter '{parameter}' in scene '{QuestSaveManager.Instance.GameObjectSave.sceneData.TryGetValue(parameter,out SceneSave sceneSave1)}'");
+        if (QuestSaveManager.Instance.GameObjectSave.sceneData.TryGetValue(parameter, out SceneSave sceneSave))
+        {
+            Debug.Log($"Check completedQuestDictionary is true {sceneSave.completedQuestsDictionary} in scene '{sceneSave.completedQuestsDictionary.TryGetValue("Checked", out string questStatus1)}'.");
+            // Check if the completed quests dictionary exists
+            if (sceneSave.completedQuestsDictionary != null && sceneSave.completedQuestsDictionary.TryGetValue("Checked", out string questStatus))
+            {
+                Debug.Log($"Check Quest '{questStatus}' is completed in scene '{parameter}'.");
+                //questStatus is the barn in this case. Parameter is the scene name.
+                MessageSystem.SendMessage(null, "Checked", questStatus); // Send the quest status to the Quest Machine
+            }
+            else
+            {
+                Debug.LogWarning($"Quest '{parameter}' not found in completed quests.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"No data found for scene '{parameter}'.");
+        }
+    }
+    
+    void CheckCompletedQuestForSpecificSceneAndParameter()
+    {
+         // Replace with the name of the scene you want to check
+        string targetParameter = "Scene4_Barn"; // Replace with the parameter you want to check
+
+        CheckCompletedQuest(targetParameter);
+    }
+
     void CheckKillCountForSpecificSceneAndParameter()
     {
         string targetSceneName = "Scene4_Barn"; // Replace with the name of the scene you want to check
@@ -70,28 +107,13 @@ public int CheckEnemyKillCount(string sceneName, string parameter)
         Debug.Log($"Kill Count for parameter '{targetParameter}' in scene '{targetSceneName}': {killCount}");
     }
 
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
         // Simulate enemy kill count check by parameter
         CheckKillCountForSpecificSceneAndParameter();
+        CheckCompletedQuestForSpecificSceneAndParameter();
         }
     }   
-
-    public void CheckCompletedQuest(string sceneName, bool isVisited)
-    {
-        // Save the scene visit status with true or false value.
-        // Check if the scene name is valid and exists in the SceneEnemiesManager
-        // Save the scene visit status with true or false value.
-    }
-
-    public void SaveCompletedQuest(string questName , bool isCompleted)
-    {
-        // Save the completed quest with true or false value.
-        // Check if the quest name is valid and exists in the Quest Machine
-        // Save the completed quest with true or false value.
-    }
-
 }
