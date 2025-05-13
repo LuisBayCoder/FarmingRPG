@@ -30,20 +30,20 @@ public class QuestSaveManager : SingletonMonobehaviour<QuestSaveManager>, ISavea
 
   // This method is called to save a completed quest
 // It takes the quest name and location as parameters
-public void SaveCompletedQuest(string questName, string location)
-{
-    if (string.IsNullOrEmpty(questName)) return;
-
-    // Add the quest to the dictionary to track it as completed
-    if (!completedQuests.ContainsKey(questName))
+    public void SaveCompletedQuest(string questName, string location)
     {
-        completedQuests[questName] = location; // Save the quest name and location
-    }
+        if (string.IsNullOrEmpty(questName)) return;
 
-    // Persist to save system
-    ISaveableStoreScene(SceneManager.GetActiveScene().name);
-    Debug.Log($"Quest '{questName}' saved as completed at location '{location}'.");
-}
+        // Add the quest to the dictionary to track it as completed
+        if (!completedQuests.ContainsKey(questName))
+        {
+            completedQuests[questName] = location; // Save the quest name and location
+        }
+
+        // Persist to save system
+        ISaveableStoreScene(SceneManager.GetActiveScene().name);
+        Debug.Log($"Quest '{questName}' saved as completed at location '{location}'.");
+    }
 
     public bool IsQuestCompleted(string questName)
     {
@@ -126,7 +126,5 @@ public void SaveCompletedQuest(string questName, string location)
     {
         ISaveableDeregister();
     }
-
-
 }
 

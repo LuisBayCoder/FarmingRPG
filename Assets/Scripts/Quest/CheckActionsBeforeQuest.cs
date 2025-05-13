@@ -29,22 +29,27 @@ public class CheckActionsBeforeQuest : MonoBehaviour
 
 //this method will only work with "Killed" message used in Quest Machine.
 //this method is used for checking the enemy kill count and sending the kill count to the Quest Machine when a quest starts.
+//this method takes the scene name and the enemy name as parameters.
 public int CheckEnemyKillCount(string sceneName, string parameter)
 {
-    // Access the SceneEnemiesManager's GameObjectSave data
     if (SceneEnemiesManager.Instance.GameObjectSave.sceneData.TryGetValue(sceneName, out SceneSave sceneSave))
     {
-        // Check if the enemy kill counts exist for the scene
         if (sceneSave.stringIntDictionary != null && sceneSave.stringIntDictionary.TryGetValue(parameter, out int killCount))
         {
             Debug.Log($"Kill Count for parameter '{parameter}' in scene '{sceneName}': {killCount}");
-            MessageSystem.SendMessage(null, "Killed", parameter, killCount); // Send the kill count to the Quest Machine
+
+            for (int i = 0; i < killCount; i++)
+            {
+                MessageSystem.SendMessage(null, "Killed", parameter); // Send one message per kill
+            }
+
             return killCount;
         }
     }
 
-    return 0; // Default value if not found
+    return 0;
 }
+
 
    // 👇 UnityEvent-friendly wrapper method
     public void CheckEnemyKillCount_EventWrapper(string combinedArgs)
@@ -67,8 +72,15 @@ public int CheckEnemyKillCount(string sceneName, string parameter)
     //the parameter is the name of the scene
     public void CheckCompletedQuest(string parameter)
     {
-        //parameter take the scene name thas is the name where the dictionary is saved. Like Scene4_Barn. out SceneSave returns true or false if the scene name is found in the dictionary.
-        Debug.Log($"Quest Count for parameter '{parameter}' in scene '{QuestSaveManager.Instance.GameObjectSave.sceneData.TryGetValue(parameter,out SceneSave sceneSave1)}'");
+        StartCoroutine(CheckCompletedQuestWithDelay(parameter));
+    }
+
+    private IEnumerator CheckCompletedQuestWithDelay(string parameter)
+    {
+        float delay = 2.0f; // Set the delay duration in seconds
+        yield return new WaitForSeconds(delay);
+
+        Debug.Log($"Quest Count for parameter '{parameter}' in scene '{QuestSaveManager.Instance.GameObjectSave.sceneData.TryGetValue(parameter, out SceneSave sceneSave1)}'");
         if (QuestSaveManager.Instance.GameObjectSave.sceneData.TryGetValue(parameter, out SceneSave sceneSave))
         {
             Debug.Log($"Check completedQuestDictionary is true {sceneSave.completedQuestsDictionary} in scene '{sceneSave.completedQuestsDictionary.TryGetValue("Checked", out string questStatus1)}'.");

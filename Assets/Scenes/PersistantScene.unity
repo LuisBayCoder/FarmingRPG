@@ -3548,6 +3548,54 @@ MonoBehaviour:
             m_StringArgument: Scene4_Barn|Slimer
             m_BoolArgument: 0
           m_CallState: 2
+  - guid: d29d2e51-f067-4c4a-8f39-bb0666a85fb6
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 886083113}
+          m_TargetAssemblyTypeName: CheckActionsBeforeQuest, Assembly-CSharp
+          m_MethodName: CheckCompletedQuest
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Scene4_Barn
+            m_BoolArgument: 0
+          m_CallState: 2
+  - guid: 4f8dcdd3-02d3-4f51-9f61-555bca430004
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 886083113}
+          m_TargetAssemblyTypeName: CheckActionsBeforeQuest, Assembly-CSharp
+          m_MethodName: CheckCompletedQuest
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Scene4_Barn
+            m_BoolArgument: 0
+          m_CallState: 2
+  - guid: 7803314e-aa5e-4180-b535-3cac166d0e19
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 886083113}
+          m_TargetAssemblyTypeName: CheckActionsBeforeQuest, Assembly-CSharp
+          m_MethodName: CheckEnemyKillCount_EventWrapper
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Scene4_Barn|Slimer
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &178380853
 Transform:
   m_ObjectHideFlags: 0
@@ -14679,6 +14727,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4156620909928231200, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156620909928231200, guid: e3d56d9e8146d204987941fbc158912f,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -14767,7 +14820,8 @@ MonoBehaviour:
   condition:
     luaConditions: []
     questConditions: []
-    acceptedTags: []
+    acceptedTags:
+    - 
     acceptedGameObjects: []
     luaWizardIndex: -1
     lastEvaluationValue: 0
@@ -14815,7 +14869,7 @@ MonoBehaviour:
   stopConversationOnTriggerExit: 0
   marginToAllowTriggerExit: 0.2
   stopConversationIfTooFar: 1
-  maxConversationDistance: 5
+  maxConversationDistance: 20
   monitorConversationDistanceFrequency: 1
   showCursorDuringConversation: 1
   pauseGameDuringConversation: 0
@@ -14842,8 +14896,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overrideName: 
-  overrideUseMessage: 
-  maxUseDistance: 1
+  overrideUseMessage: Press E to use
+  maxUseDistance: 30
   events:
     onSelect:
       m_PersistentCalls:
@@ -20473,10 +20527,10 @@ GameObject:
   - component: {fileID: 1117205241}
   - component: {fileID: 1117205245}
   - component: {fileID: 1117205244}
-  - component: {fileID: 1117205246}
   - component: {fileID: 1117205247}
   - component: {fileID: 1117205249}
   - component: {fileID: 1117205242}
+  - component: {fileID: 1117205243}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -20697,6 +20751,18 @@ MonoBehaviour:
   m_onlyRememberHandwrittenQuests: 0
   m_compressCompletedProcgenQuests: 0
   m_onlyTrackOneQuestAtATime: 0
+--- !u!114 &1117205243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117205232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d569343734dbf0c4ab1fc49d58ca66c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1117205244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20726,60 +20792,11 @@ MonoBehaviour:
   selectAt: 1
   layerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
   distanceFrom: 0
-  maxSelectionDistance: 30
+  maxSelectionDistance: 100
   runRaycasts: 0
   raycastAll: 0
-  useDefaultGUI: 1
-  guiSkin: {fileID: 0}
-  guiStyleName: label
-  alignment: 1
-  textStyle: 1
-  textStyleColor: {r: 0, g: 0, b: 0, a: 1}
-  inRangeColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  outOfRangeColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  reticle:
-    inRange: {fileID: 0}
-    outOfRange: {fileID: 0}
-    width: 64
-    height: 64
-  useKey: 32
-  useButton: Fire2
-  defaultUseMessage: (spacebar to interact)
-  broadcastToChildren: 1
-  actorTransform: {fileID: 0}
-  tooFarMessage: 
-  onSelectedUsable:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeselectedUsable:
-    m_PersistentCalls:
-      m_Calls: []
-  tooFarEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  debug: 0
---- !u!114 &1117205246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117205232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624654ff0a68ee844994f728ddf3d991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectAt: 1
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  distanceFrom: 0
-  maxSelectionDistance: 30
-  runRaycasts: 0
-  raycastAll: 1
   useDefaultGUI: 1
   guiSkin: {fileID: 0}
   guiStyleName: label
@@ -24805,10 +24822,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154424, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: trigger
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154425, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154427, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: m_Name
       value: NPCChat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154427, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154427, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c962b046586e6044fa9f5b43d8a2c414, type: 3}
@@ -33309,6 +33346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 125852, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 425660, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -34674,44 +34715,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unregisterOnDisable: 0
---- !u!114 &1810942466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1810942462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9888f0d13032ad4bb14acdba3472d3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alertUIElements:
-    panel: {fileID: 0}
-    alertText:
-      m_uiText: {fileID: 0}
-      m_textMeshProUGUI: {fileID: 0}
-    queueAlerts: 0
-    dontQueueDuplicates: 0
-    waitForHideAnimation: 0
-    allowForceImmediate: 0
-  conversationUIElements:
-    mainPanel: {fileID: 0}
-    dontDeactivateMainPanel: 0
-    waitForMainPanelOpen: 0
-    subtitlePanels: []
-    defaultNPCSubtitlePanel: {fileID: 0}
-    defaultPCSubtitlePanel: {fileID: 0}
-    allowOpenSubtitlePanelsOnStartConversation: 1
-    allowDialogueActorCustomPanels: 1
-    menuPanels: []
-    defaultMenuPanel: {fileID: 0}
-    useFirstResponseForMenuPortrait: 0
-    waitForClose: 1
-  QTEIndicatorElements:
-    QTEIndicators: []
-  addEventSystemIfNeeded: 1
-  verifyPanelAssignments: 1
 --- !u!1 &1818766101
 GameObject:
   m_ObjectHideFlags: 0
