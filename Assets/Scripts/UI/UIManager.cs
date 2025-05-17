@@ -32,6 +32,18 @@ public class UIManager : SingletonMonobehaviour<UIManager>
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            // Don't respond to Escape if the note is open
+            // This is to prevent the pause menu from opening when the note is open
+            // and the player presses Escape
+            // This is to prevent the pause menu from opening when the note is open
+            Debug.Log("NoteReaderUI.Instance: " + NoteReaderUI.Instance);
+            Debug.Log("NoteReaderUI.Instance.notePanel.activeSelf: " + NoteReaderUI.Instance.IsNoteOpen);
+            if (NoteReaderUI.Instance != null && NoteReaderUI.Instance.IsNoteOpen)
+            {
+                Debug.Log("Note is open, not responding to Escape key.");
+                return;
+            }
+
             if (PauseMenuOn)
             {
                 DisablePauseMenu();

@@ -24,5 +24,6 @@ public class ItemDetails
     public bool isNotTrigger; // This will be used to determine if the item is a trigger or not
     public bool isQuestItem; // This will be used to determine if the item is a quest item
     public string questCountName; // This will be used to determine the quest item name
+    public Sprite diagramImage;
 }
 

@@ -1,11 +1,10 @@
-﻿
+
 using PixelCrushers.QuestMachine;
 using UnityEngine;
 using PixelCrushers;
 
 public class ItemPickUp : MonoBehaviour
 {
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Item item = collision.GetComponent<Item>();
@@ -24,10 +23,18 @@ public class ItemPickUp : MonoBehaviour
                 // Play pick up sound
                 AudioManager.Instance.PlaySound(SoundName.effectPickupSound);
 
-                if(itemDetails.isQuestItem == true)
+                if (itemDetails.isQuestItem == true)
                 {
                     MessageSystem.SendMessage(null, "Get", itemDetails.questCountName, 1);
-                } 
+                }
+
+                Debug.Log("itemdetails.itemType: " + ItemType.Note);
+                // If it's a note, open the note UI
+                if (itemDetails.itemType == ItemType.Note && itemDetails.diagramImage != null)
+                {
+                    
+                    NoteReaderUI.Instance.ShowNote(itemDetails.diagramImage);
+                }
             }
         }
     }

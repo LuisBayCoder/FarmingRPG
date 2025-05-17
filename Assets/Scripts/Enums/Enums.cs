@@ -177,6 +177,7 @@ public enum ItemType
     Reapable_scenary,
     Furniture,
     Weapon,
+    Note,
     none,
     count
 }
