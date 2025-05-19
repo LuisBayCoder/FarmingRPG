@@ -28,6 +28,17 @@ public class UIInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         parentCanvas = GetComponentInParent<Canvas>();
     }
 
+    private void Update()
+    {
+        //Clear selected item on rigth click
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (isSelected)
+            {
+                ClearSelectedItem();
+            }
+        }
+    }
     private void OnDisable()
     {
         EventHandler.AfterSceneLoadEvent -= SceneLoaded;
@@ -114,8 +125,16 @@ public class UIInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             Player.Instance.ClearCarriedItem();
         }
+        //show note if it is a note
+        if (itemDetails.itemType == ItemType.Note && itemDetails.diagramImage != null)
+        {         
+            NoteReaderUI.Instance.ShowNote(itemDetails.diagramImage);
+        }
     }
 
+    /// <summary>
+    /// Clears the selected item from the inventory slot   
+    /// </summary> 
     public void ClearSelectedItem()
     {
         ClearCursors();
@@ -256,6 +275,7 @@ public class UIInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 if (itemQuantity > 0)
                 {
                     SetSelectedItem();
+
                 }
             }
         }
