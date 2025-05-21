@@ -20,6 +20,14 @@ public static class EventHandler
             DropSelectedItemEvent();
     }
 
+    public static event Action<Vector3> DropSelectedItemEventWithPosition;
+
+    public static void CallDropSelectedItemEventWithPosition(Vector3 dropPosition)
+    {
+        if (DropSelectedItemEventWithPosition != null)
+            DropSelectedItemEventWithPosition(dropPosition);
+    }
+
     // Remove selected item from inventory
     public static event Action RemoveSelectedItemFromInventoryEvent;
 

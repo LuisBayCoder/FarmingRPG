@@ -44,6 +44,7 @@ public class UIInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         EventHandler.AfterSceneLoadEvent -= SceneLoaded;
         EventHandler.RemoveSelectedItemFromInventoryEvent -= RemoveSelectedItemFromInventory;
         EventHandler.DropSelectedItemEvent -= DropSelectedItemAtMousePosition;
+        EventHandler.DropSelectedItemEventWithPosition -= DropSelectedItemWithObjectPosition;
     }
 
     private void OnEnable()
@@ -51,6 +52,7 @@ public class UIInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         EventHandler.AfterSceneLoadEvent += SceneLoaded;
         EventHandler.RemoveSelectedItemFromInventoryEvent += RemoveSelectedItemFromInventory;
         EventHandler.DropSelectedItemEvent += DropSelectedItemAtMousePosition;
+        EventHandler.DropSelectedItemEventWithPosition += DropSelectedItemWithObjectPosition;
     }
 
     private void Start()
@@ -175,6 +177,26 @@ public class UIInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 {
                     ClearSelectedItem();
                 }
+            }
+        }
+    }
+
+    private void DropSelectedItemWithObjectPosition(Vector3 dropPosition)
+    {
+        if (itemDetails != null && isSelected)
+        {
+            // Create item from prefab at mouse position
+            GameObject itemGameObject = Instantiate(itemPrefab, new Vector3(dropPosition.x, dropPosition.y , dropPosition.z), Quaternion.identity, parentItem);
+            Item item = itemGameObject.GetComponent<Item>();
+            item.ItemCode = itemDetails.itemCode;
+
+            // Remove item from players inventory
+            InventoryManager.Instance.RemoveItem(InventoryLocation.player, item.ItemCode);
+
+            // If no more of item then clear selected
+            if (InventoryManager.Instance.FindItemInInventory(InventoryLocation.player, item.ItemCode) == -1)
+            {
+                ClearSelectedItem();
             }
         }
     }

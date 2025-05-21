@@ -178,6 +178,7 @@ public enum ItemType
     Furniture,
     Weapon,
     Note,
+    QuestItem,
     none,
     count
 }

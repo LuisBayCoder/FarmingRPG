@@ -267,6 +267,9 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
                     ProcessPlayerClickInput(cursorGridPosition, playerGridPosition);
                 }
+
+                ValidateObjectUnderCursor();
+
             }
         }
     }
@@ -283,6 +286,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Get Selected item details
         ItemDetails itemDetails = InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
 
+        // Get cursor position in world space
         Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         cursorPosition.z = 0; // Ensure z is 0 for 2D
 
@@ -481,7 +485,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Trigger animation
         StartCoroutine(HoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails, gridCursor.CursorPositionIsValid));
     }
- 
+
     private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails, bool isCursorPositionValid)
     {
         PlayerInputIsDisabled = true;
@@ -1108,6 +1112,37 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 EventHandler.CallMovementEvent(0f, 0f, false, false, false, false, ToolEffect.none, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false);
 
                 break;
+        }
+    }
+    public void ValidateObjectUnderCursor()
+    {
+        //I need to check if the item is valid and if the item is valid I can place an object on it.
+        //raycast to check the item
+        RaycastHit2D hit = Physics2D.Raycast(cursor.GetWorldPositionForCursor(), Vector2.zero, 0f, LayerMask.GetMask("QuestItem"));
+        if (hit.collider != null)
+        {
+            // Get Selected item details
+            ItemDetails itemDetails = InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
+            Debug.Log("CursorOverItem: " + hit.collider.gameObject.name);
+
+            if (itemDetails.itemType == ItemType.QuestItem)
+            {
+                // Check if the item is a quest item
+                SkullPedestal skullPedestal = hit.collider.GetComponent<SkullPedestal>();
+                if (skullPedestal != null)
+                {
+                    EventHandler.CallDropSelectedItemEventWithPosition(skullPedestal.itemPosition.position);
+                }
+            }
+            else
+            {
+                Debug.Log("CursorOverItem: " + hit.collider.gameObject.name + " is not a quest item.");
+            }
+
+        }
+        else
+        {
+            Debug.Log("CursorOverItem: None");
         }
     }
 }
