@@ -1128,10 +1128,11 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             if (itemDetails.itemType == ItemType.QuestItem)
             {
                 // Check if the item is a quest item
-                SkullPedestal skullPedestal = hit.collider.GetComponent<SkullPedestal>();
-                if (skullPedestal != null)
+                QuestObject questObject = hit.collider.GetComponent<QuestObject>();
+                if (questObject != null)
                 {
-                    EventHandler.CallDropSelectedItemEventWithPosition(skullPedestal.itemPosition.position);
+                    EventHandler.CallDropSelectedItemEventWithPosition(questObject.itemPosition.position);
+                    questObject.Interact();
                 }
             }
             else

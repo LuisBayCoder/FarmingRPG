@@ -75,7 +75,12 @@ PrefabInstance:
     - target: {fileID: 4624486241042703506, guid: 92fa22be78fc3c44997a8ab41b5db179,
         type: 3}
       propertyPath: m_Name
-      value: Cow Skull
+      value: Cow Skull Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624486241042703506, guid: 92fa22be78fc3c44997a8ab41b5db179,
+        type: 3}
+      propertyPath: m_TagString
+      value: QuestItem
       objectReference: {fileID: 0}
     - target: {fileID: 7371813337606645893, guid: 92fa22be78fc3c44997a8ab41b5db179,
         type: 3}
