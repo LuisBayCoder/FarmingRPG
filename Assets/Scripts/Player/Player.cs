@@ -1132,7 +1132,9 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 if (questObject != null)
                 {
                     EventHandler.CallDropSelectedItemEventWithPosition(questObject.itemPosition.position);
-                    questObject.Interact();
+                    //I need to see the item being carried and turn that item into a string name
+
+                    questObject.Interact(itemDetails.itemDescription);
                 }
             }
             else

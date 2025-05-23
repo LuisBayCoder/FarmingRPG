@@ -12,13 +12,21 @@ public class QuestObject : MonoBehaviour
     [Header("Quest Item")]
     public string itemNameRequired;
 
-    public void Interact()
+    public void Interact(string itemName)
     {
-        //this is called when the player drops the item on the pedestal
-
+        Debug.Log("Interacting with the pedestal " + itemName);
+        //this is called when the player interacts with the pedestal
+        if (itemName == itemNameRequired)
+        {
+            isCorrectlyPlaced = true;
+            Debug.Log("Item placed correctly");
+            
+        }
+        else
+        {
+            Debug.Log("Item not correct");
+        }
     }
-
-    public bool IsCorrect() => isCorrectlyPlaced;
 }
 
 
