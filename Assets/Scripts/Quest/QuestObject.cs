@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class QuestObject : MonoBehaviour
 {
-    private bool isCorrectlyPlaced = false;
-
     [Header("Skull Pedestal")]
     public Transform itemPosition;
+    //[SerializeField] private GameObject lightObject;
 
     [Header("Quest Item")]
     public string itemNameRequired;
@@ -16,16 +15,6 @@ public class QuestObject : MonoBehaviour
     {
         Debug.Log("Interacting with the pedestal " + itemName);
         //this is called when the player interacts with the pedestal
-        if (itemName == itemNameRequired)
-        {
-            isCorrectlyPlaced = true;
-            Debug.Log("Item placed correctly");
-            
-        }
-        else
-        {
-            Debug.Log("Item not correct");
-        }
     }
 }
 
