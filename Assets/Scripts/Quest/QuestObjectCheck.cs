@@ -7,6 +7,7 @@ public class QuestObjectCheck : MonoBehaviour
     [SerializeField] private string itemNameRequired; // The name of the item required for this quest object
     [SerializeField] private GameObject lightObject;
     private QuestManager questManager;
+    public bool itemPlaced = false; // Flag to check if the item is placed
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class QuestObjectCheck : MonoBehaviour
                 Debug.Log("Item placed correctly: " + itemDetails.itemDescription);
                 //I need to change registerCorrectPlacement to subtract 1 from the required correct placements
                 // Register the correct placement with the quest manager    
-
+                itemPlaced = true; // Set the flag to true when the item is placed
                 questManager.RegisterCorrectPlacement(1);
             }
 
@@ -48,6 +49,7 @@ public class QuestObjectCheck : MonoBehaviour
         lightObject.SetActive(false);
         Debug.Log("Item removed from pedestal");
         questManager.RegisterCorrectPlacement(-1);
+        itemPlaced = false; // Reset the flag when the item is removed  
     }
 }
 

@@ -1124,6 +1124,17 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             // Get Selected item details
             ItemDetails itemDetails = InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
             Debug.Log("CursorOverItem: " + hit.collider.gameObject.name);
+            // Check if the item is a quest item
+            // i need to get the child game object and the QuestObject component from it and check if item is placed equals true
+            if (itemDetails != null && itemDetails.itemType == ItemType.QuestItem && hit.collider.gameObject.transform.childCount > 0)
+            {
+                QuestObjectCheck questObjectCheck = hit.collider.gameObject.transform.GetChild(0).GetComponent<QuestObjectCheck>();
+                if (questObjectCheck != null && questObjectCheck.itemPlaced)
+                {
+                    Debug.Log("CursorOverItem: " + hit.collider.gameObject.name + " is a quest item and item is not placed.");
+                    return;
+                }
+            }
 
             if (itemDetails.itemType == ItemType.QuestItem)
             {
