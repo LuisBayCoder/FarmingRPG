@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 935899b62f48ae5498594680ed17d133, type: 3}
-  m_Name: Dialogue Database (Auto-Backup)
+  m_Name: Dialogue Database
   m_EditorClassIdentifier: 
   version: 
   author: 
@@ -349,8 +349,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 7.7854843
-        y: 204.30609
+        x: 177.35046
+        y: 189.08871
         width: 160
         height: 30
     - id: 3
@@ -405,8 +405,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 5.9402084
-        y: 349.7346
+        x: 54.57305
+        y: 274.88034
         width: 160
         height: 30
     - id: 4
@@ -930,8 +930,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 670.5308
-        y: 783.88947
+        x: 603.3434
+        y: 777.63947
         width: 160
         height: 30
     - id: 13
@@ -979,8 +979,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 746.3549
-        y: 833.34
+        x: 799.47986
+        y: 773.9651
         width: 160
         height: 30
     - id: 14
@@ -1028,8 +1028,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 872.72864
-        y: 780.5928
+        x: 1010.2286
+        y: 772.7803
         width: 160
         height: 30
     - id: 15
@@ -1089,8 +1089,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 29.92096
-        y: 65.5849
+        x: 175.57294
+        y: 100.36746
         width: 160
         height: 30
     - id: 16
@@ -2382,9 +2382,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'How are we going to pay the montly rent for the farm. There is a
-          pet cementery take the ramains to the highest point ontop of a rock. I
-          heard stories of a reward given for sacrifices. '
+        value: 'How are we going to pay the montly rent for the farm. '
         type: 0
         typeString: 
       - title: Sequence
@@ -2416,8 +2414,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1625.1554
-        y: 410.8416
+        x: 1612.3894
+        y: 508.71393
         width: 160
         height: 30
     - id: 40
@@ -2498,7 +2496,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'Go to the pet semetery. '
+        value: 'Go check to the pet cemetery it''s ouside the farm. Go north trough
+          the woods. '
         type: 0
         typeString: 
       - title: Sequence
@@ -2574,8 +2573,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1540.8977
-        y: 519.04285
+        x: 1670.6848
+        y: 609.4683
         width: 160
         height: 30
     - id: 45
@@ -2635,8 +2634,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 4.5294113
-        y: 411.3571
+        x: 6.591263
+        y: 380.42926
         width: 160
         height: 30
     - id: 46
@@ -2662,7 +2661,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'No, there all dead. Killed by some green things. '
+        value: No, there all dead. Stripped to the bone. Killed by some green blobs.
         type: 0
         typeString: 
       - title: Sequence
@@ -2692,7 +2691,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 1
-        y: 496.65118
+        y: 472.93982
         width: 160
         height: 30
     - id: 47
@@ -2768,8 +2767,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'Well, what are you waiting for? Go kill those things and find out
-          how they got in the barn. '
+        value: "Green blobs? Stripped to the bone? This ain\u2019t some fairytale!
+          You sure you\u2019re not pulling my leg? Damn it, this farm doesn\u2019t
+          need more problems! Did you take care of them. "
         type: 0
         typeString: 
       - title: Sequence
@@ -2801,7 +2801,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1
+        x: 51.515457
         y: 552.9029
         width: 160
         height: 30
@@ -2857,8 +2857,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1
-        y: 611.1673
+        x: 78.31958
+        y: 610.13635
         width: 160
         height: 30
     - id: 50
@@ -2880,7 +2880,9 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
-        value: 'And what did you find. '
+        value: 'Alright, alright... if you say you took care of it, then fine. But
+          what the hell are those things, and how did they get in my barn?! Did you
+          find anything else. '
         type: 0
         typeString: 
       - title: Dialogue Text
@@ -2911,6 +2913,12 @@ MonoBehaviour:
         destinationDialogueID: 52
         isConnector: 0
         priority: 2
+      - originConversationID: 1
+        originDialogueID: 50
+        destinationConversationID: 1
+        destinationDialogueID: 54
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -2918,8 +2926,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1
-        y: 667.7789
+        x: 327.02838
+        y: 641.8172
         width: 160
         height: 30
     - id: 51
@@ -2941,8 +2949,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
-        value: 'I found the skull aranged in order and candles aranged in a strange
-          pattern. '
+        value: Nothing else.
         type: 0
         typeString: 
       - title: Dialogue Text
@@ -2953,6 +2960,10 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
+      - title: Response Menu Sequence
+        value: 
+        type: 0
+        typeString: 
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -2960,16 +2971,23 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
-      conditionsString: 
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 51
+        destinationConversationID: 1
+        destinationDialogueID: 53
+        isConnector: 0
+        priority: 2
+      conditionsString: GetQuestNodeState("CheckOnLivestockAndReturn", "Return")
+        == "active"
       userScript: SetQuestState("CheckOnLivestockAndReturn", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1
-        y: 730.1756
+        x: 176.9787
+        y: 733.55426
         width: 160
         height: 30
     - id: 52
@@ -3010,6 +3028,58 @@ MonoBehaviour:
       falseConditionAction: Block
       conditionPriority: 2
       outgoingLinks: []
+      conditionsString: GetQuestNodeState("CheckOnLivestockAndReturn", "Return")
+        == "Inactive"
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 536.9161
+        y: 710.0971
+        width: 160
+        height: 30
+    - id: 53
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: Got to the pet cementery see what the hell they want. They need to
+          pay for the cows. Or whe wont have enough money to pay the bill at the
+          end of the month.
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -3017,13 +3087,63 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 212.57027
-        y: 676.4566
+        x: 134.86122
+        y: 827.56726
+        width: 160
+        height: 30
+    - id: 54
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 'I found a weird note with Petcementery writen on it. With some weird
+          leters, and some directions. '
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 361.35672
+        y: 733.6082
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 437.85904}
-    canvasZoom: 0.76000035
+    canvasScrollPosition: {x: 17.91043, y: 46.932648}
+    canvasZoom: 0.6700005
   - id: 2
     fields:
     - title: Title

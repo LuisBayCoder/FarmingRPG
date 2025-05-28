@@ -16,7 +16,6 @@ public class QuestManager : MonoBehaviour
     public int requiredCorrectPlacements = 3; // how many are needed to complete the puzzle
     public Light2D spiralLight; // reference to the light that will increase in intensity
     public float lightIncreaseRate = 0.1f; // rate at which the light intensity increases
-
     private void Start()
     {
         if (spiralLight == null)
@@ -70,7 +69,44 @@ public class QuestManager : MonoBehaviour
             yield return null; // wait for the next frame
         }
         spiralLight.intensity = 5f; // ensure it doesn't exceed the maximum intensity
-        Debug.Log("Spiral light intensity reached maximum.");
+
+        // Fade to black and wait for it to finish
+        yield return StartCoroutine(SceneControllerManager.Instance.FadeToBlackCoroutine());
+        //after fading to black wait a second before continuing 
+        yield return new WaitForSeconds(1f);
+        spiralLight.intensity = 0f; // reset the light intensity
+         // Find all Item components under the parent and destroy those with itemCode 10028
+        Transform itemsParent = GameObject.FindGameObjectWithTag("ItemsParentTransform").transform;
+        Item[] items = itemsParent.GetComponentsInChildren<Item>(true);
+        foreach (Item item in items)
+        {
+            if (item.ItemCode == 10028)
+            {
+                Destroy(item.gameObject);
+            }
+        }
+        //Make structure appear
+        GameObject structure = GameObject.Find("Structure");
+        if (structure != null)
+        {
+            // Enable all components with an 'enabled' property under Structure (including inactive children)
+            Component[] components = structure.GetComponentsInChildren<Component>(true);
+            foreach (Component comp in components)
+            {
+                var type = comp.GetType();
+                var enabledProp = type.GetProperty("enabled");
+                if (enabledProp != null && enabledProp.PropertyType == typeof(bool))
+                {
+                    enabledProp.SetValue(comp, true, null);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Structure not found in the scene. Please ensure it is present.");
+        }
+        // Fade from black and wait for it to finish
+        yield return StartCoroutine(SceneControllerManager.Instance.FadeFromBlackCoroutine());
     }
 }
 

@@ -141,4 +141,28 @@ public class SceneControllerManager : SingletonMonobehaviour<SceneControllerMana
             StartCoroutine(FadeAndSwitchScenes(sceneName, spawnPosition));
         }
     }
+
+    public void FadeToBlack()
+    {
+        if (!isFading)
+        {
+            StartCoroutine(Fade(1f));
+        }
+    }
+
+    public void FadeFromBlack()
+    {
+        //if it's still not done fading to black then wait for it to finish then start fading from black
+        
+    }
+
+    public IEnumerator FadeToBlackCoroutine()
+    {
+        yield return StartCoroutine(Fade(1f));
+    }
+
+    public IEnumerator FadeFromBlackCoroutine()
+    {
+        yield return StartCoroutine(Fade(0f));
+    }
 }
