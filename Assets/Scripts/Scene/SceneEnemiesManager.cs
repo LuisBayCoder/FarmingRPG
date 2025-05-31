@@ -261,6 +261,7 @@ public class SceneEnemiesManager : SingletonMonobehaviour<SceneEnemiesManager>, 
         }
 
         // Create and store scene data
+
         SceneSave sceneSave = new SceneSave();
         sceneSave.listSceneEnemy = sceneEnemyList;
 

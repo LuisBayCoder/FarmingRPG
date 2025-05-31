@@ -37,7 +37,7 @@ public class QuestSaveManager : SingletonMonobehaviour<QuestSaveManager>, ISavea
         // Add the quest to the dictionary to track it as completed
         if (!completedQuests.ContainsKey(questName))
         {
-            completedQuests[questName] = location; // Save the quest name and location
+            completedQuests[questName] = location; 
         }
 
         // Persist to save system

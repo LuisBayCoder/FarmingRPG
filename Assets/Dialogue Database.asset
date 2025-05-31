@@ -140,6 +140,36 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+  - id: 3
+    fields:
+    - title: Name
+      value: CreepyNote
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: 
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
   locations: []
   variables:
   - id: 1
@@ -591,8 +621,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 398.0045
-        y: 466.06464
+        x: 406.9597
+        y: 445.16913
         width: 160
         height: 30
     - id: 7
@@ -1746,7 +1776,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 892.91125
-        y: 341.39233
+        y: 342.95483
         width: 160
         height: 30
     - id: 27
@@ -2801,8 +2831,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 51.515457
-        y: 552.9029
+        x: 41.206177
+        y: 544.5478
         width: 160
         height: 30
     - id: 49
@@ -2850,8 +2880,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: GetQuestNodeState("CheckOnLivestockAndReturn", "Discussed Quest")
-        == "active"
+      userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -2920,7 +2949,13 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: 'SetQuestState("CheckOnLivestockAndReturn", "success");
+
+
+        GiveQuest("Butch",
+        "CreepyNote")
+
+'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -2978,8 +3013,7 @@ MonoBehaviour:
         destinationDialogueID: 53
         isConnector: 0
         priority: 2
-      conditionsString: GetQuestNodeState("CheckOnLivestockAndReturn", "Return")
-        == "active"
+      conditionsString: 
       userScript: SetQuestState("CheckOnLivestockAndReturn", "success")
       onExecute:
         m_PersistentCalls:
@@ -3142,8 +3176,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 17.91043, y: 46.932648}
-    canvasZoom: 0.6700005
+    canvasScrollPosition: {x: 0, y: 570.89996}
+    canvasZoom: 0.8500004
   - id: 2
     fields:
     - title: Title
