@@ -16,6 +16,8 @@ public class QuestManager : MonoBehaviour
     public int requiredCorrectPlacements = 3; // how many are needed to complete the puzzle
     public Light2D spiralLight; // reference to the light that will increase in intensity
     public float lightIncreaseRate = 0.1f; // rate at which the light intensity increases
+                                           //need an array of Light2D objects to turn off  
+    public Light2D[] lightsToTurnOff; // array of lights to turn off when the quest is complete
     private void Start()
     {
         if (spiralLight == null)
@@ -26,7 +28,8 @@ public class QuestManager : MonoBehaviour
             {
                 Debug.LogError("Spiral light not found in the scene. Please assign it in the QuestManager.");
             }
-        }
+        } 
+
     }
     public void RegisterCorrectPlacement(int amount)
     {
@@ -98,6 +101,30 @@ public class QuestManager : MonoBehaviour
                 if (enabledProp != null && enabledProp.PropertyType == typeof(bool))
                 {
                     enabledProp.SetValue(comp, true, null);
+                }
+            }
+
+            // Find the lights to turn off by tag (including only active ones)
+            GameObject[] lights = GameObject.FindGameObjectsWithTag("LightToTurnOff");
+            lightsToTurnOff = new Light2D[lights.Length];
+            for (int i = 0; i < lights.Length; i++)
+            {
+                lightsToTurnOff[i] = lights[i].GetComponent<Light2D>();
+                if (lightsToTurnOff[i] == null)
+                {
+                    Debug.LogWarning("Light2D component not found on " + lights[i].name);
+                }
+            }
+
+            foreach (Light2D light in lightsToTurnOff)
+            {
+                if (light != null)
+                {
+                    light.enabled = false; // Turn off the light
+                }
+                else
+                {
+                    Debug.LogWarning("Light2D component is null in lightsToTurnOff array.");
                 }
             }
         }

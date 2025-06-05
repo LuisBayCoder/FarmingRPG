@@ -8,50 +8,51 @@ using PixelCrushers.QuestMachine;
 
 //This will only work with "Get" message used in Quest Machine.
 //This script is used for checking the inventory and sending the item count to the Quest Machine when a quest starts.
+//Checks item descrition from scriptabe object and sends the item count to the Quest Machine.
 public class CheckActionsBeforeQuest : MonoBehaviour
 {
     public void InventoryCheck(string messageArgs)
-{
-    // Retrieve the item name from the message parameter
-    string questItemName = messageArgs;
-    Debug.Log($"Quest started! Item to pick up: {questItemName}");
-
-    // Check how many of this item the player already has
-    int currentCount = InventoryManager.Instance.GetItemQuantityByName(questItemName);
-
-    if (currentCount > 0)
     {
-        Debug.Log($"Re-sending {currentCount} of {questItemName} to Quest Machine.");
-        // Re-send the message globally
-        MessageSystem.SendMessage(null, "Get", questItemName, currentCount);
-    }
-}
+        // Retrieve the item name from the message parameter
+        string questItemName = messageArgs;
+        Debug.Log($"Quest started! Item to pick up: {questItemName}");
 
-//this method will only work with "Killed" message used in Quest Machine.
-//this method is used for checking the enemy kill count and sending the kill count to the Quest Machine when a quest starts.
-//this method takes the scene name and the enemy name as parameters.
-public int CheckEnemyKillCount(string sceneName, string parameter)
-{
-    if (SceneEnemiesManager.Instance.GameObjectSave.sceneData.TryGetValue(sceneName, out SceneSave sceneSave))
-    {
-        if (sceneSave.stringIntDictionary != null && sceneSave.stringIntDictionary.TryGetValue(parameter, out int killCount))
+        // Check how many of this item the player already has
+        int currentCount = InventoryManager.Instance.GetItemQuantityByName(questItemName);
+
+        if (currentCount > 0)
         {
-            Debug.Log($"Kill Count for parameter '{parameter}' in scene '{sceneName}': {killCount}");
-
-            for (int i = 0; i < killCount; i++)
-            {
-                MessageSystem.SendMessage(null, "Killed", parameter); // Send one message per kill
-            }
-
-            return killCount;
+            Debug.Log($"Re-sending {currentCount} of {questItemName} to Quest Machine.");
+            // Re-send the message globally
+            MessageSystem.SendMessage(null, "Get", questItemName, currentCount);
         }
     }
 
-    return 0;
-}
+    //this method will only work with "Killed" message used in Quest Machine.
+    //this method is used for checking the enemy kill count and sending the kill count to the Quest Machine when a quest starts.
+    //this method takes the scene name and the enemy name as parameters.
+    public int CheckEnemyKillCount(string sceneName, string parameter)
+    {
+        if (SceneEnemiesManager.Instance.GameObjectSave.sceneData.TryGetValue(sceneName, out SceneSave sceneSave))
+        {
+            if (sceneSave.stringIntDictionary != null && sceneSave.stringIntDictionary.TryGetValue(parameter, out int killCount))
+            {
+                Debug.Log($"Kill Count for parameter '{parameter}' in scene '{sceneName}': {killCount}");
+
+                for (int i = 0; i < killCount; i++)
+                {
+                    MessageSystem.SendMessage(null, "Killed", parameter); // Send one message per kill
+                }
+
+                return killCount;
+            }
+        }
+
+        return 0;
+    }
 
 
-   // 👇 UnityEvent-friendly wrapper method
+    // 👇 UnityEvent-friendly wrapper method
     public void CheckEnemyKillCount_EventWrapper(string combinedArgs)
     {
         string[] parts = combinedArgs.Split('|');
@@ -101,10 +102,10 @@ public int CheckEnemyKillCount(string sceneName, string parameter)
             Debug.LogWarning($"No data found for scene '{parameter}'.");
         }
     }
-    
+
     void CheckCompletedQuestForSpecificSceneAndParameter()
     {
-         // Replace with the name of the scene you want to check
+        // Replace with the name of the scene you want to check
         string targetParameter = "Scene4_Barn"; // Replace with the parameter you want to check
 
         CheckCompletedQuest(targetParameter);
@@ -123,9 +124,11 @@ public int CheckEnemyKillCount(string sceneName, string parameter)
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-        // Simulate enemy kill count check by parameter
-        CheckKillCountForSpecificSceneAndParameter();
-        CheckCompletedQuestForSpecificSceneAndParameter();
+            // Simulate enemy kill count check by parameter
+            //CheckKillCountForSpecificSceneAndParameter();
+            //CheckCompletedQuestForSpecificSceneAndParameter();
+            // Simulate inventory check by item name
+            InventoryCheck("Creepy Note"); // Replace with the actual item name you want to check
         }
-    }   
+    }
 }

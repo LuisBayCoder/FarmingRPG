@@ -622,15 +622,12 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
 
             if (so_GridProperties.sceneName == sceneName)
             {
-                Debug.Log($"Match found for scene: {sceneName}");
-
                 gridDimensions.x = so_GridProperties.gridWidth;
                 gridDimensions.y = so_GridProperties.gridHeight;
 
                 gridOrigin.x = so_GridProperties.originX;
                 gridOrigin.y = so_GridProperties.originY;
 
-                Debug.Log($"Grid Dimensions: {gridDimensions}, Grid Origin: {gridOrigin}");
                 return true;
             }
         }

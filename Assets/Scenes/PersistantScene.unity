@@ -3700,6 +3700,54 @@ MonoBehaviour:
             m_StringArgument: Scene4_Barn|Slimer
             m_BoolArgument: 0
           m_CallState: 2
+  - guid: b0638bc1-6ab8-43b1-ad94-cfbcd6de2a82
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 886083113}
+          m_TargetAssemblyTypeName: CheckActionsBeforeQuest, Assembly-CSharp
+          m_MethodName: InventoryCheck
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Creepy Note
+            m_BoolArgument: 0
+          m_CallState: 2
+  - guid: c16c1c0a-87ab-4e32-b66d-e8600d753413
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 886083113}
+          m_TargetAssemblyTypeName: CheckActionsBeforeQuest, Assembly-CSharp
+          m_MethodName: CheckEnemyKillCount_EventWrapper
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Scene4_Barn|Slimer
+            m_BoolArgument: 0
+          m_CallState: 2
+  - guid: 1466aa3b-639f-43a5-9497-1029af01652c
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 886083113}
+          m_TargetAssemblyTypeName: CheckActionsBeforeQuest, Assembly-CSharp
+          m_MethodName: InventoryCheck
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Creepy Note
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &178380853
 Transform:
   m_ObjectHideFlags: 0
@@ -20420,6 +20468,7 @@ MonoBehaviour:
   requiredCorrectPlacements: 3
   spiralLight: {fileID: 0}
   lightIncreaseRate: 0.6
+  lightsToTurnOff: []
 --- !u!4 &1098528989
 Transform:
   m_ObjectHideFlags: 0

@@ -485,6 +485,7 @@ public Dictionary<string, int> GetAllItems()  //I will keep this for now I will 
         /// </summary>
         /// <param name="itemName">The name of the item.</param>
         /// <returns>The quantity of the item.</returns>
+        /// <get item by item description>
 public int GetItemQuantityByName(string itemName)
 {
     // Call GetAllItems to get the dictionary of all items
@@ -493,20 +494,13 @@ public int GetItemQuantityByName(string itemName)
     // Check if the item exists in the dictionary
     if (allItems.TryGetValue(itemName, out int quantity))
     {
+        Debug.Log($"Item '{itemName}' found with quantity: {quantity}");
         return quantity;
     }
-
+    Debug.Log($"Item '{itemName}' not found in inventory.");
     // Return 0 if the item is not found
     return 0;
 }
-    //private void DebugPrintInventoryList(List<InventoryItem> inventoryList)
-    //{
-    //    foreach (InventoryItem inventoryItem in inventoryList)
-    //    {
-    //        Debug.Log("Item Description:" + InventoryManager.Instance.GetItemDetails(inventoryItem.itemCode).itemDescription + "    Item Quantity: " + inventoryItem.itemQuantity);
-    //    }
-    //    Debug.Log("******************************************************************************");
-    //}
 
 }
 

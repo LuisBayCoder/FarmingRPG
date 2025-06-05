@@ -33,6 +33,8 @@ public class QuestObjectCheck : MonoBehaviour
                 // Register the correct placement with the quest manager    
                 itemPlaced = true; // Set the flag to true when the item is placed
                 questManager.RegisterCorrectPlacement(1);
+                //I need to turn off the 2D collider on the item so it can't be picked up again
+                collision.gameObject.GetComponent<Collider2D>().enabled = false;
             }
 
         }
@@ -43,6 +45,7 @@ public class QuestObjectCheck : MonoBehaviour
         }
     }
 
+    /*
     private void OnTriggerExit2D(Collider2D collision)
     {
         // Disable the light object when the item is removed
@@ -51,5 +54,6 @@ public class QuestObjectCheck : MonoBehaviour
         questManager.RegisterCorrectPlacement(-1);
         itemPlaced = false; // Reset the flag when the item is removed  
     }
+    */
 }
 

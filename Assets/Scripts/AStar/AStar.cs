@@ -34,7 +34,7 @@ public class AStar : MonoBehaviour
 
         if (PopulateGridNodesFromGridPropertiesDictionary(sceneName, startGridPosition, endGridPosition))
         {
-            Debug.Log("AStar BuildPath: after populategridnodes" + sceneName + " " + startGridPosition + " " + endGridPosition + " " + npcMovementStepStack.Count);
+            //Debug.Log("AStar BuildPath: after populategridnodes" + sceneName + " " + startGridPosition + " " + endGridPosition + " " + npcMovementStepStack.Count);
             if (FindShortestPath())
             {
                 UpdatePathOnNPCMovementStepStack(sceneName, npcMovementStepStack);
