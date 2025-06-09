@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers;
+using PixelCrushers.QuestMachine;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
@@ -28,7 +30,7 @@ public class QuestManager : MonoBehaviour
             {
                 Debug.LogError("Spiral light not found in the scene. Please assign it in the QuestManager.");
             }
-        } 
+        }
 
     }
     public void RegisterCorrectPlacement(int amount)
@@ -52,7 +54,7 @@ public class QuestManager : MonoBehaviour
         {
             Debug.LogError("Spiral light not found in the scene. Please assign it in the QuestManager.");
         }
-        
+
         if (spiralLight != null)
         {
             Debug.Log("Spiral light found, starting intensity increase.");
@@ -78,7 +80,7 @@ public class QuestManager : MonoBehaviour
         //after fading to black wait a second before continuing 
         yield return new WaitForSeconds(1f);
         spiralLight.intensity = 0f; // reset the light intensity
-         // Find all Item components under the parent and destroy those with itemCode 10028
+                                    // Find all Item components under the parent and destroy those with itemCode 10028
         Transform itemsParent = GameObject.FindGameObjectWithTag("ItemsParentTransform").transform;
         Item[] items = itemsParent.GetComponentsInChildren<Item>(true);
         foreach (Item item in items)
@@ -90,6 +92,7 @@ public class QuestManager : MonoBehaviour
         }
         //Make structure appear
         GameObject structure = GameObject.Find("Structure");
+        
         if (structure != null)
         {
             // Enable all components with an 'enabled' property under Structure (including inactive children)
@@ -103,7 +106,7 @@ public class QuestManager : MonoBehaviour
                     enabledProp.SetValue(comp, true, null);
                 }
             }
-
+            QuestCompleted("Door", "Open"); // Send a message to the Quest Machine indicating the quest is completed
             // Find the lights to turn off by tag (including only active ones)
             GameObject[] lights = GameObject.FindGameObjectsWithTag("LightToTurnOff");
             lightsToTurnOff = new Light2D[lights.Length];
@@ -134,6 +137,26 @@ public class QuestManager : MonoBehaviour
         }
         // Fade from black and wait for it to finish
         yield return StartCoroutine(SceneControllerManager.Instance.FadeFromBlackCoroutine());
+    }
+
+    public void QuestCompleted(string message, string parameter)
+    {
+        // This method is called when a quest is completed
+        // You can add additional logic here if needed
+        Debug.Log($"Quest '{message}' completed with status: {parameter}");
+        // Send a message to the Quest Machine indicating the quest is completed
+        MessageSystem.SendMessage(null, message, parameter);
+        //MessageSystem.SendMessage(null, parameter, questStatus, "Success");
+        Debug.Log($"Quest '{message}' completed.");
+        // You can add additional logic here if needed
+    }
+
+    public void StartQuest(string questName, string parameter)
+    {
+        // This method is called to start a quest
+        Debug.Log($"Starting quest: {questName}");
+        // You can add additional logic here if needed
+        MessageSystem.SendMessage(null, "StartQuest", questName);
     }
 }
 

@@ -3748,6 +3748,22 @@ MonoBehaviour:
             m_StringArgument: Creepy Note
             m_BoolArgument: 0
           m_CallState: 2
+  - guid: bddf8db4-0afa-4a73-a7f2-a8cd310a0d25
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 886083113}
+          m_TargetAssemblyTypeName: CheckActionsBeforeQuest, Assembly-CSharp
+          m_MethodName: InventoryCheck
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Cow Skulls
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &178380853
 Transform:
   m_ObjectHideFlags: 0

@@ -408,7 +408,8 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
-        value: I checked the barn they are all dead. Stripped down to the bone.
+        value: "I checked the barn. They\u2019re all gone. Just bones left. Green
+          blobs did it, I think."
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
@@ -464,8 +465,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
-        value: Oh, sure. Let me just grab a pitchfork and save the farm from the
-          terrifying... silence.
+        value: 'Maybe they''re sleeping. '
         type: 0
         typeString: 
       - title: Dialogue Text
@@ -497,8 +497,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 267.63354
-        y: 284.4396
+        x: 294.29944
+        y: 239.72375
         width: 160
         height: 30
     - id: 5
@@ -553,8 +553,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 186.03181
-        y: 333.2472
+        x: 189.22331
+        y: 292.8217
         width: 160
         height: 30
     - id: 6
@@ -2581,8 +2581,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Green blobs? Stripped to the bone? Damn it, this farm doesn\u2019t
-          need more problems! Who let them in the barn? You find any clues. "
+        value: "Green blobs? Stripped to the bone? Damn it all\u2014this farm doesn\u2019t
+          need more damn problems! Who the hell let 'em in the barn? You see anything?
+          Tracks, signs\u2014anything at all?"
         type: 0
         typeString: 
       - title: Sequence
@@ -2678,11 +2679,11 @@ MonoBehaviour:
       - title: Title
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
         value: 1
         type: 5
@@ -2694,15 +2695,15 @@ MonoBehaviour:
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Yes. This creepy note.
+        value: Yes. Found this note. Creepy stuff.
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -3339,8 +3340,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'Alright it says pet sementary at the bottom and it has weird writting
-          and arrows poiting in three directions. '
+        value: "Alright\u2026 says Pet Sematary at the bottom. Weird damn writing
+          all over it, and arrows\u2014three of \u2019em\u2014pointing in different
+          directions. What the hell is this supposed to mean?"
         type: 0
         typeString: 
       - title: Sequence
@@ -3395,7 +3397,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: What does it mean?
+        value: 'Someone wanted us to find that note. They left it there, in plain
+          sight, and it ends with ''Pet Sematary''.  '
         type: 0
         typeString: 
       - title: Sequence
@@ -3450,8 +3453,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'No one goes there since the accident with the boy. Somethings not
-          right. I would go but my knees are bad and there''s too much overgrowth. '
+        value: "No one goes near that place since the accident with the boy. I\u2019d
+          check it myself, but my knees are shot and the overgrowth\u2019s thick
+          as hell."
         type: 0
         typeString: 
       - title: Sequence
@@ -3518,7 +3522,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'Okay, I''ll go. '
+        value: "Okay. I\u2019ll go. Someone put that note there for a reason."
         type: 0
         typeString: 
       - title: Sequence
@@ -3546,7 +3550,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 372.88144
+        x: 368.4038
         y: 694.4694
         width: 160
         height: 30
@@ -3671,11 +3675,16 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'Take the sythe you''ll probably need it to clear the path. '
+        value: "Take the scythe. You\u2019ll probably need it to cut through all
+          that overgrowth."
         type: 0
         typeString: 
       - title: Sequence
         value: 
+        type: 0
+        typeString: 
+      - title: EventGuid
+        value: bddf8db4-0afa-4a73-a7f2-a8cd310a0d25
         type: 0
         typeString: 
       conversationID: 1
@@ -3698,8 +3707,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 78.45605, y: 508.93005}
-    canvasZoom: 0.8800003
+    canvasScrollPosition: {x: 67.032974, y: 531.95496}
+    canvasZoom: 0.9100002
   - id: 2
     fields:
     - title: Title

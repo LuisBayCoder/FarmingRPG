@@ -26,6 +26,7 @@ public class QuestObjectCheck : MonoBehaviour
         {
             if (itemDetails.itemDescription == itemNameRequired)
             {
+                collision.gameObject.GetComponent<Collider2D>().enabled = false;
                 // Enable the light object to indicate correct placement
                 lightObject.SetActive(true);
                 Debug.Log("Item placed correctly: " + itemDetails.itemDescription);
@@ -34,7 +35,7 @@ public class QuestObjectCheck : MonoBehaviour
                 itemPlaced = true; // Set the flag to true when the item is placed
                 questManager.RegisterCorrectPlacement(1);
                 //I need to turn off the 2D collider on the item so it can't be picked up again
-                collision.gameObject.GetComponent<Collider2D>().enabled = false;
+                
             }
 
         }

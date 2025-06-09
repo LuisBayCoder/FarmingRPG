@@ -13,18 +13,42 @@ public class CheckActionsBeforeQuest : MonoBehaviour
 {
     public void InventoryCheck(string messageArgs)
     {
+        // I need to add a delay before sending the message to ensure the inventory is updated
+        StartCoroutine(InventoryCheckWithDelay(messageArgs));
         // Retrieve the item name from the message parameter
-        string questItemName = messageArgs;
+       
+    }
+
+    private IEnumerator InventoryCheckWithDelay(string messageArgs)
+    {
+        // Wait for a short duration to ensure the inventory is updated
+        yield return new WaitForSeconds(2f);
+         string questItemName = messageArgs;
         Debug.Log($"Quest started! Item to pick up: {questItemName}");
 
         // Check how many of this item the player already has
         int currentCount = InventoryManager.Instance.GetItemQuantityByName(questItemName);
 
-        if (currentCount > 0)
+        //if the count is more than 1 need to send message for each item
+        if (currentCount > 1)
         {
-            Debug.Log($"Re-sending {currentCount} of {questItemName} to Quest Machine.");
-            // Re-send the message globally
-            MessageSystem.SendMessage(null, "Get", questItemName, currentCount);
+            Debug.Log($"Player has {currentCount} of {questItemName}. Sending each item count to Quest Machine.");
+            // Send a message for each item in the inventory
+            for (int i = 0; i < currentCount; i++)
+            {
+                MessageSystem.SendMessage(null, "Get", questItemName, 1); // Send one item at a time
+            }
+        }
+        //if the count is 0 then send the message with 0 count
+        else if (currentCount == 1)
+        {
+            Debug.Log($"Player has 1 of {questItemName}. Sending 1 to Quest Machine.");
+            MessageSystem.SendMessage(null, "Get", questItemName, 1); // Send one item
+        }
+        else
+        {
+            Debug.Log($"Player has no {questItemName}. Sending 0 to Quest Machine.");
+            MessageSystem.SendMessage(null, "Get", questItemName, 0); // Send zero count
         }
     }
 
@@ -128,7 +152,7 @@ public class CheckActionsBeforeQuest : MonoBehaviour
             //CheckKillCountForSpecificSceneAndParameter();
             //CheckCompletedQuestForSpecificSceneAndParameter();
             // Simulate inventory check by item name
-            InventoryCheck("Creepy Note"); // Replace with the actual item name you want to check
+            InventoryCheck("Cow Skulls"); // Replace with the actual item name you want to check
         }
     }
 }
