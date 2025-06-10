@@ -28,14 +28,10 @@ public class QuestObjectCheck : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Collider2D>().enabled = false;
                 // Enable the light object to indicate correct placement
-                lightObject.SetActive(true);
-                Debug.Log("Item placed correctly: " + itemDetails.itemDescription);
-                //I need to change registerCorrectPlacement to subtract 1 from the required correct placements
-                // Register the correct placement with the quest manager    
-                itemPlaced = true; // Set the flag to true when the item is placed
-                questManager.RegisterCorrectPlacement(1);
-                //I need to turn off the 2D collider on the item so it can't be picked up again
-                
+
+                //I need a delay before the light object is enabled only if the item is still there after the delay
+                // Start a coroutine to enable the light object after a delay   
+                StartCoroutine(EnableLightObjectWithDelay(0.5f, collision.gameObject));
             }
 
         }
@@ -46,6 +42,20 @@ public class QuestObjectCheck : MonoBehaviour
         }
     }
 
+    private IEnumerator EnableLightObjectWithDelay(float delay, GameObject item)
+    {
+        yield return new WaitForSeconds(delay);
+        // Check if the item is still in the trigger area   
+        if (item != null && item.GetComponent<Collider2D>().enabled == false)
+        {
+            lightObject.SetActive(true);
+            questManager.RegisterCorrectPlacement(1);
+        }
+        else
+        {
+            Debug.Log("Item was removed before the delay ended.");
+        }      
+    }
     /*
     private void OnTriggerExit2D(Collider2D collision)
     {
