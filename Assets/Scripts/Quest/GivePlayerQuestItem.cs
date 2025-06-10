@@ -12,7 +12,7 @@ public class GivePlayerQuestItem : MonoBehaviour
         pendingItemCode = itemCode;
     }
 
-    public void OnGameUnpaused()
+    public void OnConversationEnd()
     {
         if (pendingItemCode != -1)
         {
