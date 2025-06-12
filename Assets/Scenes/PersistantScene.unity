@@ -3764,6 +3764,18 @@ MonoBehaviour:
             m_StringArgument: Cow Skulls
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1098528990}
+          m_TargetAssemblyTypeName: GivePlayerQuestItem, Assembly-CSharp
+          m_MethodName: QueueQuestItem
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 10017
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &178380853
 Transform:
   m_ObjectHideFlags: 0
@@ -35341,6 +35353,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: PixelCrushers.QuestMachine.UnityUIQuestHUD, Assembly-CSharp-firstpass
           m_MethodName: set_showActiveQuests
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1098528990}
+          m_TargetAssemblyTypeName: GivePlayerQuestItem, Assembly-CSharp
+          m_MethodName: OnConversationEnd
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

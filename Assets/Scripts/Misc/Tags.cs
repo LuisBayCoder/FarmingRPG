@@ -9,4 +9,5 @@
 
     //new for enemy
     public const string EnemiesParentTransform = "EnemiesParentTransform";
+    public const string QuestObjectParentTransform = "QuestObjectParentTransform";
 }

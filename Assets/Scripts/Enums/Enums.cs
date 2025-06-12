@@ -199,3 +199,13 @@ public enum EnemyType //new for enemytype
     legendary,
     none
 }
+
+public enum QuestObjectType
+{
+    none,
+    enemy,
+    item,
+    furniture,
+    npc,
+    count
+}

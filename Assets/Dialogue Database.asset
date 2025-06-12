@@ -353,7 +353,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: Audio(Audio/don'tDragYourFeet); Delay(5);
+        value: Audio(Audio/CheckTheBarn1); Delay(1);
         type: 0
         typeString: CustomFieldType_Text
       - title: Response Menu Sequence
@@ -2587,7 +2587,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: Audio(Audio/anythingAtAll)
         type: 0
         typeString: 
       - title: EventGuid
@@ -3346,6 +3346,10 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
+        value: Audio(Audio/PetSematary); Delay(1);
+        type: 0
+        typeString: 
+      - title: Response Menu Sequence
         value: 
         type: 0
         typeString: 
@@ -3459,7 +3463,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: Audio(Audio/ThickAsHell); Delay(1);
         type: 0
         typeString: 
       conversationID: 1
@@ -3495,7 +3499,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 460.79352
+        x: 459.65717
         y: 624.6893
         width: 160
         height: 30
@@ -3680,7 +3684,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: Audio(Audio/Overgrowth); Delay(1);
         type: 0
         typeString: 
       - title: EventGuid
@@ -3707,8 +3711,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 160.52628, y: 545.1508}
-    canvasZoom: 0.7600003
+    canvasScrollPosition: {x: 72.727234, y: 471.59085}
+    canvasZoom: 0.8800002
   - id: 2
     fields:
     - title: Title
