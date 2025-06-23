@@ -3,12 +3,11 @@ using UnityEngine;
 using System.Linq;
 
 public class E_EnemyAI : MonoBehaviour
-{
-   // [SerializeField] private Transform[] attackPositions; // The 4 positions around the player (left, right, up, down)
+{   // [SerializeField] private Transform[] attackPositions; // The 4 positions around the player (left, right, up, down)
     [SerializeField] private float detectionRadius = 5f; // Detection radius
     [SerializeField] private float minAttackDistance = 0.1f; // Minimum distance to trigger attack
-    [SerializeField] private float maxAttackDistance = 0.3f; // Maximum distance to trigger attack
-    [SerializeField] private float attackDistance = 0.2f;
+    [SerializeField] private float maxChaseRange = 0.3f; // Maximum distance to trigger attack
+    [SerializeField] private float stopDistance = 1.75f;
     [SerializeField] private float pathUpdateDelay = 0.5f; // Time between path recalculations
     [SerializeField] private NPCPath npcPath = null; // A* pathfinding script
     [SerializeField] private int attackDamage = 1;
@@ -147,21 +146,19 @@ public class E_EnemyAI : MonoBehaviour
         // Check if player is within detection radius
         if (distanceToPlayer <= detectionRadius)
         {
-            if (isDebugMode) Debug.Log("Player detected within detection radius.");
-            state = State.Chasing; 
+            if (isDebugMode) Debug.Log("Player detected within detection radius.");            state = State.Chasing; 
             // Set playerDetected to true
             playerDetected = true;
             // If the enemy is within the max attack distance, stop updating the path
-            if (distanceToPlayer <= maxAttackDistance)
+            if (distanceToPlayer <= maxChaseRange)
             {
                 isInAttackRange = true;
                 targetPosition = player; // Set the target to the player's position
             }
-            else
-            {
+            else            {
                 isInAttackRange = false;
 
-                if (targetPosition == null || Vector3.Distance(transform.position, targetPosition.position) > maxAttackDistance)
+                if (targetPosition == null || Vector3.Distance(transform.position, targetPosition.position) > maxChaseRange)
                 {
                     UpdatePathToPlayer(); // Update the path to the player
                 }
@@ -230,7 +227,7 @@ public class E_EnemyAI : MonoBehaviour
 
 
             // Update the path only if the enemy is far from the target
-            if (distanceToTarget >= attackDistance) // Adding a buffer
+            if (distanceToTarget >= stopDistance) // Adding a buffer
             {
                 pathUpdateTimer = pathUpdateDelay; // Reset the timer
                 targetPosition = player; // Set the target to the player's position
@@ -306,10 +303,8 @@ public class E_EnemyAI : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius); // Detection radius
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, maxAttackDistance); // Maximum attack range
+        Gizmos.DrawWireSphere(transform.position, detectionRadius); // Detection radius        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, maxChaseRange); // Maximum attack range
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, minAttackDistance); // Minimum attack range
     }
