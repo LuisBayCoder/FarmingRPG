@@ -72,23 +72,6 @@ public class NPCMovement : MonoBehaviour
         npcPath = GetComponent<NPCPath>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (animator == null)
-        {
-            if (debugMode) Debug.LogError("Animator component not found in Awake.");
-        }
-        else
-        {
-            if (debugMode) Debug.Log("Animator component found in Awake.");
-            if (animator.runtimeAnimatorController == null)
-            {
-                if (debugMode) Debug.LogError("Animator Controller is not assigned in Awake.");
-            }
-            else
-            {
-                if (debugMode) Debug.Log("Animator Controller is assigned in Awake.");
-            }
-        }
-
         animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = animatorOverrideController;
         
@@ -100,24 +83,8 @@ public class NPCMovement : MonoBehaviour
     private void Start()
     {
         waitForFixedUpdate = new WaitForFixedUpdate();
-        SetIdleAnimation();
-
-        if (animator == null)
-        {
-            if (debugMode) Debug.LogError("Animator component not found in Start.");
-        }
-        else
-        {
-            if (debugMode) Debug.Log("Animator component found in Start.");
-            if (animator.runtimeAnimatorController == null)
-            {
-                if (debugMode) Debug.LogError("Animator Controller is not assigned in Start.");
-            }
-            else
-            {
-                if (debugMode) Debug.Log("Animator Controller is assigned in Start.");
-            }
-        }
+        ResetIdleAnimation();
+        ResetMoveAnimation();
     }
 
     private void FixedUpdate()
@@ -172,7 +139,7 @@ public class NPCMovement : MonoBehaviour
                 else
                 {
                     ResetMoveAnimation();
-                    SetNPCFacingDirection();
+                    //SetNPCFacingDirection();
                     SetNPCEventAnimation();
                 }
             }

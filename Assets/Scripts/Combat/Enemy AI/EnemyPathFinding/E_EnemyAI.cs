@@ -7,7 +7,7 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private float detectionRadius = 5f; // Detection radius
     [SerializeField] private float minAttackDistance = 0.1f; // Minimum distance to trigger attack
     [SerializeField] private float maxChaseRange = 0.3f; // Maximum distance to trigger attack
-    [SerializeField] private float stopDistance = 1.75f;
+    [SerializeField] private float pathFindingStopDistance = 1.75f; // Distance to stop pathfinding when close enough to the target
     [SerializeField] private float pathUpdateDelay = 0.5f; // Time between path recalculations
     [SerializeField] private NPCPath npcPath = null; // A* pathfinding script
     [SerializeField] private int attackDamage = 1;
@@ -43,30 +43,24 @@ public class E_EnemyAI : MonoBehaviour
         // Get the Animator component
         animator = GetComponent<Animator>();
 
-        if (animator == null)
-        {
-            if (isDebugMode) Debug.LogError("Animator component not found in Awake.");
-        }
-        else
-        {
-            if (isDebugMode) Debug.Log("Animator component found in Awake.");
-        }
-
         enemyPathfinding = GetComponent<EnemyPathfinding>();
-        state = State.Roaming;
     }
 
     private void Start()
     {
         // Find player in the scene
-        player = GameObject.FindGameObjectWithTag("Player").transform; 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         GetComponent<NPCMovement>().EnemyAfterSceneLoad();
 
         npcPath = GetComponent<NPCPath>();
 
+        state = State.Roaming;
+
         StartCoroutine(RoamingRoutine());
 
+        animator.SetBool("isAttacking", false); // Ensure attack animation is not playing at start
+        ResetMovementAnimation(); // Reset all movement animations  
         enemyCollider = GetComponent<Collider2D>();
 
         // Start periodic checks
@@ -79,7 +73,7 @@ public class E_EnemyAI : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider != enemyCollider && collider.CompareTag("Enemy")) 
+            if (collider != enemyCollider && collider.CompareTag("Enemy"))
             {
                 ResolveCollision(collider);
                 break; // Only handle the first collision for simplicity
@@ -127,7 +121,19 @@ public class E_EnemyAI : MonoBehaviour
     {
         while (state == State.Roaming)
         {
+            Debug.Log("Enemy is roaming");
+            if (isAvoidingCollision)
+            {
+                // If avoiding collision, skip roaming logic
+                yield return null;
+                continue;
+            }
+
             Vector2 roamPosition = GetRoamingPosition();
+
+            // Determine and set movement direction before moving
+            SetMovementAnimation(roamPosition);
+
             enemyPathfinding.MoveTo(roamPosition);
             yield return new WaitForSeconds(2f);
         }
@@ -135,7 +141,49 @@ public class E_EnemyAI : MonoBehaviour
 
     private Vector2 GetRoamingPosition()
     {
-        return new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1f)).normalized; 
+        return new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1f)).normalized;
+    }
+
+    // New method to handle movement animation based on direction
+    private void SetMovementAnimation(Vector2 direction)
+    {
+        if (animator == null)
+        {
+            Debug.LogError("Animator component is not assigned.");
+            return;
+        }
+
+       ResetMovementAnimation(); // Reset all movement animations
+
+        // Determine primary direction based on the larger component
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            // Horizontal movement is dominant
+            if (direction.x > 0)
+            {
+                animator.SetBool(Settings.walkRight, true);
+                if (isDebugMode) Debug.Log("Enemy moving right");
+            }
+            else
+            {
+                animator.SetBool(Settings.walkLeft, true);
+                if (isDebugMode) Debug.Log("Enemy moving left");
+            }
+        }
+        else
+        {
+            // Vertical movement is dominant
+            if (direction.y > 0)
+            {
+                animator.SetBool(Settings.walkUp, true);
+                if (isDebugMode) Debug.Log("Enemy moving up");
+            }
+            else
+            {
+                animator.SetBool(Settings.walkDown, true);
+                if (isDebugMode) Debug.Log("Enemy moving down");
+            }
+        }
     }
 
     private void Update()
@@ -146,7 +194,7 @@ public class E_EnemyAI : MonoBehaviour
         // Check if player is within detection radius
         if (distanceToPlayer <= detectionRadius)
         {
-            if (isDebugMode) Debug.Log("Player detected within detection radius.");            state = State.Chasing; 
+            if (isDebugMode) Debug.Log("Player detected within detection radius."); state = State.Chasing;
             // Set playerDetected to true
             playerDetected = true;
             // If the enemy is within the max attack distance, stop updating the path
@@ -155,7 +203,8 @@ public class E_EnemyAI : MonoBehaviour
                 isInAttackRange = true;
                 targetPosition = player; // Set the target to the player's position
             }
-            else            {
+            else
+            {
                 isInAttackRange = false;
 
                 if (targetPosition == null || Vector3.Distance(transform.position, targetPosition.position) > maxChaseRange)
@@ -227,7 +276,7 @@ public class E_EnemyAI : MonoBehaviour
 
 
             // Update the path only if the enemy is far from the target
-            if (distanceToTarget >= stopDistance) // Adding a buffer
+            if (distanceToTarget >= pathFindingStopDistance) // Adding a buffer
             {
                 pathUpdateTimer = pathUpdateDelay; // Reset the timer
                 targetPosition = player; // Set the target to the player's position
@@ -267,7 +316,7 @@ public class E_EnemyAI : MonoBehaviour
         {
             if (isDebugMode) Debug.LogError("Animator component is null.");
         }
-        
+
         npcPath.ClearPath(); // Stop moving once the enemy attacks
         DeterminePlayerDirection(); // Determine player direction for the attack animation
     }
@@ -374,5 +423,18 @@ public class E_EnemyAI : MonoBehaviour
                 // Handle logic when the player is directly below
             }
         }
+    }
+    private void ResetMovementAnimation()
+    {
+         // Reset all movement animation parameters
+        animator.SetBool(Settings.walkRight, false);
+        animator.SetBool(Settings.walkLeft, false);
+        animator.SetBool(Settings.walkUp, false);
+        animator.SetBool(Settings.walkDown, false);
+
+        animator.SetBool(Settings.idleRight, false);
+        animator.SetBool(Settings.idleLeft, false);
+        animator.SetBool(Settings.idleUp, false);
+        animator.SetBool(Settings.idleDown, false);
     }
 }
