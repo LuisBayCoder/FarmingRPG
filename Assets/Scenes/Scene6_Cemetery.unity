@@ -11548,11 +11548,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2670564388992249041, guid: cb41c6deb05e2cb41ae2d8f8c0f064a8,
-        type: 3}
-      propertyPath: npcFacingDirectionAtDestination
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb41c6deb05e2cb41ae2d8f8c0f064a8, type: 3}
 --- !u!4 &1484299869 stripped
@@ -40199,16 +40194,6 @@ PrefabInstance:
     - target: {fileID: 2670564388992249003, guid: cb41c6deb05e2cb41ae2d8f8c0f064a8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2670564388992249040, guid: cb41c6deb05e2cb41ae2d8f8c0f064a8,
-        type: 3}
-      propertyPath: attackDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2670564388992249041, guid: cb41c6deb05e2cb41ae2d8f8c0f064a8,
-        type: 3}
-      propertyPath: npcFacingDirectionAtDestination
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
