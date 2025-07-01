@@ -91,21 +91,12 @@ public class QuestManager : MonoBehaviour
             }
         }
         //Make structure appear
-        GameObject structure = GameObject.Find("Structure");
+        GameObject structure = GameObject.Find("InstantiateQuestItem");
         
         if (structure != null)
         {
-            // Enable all components with an 'enabled' property under Structure (including inactive children)
-            Component[] components = structure.GetComponentsInChildren<Component>(true);
-            foreach (Component comp in components)
-            {
-                var type = comp.GetType();
-                var enabledProp = type.GetProperty("enabled");
-                if (enabledProp != null && enabledProp.PropertyType == typeof(bool))
-                {
-                    enabledProp.SetValue(comp, true, null);
-                }
-            }
+            // Instantiate the quest item
+            structure.GetComponent<InstantiateQuestItem>().InstantiateObject();
             QuestCompleted("Door", "Open"); // Send a message to the Quest Machine indicating the quest is completed
             // Find the lights to turn off by tag (including only active ones)
             GameObject[] lights = GameObject.FindGameObjectsWithTag("LightToTurnOff");
