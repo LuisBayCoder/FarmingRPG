@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PixelCrushers;
-using UnityEditor.SearchService;
-using PixelCrushers.QuestMachine;
 
 
 //This will only work with "Get" message used in Quest Machine.

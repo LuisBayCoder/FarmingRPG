@@ -20,19 +20,7 @@ public class QuestManager : MonoBehaviour
     public float lightIncreaseRate = 0.1f; // rate at which the light intensity increases
                                            //need an array of Light2D objects to turn off  
     public Light2D[] lightsToTurnOff; // array of lights to turn off when the quest is complete
-    private void Start()
-    {
-        if (spiralLight == null)
-        {
-            //I need to fidn the spiral by light by name of object
-            spiralLight = GameObject.Find("SpiralLight").GetComponent<Light2D>();
-            if (spiralLight == null)
-            {
-                Debug.LogError("Spiral light not found in the scene. Please assign it in the QuestManager.");
-            }
-        }
-
-    }
+  
     public void RegisterCorrectPlacement(int amount)
     {
         correctPlacements += amount;

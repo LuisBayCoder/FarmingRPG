@@ -25,8 +25,8 @@ public class NPCMovement : MonoBehaviour
     [Header("NPC Movement")]
     public float npcNormalSpeed = 2f;
 
-    [SerializeField] private float npcMinSpeed = 1f;
-    [SerializeField] private float npcMaxSpeed = 3f;
+    //[SerializeField] private float npcMinSpeed = 1f;
+    //[SerializeField] private float npcMaxSpeed = 3f;
     public bool npcIsMoving = false;
     private bool paused = false;
 
