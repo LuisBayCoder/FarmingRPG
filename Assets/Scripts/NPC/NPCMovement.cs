@@ -47,7 +47,6 @@ public class NPCMovement : MonoBehaviour
     [HideInInspector] public bool npcActiveInScene = false;
     [SerializeField] private Component[] componentsToToggle; // Array of components to enable/disable
     private bool sceneLoaded = false;
-
     private Coroutine moveToGridPositionRoutine;
 
     public bool debugMode = false; // Set to true to show debug logs
@@ -56,6 +55,21 @@ public class NPCMovement : MonoBehaviour
     {
         EventHandler.AfterSceneLoadEvent += AfterSceneLoad;
         EventHandler.BeforeSceneUnloadEvent += BeforeSceneUnloaded;
+        //Check if the Enemy script is attached to this game object
+        // If so, set the npcCurrentScene to the current scene name as a SceneName
+        if (GetComponent<Enemy>())
+        {
+            // Convert string to SceneName enum
+            if (System.Enum.TryParse<SceneName>(SceneManager.GetActiveScene().name, out SceneName sceneName))
+            {
+                npcCurrentScene = sceneName;
+            }
+            else
+            {
+                // Handle case where scene name doesn't match any enum value
+                Debug.LogWarning($"Scene name '{SceneManager.GetActiveScene().name}' not found in SceneName enum");
+            }
+        }
     }
 
     private void OnDisable()

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class E_EnemyAI : MonoBehaviour
 {   // [SerializeField] private Transform[] attackPositions; // The 4 positions around the player (left, right, up, down)
@@ -44,6 +45,17 @@ public class E_EnemyAI : MonoBehaviour
         animator = GetComponent<Animator>();
 
         enemyPathfinding = GetComponent<EnemyPathfinding>();
+
+         // Convert string to SceneName enum
+            if (System.Enum.TryParse<SceneName>(SceneManager.GetActiveScene().name, out SceneName sceneName))
+            {
+                npcCurrentScene = sceneName;
+            }
+            else
+            {
+                // Handle case where scene name doesn't match any enum value
+                Debug.LogWarning($"Scene name '{SceneManager.GetActiveScene().name}' not found in SceneName enum");
+            }
     }
 
     private void Start()
