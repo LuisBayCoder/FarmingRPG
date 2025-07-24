@@ -13,7 +13,7 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private NPCPath npcPath = null; // A* pathfinding script
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private bool isDebugMode = false; // Debug mode flag
-
+    [SerializeField] private float roamDuration = 3f; // Duration of roaming before changing direction
     private Transform player;
     public float checkInterval = 2f; // Time between overlap checks
     public float moveDistance = 1f; // Distance to move away if overlapping
@@ -133,7 +133,6 @@ public class E_EnemyAI : MonoBehaviour
     {
         while (state == State.Roaming)
         {
-            Debug.Log("Enemy is roaming");
             if (isAvoidingCollision)
             {
                 // If avoiding collision, skip roaming logic
@@ -147,12 +146,13 @@ public class E_EnemyAI : MonoBehaviour
             SetMovementAnimation(roamPosition);
 
             enemyPathfinding.MoveTo(roamPosition);
-            yield return new WaitForSeconds(2f);
+            // Wait for a short duration to simulate roaming between roamDuration and 2f
+            yield return new WaitForSeconds(Random.Range(roamDuration, 2f));
         }
     }
 
-    private Vector2 GetRoamingPosition()
-    {
+        private Vector2 GetRoamingPosition()
+        {
         return new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1f)).normalized;
     }
 
