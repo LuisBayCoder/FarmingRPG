@@ -67,18 +67,25 @@ public class E_EnemyAI : MonoBehaviour
 
         npcPath = GetComponent<NPCPath>();
 
-        state = State.Roaming;
-
-        StartCoroutine(RoamingRoutine());
-
         animator.SetBool("isAttacking", false); // Ensure attack animation is not playing at start
-        ResetMovementAnimation(); // Reset all movement animations  
+
+        StartResetAnimation();
+
         enemyCollider = GetComponent<Collider2D>();
 
         // Start periodic checks
         InvokeRepeating(nameof(CheckForCollision), checkInterval, checkInterval);
     }
 
+    private void StartResetAnimation()
+    {
+        
+        ResetMovementAnimation(); // Reset all movement animations
+
+        state = State.Roaming; // Set initial state to Roaming
+
+        StartCoroutine(RoamingRoutine());
+    }
     private void CheckForCollision()
     {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, enemyCollider.bounds.size, 0);
@@ -151,14 +158,15 @@ public class E_EnemyAI : MonoBehaviour
         }
     }
 
-        private Vector2 GetRoamingPosition()
-        {
+    private Vector2 GetRoamingPosition()
+    {
         return new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1f)).normalized;
     }
 
     // New method to handle movement animation based on direction
     private void SetMovementAnimation(Vector2 direction)
     {
+        
         if (animator == null)
         {
             Debug.LogError("Animator component is not assigned.");
@@ -167,10 +175,12 @@ public class E_EnemyAI : MonoBehaviour
 
        ResetMovementAnimation(); // Reset all movement animations
 
+
         // Determine primary direction based on the larger component
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
-            // Horizontal movement is dominant
+
+            Debug.Log("Setting movement animation for direction: " + direction); 
             if (direction.x > 0)
             {
                 animator.SetBool(Settings.walkRight, true);

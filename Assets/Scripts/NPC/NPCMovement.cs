@@ -192,29 +192,6 @@ public class NPCMovement : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
-    private void SetNPCFacingDirection()
-    {
-        ResetIdleAnimation();
-
-        switch (npcFacingDirectionAtDestination)
-        {
-            case Direction.up:
-                animator.SetBool(Settings.idleUp, true);
-                break;
-            case Direction.down:
-                animator.SetBool(Settings.idleDown, true);
-                break;
-            case Direction.left:
-                animator.SetBool(Settings.idleLeft, true);
-                break;
-            case Direction.right:
-                animator.SetBool(Settings.idleRight, true);
-                break;
-            case Direction.none:
-                break;
-        }
-    }
-
     public void SetNPCActiveInScene()
     {
         spriteRenderer.enabled = true;
@@ -289,6 +266,7 @@ public class NPCMovement : MonoBehaviour
         }
 
         sceneLoaded = true;
+        
     }
 
     private void BeforeSceneUnloaded()
