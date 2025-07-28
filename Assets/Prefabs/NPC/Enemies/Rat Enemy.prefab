@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f9d98fc66f86643a9795c2a9205ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcCurrentScene: 6
+  npcCurrentScene: 0
   npcTargetScene: 0
   npcCurrentGridPosition: {x: 0, y: 0, z: 0}
   npcTargetGridPosition: {x: 0, y: 0, z: 0}
@@ -265,18 +265,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 7.5
-  minAttackDistance: 1.3
+  minAttackDistance: 1.75
   maxChaseRange: 0.3
   pathFindingStopDistance: 1.75
   pathUpdateDelay: 0.5
   npcPath: {fileID: 5265656417562702205}
   attackDamage: 1
-  isDebugMode: 0
+  isDebugMode: 1
+  roamDuration: 3
   checkInterval: 2
   moveDistance: 0.5
   playerDetected: 0
   isInAttackRange: 1
-  npcCurrentScene: 6
+  npcCurrentScene: 0
 --- !u!114 &5265656417562702202
 MonoBehaviour:
   m_ObjectHideFlags: 0

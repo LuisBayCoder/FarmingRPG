@@ -5543,6 +5543,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5265656417562702195, guid: d65ca1a71999c1c4a833464502957640,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265656417562702195, guid: d65ca1a71999c1c4a833464502957640,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.45
       objectReference: {fileID: 0}
@@ -5550,6 +5555,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -4.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265656417562702195, guid: d65ca1a71999c1c4a833464502957640,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265656417562702195, guid: d65ca1a71999c1c4a833464502957640,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5265656417562702195, guid: d65ca1a71999c1c4a833464502957640,
         type: 3}
@@ -5566,20 +5581,25 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 5265656417562702203, guid: d65ca1a71999c1c4a833464502957640,
+    - target: {fileID: 5265656417562702195, guid: d65ca1a71999c1c4a833464502957640,
         type: 3}
-      propertyPath: isDebugMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5265656417562702203, guid: d65ca1a71999c1c4a833464502957640,
-        type: 3}
-      propertyPath: npcCurrentScene
+      propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5265656417562702204, guid: d65ca1a71999c1c4a833464502957640,
+    - target: {fileID: 5265656417562702195, guid: d65ca1a71999c1c4a833464502957640,
         type: 3}
-      propertyPath: npcCurrentScene
+      propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265656417562702195, guid: d65ca1a71999c1c4a833464502957640,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265656417562702201, guid: d65ca1a71999c1c4a833464502957640,
+        type: 3}
+      propertyPath: m_Name
+      value: Rat Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d65ca1a71999c1c4a833464502957640, type: 3}

@@ -14,7 +14,10 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private bool isDebugMode = false; // Debug mode flag
     [SerializeField] private float roamDuration = 3f; // Duration of roaming before changing direction
-    private Transform player;
+    private GameObject player; // Reference to the player GameObject
+    //private Vector2Int playerGridPosition; // Player's grid position for pathfinding  
+    private Transform playerTransform;
+    private Transform enemyAttackPosition; // The position where the enemy attacks from
     public float checkInterval = 2f; // Time between overlap checks
     public float moveDistance = 1f; // Distance to move away if overlapping
 
@@ -61,7 +64,11 @@ public class E_EnemyAI : MonoBehaviour
     private void Start()
     {
         // Find player in the scene
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player");
+        //get the child gameobject of the player named EnemyAttackPosition
+        enemyAttackPosition = player.transform.Find("EnemyAttackPosition");
+
+        playerTransform = player.transform;
 
         GetComponent<NPCMovement>().EnemyAfterSceneLoad();
 
@@ -211,7 +218,7 @@ public class E_EnemyAI : MonoBehaviour
     private void Update()
     {
         // Calculate the distance between the enemy and the player
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
         // Check if player is within detection radius
         if (distanceToPlayer <= detectionRadius)
@@ -223,7 +230,7 @@ public class E_EnemyAI : MonoBehaviour
             if (distanceToPlayer <= maxChaseRange)
             {
                 isInAttackRange = true;
-                targetPosition = player; // Set the target to the player's position
+                targetPosition = playerTransform; // Set the target to the player's position
             }
             else
             {
@@ -294,14 +301,14 @@ public class E_EnemyAI : MonoBehaviour
         // Only update the path if the distance to the target is significant
         if (pathUpdateTimer <= 0f)
         {
-            float distanceToTarget = Vector3.Distance(transform.position, targetPosition != null ? targetPosition.position : player.position);
+            float distanceToTarget = Vector3.Distance(transform.position, targetPosition != null ? targetPosition.position : playerTransform.position);
 
 
             // Update the path only if the enemy is far from the target
             if (distanceToTarget >= pathFindingStopDistance) // Adding a buffer
             {
                 pathUpdateTimer = pathUpdateDelay; // Reset the timer
-                targetPosition = player; // Set the target to the player's position
+                targetPosition = playerTransform; // Set the target to the player's position
 
                 if (targetPosition != null)
                 {
@@ -340,7 +347,21 @@ public class E_EnemyAI : MonoBehaviour
         }
 
         npcPath.ClearPath(); // Stop moving once the enemy attacks
+        
+        // Choose a random attack position from the 4 child objects
+        if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0)
+        {
+            int randomIndex = Random.Range(0, enemyAttackPosition.childCount);
+            Transform selectedAttackPosition = enemyAttackPosition.GetChild(randomIndex);
+            
+            // Move enemy to the selected attack position
+            transform.position = selectedAttackPosition.position;
+            
+            if (isDebugMode) Debug.Log($"Enemy moved to attack position {randomIndex}: {selectedAttackPosition.name}");
+        }
+        
         DeterminePlayerDirection(); // Determine player direction for the attack animation
+
     }
 
     // This method is called by the animation event when the enemy is attacking
@@ -348,7 +369,7 @@ public class E_EnemyAI : MonoBehaviour
     public void AttackPlayerByAnimation()
     {
         // Deal damage to the player
-        Character playerCharacter = player.GetComponent<Character>();
+        Character playerCharacter = playerTransform.GetComponent<Character>();
         if (playerCharacter != null)
         {
             playerCharacter.TakeDamage(attackDamage); // Deal 10 damage (you can adjust the damage amount as needed)
@@ -382,7 +403,7 @@ public class E_EnemyAI : MonoBehaviour
 
     private void DeterminePlayerDirection()
     {
-        Vector3 directionToPlayer = player.position - transform.position;
+        Vector3 directionToPlayer = playerTransform.position - transform.position;
 
         // Check the horizontal and vertical direction to determine the quadrant
         if (directionToPlayer.x > 0 && directionToPlayer.y > 0)
@@ -437,12 +458,14 @@ public class E_EnemyAI : MonoBehaviour
             if (directionToPlayer.y > 0)
             {
                 if (isDebugMode) Debug.Log("Player is directly above");
-                // Handle logic when the player is directly above
+                animator.SetBool("isAttackingDown", false);
+                animator.SetBool("isAttackingUp", true);
             }
             else
             {
                 if (isDebugMode) Debug.Log("Player is directly below");
-                // Handle logic when the player is directly below
+                animator.SetBool("isAttackingDown", true);
+                animator.SetBool("isAttackingUp", false);
             }
         }
     }
