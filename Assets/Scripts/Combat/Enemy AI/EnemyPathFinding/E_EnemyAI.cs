@@ -7,13 +7,15 @@ public class E_EnemyAI : MonoBehaviour
 {   // [SerializeField] private Transform[] attackPositions; // The 4 positions around the player (left, right, up, down)
     [SerializeField] private float detectionRadius = 5f; // Detection radius
     [SerializeField] private float minAttackDistance = 0.1f; // Minimum distance to trigger attack
-    [SerializeField] private float maxChaseRange = 0.3f; // Maximum distance to trigger attack
+    [SerializeField] private float maxAttackRange = 0.3f; // Maximum distance to trigger attack
     [SerializeField] private float pathFindingStopDistance = 1.75f; // Distance to stop pathfinding when close enough to the target
     [SerializeField] private float pathUpdateDelay = 0.5f; // Time between path recalculations
     [SerializeField] private NPCPath npcPath = null; // A* pathfinding script
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private bool isDebugMode = false; // Debug mode flag
     [SerializeField] private float roamDuration = 3f; // Duration of roaming before changing direction
+    [SerializeField] private float attackPositionMoveSpeed = 5f; // Speed for moving to attack position
+
     private GameObject player; // Reference to the player GameObject
     //private Vector2Int playerGridPosition; // Player's grid position for pathfinding  
     private Transform playerTransform;
@@ -30,6 +32,10 @@ public class E_EnemyAI : MonoBehaviour
     public bool isInAttackRange = false;
     public SceneName npcCurrentScene;
     private bool isAvoidingCollision = false;
+    private bool isMovingToAttackPosition = false; // Flag to track if enemy is moving to attack position
+    private Vector3 targetAttackPosition; // Target attack position
+
+    [SerializeField] private NPCMovement npcMovement; // Reference to the NPCMovement script
 
     private enum State
     {
@@ -41,6 +47,8 @@ public class E_EnemyAI : MonoBehaviour
     private State state; // Current state of the enemy
     private EnemyPathfinding enemyPathfinding;
     private Vector3 originalTargetPosition; // Store the target position before avoiding
+
+    private bool hasChosenAttackPosition = false; // Flag to prevent repeatedly choosing attack positions
 
     private void Awake()
     {
@@ -227,16 +235,17 @@ public class E_EnemyAI : MonoBehaviour
             // Set playerDetected to true
             playerDetected = true;
             // If the enemy is within the max attack distance, stop updating the path
-            if (distanceToPlayer <= maxChaseRange)
+            if (distanceToPlayer <= maxAttackRange)
             {
                 isInAttackRange = true;
                 targetPosition = playerTransform; // Set the target to the player's position
+                npcMovement.CancelNPCMovement(); // Stop moving once attacking
             }
             else
             {
                 isInAttackRange = false;
 
-                if (targetPosition == null || Vector3.Distance(transform.position, targetPosition.position) > maxChaseRange)
+                if (targetPosition == null || Vector3.Distance(transform.position, targetPosition.position) > maxAttackRange)
                 {
                     UpdatePathToPlayer(); // Update the path to the player
                 }
@@ -249,6 +258,7 @@ public class E_EnemyAI : MonoBehaviour
             if (isDebugMode) Debug.Log("Player out of detection radius.");
             playerDetected = false;
             isInAttackRange = false;
+            hasChosenAttackPosition = false; // Reset attack position flag when player leaves detection range
             state = State.Roaming;
             StartCoroutine(RoamingRoutine());
         }
@@ -261,12 +271,26 @@ public class E_EnemyAI : MonoBehaviour
             if (distanceToTarget <= minAttackDistance)
             {
                 AttackPlayer(); // Trigger the attack
-                npcPath.ClearPath(); // Stop moving once attacking
+                
                 targetPosition = null; // Clear the target to stop movement
             }
             else
             {
                 AttackPlayerFalse();
+            }
+        }
+
+        // Handle smooth movement to attack position
+        if (isMovingToAttackPosition)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetAttackPosition, attackPositionMoveSpeed * Time.deltaTime);
+            
+            // Check if we've reached the target position
+            if (Vector3.Distance(transform.position, targetAttackPosition) < 0.01f)
+            {
+                transform.position = targetAttackPosition; // Snap to exact position
+                isMovingToAttackPosition = false;
+                if (isDebugMode) Debug.Log("Enemy reached attack position");
             }
         }
     }
@@ -334,34 +358,39 @@ public class E_EnemyAI : MonoBehaviour
     // Trigger attack animation when the enemy is in range
     private void AttackPlayer()
     {
-        if (animator != null)
+        // Only choose attack position if we haven't already chosen one
+        if (!hasChosenAttackPosition)
         {
-            animator.SetBool("isAttacking", true); // Play attack animation
-            if (isDebugMode) Debug.Log("Setting isAttacking to true");
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (isDebugMode) Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
-        }
-        else
-        {
-            if (isDebugMode) Debug.LogError("Animator component is null.");
-        }
+            if (animator != null)
+            {
+                animator.SetBool("isAttacking", true); // Play attack animation
+                if (isDebugMode) Debug.Log("Setting isAttacking to true");
+                AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                if (isDebugMode) Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
+            }
+            else
+            {
+                if (isDebugMode) Debug.LogError("Animator component is null.");
+            }
 
-        npcPath.ClearPath(); // Stop moving once the enemy attacks
-        
-        // Choose a random attack position from the 4 child objects
-        if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0)
-        {
-            int randomIndex = Random.Range(0, enemyAttackPosition.childCount);
-            Transform selectedAttackPosition = enemyAttackPosition.GetChild(randomIndex);
+            npcPath.ClearPath(); // Stop moving once the enemy attacks
             
-            // Move enemy to the selected attack position
-            transform.position = selectedAttackPosition.position;
+            // Choose a random attack position from the 4 child objects
+            if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0)
+            {
+                int randomIndex = Random.Range(0, enemyAttackPosition.childCount);
+                Transform selectedAttackPosition = enemyAttackPosition.GetChild(randomIndex);
+                
+                // Instead of snapping, smoothly move to the position
+                targetAttackPosition = selectedAttackPosition.position;
+                isMovingToAttackPosition = true;
+                hasChosenAttackPosition = true; // Mark that we've chosen an attack position
+                
+                if (isDebugMode) Debug.Log($"Enemy moving to attack position {randomIndex}: {selectedAttackPosition.name}");
+            }
             
-            if (isDebugMode) Debug.Log($"Enemy moved to attack position {randomIndex}: {selectedAttackPosition.name}");
+            DeterminePlayerDirection(); // Determine player direction for the attack animation
         }
-        
-        DeterminePlayerDirection(); // Determine player direction for the attack animation
-
     }
 
     // This method is called by the animation event when the enemy is attacking
@@ -384,6 +413,9 @@ public class E_EnemyAI : MonoBehaviour
             if (isDebugMode) Debug.Log("Setting isAttacking to false");
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             if (isDebugMode) Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
+            
+            // Reset attack position flag when attack animation stops
+            hasChosenAttackPosition = false;
         }
         else
         {
@@ -396,7 +428,7 @@ public class E_EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius); // Detection radius        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, maxChaseRange); // Maximum attack range
+        Gizmos.DrawWireSphere(transform.position, maxAttackRange); // Maximum attack range
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, minAttackDistance); // Minimum attack range
     }

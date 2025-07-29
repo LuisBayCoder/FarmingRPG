@@ -266,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRadius: 7.5
   minAttackDistance: 1.75
-  maxChaseRange: 0.3
+  maxAttackRange: 0.87
   pathFindingStopDistance: 1.75
   pathUpdateDelay: 0.5
   npcPath: {fileID: 5265656417562702205}
@@ -278,6 +278,7 @@ MonoBehaviour:
   playerDetected: 0
   isInAttackRange: 1
   npcCurrentScene: 0
+  npcMovement: {fileID: 5265656417562702204}
 --- !u!114 &5265656417562702202
 MonoBehaviour:
   m_ObjectHideFlags: 0
