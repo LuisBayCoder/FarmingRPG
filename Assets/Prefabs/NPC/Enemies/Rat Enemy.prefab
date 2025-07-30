@@ -273,12 +273,17 @@ MonoBehaviour:
   attackDamage: 1
   isDebugMode: 1
   roamDuration: 3
+  attackPositionMoveSpeed: 5
   checkInterval: 2
   moveDistance: 0.5
   playerDetected: 0
   isInAttackRange: 1
   npcCurrentScene: 0
   npcMovement: {fileID: 5265656417562702204}
+  attackOffsetDown: {x: 0, y: 0}
+  attackOffsetUp: {x: 0, y: -0.1}
+  attackOffsetRight: {x: -0.9, y: 0.5}
+  attackOffsetLeft: {x: 0.9, y: 0.5}
 --- !u!114 &5265656417562702202
 MonoBehaviour:
   m_ObjectHideFlags: 0

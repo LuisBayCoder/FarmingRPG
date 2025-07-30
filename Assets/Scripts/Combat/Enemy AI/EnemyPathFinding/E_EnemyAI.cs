@@ -37,6 +37,11 @@ public class E_EnemyAI : MonoBehaviour
 
     [SerializeField] private NPCMovement npcMovement; // Reference to the NPCMovement script
 
+    [SerializeField] private Vector2 attackOffsetDown = Vector2.zero;
+    [SerializeField] private Vector2 attackOffsetUp = Vector2.zero;
+    [SerializeField] private Vector2 attackOffsetRight = Vector2.zero;
+    [SerializeField] private Vector2 attackOffsetLeft = Vector2.zero;
+
     private enum State
     {
         Roaming,
@@ -379,37 +384,75 @@ public class E_EnemyAI : MonoBehaviour
             if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0)
             {
                 int randomIndex = Random.Range(0, enemyAttackPosition.childCount);
-                Transform selectedAttackPosition = enemyAttackPosition.GetChild(randomIndex);
                 
-                // Instead of snapping, smoothly move to the position
-                targetAttackPosition = selectedAttackPosition.position;
+                // Move to attack position and set animation (now handles offset internally)
                 isMovingToAttackPosition = true;
                 hasChosenAttackPosition = true; // Mark that we've chosen an attack position
                 
-                if (isDebugMode) Debug.Log($"Enemy moving to attack position {randomIndex}: {selectedAttackPosition.name}");
+                // Set attack animation based on random index (this now also sets targetAttackPosition with offset)
+                SetAttackAnimationByIndex(randomIndex);
+                
+                if (isDebugMode) Debug.Log($"Enemy moving to attack position {randomIndex} with offset");
             }
-            
-            DeterminePlayerDirection(); // Determine player direction for the attack animation
         }
     }
 
-    // This method is called by the animation event when the enemy is attacking
-    //even if the player is out of range it will get hit. Fix needed.
-    public void AttackPlayerByAnimation()
+    // New method to set attack animation based on attack position index
+    private void SetAttackAnimationByIndex(int index)
     {
-        // Deal damage to the player
-        Character playerCharacter = playerTransform.GetComponent<Character>();
-        if (playerCharacter != null)
+        // Reset all attack animations first
+        ResetAttackAnimations();
+        
+        // Get the base attack position
+        Transform selectedAttackPosition = enemyAttackPosition.GetChild(index);
+        Vector3 basePosition = selectedAttackPosition.position;
+        
+        // Set the appropriate attack animation and apply offset based on index
+        switch (index)
         {
-            playerCharacter.TakeDamage(attackDamage); // Deal 10 damage (you can adjust the damage amount as needed)
+            case 0: // Down attack
+                animator.SetBool("isAttackingDown", true);
+                targetAttackPosition = basePosition + (Vector3)attackOffsetDown;
+                if (isDebugMode) Debug.Log("Setting attack animation: Down with offset: " + attackOffsetDown);
+                break;
+            case 1: // Up attack
+                animator.SetBool("isAttackingUp", true);
+                targetAttackPosition = basePosition + (Vector3)attackOffsetUp;
+                if (isDebugMode) Debug.Log("Setting attack animation: Up with offset: " + attackOffsetUp);
+                break;
+            case 2: // Right attack
+                animator.SetBool("isAttackingRight", true);
+                targetAttackPosition = basePosition + (Vector3)attackOffsetRight;
+                if (isDebugMode) Debug.Log("Setting attack animation: Right with offset: " + attackOffsetRight);
+                break;
+            case 3: // Left attack
+                animator.SetBool("isAttackingLeft", true);
+                targetAttackPosition = basePosition + (Vector3)attackOffsetLeft;
+                if (isDebugMode) Debug.Log("Setting attack animation: Left with offset: " + attackOffsetLeft);
+                break;
+            default:
+                targetAttackPosition = basePosition; // No offset for invalid index
+                if (isDebugMode) Debug.LogWarning($"Invalid attack position index: {index}");
+                break;
         }
     }
 
+    // New method to reset all attack animations
+    private void ResetAttackAnimations()
+    {
+    animator.SetBool("isAttackingDown", false);
+    animator.SetBool("isAttackingUp", false);
+    animator.SetBool("isAttackingLeft", false);
+    animator.SetBool("isAttackingRight", false);
+    }
+
+    // Updated AttackPlayerFalse method to also reset attack animations
     private void AttackPlayerFalse()
     {
         if (animator != null)
         {
             animator.SetBool("isAttacking", false);
+            ResetAttackAnimations(); // Reset directional attack animations
             if (isDebugMode) Debug.Log("Setting isAttacking to false");
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             if (isDebugMode) Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
@@ -433,74 +476,6 @@ public class E_EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, minAttackDistance); // Minimum attack range
     }
 
-    private void DeterminePlayerDirection()
-    {
-        Vector3 directionToPlayer = playerTransform.position - transform.position;
-
-        // Check the horizontal and vertical direction to determine the quadrant
-        if (directionToPlayer.x > 0 && directionToPlayer.y > 0)
-        {
-            if (isDebugMode) Debug.Log("Player is above and to the right");
-            // Handle logic when the player is above and to the right
-            animator.SetBool("isAttackingLeft", false);
-            animator.SetBool("isAttackingRight", true);
-        }
-        else if (directionToPlayer.x < 0 && directionToPlayer.y > 0)
-        {
-            if (isDebugMode) Debug.Log("Player is above and to the left");
-            // Handle logic when the player is above and to the left
-            animator.SetBool("isAttackingRight", false);
-            animator.SetBool("isAttackingLeft", true);
-        }
-        else if (directionToPlayer.x > 0 && directionToPlayer.y < 0)
-        {
-            if (isDebugMode) Debug.Log("Player is below and to the right");
-            // Handle logic when the player is below and to the right
-            animator.SetBool("isAttackingLeft", false);
-            animator.SetBool("isAttackingRight", true);
-        }
-        else if (directionToPlayer.x < 0 && directionToPlayer.y < 0)
-        {
-            if (isDebugMode) Debug.Log("Player is below and to the left");
-            // Handle logic when the player is below and to the left
-            animator.SetBool("isAttackingRight", false);
-            animator.SetBool("isAttackingLeft", true);
-        }
-        else if (Mathf.Abs(directionToPlayer.x) > Mathf.Abs(directionToPlayer.y))
-        {
-            // The player is directly to the left or right
-            if (directionToPlayer.x > 0)
-            {
-                if (isDebugMode) Debug.Log("Player is directly to the right");
-                // Handle logic when the player is directly to the right
-                animator.SetBool("isAttackingLeft", false);
-                animator.SetBool("isAttackingRight", true);
-            }
-            else
-            {
-                if (isDebugMode) Debug.Log("Player is directly to the left");
-                // Handle logic when the player is directly to the left
-                animator.SetBool("isAttackingRight", false);
-                animator.SetBool("isAttackingLeft", true);
-            }
-        }
-        else
-        {
-            // The player is directly above or below
-            if (directionToPlayer.y > 0)
-            {
-                if (isDebugMode) Debug.Log("Player is directly above");
-                animator.SetBool("isAttackingDown", false);
-                animator.SetBool("isAttackingUp", true);
-            }
-            else
-            {
-                if (isDebugMode) Debug.Log("Player is directly below");
-                animator.SetBool("isAttackingDown", true);
-                animator.SetBool("isAttackingUp", false);
-            }
-        }
-    }
     private void ResetMovementAnimation()
     {
          // Reset all movement animation parameters
