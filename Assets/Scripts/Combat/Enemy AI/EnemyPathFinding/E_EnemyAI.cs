@@ -62,16 +62,16 @@ public class E_EnemyAI : MonoBehaviour
 
         enemyPathfinding = GetComponent<EnemyPathfinding>();
 
-         // Convert string to SceneName enum
-            if (System.Enum.TryParse<SceneName>(SceneManager.GetActiveScene().name, out SceneName sceneName))
-            {
-                npcCurrentScene = sceneName;
-            }
-            else
-            {
-                // Handle case where scene name doesn't match any enum value
-                Debug.LogWarning($"Scene name '{SceneManager.GetActiveScene().name}' not found in SceneName enum");
-            }
+        // Convert string to SceneName enum
+        if (System.Enum.TryParse<SceneName>(SceneManager.GetActiveScene().name, out SceneName sceneName))
+        {
+            npcCurrentScene = sceneName;
+        }
+        else
+        {
+            // Handle case where scene name doesn't match any enum value
+            Debug.LogWarning($"Scene name '{SceneManager.GetActiveScene().name}' not found in SceneName enum");
+        }
     }
 
     private void Start()
@@ -99,7 +99,7 @@ public class E_EnemyAI : MonoBehaviour
 
     private void StartResetAnimation()
     {
-        
+
         ResetMovementAnimation(); // Reset all movement animations
 
         state = State.Roaming; // Set initial state to Roaming
@@ -186,21 +186,21 @@ public class E_EnemyAI : MonoBehaviour
     // New method to handle movement animation based on direction
     private void SetMovementAnimation(Vector2 direction)
     {
-        
+
         if (animator == null)
         {
             Debug.LogError("Animator component is not assigned.");
             return;
         }
 
-       ResetMovementAnimation(); // Reset all movement animations
+        ResetMovementAnimation(); // Reset all movement animations
 
 
         // Determine primary direction based on the larger component
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
 
-            Debug.Log("Setting movement animation for direction: " + direction); 
+            Debug.Log("Setting movement animation for direction: " + direction);
             if (direction.x > 0)
             {
                 animator.SetBool(Settings.walkRight, true);
@@ -276,7 +276,7 @@ public class E_EnemyAI : MonoBehaviour
             if (distanceToTarget <= minAttackDistance)
             {
                 AttackPlayer(); // Trigger the attack
-                
+
                 targetPosition = null; // Clear the target to stop movement
             }
             else
@@ -289,7 +289,7 @@ public class E_EnemyAI : MonoBehaviour
         if (isMovingToAttackPosition)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetAttackPosition, attackPositionMoveSpeed * Time.deltaTime);
-            
+
             // Check if we've reached the target position
             if (Vector3.Distance(transform.position, targetAttackPosition) < 0.01f)
             {
@@ -379,19 +379,19 @@ public class E_EnemyAI : MonoBehaviour
             }
 
             npcPath.ClearPath(); // Stop moving once the enemy attacks
-            
+
             // Choose a random attack position from the 4 child objects
             if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0)
             {
                 int randomIndex = Random.Range(0, enemyAttackPosition.childCount);
-                
+
                 // Move to attack position and set animation (now handles offset internally)
                 isMovingToAttackPosition = true;
                 hasChosenAttackPosition = true; // Mark that we've chosen an attack position
-                
+
                 // Set attack animation based on random index (this now also sets targetAttackPosition with offset)
                 SetAttackAnimationByIndex(randomIndex);
-                
+
                 if (isDebugMode) Debug.Log($"Enemy moving to attack position {randomIndex} with offset");
             }
         }
@@ -402,11 +402,11 @@ public class E_EnemyAI : MonoBehaviour
     {
         // Reset all attack animations first
         ResetAttackAnimations();
-        
+
         // Get the base attack position
         Transform selectedAttackPosition = enemyAttackPosition.GetChild(index);
         Vector3 basePosition = selectedAttackPosition.position;
-        
+
         // Set the appropriate attack animation and apply offset based on index
         switch (index)
         {
@@ -440,10 +440,10 @@ public class E_EnemyAI : MonoBehaviour
     // New method to reset all attack animations
     private void ResetAttackAnimations()
     {
-    animator.SetBool("isAttackingDown", false);
-    animator.SetBool("isAttackingUp", false);
-    animator.SetBool("isAttackingLeft", false);
-    animator.SetBool("isAttackingRight", false);
+        animator.SetBool("isAttackingDown", false);
+        animator.SetBool("isAttackingUp", false);
+        animator.SetBool("isAttackingLeft", false);
+        animator.SetBool("isAttackingRight", false);
     }
 
     // Updated AttackPlayerFalse method to also reset attack animations
@@ -456,7 +456,7 @@ public class E_EnemyAI : MonoBehaviour
             if (isDebugMode) Debug.Log("Setting isAttacking to false");
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             if (isDebugMode) Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
-            
+
             // Reset attack position flag when attack animation stops
             hasChosenAttackPosition = false;
         }
@@ -478,7 +478,7 @@ public class E_EnemyAI : MonoBehaviour
 
     private void ResetMovementAnimation()
     {
-         // Reset all movement animation parameters
+        // Reset all movement animation parameters
         animator.SetBool(Settings.walkRight, false);
         animator.SetBool(Settings.walkLeft, false);
         animator.SetBool(Settings.walkUp, false);
@@ -488,5 +488,9 @@ public class E_EnemyAI : MonoBehaviour
         animator.SetBool(Settings.idleLeft, false);
         animator.SetBool(Settings.idleUp, false);
         animator.SetBool(Settings.idleDown, false);
+    }
+    public void AttackPlayerByAnimation()
+    {
+        player.GetComponent<Character>().TakeDamage(attackDamage);
     }
 }
