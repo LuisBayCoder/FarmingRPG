@@ -54,6 +54,10 @@ public class Item : MonoBehaviour
                 BoxCollider2D boxCollider = gameObject.GetComponent<BoxCollider2D>();
                 boxCollider.isTrigger = false;
             }
+            if (itemDetails.orderInLayer != 0)
+            {
+                spriteRenderer.sortingOrder = itemDetails.orderInLayer;
+            }
 
         }
     

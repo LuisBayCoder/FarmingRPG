@@ -20,6 +20,7 @@ public class ItemDetails
     public int staminaAmount;
     public int itemCost; // This will be used as the cost to buy the item
     public bool resizable; // This will be used to determine if the item can be resized
+    public int orderInLayer; // This will be used to determine the order in layer of the item
     public float scaleFactor; // This will be used to determine the scale factor of the item
     public bool isNotTrigger; // This will be used to determine if the item is a trigger or not
     public bool isQuestItem; // This will be used to determine if the item is a quest item
