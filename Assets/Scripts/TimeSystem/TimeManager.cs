@@ -315,5 +315,102 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
     {
         // Nothing required here since Time Manager is running on the persistent scene
     }
+
+    public void SetTimeToDawn()
+    {
+        // Reset minutes and seconds first
+        gameMinute = 0;
+        gameSecond = 0;
+        
+        // If it's already dawn (6 AM) or later, advance to next day's dawn
+        if (gameHour >= 6)
+        {
+            // Calculate hours needed to reach next day's 6 AM
+            int hoursToNextDawn = (24 - gameHour) + 6;
+            
+            // Advance time hour by hour using the existing system
+            for (int i = 0; i < hoursToNextDawn; i++)
+            {
+                AdvanceGameHour();
+            }
+        }
+        else
+        {
+            // If it's before 6 AM, advance to 6 AM same day
+            int hoursToAdvance = 6 - gameHour;
+            for (int i = 0; i < hoursToAdvance; i++)
+            {
+                AdvanceGameHour();
+            }
+        }
+    }
+
+    private void AdvanceGameHour()
+    {
+        gameHour++;
+        
+        if (gameHour > 23)
+        {
+            gameHour = 0;
+            gameDay++;
+
+            if (gameDay > 30)
+            {
+                gameDay = 1;
+
+                int gs = (int)gameSeason;
+                gs++;
+                gameSeason = (Season)gs;
+
+                if (gs > 3)
+                {
+                    gs = 0;
+                    gameSeason = (Season)gs;
+                    gameYear++;
+
+                    if (gameYear > 9999)
+                        gameYear = 1;
+
+                    EventHandler.CallAdvanceGameYearEvent(gameYear, gameSeason, gameDay, gameDayOfWeek, gameHour, gameMinute, gameSecond);
+                }
+
+                EventHandler.CallAdvanceGameSeasonEvent(gameYear, gameSeason, gameDay, gameDayOfWeek, gameHour, gameMinute, gameSecond);
+            }
+
+            gameDayOfWeek = GetDayOfWeek();
+            EventHandler.CallAdvanceGameDayEvent(gameYear, gameSeason, gameDay, gameDayOfWeek, gameHour, gameMinute, gameSecond);
+        }
+
+        EventHandler.CallAdvanceGameHourEvent(gameYear, gameSeason, gameDay, gameDayOfWeek, gameHour, gameMinute, gameSecond);
+    }
+
+    public void SetTimeToDusk()
+    {
+        // Reset minutes and seconds first
+        gameMinute = 0;
+        gameSecond = 0;
+
+        // If it's already dusk (7 PM) or later, advance to next day's dusk
+        if (gameHour >= 19)
+        {
+            // Calculate hours needed to reach next day's 7 PM (19:00)
+            int hoursToNextDusk = (24 - gameHour) + 19;
+
+            // Advance time hour by hour using the existing system
+            for (int i = 0; i < hoursToNextDusk; i++)
+            {
+                AdvanceGameHour();
+            }
+        }
+        else
+        {
+            // If it's before 7 PM, advance to 7 PM same day
+            int hoursToAdvance = 19 - gameHour;
+            for (int i = 0; i < hoursToAdvance; i++)
+            {
+                AdvanceGameHour();
+            }
+        }
+    }
 }
 

@@ -16,6 +16,7 @@ public class Sleep : MonoBehaviour
 
     private void SleepPlayer()
     {
-        Debug.Log("Player is sleeping...");
+        //find the UIManager and call the EnableSleepMenu method
+        UIManager.Instance.EnableSleepMenu();
     }
 }

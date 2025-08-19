@@ -5,11 +5,14 @@ public class UIManager : SingletonMonobehaviour<UIManager>
 {
 
     private bool _pauseMenuOn = false;
+    private bool _sleepMenuOn = false;
     [SerializeField] private UIInventoryBar uiInventoryBar = null;
     [SerializeField] private PauseMenuInventoryManagement pauseMenuInventoryManagement = null;
     [SerializeField] private GameObject pauseMenu = null;
+    [SerializeField] private GameObject sleepMenu = null;
     [SerializeField] private GameObject[] menuTabs = null;
     [SerializeField] private Button[] menuButtons = null;
+    
 
     public bool PauseMenuOn { get => _pauseMenuOn; set => _pauseMenuOn = value; }
 
@@ -18,6 +21,7 @@ public class UIManager : SingletonMonobehaviour<UIManager>
         base.Awake();
 
         pauseMenu.SetActive(false);
+        sleepMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -46,9 +50,14 @@ public class UIManager : SingletonMonobehaviour<UIManager>
             {
                 DisablePauseMenu();
             }
-            else
+            else if (!_sleepMenuOn)
             {
                 EnablePauseMenu();
+            }
+            //if the sleep menu is open, close it
+            if (_sleepMenuOn)
+            {
+                DisableSleepMenu();
             }
         }
     }
@@ -82,6 +91,25 @@ public class UIManager : SingletonMonobehaviour<UIManager>
         Player.Instance.PlayerInputIsDisabled = false;
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
+    }
+
+    public void EnableSleepMenu()
+    {
+        _sleepMenuOn = true;
+        Player.Instance.PlayerInputIsDisabled = true;
+        Time.timeScale = 0;
+        sleepMenu.SetActive(true);
+
+        // Trigger garbage collector
+        System.GC.Collect();
+    }
+
+    public void DisableSleepMenu()
+    {
+        _sleepMenuOn = false;
+        Player.Instance.PlayerInputIsDisabled = false;
+        Time.timeScale = 1;
+        sleepMenu.SetActive(false);
     }
 
     private void HighlightButtonForSelectedTab()
@@ -142,5 +170,4 @@ public class UIManager : SingletonMonobehaviour<UIManager>
     {
         Application.Quit();
     }
-
 }
