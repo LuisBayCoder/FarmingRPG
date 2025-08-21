@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using PixelCrushers.DialogueSystem.Articy.Articy_4_0;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : SingletonMonobehaviour<UIManager>
@@ -10,6 +12,7 @@ public class UIManager : SingletonMonobehaviour<UIManager>
     [SerializeField] private PauseMenuInventoryManagement pauseMenuInventoryManagement = null;
     [SerializeField] private GameObject pauseMenu = null;
     [SerializeField] private GameObject sleepMenu = null;
+    [SerializeField] private GameObject doorIsLockedUI = null;
     [SerializeField] private GameObject[] menuTabs = null;
     [SerializeField] private Button[] menuButtons = null;
     
@@ -22,6 +25,7 @@ public class UIManager : SingletonMonobehaviour<UIManager>
 
         pauseMenu.SetActive(false);
         sleepMenu.SetActive(false);
+        doorIsLockedUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -96,7 +100,7 @@ public class UIManager : SingletonMonobehaviour<UIManager>
     public void EnableSleepMenu()
     {
         _sleepMenuOn = true;
-        Player.Instance.PlayerInputIsDisabled = true;
+        Player.Instance.DisablePlayerInputAndResetMovement();
         Time.timeScale = 0;
         sleepMenu.SetActive(true);
 
@@ -107,9 +111,27 @@ public class UIManager : SingletonMonobehaviour<UIManager>
     public void DisableSleepMenu()
     {
         _sleepMenuOn = false;
-        Player.Instance.PlayerInputIsDisabled = false;
+        Player.Instance.EnablePlayerInput();
         Time.timeScale = 1;
         sleepMenu.SetActive(false);
+    }
+
+    public void DisableSleepMenuOnSleep()
+    {
+        _sleepMenuOn = false;
+        sleepMenu.SetActive(false);
+    }
+
+    public void EnableDoorIsLockedUI()
+    {
+        // Show the door is locked UI
+        doorIsLockedUI.SetActive(true);
+    }
+
+    public void DisableDoorIsLockedUI()
+    {
+        // Hide the door is locked UI
+        doorIsLockedUI.SetActive(false);
     }
 
     private void HighlightButtonForSelectedTab()

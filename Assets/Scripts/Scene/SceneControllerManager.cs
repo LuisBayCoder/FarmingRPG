@@ -32,7 +32,7 @@ public class SceneControllerManager : SingletonMonobehaviour<SceneControllerMana
         {
             // ... move the alpha towards it's target alpha.
             faderCanvasGroup.alpha = Mathf.MoveTowards(faderCanvasGroup.alpha, finalAlpha,
-                fadeSpeed * Time.deltaTime);
+            fadeSpeed * Time.deltaTime);
 
             // Wait for a frame then continue.
             yield return null;
