@@ -179,6 +179,7 @@ public enum ItemType
     Weapon,
     Note,
     QuestItem,
+    Key,
     none,
     count
 }
