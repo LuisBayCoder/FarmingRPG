@@ -33507,6 +33507,7 @@ GameObject:
   - component: {fileID: 1657521409}
   - component: {fileID: 1657521411}
   - component: {fileID: 1657521410}
+  - component: {fileID: 1657521412}
   m_Layer: 0
   m_Name: Tab3Keys
   m_TagString: Untagged
@@ -33607,6 +33608,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657521408}
   m_CullTransparentMesh: 0
+--- !u!114 &1657521412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657521408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef593be738ea564aa613429951f5f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keysManagementSlot:
+  - {fileID: 6607267772414985996}
+  - {fileID: 6214689968636460372}
+  - {fileID: 6214689970221560146}
+  - {fileID: 6214689970450047527}
+  - {fileID: 6214689969562159527}
+  - {fileID: 6214689969216909905}
+  - {fileID: 6214689970359120406}
+  - {fileID: 6214689969911657237}
+  - {fileID: 6214689970328808495}
+  - {fileID: 6214689970460069240}
+  - {fileID: 6214689970301171411}
+  - {fileID: 6214689970360428684}
+  - {fileID: 6214689969932164903}
+  - {fileID: 6214689969163454973}
+  - {fileID: 6214689969542913399}
+  - {fileID: 6214689969072459378}
+  - {fileID: 6214689970181671751}
+  - {fileID: 6214689970699046798}
+  - {fileID: 6214689969642768583}
+  - {fileID: 6214689969498561231}
+  - {fileID: 6214689969833619347}
+  - {fileID: 6214689970131225928}
+  - {fileID: 6214689970206572683}
+  - {fileID: 6214689970480074442}
+  - {fileID: 6214689970612430523}
+  - {fileID: 6214689969355378119}
+  - {fileID: 6214689968639905612}
+  - {fileID: 6214689969805464384}
+  - {fileID: 6214689968923842656}
+  - {fileID: 6214689970376582184}
+  - {fileID: 6214689969143124405}
+  - {fileID: 6214689969541228005}
+  - {fileID: 6214689968888793538}
+  - {fileID: 6214689969244465829}
+  - {fileID: 6214689969304343583}
+  - {fileID: 6214689970331329348}
+  inventoryManagementDraggedItemPrefab: {fileID: 6204872297177650831, guid: 8ea4c35db8c797a4f99e9fe6b8a75930,
+    type: 3}
+  transparent16x16: {fileID: 21300000, guid: 89c46045b5f23d840b62099f6f1f6344, type: 3}
+  inventoryTextBoxGameobject: {fileID: 0}
 --- !u!1 &1658831244
 GameObject:
   m_ObjectHideFlags: 0
@@ -51691,6 +51745,7 @@ GameObject:
   - component: {fileID: 1228477907117186499}
   - component: {fileID: 1073766298085746545}
   - component: {fileID: 6298690762252407186}
+  - component: {fileID: 6214689968636460372}
   m_Layer: 0
   m_Name: InventorySaleSlot1
   m_TagString: Untagged
@@ -51698,6 +51753,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689968636460372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689968636460371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762252407186}
+  textMeshProUGUI: {fileID: 3368471549959893259}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689968639905611
 GameObject:
   m_ObjectHideFlags: 0
@@ -51709,6 +51809,7 @@ GameObject:
   - component: {fileID: 1228477907116486619}
   - component: {fileID: 1073766298084349289}
   - component: {fileID: 6298690762253247370}
+  - component: {fileID: 6214689968639905612}
   m_Layer: 0
   m_Name: InventorySaleSlot26
   m_TagString: Untagged
@@ -51716,6 +51817,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689968639905612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689968639905611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762253247370}
+  textMeshProUGUI: {fileID: 3368471549960717075}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689968888793537
 GameObject:
   m_ObjectHideFlags: 0
@@ -51727,6 +51873,7 @@ GameObject:
   - component: {fileID: 1228477906866153809}
   - component: {fileID: 1073766297799578595}
   - component: {fileID: 6298690762000852224}
+  - component: {fileID: 6214689968888793538}
   m_Layer: 0
   m_Name: InventorySaleSlot32
   m_TagString: Untagged
@@ -51734,6 +51881,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689968888793538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689968888793537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762000852224}
+  textMeshProUGUI: {fileID: 3368471549673784729}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689968923842655
 GameObject:
   m_ObjectHideFlags: 0
@@ -51745,6 +51937,7 @@ GameObject:
   - component: {fileID: 1228477906897041615}
   - component: {fileID: 1073766297831867005}
   - component: {fileID: 6298690761969317022}
+  - component: {fileID: 6214689968923842656}
   m_Layer: 0
   m_Name: InventorySaleSlot28
   m_TagString: Untagged
@@ -51752,6 +51945,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689968923842656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689968923842655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761969317022}
+  textMeshProUGUI: {fileID: 3368471549643297799}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969072459377
 GameObject:
   m_ObjectHideFlags: 0
@@ -51763,6 +52001,7 @@ GameObject:
   - component: {fileID: 1228477907020525281}
   - component: {fileID: 1073766297987372115}
   - component: {fileID: 6298690761821774512}
+  - component: {fileID: 6214689969072459378}
   m_Layer: 0
   m_Name: InventorySaleSlot15
   m_TagString: Untagged
@@ -51770,6 +52009,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969072459378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969072459377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761821774512}
+  textMeshProUGUI: {fileID: 3368471549519807017}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969143124404
 GameObject:
   m_ObjectHideFlags: 0
@@ -51781,6 +52065,7 @@ GameObject:
   - component: {fileID: 1228477906948550948}
   - component: {fileID: 1073766298050628502}
   - component: {fileID: 6298690761883991413}
+  - component: {fileID: 6214689969143124405}
   m_Layer: 0
   m_Name: InventorySaleSlot30
   m_TagString: Untagged
@@ -51788,6 +52073,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969143124405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969143124404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761883991413}
+  textMeshProUGUI: {fileID: 3368471549591526892}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969163454972
 GameObject:
   m_ObjectHideFlags: 0
@@ -51799,6 +52129,7 @@ GameObject:
   - component: {fileID: 1228477907665103212}
   - component: {fileID: 1073766298632475614}
   - component: {fileID: 6298690762804520253}
+  - component: {fileID: 6214689969163454973}
   m_Layer: 0
   m_Name: InventorySaleSlot13
   m_TagString: Untagged
@@ -51806,6 +52137,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969163454973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969163454972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762804520253}
+  textMeshProUGUI: {fileID: 3368471550502618532}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969216909904
 GameObject:
   m_ObjectHideFlags: 0
@@ -51817,6 +52193,7 @@ GameObject:
   - component: {fileID: 1228477907613749952}
   - component: {fileID: 1073766298681796722}
   - component: {fileID: 6298690762881097361}
+  - component: {fileID: 6214689969216909905}
   m_Layer: 0
   m_Name: InventorySaleSlot5
   m_TagString: Untagged
@@ -51824,6 +52201,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969216909905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969216909904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762881097361}
+  textMeshProUGUI: {fileID: 3368471550553980424}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969244465828
 GameObject:
   m_ObjectHideFlags: 0
@@ -51835,6 +52257,7 @@ GameObject:
   - component: {fileID: 1228477907586714164}
   - component: {fileID: 1073766298687795334}
   - component: {fileID: 6298690762857727589}
+  - component: {fileID: 6214689969244465829}
   m_Layer: 0
   m_Name: InventorySaleSlot33
   m_TagString: Untagged
@@ -51842,6 +52265,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969244465829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969244465828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762857727589}
+  textMeshProUGUI: {fileID: 3368471550564230908}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969304343582
 GameObject:
   m_ObjectHideFlags: 0
@@ -51853,6 +52321,7 @@ GameObject:
   - component: {fileID: 1228477907793441934}
   - component: {fileID: 1073766298761825852}
   - component: {fileID: 6298690762658101471}
+  - component: {fileID: 6214689969304343583}
   m_Layer: 0
   m_Name: InventorySaleSlot34
   m_TagString: Untagged
@@ -51860,6 +52329,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969304343583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969304343582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762658101471}
+  textMeshProUGUI: {fileID: 3368471550357248070}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969355378118
 GameObject:
   m_ObjectHideFlags: 0
@@ -51871,6 +52385,7 @@ GameObject:
   - component: {fileID: 1228477907743845718}
   - component: {fileID: 1073766298811488228}
   - component: {fileID: 6298690762742227207}
+  - component: {fileID: 6214689969355378119}
   m_Layer: 0
   m_Name: InventorySaleSlot25
   m_TagString: Untagged
@@ -51878,6 +52393,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969355378119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969355378118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762742227207}
+  textMeshProUGUI: {fileID: 3368471550406705566}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969498561230
 GameObject:
   m_ObjectHideFlags: 0
@@ -51889,6 +52449,7 @@ GameObject:
   - component: {fileID: 1228477907329219166}
   - component: {fileID: 1073766298431291628}
   - component: {fileID: 6298690762602296847}
+  - component: {fileID: 6214689969498561231}
   m_Layer: 0
   m_Name: InventorySaleSlot19
   m_TagString: Untagged
@@ -51896,6 +52457,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969498561231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969498561230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762602296847}
+  textMeshProUGUI: {fileID: 3368471550301378198}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969541228004
 GameObject:
   m_ObjectHideFlags: 0
@@ -51907,6 +52513,7 @@ GameObject:
   - component: {fileID: 1228477907355092340}
   - component: {fileID: 1073766298457849798}
   - component: {fileID: 6298690762559490341}
+  - component: {fileID: 6214689969541228005}
   m_Layer: 0
   m_Name: InventorySaleSlot31
   m_TagString: Untagged
@@ -51914,6 +52521,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969541228005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969541228004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762559490341}
+  textMeshProUGUI: {fileID: 3368471550258588092}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969542913398
 GameObject:
   m_ObjectHideFlags: 0
@@ -51925,6 +52577,7 @@ GameObject:
   - component: {fileID: 1228477907352501734}
   - component: {fileID: 1073766298454083412}
   - component: {fileID: 6298690762554831287}
+  - component: {fileID: 6214689969542913399}
   m_Layer: 0
   m_Name: InventorySaleSlot14
   m_TagString: Untagged
@@ -51932,6 +52585,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969542913399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969542913398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762554831287}
+  textMeshProUGUI: {fileID: 3368471550261317934}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969562159526
 GameObject:
   m_ObjectHideFlags: 0
@@ -51943,6 +52641,7 @@ GameObject:
   - component: {fileID: 1228477907535358262}
   - component: {fileID: 1073766298468619140}
   - component: {fileID: 6298690762405782887}
+  - component: {fileID: 6214689969562159527}
   m_Layer: 0
   m_Name: InventorySaleSlot4
   m_TagString: Untagged
@@ -51950,6 +52649,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969562159527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969562159526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762405782887}
+  textMeshProUGUI: {fileID: 3368471550078715390}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969642768582
 GameObject:
   m_ObjectHideFlags: 0
@@ -51961,6 +52705,7 @@ GameObject:
   - component: {fileID: 1228477907456583766}
   - component: {fileID: 1073766298557616868}
   - component: {fileID: 6298690762459128839}
+  - component: {fileID: 6214689969642768583}
   m_Layer: 0
   m_Name: InventorySaleSlot18
   m_TagString: Untagged
@@ -51968,6 +52713,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969642768583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969642768582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690762459128839}
+  textMeshProUGUI: {fileID: 3368471550157227166}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969805464383
 GameObject:
   m_ObjectHideFlags: 0
@@ -51979,6 +52769,7 @@ GameObject:
   - component: {fileID: 1228477906017121199}
   - component: {fileID: 1073766297119852829}
   - component: {fileID: 6298690761221521406}
+  - component: {fileID: 6214689969805464384}
   m_Layer: 0
   m_Name: InventorySaleSlot27
   m_TagString: Untagged
@@ -51986,6 +52777,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969805464384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969805464383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761221521406}
+  textMeshProUGUI: {fileID: 3368471551076474727}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969833619346
 GameObject:
   m_ObjectHideFlags: 0
@@ -51997,6 +52833,7 @@ GameObject:
   - component: {fileID: 1228477906191994626}
   - component: {fileID: 1073766297158825392}
   - component: {fileID: 6298690761056125779}
+  - component: {fileID: 6214689969833619347}
   m_Layer: 0
   m_Name: InventorySaleSlot20
   m_TagString: Untagged
@@ -52004,6 +52841,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969833619347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969833619346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761056125779}
+  textMeshProUGUI: {fileID: 3368471550901724106}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969911657236
 GameObject:
   m_ObjectHideFlags: 0
@@ -52015,6 +52897,7 @@ GameObject:
   - component: {fileID: 1228477906110681988}
   - component: {fileID: 1073766297212938550}
   - component: {fileID: 6298690761111166933}
+  - component: {fileID: 6214689969911657237}
   m_Layer: 0
   m_Name: InventorySaleSlot7
   m_TagString: Untagged
@@ -52022,6 +52905,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969911657237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969911657236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761111166933}
+  textMeshProUGUI: {fileID: 3368471550966136652}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689969932164902
 GameObject:
   m_ObjectHideFlags: 0
@@ -52033,6 +52961,7 @@ GameObject:
   - component: {fileID: 1228477906160566198}
   - component: {fileID: 1073766297228068100}
   - component: {fileID: 6298690761096033255}
+  - component: {fileID: 6214689969932164903}
   m_Layer: 0
   m_Name: InventorySaleSlot12
   m_TagString: Untagged
@@ -52040,6 +52969,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689969932164903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689969932164902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761096033255}
+  textMeshProUGUI: {fileID: 3368471550916383614}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970131225927
 GameObject:
   m_ObjectHideFlags: 0
@@ -52051,6 +53025,7 @@ GameObject:
   - component: {fileID: 1228477905961102807}
   - component: {fileID: 1073766296895051621}
   - component: {fileID: 6298690760758681990}
+  - component: {fileID: 6214689970131225928}
   m_Layer: 0
   m_Name: InventorySaleSlot21
   m_TagString: Untagged
@@ -52058,6 +53033,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970131225928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970131225927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690760758681990}
+  textMeshProUGUI: {fileID: 3368471550579097887}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970181671750
 GameObject:
   m_ObjectHideFlags: 0
@@ -52069,6 +53089,7 @@ GameObject:
   - component: {fileID: 1228477905843809238}
   - component: {fileID: 1073766296944972132}
   - component: {fileID: 6298690760842160007}
+  - component: {fileID: 6214689970181671751}
   m_Layer: 0
   m_Name: InventorySaleSlot16
   m_TagString: Untagged
@@ -52076,6 +53097,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970181671751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970181671750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690760842160007}
+  textMeshProUGUI: {fileID: 3368471550696130334}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970206572682
 GameObject:
   m_ObjectHideFlags: 0
@@ -52087,6 +53153,7 @@ GameObject:
   - component: {fileID: 1228477905885487130}
   - component: {fileID: 1073766296987179688}
   - component: {fileID: 6298690760817257547}
+  - component: {fileID: 6214689970206572683}
   m_Layer: 0
   m_Name: InventorySaleSlot22
   m_TagString: Untagged
@@ -52094,6 +53161,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970206572683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970206572682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690760817257547}
+  textMeshProUGUI: {fileID: 3368471550671228114}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970221560145
 GameObject:
   m_ObjectHideFlags: 0
@@ -52105,6 +53217,7 @@ GameObject:
   - component: {fileID: 1228477906609361345}
   - component: {fileID: 1073766297542634355}
   - component: {fileID: 6298690761746128272}
+  - component: {fileID: 6214689970221560146}
   m_Layer: 0
   m_Name: InventorySaleSlot2
   m_TagString: Untagged
@@ -52112,6 +53225,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970221560146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970221560145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761746128272}
+  textMeshProUGUI: {fileID: 3368471551558106377}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970301171410
 GameObject:
   m_ObjectHideFlags: 0
@@ -52123,6 +53281,7 @@ GameObject:
   - component: {fileID: 1228477906529490498}
   - component: {fileID: 1073766297597537520}
   - component: {fileID: 6298690761801030163}
+  - component: {fileID: 6214689970301171411}
   m_Layer: 0
   m_Name: InventorySaleSlot10
   m_TagString: Untagged
@@ -52130,6 +53289,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970301171411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970301171410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761801030163}
+  textMeshProUGUI: {fileID: 3368471551621462666}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970328808494
 GameObject:
   m_ObjectHideFlags: 0
@@ -52141,6 +53345,7 @@ GameObject:
   - component: {fileID: 1228477906565549246}
   - component: {fileID: 1073766297634616844}
   - component: {fileID: 6298690761772040431}
+  - component: {fileID: 6214689970328808495}
   m_Layer: 0
   m_Name: InventorySaleSlot8
   m_TagString: Untagged
@@ -52148,6 +53353,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970328808495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970328808494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761772040431}
+  textMeshProUGUI: {fileID: 3368471551585132662}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970331329347
 GameObject:
   m_ObjectHideFlags: 0
@@ -52159,6 +53409,7 @@ GameObject:
   - component: {fileID: 1228477906563941331}
   - component: {fileID: 1073766297632094561}
   - component: {fileID: 6298690761766244226}
+  - component: {fileID: 6214689970331329348}
   m_Layer: 0
   m_Name: InventorySaleSlot35
   m_TagString: Untagged
@@ -52166,6 +53417,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970331329348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970331329347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761766244226}
+  textMeshProUGUI: {fileID: 3368471551586610971}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970359120405
 GameObject:
   m_ObjectHideFlags: 0
@@ -52177,6 +53473,7 @@ GameObject:
   - component: {fileID: 1228477906738532997}
   - component: {fileID: 1073766297673508919}
   - component: {fileID: 6298690761607388884}
+  - component: {fileID: 6214689970359120406}
   m_Layer: 0
   m_Name: InventorySaleSlot6
   m_TagString: Untagged
@@ -52184,6 +53481,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970359120406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970359120405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761607388884}
+  textMeshProUGUI: {fileID: 3368471551428804173}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970360428683
 GameObject:
   m_ObjectHideFlags: 0
@@ -52195,6 +53537,7 @@ GameObject:
   - component: {fileID: 1228477906735646747}
   - component: {fileID: 1073766297670103721}
   - component: {fileID: 6298690761601877066}
+  - component: {fileID: 6214689970360428684}
   m_Layer: 0
   m_Name: InventorySaleSlot11
   m_TagString: Untagged
@@ -52202,6 +53545,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970360428684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970360428683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761601877066}
+  textMeshProUGUI: {fileID: 3368471551414904019}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970376582183
 GameObject:
   m_ObjectHideFlags: 0
@@ -52213,6 +53601,7 @@ GameObject:
   - component: {fileID: 1228477906722374839}
   - component: {fileID: 1073766297689865733}
   - component: {fileID: 6298690761591228646}
+  - component: {fileID: 6214689970376582184}
   m_Layer: 0
   m_Name: InventorySaleSlot29
   m_TagString: Untagged
@@ -52220,6 +53609,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970376582184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970376582183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761591228646}
+  textMeshProUGUI: {fileID: 3368471551445215359}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970450047526
 GameObject:
   m_ObjectHideFlags: 0
@@ -52231,6 +53665,7 @@ GameObject:
   - component: {fileID: 1228477906649039542}
   - component: {fileID: 1073766297750616068}
   - component: {fileID: 6298690761647918823}
+  - component: {fileID: 6214689970450047527}
   m_Layer: 0
   m_Name: InventorySaleSlot3
   m_TagString: Untagged
@@ -52238,6 +53673,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970450047527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970450047526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761647918823}
+  textMeshProUGUI: {fileID: 3368471551501905534}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970460069239
 GameObject:
   m_ObjectHideFlags: 0
@@ -52249,6 +53729,7 @@ GameObject:
   - component: {fileID: 1228477906705214951}
   - component: {fileID: 1073766297773872981}
   - component: {fileID: 6298690761640649142}
+  - component: {fileID: 6214689970460069240}
   m_Layer: 0
   m_Name: InventorySaleSlot9
   m_TagString: Untagged
@@ -52256,6 +53737,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970460069240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970460069239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761640649142}
+  textMeshProUGUI: {fileID: 3368471551462113583}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970480074441
 GameObject:
   m_ObjectHideFlags: 0
@@ -52267,6 +53793,7 @@ GameObject:
   - component: {fileID: 1228477906683244121}
   - component: {fileID: 1073766297785357547}
   - component: {fileID: 6298690761620808200}
+  - component: {fileID: 6214689970480074442}
   m_Layer: 0
   m_Name: InventorySaleSlot23
   m_TagString: Untagged
@@ -52274,6 +53801,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970480074442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970480074441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761620808200}
+  textMeshProUGUI: {fileID: 3368471551467438737}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970612430522
 GameObject:
   m_ObjectHideFlags: 0
@@ -52285,6 +53857,7 @@ GameObject:
   - component: {fileID: 1228477906282972714}
   - component: {fileID: 1073766297384582296}
   - component: {fileID: 6298690761485306491}
+  - component: {fileID: 6214689970612430523}
   m_Layer: 0
   m_Name: InventorySaleSlot24
   m_TagString: Untagged
@@ -52292,6 +53865,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970612430523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970612430522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761485306491}
+  textMeshProUGUI: {fileID: 3368471551330839266}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1 &6214689970699046797
 GameObject:
   m_ObjectHideFlags: 0
@@ -52303,6 +53921,7 @@ GameObject:
   - component: {fileID: 1228477906398998301}
   - component: {fileID: 1073766297468048815}
   - component: {fileID: 6298690761402065740}
+  - component: {fileID: 6214689970699046798}
   m_Layer: 0
   m_Name: InventorySaleSlot17
   m_TagString: Untagged
@@ -52310,6 +53929,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6214689970699046798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214689970699046797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6298690761402065740}
+  textMeshProUGUI: {fileID: 3368471551215076309}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!114 &6298690760758681990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53755,6 +55419,7 @@ GameObject:
   - component: {fileID: 8826976135034558530}
   - component: {fileID: 6607267772414985995}
   - component: {fileID: 6607267772414985994}
+  - component: {fileID: 6607267772414985996}
   m_Layer: 0
   m_Name: InventorySaleSlot0
   m_TagString: Untagged
@@ -53800,6 +55465,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6607267772414985993}
   m_CullTransparentMesh: 1
+--- !u!114 &6607267772414985996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607267772414985993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2f25650ae52c147b9a4e09a4ccbf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManagementSlotImage: {fileID: 6607267772414985994}
+  textMeshProUGUI: {fileID: 6607267771783307341}
+  inventoryManagement: {fileID: 1657521412}
+  inventoryTextBoxPrefab: {fileID: 1800463966247388849, guid: 106fc3c2de721664fb11e5289ae2df92,
+    type: 3}
+  itemDetails:
+    itemCode: 0
+    itemType: 0
+    itemDescription: 
+    itemSprite: {fileID: 0}
+    itemLongDescription: 
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 0
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 0
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 0
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  itemQuantity: 0
+  slotNumber: 0
+  itsInventoryUI: 1
+  draggedItem: {fileID: 0}
 --- !u!1001 &6972984206032103851
 PrefabInstance:
   m_ObjectHideFlags: 0

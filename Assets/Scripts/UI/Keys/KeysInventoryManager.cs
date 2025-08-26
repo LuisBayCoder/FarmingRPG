@@ -4,7 +4,7 @@ using UnityEngine;
 public class KeysInventoryManager : MonoBehaviour
 {
 
-    [SerializeField] private KeysInventoryManagementSlot[] keysManagementSlot = null;
+    [SerializeField] private KeyInventoryManagementSlot[] keysManagementSlot = null;
 
     public GameObject inventoryManagementDraggedItemPrefab;
 
@@ -21,7 +21,7 @@ public class KeysInventoryManager : MonoBehaviour
         if (InventoryManager.Instance != null)
         {
             Debug.Log("PauseMenuInventoryManagement OnEnable");
-            PopulatePlayerInventory(InventoryLocation.player, InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player]);
+            PopulatePlayerInventory(InventoryLocation.keyring, InventoryManager.Instance.inventoryLists[(int)InventoryLocation.keyring]);
         }
     }
 
@@ -44,7 +44,7 @@ public class KeysInventoryManager : MonoBehaviour
     public void DestroyCurrentlyDraggedItems()
     {
         // loop through all player inventory items
-        for (int i = 0; i < InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player].Count; i++)
+        for (int i = 0; i < InventoryManager.Instance.inventoryLists[(int)InventoryLocation.keyring].Count; i++)
         {
             if (keysManagementSlot[i].draggedItem != null)
             {
@@ -56,12 +56,12 @@ public class KeysInventoryManager : MonoBehaviour
 
     private void PopulatePlayerInventory(InventoryLocation inventoryLocation, List<InventoryItem> playerInventoryList)
     {
-        if (inventoryLocation == InventoryLocation.player)
+        if (inventoryLocation == InventoryLocation.keyring)
         {
             InitialiseInventoryManagementSlots();
 
             // loop through all player inventory items
-            for (int i = 0; i < InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player].Count; i++)
+            for (int i = 0; i < InventoryManager.Instance.inventoryLists[(int)InventoryLocation.keyring].Count; i++)
             {
                 // Get inventory item details
                 keysManagementSlot[i].itemDetails = InventoryManager.Instance.GetItemDetails(playerInventoryList[i].itemCode);
@@ -80,20 +80,14 @@ public class KeysInventoryManager : MonoBehaviour
     private void InitialiseInventoryManagementSlots()
     {
         // Clear inventory slots
-        for (int i = 0; i < Settings.playerMaximumInventoryCapacity; i++)
+        for (int i = 0; i < keysManagementSlot.Length; i++)
         {
-            keysManagementSlot[i].greyedOutImageGO.SetActive(false);
             keysManagementSlot[i].itemDetails = null;
             keysManagementSlot[i].itemQuantity = 0;
             keysManagementSlot[i].inventoryManagementSlotImage.sprite = transparent16x16;
             keysManagementSlot[i].textMeshProUGUI.text = "";
         }
 
-        // Grey out unavailable slots
-        for (int i = InventoryManager.Instance.inventoryListCapacityIntArray[(int)InventoryLocation.player]; i < Settings.playerMaximumInventoryCapacity; i++)
-        {
-            keysManagementSlot[i].greyedOutImageGO.SetActive(true);
-        }
     }
 
 }

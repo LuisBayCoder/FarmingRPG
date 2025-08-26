@@ -77,6 +77,7 @@ public enum InventoryLocation
     player,
     chest,
     store,
+    keyring,
     count
 }
 

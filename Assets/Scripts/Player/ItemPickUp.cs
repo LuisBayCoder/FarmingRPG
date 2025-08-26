@@ -16,8 +16,16 @@ public class ItemPickUp : MonoBehaviour
             // if item can be picked up
             if (itemDetails.canBePickedUp == true)
             {
-                // Add item to inventory
-                InventoryManager.Instance.AddItem(InventoryLocation.player, item, collision.gameObject);
+                if(itemDetails.itemType != ItemType.Key)
+                {
+                    // Add item to inventory
+                    InventoryManager.Instance.AddItem(InventoryLocation.player, item, collision.gameObject);
+                }
+                else if(itemDetails.itemType == ItemType.Key)
+                {
+                    // Add item to keyring inventory
+                    InventoryManager.Instance.AddItem(InventoryLocation.keyring, item, collision.gameObject);
+                }
 
                 // Play pick up sound
                 AudioManager.Instance.PlaySound(SoundName.effectPickupSound);

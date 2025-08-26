@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class KeysInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class KeyInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Image inventoryManagementSlotImage;
     public TextMeshProUGUI textMeshProUGUI;
-    public GameObject greyedOutImageGO;
+
     [SerializeField] private KeysInventoryManager inventoryManagement = null;
     [SerializeField] private GameObject inventoryTextBoxPrefab = null;
 
@@ -20,20 +20,10 @@ public class KeysInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IDr
     // private Vector3 startingPosition;
     public GameObject draggedItem;
     private Canvas parentCanvas;
-    private bool isPointerOver = false;
 
     private void Awake()
     {
         parentCanvas = GetComponentInParent<Canvas>();
-    }
-
-    private void Update()
-    {
-        // Check if the left mouse button is clicked while the pointer is over the slot
-        if (isPointerOver && Input.GetMouseButtonDown(0))
-        {
-            MoveItemToStoreInventory();
-        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -66,10 +56,10 @@ public class KeysInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IDr
             Destroy(draggedItem);
 
             // Get object drag is over
-            if (eventData.pointerCurrentRaycast.gameObject != null && eventData.pointerCurrentRaycast.gameObject.GetComponent<KeysInventoryManagementSlot>() != null)
+            if (eventData.pointerCurrentRaycast.gameObject != null && eventData.pointerCurrentRaycast.gameObject.GetComponent<KeyInventoryManagementSlot>() != null)
             {
                 // get the slot number where the drag ended
-                int toSlotNumber = eventData.pointerCurrentRaycast.gameObject.GetComponent<KeysInventoryManagementSlot>().slotNumber;
+                int toSlotNumber = eventData.pointerCurrentRaycast.gameObject.GetComponent<KeyInventoryManagementSlot>().slotNumber;
 
                 // Swap inventory items in inventory list
                 InventoryManager.Instance.SwapInventoryItems(InventoryLocation.player, slotNumber, toSlotNumber);
@@ -110,28 +100,6 @@ public class KeysInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IDr
                     "" 
                 );
             }
-            else
-            {
-                isPointerOver = true;
-
-                //this is the player ui inventory in the store so we need to use the store ui inventory text box
-                StoreUIInventoryTextBox storeUIInventoryTextBox = inventoryManagement.inventoryTextBoxGameobject.GetComponent<StoreUIInventoryTextBox>();
-
-                // Set item type description
-                string itemTypeDescription = InventoryManager.Instance.GetItemTypeDescription(itemDetails.itemType);
-
-                // Populate text box
-                storeUIInventoryTextBox.SetTextboxText(
-                    itemDetails.itemDescription,
-                    itemTypeDescription,
-                    "",
-                    itemDetails.itemLongDescription,
-                    "",
-                    "",
-                    "Sell", // Example value for textBuySale
-                    itemDetails.itemCost.ToString() // Example price value
-                );
-            }
 
             // Set text box position
             if (slotNumber > 23)
@@ -149,35 +117,7 @@ public class KeysInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IDr
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        isPointerOver = false;
         inventoryManagement.DestroyInventoryTextBoxGameobject();
-    }
-
-    private void MoveItemToStoreInventory()
-    {
-        // Get the item details and quantity
-        Debug.Log("MoveItemToStoreInventory" + itemDetails.itemCode);
-        int itemCode = itemDetails.itemCode;
-        int itemQuantity = this.itemQuantity;
-
-        // Access the singleton instance of StoreInventoryManager
-        StoreInventoryManager storeInventoryManager = StoreInventoryManager.Instance;
-
-        // Add the item to the store's inventory
-        // Check if the instance is not null
-        if (storeInventoryManager != null)
-        {
-            storeInventoryManager.AddItem(InventoryLocation.store, itemCode);
-        }
-        SellItem(itemDetails.itemCost);    // Example: Selling items
-        // Remove the item from the player's inventory
-        InventoryManager.Instance.RemoveItem(InventoryLocation.player, itemCode);
-        OnPointerEnter(null);
-    }
-    // Example: Selling items
-    public void SellItem(int cropValue)
-    {
-         CoinManager.Instance.AddCoins(cropValue);
     }
 }
 
