@@ -58,8 +58,6 @@ public class Item : MonoBehaviour
             {
                 spriteRenderer.sortingOrder = itemDetails.orderInLayer;
             }
-
         }
-    
     }
 }
