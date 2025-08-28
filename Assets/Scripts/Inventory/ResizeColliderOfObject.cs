@@ -4,56 +4,76 @@ using UnityEngine;
 
 public class ResizeColliderOfObject : MonoBehaviour
 {
-    [SerializeField] GameObject objectToResizeCollider;
-    private Vector2 originalColliderSize;
-    private Vector2 originalColliderOffset;
-    private Vector3 originalPosition;
+    [SerializeField] GameObject[] objectsToResizeCollider;
+    private Dictionary<GameObject, ColliderData> originalColliderDataMap = new Dictionary<GameObject, ColliderData>();
+
+    [System.Serializable]
+    private struct ColliderData
+    {
+        public Vector2 size;
+        public Vector2 offset;
+        public Vector3 position;
+    }
 
     void Start()
     {
-        // Store the original collider size
+        // Store the original collider data for all objects
         StoreOriginalColliderData();
         
-        // Wait a frame then find and resize new object
-        StartCoroutine(WaitAndResizeNewObject());
+        // Wait a frame then find and resize new objects
+        StartCoroutine(WaitAndResizeNewObjects());
     }
     
     void StoreOriginalColliderData()
     {
-        if (objectToResizeCollider != null)
+        foreach (GameObject obj in objectsToResizeCollider)
         {
-            BoxCollider2D boxCollider = objectToResizeCollider.GetComponent<BoxCollider2D>();
-            if (boxCollider != null)
+            if (obj != null)
             {
-                originalColliderSize = boxCollider.size;
-                originalColliderOffset = boxCollider.offset;
-                originalPosition = objectToResizeCollider.transform.position;
-                Debug.Log($"Stored original collider size: {originalColliderSize}, offset: {originalColliderOffset}");
+                BoxCollider2D boxCollider = obj.GetComponent<BoxCollider2D>();
+                if (boxCollider != null)
+                {
+                    ColliderData data = new ColliderData
+                    {
+                        size = boxCollider.size,
+                        offset = boxCollider.offset,
+                        position = obj.transform.position
+                    };
+                    originalColliderDataMap[obj] = data;
+                    Debug.Log($"Stored original collider data for {obj.name}: size: {data.size}, offset: {data.offset}");
+                }
             }
         }
     }
     
-    IEnumerator WaitAndResizeNewObject()
+    IEnumerator WaitAndResizeNewObjects()
     {
-        // Wait 0.1 seconds for the new object to appear
+        // Wait 0.6 seconds for the new objects to appear
         yield return new WaitForSeconds(0.6f);
         
-        // Find new object at the same location
-        GameObject newObject = FindObjectAtPosition(originalPosition);
-        Debug.Log($"Found new object: {newObject?.name} at position: {originalPosition}");
-        if (newObject != null && newObject != objectToResizeCollider)
+        // Find and resize new objects for each original object
+        foreach (var kvp in originalColliderDataMap)
         {
-            ApplyOriginalSizeToNewObject(newObject);
+            GameObject originalObject = kvp.Key;
+            ColliderData originalData = kvp.Value;
+            
+            GameObject newObject = FindObjectAtPosition(originalData.position, originalObject);
+            Debug.Log($"Found new object: {newObject?.name} at position: {originalData.position}");
+            
+            if (newObject != null)
+            {
+                ApplyOriginalSizeToNewObject(newObject, originalData);
+            }
         }
     }
     
-    GameObject FindObjectAtPosition(Vector3 position)
+    GameObject FindObjectAtPosition(Vector3 position, GameObject excludeObject)
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.1f);
         foreach (Collider2D col in colliders)
         {
             // Check if it's not the original object and has an Item script
-            if (col.gameObject != objectToResizeCollider && col.gameObject.GetComponent<Item>() != null)
+            if (col.gameObject != excludeObject && col.gameObject.GetComponent<Item>() != null)
             {
                 return col.gameObject;
             }
@@ -61,14 +81,14 @@ public class ResizeColliderOfObject : MonoBehaviour
         return null;
     }
     
-    void ApplyOriginalSizeToNewObject(GameObject newObject)
+    void ApplyOriginalSizeToNewObject(GameObject newObject, ColliderData originalData)
     {
         BoxCollider2D boxCollider = newObject.GetComponent<BoxCollider2D>();
         if (boxCollider != null)
         {
-            boxCollider.size = originalColliderSize;
-            boxCollider.offset = originalColliderOffset;
-            Debug.Log($"Applied original size {originalColliderSize} and offset {originalColliderOffset} to new object: {newObject.name}");
+            boxCollider.size = originalData.size;
+            boxCollider.offset = originalData.offset;
+            Debug.Log($"Applied original size {originalData.size} and offset {originalData.offset} to new object: {newObject.name}");
         }
     }
 }
