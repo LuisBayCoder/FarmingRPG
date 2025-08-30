@@ -25,25 +25,11 @@ public class StorageUIManager : SingletonMonobehaviour<StorageInventoryManager>
 
         storeMenu.SetActive(false);
     }
-
-     void OnEnable()
-    {
-        // Register the StoreMenu method with Lua.
-        Lua.RegisterFunction(nameof(StoreMenu), this, SymbolExtensions.GetMethodInfo(() => StoreMenu()));
-    }
-    void OnDisable()
-    {
-        if (unregisterOnDisable)
-        {
-            // Unregister the StoreMenu method from Lua.
-            Lua.UnregisterFunction(nameof(StoreMenu));
-        }
-    }
     
     private void Update()
     {
         // Toggle pause menu if escape is pressed this a debug key
-         if (Input.GetKeyDown(KeyCode.R))
+         if (Input.GetKeyDown(KeyCode.O))
         {
             if (StoreMenuOn)
             {
@@ -153,6 +139,5 @@ public class StorageUIManager : SingletonMonobehaviour<StorageInventoryManager>
         }
 
         HighlightButtonForSelectedTab();
-
     }
 }

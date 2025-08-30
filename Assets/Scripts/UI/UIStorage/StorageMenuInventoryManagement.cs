@@ -59,12 +59,12 @@ public class StorageMenuInventoryManagement : MonoBehaviour
 
     private void PopulateStorageInventory(InventoryLocation inventoryLocation, List<InventoryItem> playerInventoryList)
     {
-        if (inventoryLocation == InventoryLocation.store)
+        if (inventoryLocation == InventoryLocation.storage)
         {
             InitialiseInventoryManagementSlots();
 
             // loop through all player inventory items
-            for (int i = 0; i < StoreInventoryManager.Instance.inventoryLists[(int)InventoryLocation.store].Count; i++)
+            for (int i = 0; i < StorageInventoryManager.Instance.inventoryLists[(int)InventoryLocation.storage].Count; i++)
             {
                 // Get inventory item details
                 inventoryManagementSlot[i].itemDetails = StorageInventoryManager.Instance.GetItemDetails(playerInventoryList[i].itemCode);
