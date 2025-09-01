@@ -20,7 +20,7 @@ public class StorageMenuInventoryManagement : MonoBehaviour
         if (StorageInventoryManager.Instance != null)
         {
             Debug.Log("StorageMenuInventoryManagement OnEnable");
-            PopulateStorageInventory(InventoryLocation.store, StorageInventoryManager.Instance.inventoryLists[(int)InventoryLocation.store]);
+            PopulateStorageInventory(InventoryLocation.storage, StorageInventoryManager.Instance.inventoryLists[(int)InventoryLocation.storage]);
         }
         else
         {
@@ -47,7 +47,7 @@ public class StorageMenuInventoryManagement : MonoBehaviour
     public void DestroyCurrentlyDraggedItems()
     {
         // loop through all player inventory items
-        for (int i = 0; i < StorageInventoryManager.Instance.inventoryLists[(int)InventoryLocation.store].Count; i++)
+        for (int i = 0; i < StorageInventoryManager.Instance.inventoryLists[(int)InventoryLocation.storage].Count; i++)
         {
             if (inventoryManagementSlot[i].draggedItem != null)
             {

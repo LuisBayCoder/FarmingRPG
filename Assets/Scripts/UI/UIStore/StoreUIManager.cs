@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using PixelCrushers.DialogueSystem;
 
-public class StoreUIManager : SingletonMonobehaviour<StoreInventoryManager>
+public class StoreUIManager : SingletonMonobehaviour<StoreUIManager>
 {
 
     private bool _storeMenuOn = false;
