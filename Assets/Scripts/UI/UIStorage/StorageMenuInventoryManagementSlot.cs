@@ -103,9 +103,8 @@ public class StorageMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandl
             itemDetails.itemLongDescription, 
             "", 
             "", 
-            "Buy", // Example value for textBuySale
-            // Calculate the price with markup
-            Mathf.RoundToInt(itemDetails.itemCost * StoreStanding.Instance.GetPriceMultiplier()).ToString() // Example price value
+            "Price:  Place in inventory.", 
+            itemDetails.itemCost.ToString()
             );
 
             // Set text box position
@@ -130,24 +129,24 @@ public class StorageMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandl
 
     private void MoveItem() 
     {
-        
         // Get the item details and quantity
         int itemCode = itemDetails.itemCode;
         int itemQuantity = this.itemQuantity;
         
-        // Access the singleton instance of StoreInventoryManager
-        InventoryManager storeInventoryManager = InventoryManager.Instance;
+        // Access the singleton instance of InventoryManager for player inventory
+        InventoryManager inventoryManager = InventoryManager.Instance;
 
         // Add the item to the player's inventory
-        // Check if the instance is not null
-        if (storeInventoryManager != null)
+        if (inventoryManager != null)
         {
-            // Add items to the player's inventory
-            storeInventoryManager.AddItem(InventoryLocation.player, itemCode);    
+            inventoryManager.AddItem(InventoryLocation.player, itemCode);    
         }
-        // Remove the item from the store inventory
-
-        StoreInventoryManager.Instance.RemoveItem(InventoryLocation.storage, itemCode);
+        
+        // Remove the item from the storage inventory - FIXED
+        if (StorageInventoryManager.Instance != null)
+        {
+            StorageInventoryManager.Instance.RemoveItem(InventoryLocation.storage, itemCode);
+        }
 
         // Call OnPointerEnter to update the UI or perform any necessary actions
         OnPointerEnter(null);

@@ -15,12 +15,14 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
     [HideInInspector] public ItemDetails itemDetails;
     [HideInInspector] public int itemQuantity;
     [SerializeField] private int slotNumber = 0;
-    [SerializeField] private bool itsInventoryUI = true;
+    [SerializeField] private bool isStoreInventoryUI = true;
+    [SerializeField] private bool isStorage = false;
 
     // private Vector3 startingPosition;
     public GameObject draggedItem;
     private Canvas parentCanvas;
-    private bool isPointerOver = false;
+    private bool isPointerOverStoreUI = false;
+    private bool isPointerOverStorageUI = false;
 
     private void Awake()
     {
@@ -30,9 +32,13 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
     private void Update()
     {
         // Check if the left mouse button is clicked while the pointer is over the slot
-        if (isPointerOver && Input.GetMouseButtonDown(0))
+        if (isPointerOverStoreUI && Input.GetMouseButtonDown(0))
         {
             MoveItemToStoreInventory();
+        }
+        else if (isPointerOverStorageUI && Input.GetMouseButtonDown(0))
+        {
+            MoveItemToStorageInventory();
         }
     }
 
@@ -91,7 +97,7 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
             inventoryManagement.inventoryTextBoxGameobject = Instantiate(inventoryTextBoxPrefab, transform.position, Quaternion.identity);
             inventoryManagement.inventoryTextBoxGameobject.transform.SetParent(parentCanvas.transform, false);
 
-            if (itsInventoryUI)
+            if (!isStoreInventoryUI && !isStorage)
             {
                 UIInventoryTextBox inventoryTextBox = inventoryManagement.inventoryTextBoxGameobject.GetComponent<UIInventoryTextBox>();
 
@@ -110,9 +116,9 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
                     "" 
                 );
             }
-            else
+            else if (isStoreInventoryUI)
             {
-                isPointerOver = true;
+                isPointerOverStoreUI = true;
 
                 //this is the player ui inventory in the store so we need to use the store ui inventory text box
                 StoreUIInventoryTextBox storeUIInventoryTextBox = inventoryManagement.inventoryTextBoxGameobject.GetComponent<StoreUIInventoryTextBox>();
@@ -133,6 +139,29 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
                 );
             }
 
+            else if (isStorage)
+            {
+                 isPointerOverStorageUI = true;
+
+                //this is the player ui inventory in the store so we need to use the store ui inventory text box
+                StoreUIInventoryTextBox storeUIInventoryTextBox = inventoryManagement.inventoryTextBoxGameobject.GetComponent<StoreUIInventoryTextBox>();
+
+                // Set item type description
+                string itemTypeDescription = InventoryManager.Instance.GetItemTypeDescription(itemDetails.itemType);
+
+                // Populate text box
+                storeUIInventoryTextBox.SetTextboxText(
+                    itemDetails.itemDescription,
+                    itemTypeDescription,
+                    "",
+                    itemDetails.itemLongDescription,
+                    "",
+                    "",
+                    "Price:  Store item.",
+                    itemDetails.itemCost.ToString()
+                );
+            }
+
             // Set text box position
             if (slotNumber > 23)
             {
@@ -149,7 +178,8 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        isPointerOver = false;
+        isPointerOverStoreUI = false;
+        isPointerOverStorageUI = false;
         inventoryManagement.DestroyInventoryTextBoxGameobject();
     }
 
@@ -174,9 +204,32 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         InventoryManager.Instance.RemoveItem(InventoryLocation.player, itemCode);
         OnPointerEnter(null);
     }
+
+    private void MoveItemToStorageInventory()
+    {
+        // Get the item details and quantity
+        Debug.Log("MoveItemToStorageInventory" + itemDetails.itemCode);
+        int itemCode = itemDetails.itemCode;
+        int itemQuantity = this.itemQuantity;
+
+        // Access the singleton instance of StorageInventoryManager
+        StorageInventoryManager storageInventoryManager = StorageInventoryManager.Instance;
+
+        // Add the item to the storage's inventory
+        // Check if the instance is not null
+        if (storageInventoryManager != null)
+        {
+            storageInventoryManager.AddItem(InventoryLocation.storage, itemCode);
+        }
+
+        // Remove the item from the player's inventory
+        InventoryManager.Instance.RemoveItem(InventoryLocation.player, itemCode);
+        OnPointerEnter(null);
+    }
+
     // Example: Selling items
     public void SellItem(int cropValue)
     {
-         CoinManager.Instance.AddCoins(cropValue);
+        CoinManager.Instance.AddCoins(cropValue);
     }
 }

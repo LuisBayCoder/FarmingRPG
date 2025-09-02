@@ -17,7 +17,7 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
     [SerializeField] private GameObject[] storeTabs = null;
     [SerializeField] private Button[] storeButtons = null;
 
-    public bool StoreMenuOn { get => _storeMenuOn; set => _storeMenuOn = value; }
+    public bool StorageMenuOn { get => _storeMenuOn; set => _storeMenuOn = value; }
 
     protected override void Awake()
     {
@@ -31,13 +31,13 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
         // Toggle pause menu if escape is pressed this a debug key
          if (Input.GetKeyDown(KeyCode.O))
         {
-            if (StoreMenuOn)
+            if (StorageMenuOn)
             {
-                DisableStoreMenu();
+                DisabelStorageMenu();
             }
             else
             {
-                EnableStoreMenu();
+                EnableStorageMenu();
             }
         }
     }
@@ -45,18 +45,18 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
     public void StoreMenu()
     {
         // Toggle pause menu if escape is pressed
-        if (StoreMenuOn)
+        if (StorageMenuOn)
         {
-            DisableStoreMenu();
+            DisabelStorageMenu();
         }
         else
         {
-            EnableStoreMenu();
+            EnableStorageMenu();
         }
     }
 
 
-    private void EnableStoreMenu()
+    public void EnableStorageMenu()
     {
         // Destroy any currently dragged items
         //uiInventoryBar.DestroyCurrentlyDraggedItems();
@@ -64,7 +64,7 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
         // Clear currently selected items
         //uiInventoryBar.ClearCurrentlySelectedItems();
 
-        StoreMenuOn = true;
+        StorageMenuOn = true;
         Player.Instance.PlayerInputIsDisabled = true;
         Time.timeScale = 0;
         storeMenu.SetActive(true);
@@ -76,12 +76,12 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
         HighlightButtonForSelectedTab();
     }
 
-    public void DisableStoreMenu()
+    public void DisabelStorageMenu()
     {
         // Destroy any currently dragged items
         //storeMenuInventoryManagement.DestroyCurrentlyDraggedItems();
 
-        StoreMenuOn = false;
+        StorageMenuOn = false;
         Player.Instance.PlayerInputIsDisabled = false;
         Time.timeScale = 1;
         storeMenu.SetActive(false);
