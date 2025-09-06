@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 426733538}
   - component: {fileID: 426733539}
   m_Layer: 0
-  m_Name: CowSpine (2)
+  m_Name: BarnToolsStorage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -491,13 +491,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426733537}
-  m_LocalRotation: {x: -0, y: -0, z: 0.19263609, w: 0.9812703}
-  m_LocalPosition: {x: -8.25, y: 9.13, z: 0}
-  m_LocalScale: {x: 0.33285603, y: 0.33285603, z: 0.24964201}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.21, y: 0.76, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 668052873}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 22.213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &426733539
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -539,7 +539,8 @@ SpriteRenderer:
   m_SortingLayerID: -1897448895
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 35a2b003107da724fafee8c27787a929, type: 3}
+  m_Sprite: {fileID: 4021480498424108630, guid: d67f8bdea7b454ba08443e00d51268b8,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
