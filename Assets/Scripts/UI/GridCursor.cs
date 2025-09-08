@@ -100,15 +100,31 @@ public class GridCursor : MonoBehaviour
             switch (itemDetails.itemType)
             {
                 case ItemType.Seed:
-                    if (!IsCursorValidForSeed(gridPropertyDetails))
+                    // If seed can be dropped, allow dropping anywhere valid OR planting in dug ground
+                    // If seed cannot be dropped, only allow planting in dug ground
+                    if (itemDetails.canBeDropped)
                     {
-                        SetCursorToInvalid();
-                        return;
+                        // Can be dropped anywhere that allows dropping OR planted in dug ground
+                        if (!IsCursorValidForCommodity(gridPropertyDetails) && !IsCursorValidForSeed(gridPropertyDetails))
+                        {
+                            SetCursorToInvalid();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        // Can only be planted in dug ground
+                        if (!IsCursorValidForSeed(gridPropertyDetails))
+                        {
+                            SetCursorToInvalid();
+                            return;
+                        }
                     }
                     break;
 
                 case ItemType.Commodity:
-                    if (!IsCursorValidForCommodity(gridPropertyDetails))
+                    // Check canBeDropped for commodities since they are being dropped
+                    if (!itemDetails.canBeDropped || !IsCursorValidForCommodity(gridPropertyDetails))
                     {
                         SetCursorToInvalid();
                         return;
@@ -121,6 +137,7 @@ public class GridCursor : MonoBehaviour
                 case ItemType.Hoeing_tool:
                 case ItemType.Reaping_tool:
                 case ItemType.Collecting_tool:
+                    // Don't check canBeDropped for tools since they are being used, not dropped
                     if (!IsCursorValidForTool(gridPropertyDetails, itemDetails))
                     {
                         SetCursorToInvalid();
@@ -129,8 +146,13 @@ public class GridCursor : MonoBehaviour
                     break;
 
                 default:
-                    SetCursorToInvalid();
-                    return;
+                    // For other item types, check canBeDropped since they would be dropped
+                    if (!itemDetails.canBeDropped)
+                    {
+                        SetCursorToInvalid();
+                        return;
+                    }
+                    break;
             }
             SetCursorToValid(); // Cursor is valid for the checked item type and grid property details
         }
@@ -160,7 +182,10 @@ public class GridCursor : MonoBehaviour
 
     private bool IsCursorValidForSeed(GridPropertyDetails gridPropertyDetails)
     {
-        return gridPropertyDetails.canDropItem;
+        // For seeds, check if the location allows dropping AND the ground has been dug
+        return gridPropertyDetails.canDropItem && 
+               gridPropertyDetails.daysSinceDug > -1 && // Ground has been dug (not -1)
+               gridPropertyDetails.seedItemCode == -1;  // No seed already planted
     }
 
     private bool IsCursorValidForTool(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails)
