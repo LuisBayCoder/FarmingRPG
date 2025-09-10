@@ -269,7 +269,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 }
 
                 ValidateObjectUnderCursor();
-
             }
         }
     }
@@ -658,21 +657,28 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
 
+        // ADD THIS: Set tool animation to basket in override animation
+        toolCharacterAttribute.partVariantType = PartVariantType.none; // You might need to add a basket variant
+        characterAttributeCustomisationList.Clear();
+        characterAttributeCustomisationList.Add(toolCharacterAttribute);
+        animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
+
+
         if (playerDirection == Vector3Int.right)
         {
-            isUsingToolRight = true;
+            isPickingRight = true;
         }
         else if (playerDirection == Vector3Int.left)
         {
-            isUsingToolLeft = true;
+            isPickingLeft = true;
         }
         else if (playerDirection == Vector3Int.up)
         {
-            isUsingToolUp = true;
+            isPickingUp = true;
         }
         else if (playerDirection == Vector3Int.down)
         {
-            isUsingToolDown = true;
+            isPickingDown = true;
         }
 
         if (isCursorPositionValid)
