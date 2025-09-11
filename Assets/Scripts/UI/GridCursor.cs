@@ -226,13 +226,29 @@ public class GridCursor : MonoBehaviour
                 if (gridPropertyDetails.seedItemCode != -1)
                 {
                     CropDetails cropDetails = so_CropDetailsList.GetCropDetails(gridPropertyDetails.seedItemCode);
-
-                    if (cropDetails != null && gridPropertyDetails.growthDays >= cropDetails.growthDays[cropDetails.growthDays.Length - 1])
+                    if (cropDetails != null)
                     {
-                        return cropDetails.CanUseToolToHarvestCrop(itemDetails.itemCode);
+                        Debug.Log($"Crop found: {cropDetails.cropProducedItemCode}, GrowthDays: {gridPropertyDetails.growthDays}, Required: {cropDetails.growthDays[cropDetails.growthDays.Length - 1]}");
+                        if (gridPropertyDetails.growthDays >= cropDetails.growthDays[cropDetails.growthDays.Length - 1])
+                        {
+                            bool canHarvest = cropDetails.CanUseToolToHarvestCrop(itemDetails.itemCode);
+                            Debug.Log($"Can harvest with tool {itemDetails.itemCode}: {canHarvest}");
+                            return canHarvest;
+                        }
+                        else
+                        {
+                            Debug.Log("Crop not fully grown.");
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("CropDetails not found.");
                     }
                 }
-
+                else
+                {
+                    Debug.Log("No crop planted here.");
+                }
                 return false;
 
             default:
