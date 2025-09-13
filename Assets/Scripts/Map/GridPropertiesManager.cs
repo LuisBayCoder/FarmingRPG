@@ -564,6 +564,7 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
     /// </summary>
     public Crop GetCropObjectAtGridLocation(GridPropertyDetails gridPropertyDetails)
     {
+        Debug.Log($"Looking for crop at grid ({gridPropertyDetails.gridX}, {gridPropertyDetails.gridY})");
         Vector3 worldPosition = grid.GetCellCenterWorld(new Vector3Int(gridPropertyDetails.gridX, gridPropertyDetails.gridY, 0));
         Collider2D[] collider2DArray = Physics2D.OverlapPointAll(worldPosition);
 

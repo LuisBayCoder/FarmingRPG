@@ -130,12 +130,13 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>, ISavea
     /// <summary>
     /// Add an item of type itemCode to the inventory list for the inventoryLocation
     /// </summary>
-    public void AddItem(InventoryLocation inventoryLocation, int itemCode)
+    public void AddItem(InventoryLocation location, int itemCode)
     {
-        List<InventoryItem> inventoryList = inventoryLists[(int)inventoryLocation];
+        Debug.Log($"AddItem called: location={location}, itemCode={itemCode}");
+        List<InventoryItem> inventoryList = inventoryLists[(int)location];
 
         // Check if inventory already contains the item
-        int itemPosition = FindItemInInventory(inventoryLocation, itemCode);
+        int itemPosition = FindItemInInventory(location, itemCode);
 
         if (itemPosition != -1)
         {
@@ -147,7 +148,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>, ISavea
         }
 
         //  Send event that inventory has been updated
-        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
+        EventHandler.CallInventoryUpdatedEvent(location, inventoryLists[(int)location]);
     }
 
 

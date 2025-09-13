@@ -903,6 +903,15 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                     crop.ProcessToolAction(equippedItemDetails, isPickingRight, isPickingLeft, isPickingDown, isPickingUp);
                     break;
             }
+           
+            if (crop != null)
+            {
+                Debug.Log("Crop found, processing tool action.");
+            }
+            else
+            {
+                Debug.Log("No crop found at grid location.");
+            }
         }
     }
 

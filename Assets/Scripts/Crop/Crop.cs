@@ -16,6 +16,8 @@ public class Crop : MonoBehaviour
 
     public void ProcessToolAction(ItemDetails equippedItemDetails, bool isToolRight, bool isToolLeft, bool isToolDown, bool isToolUp)
     {
+        Debug.Log("ProcessToolAction called");
+
         // Get grid property details
         GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(cropGridPosition.x, cropGridPosition.y);
 
@@ -61,15 +63,20 @@ public class Crop : MonoBehaviour
         }
 
         // Check if cumulative damage meets or exceeds required harvest actions
+        //always set the number at least to 1 so that even a tool with 0 damage can harvest
+        if (cumulativeDamage < 1)
+            cumulativeDamage = 1;
         if (cumulativeDamage >= requiredHarvestActions)
             HarvestCrop(isToolRight, isToolUp, cropDetails, gridPropertyDetails, animator);
     }
 
     private void HarvestCrop(bool isUsingToolRight, bool isUsingToolUp, CropDetails cropDetails, GridPropertyDetails gridPropertyDetails, Animator animator)
     {
+        Debug.Log($"HarvestCrop called. Animator is {(animator == null ? "NULL" : "NOT NULL")}");
         // Is there a harvested animation
         if (cropDetails.isHarvestedAnimation && animator != null)
         {
+            Debug.Log("Harvested animation should play.");
             // If harvest sprite then add to sprite renderer
             if (cropDetails.harvestedSprite != null)
             {
@@ -123,6 +130,7 @@ public class Crop : MonoBehaviour
         // Is there a harvested animation - Destroy this crop game object after animation completed
         if (cropDetails.isHarvestedAnimation && animator != null)
         {
+            Debug.Log("Starting coroutine to wait for harvested animation state.");
             StartCoroutine(ProcessHarvestActionsAfterAnimation(cropDetails, gridPropertyDetails, animator));
         }
         else
@@ -133,16 +141,19 @@ public class Crop : MonoBehaviour
 
     private IEnumerator ProcessHarvestActionsAfterAnimation(CropDetails cropDetails, GridPropertyDetails gridPropertyDetails, Animator animator)
     {
+        Debug.Log("ProcessHarvestActionsAfterAnimation coroutine started.");
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Harvested"))
         {
+            Debug.Log("Waiting for 'Harvested' animation state...");
             yield return null;
         }
-
+        Debug.Log("'Harvested' animation state reached. Proceeding to harvest actions.");
         HarvestActions(cropDetails, gridPropertyDetails);
     }
 
     private void HarvestActions(CropDetails cropDetails, GridPropertyDetails gridPropertyDetails)
     {
+        Debug.Log("HarvestActions called");
         SpawnHarvestedItems(cropDetails);
 
         // Does this crop transform into another crop
@@ -177,7 +188,8 @@ public class Crop : MonoBehaviour
                 Vector3 spawnPosition;
                 if (cropDetails.spawnCropProducedAtPlayerPosition)
                 {
-                    // Add item to the players inventory
+                    Debug.Log($"InventoryManager.Instance is {(InventoryManager.Instance == null ? "NULL" : "NOT NULL")}");
+                    Debug.Log($"About to add item {cropDetails.cropProducedItemCode[i]} to player inventory");
                     InventoryManager.Instance.AddItem(InventoryLocation.player, cropDetails.cropProducedItemCode[i]);
                 }
                 else
