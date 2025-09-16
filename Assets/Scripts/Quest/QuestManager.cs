@@ -20,7 +20,7 @@ public class QuestManager : MonoBehaviour
     public float lightIncreaseRate = 0.1f; // rate at which the light intensity increases
                                            //need an array of Light2D objects to turn off  
     public Light2D[] lightsToTurnOff; // array of lights to turn off when the quest is complete
-  
+
     public void RegisterCorrectPlacement(int amount)
     {
         correctPlacements += amount;
@@ -80,7 +80,7 @@ public class QuestManager : MonoBehaviour
         }
         //Make structure appear
         GameObject structure = GameObject.Find("InstantiateQuestItem");
-        
+
         if (structure != null)
         {
             // Instantiate the quest item
@@ -137,5 +137,7 @@ public class QuestManager : MonoBehaviour
         // You can add additional logic here if needed
         MessageSystem.SendMessage(null, "StartQuest", questName);
     }
+    
+    
 }
 

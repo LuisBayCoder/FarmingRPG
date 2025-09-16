@@ -27379,6 +27379,7 @@ GameObject:
   - component: {fileID: 1098528989}
   - component: {fileID: 1098528988}
   - component: {fileID: 1098528990}
+  - component: {fileID: 1098528991}
   m_Layer: 0
   m_Name: QuestManager
   m_TagString: Untagged
@@ -27430,6 +27431,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dbe754b7754094d93f41e39868bc43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1098528991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098528987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411d1c8c46e14e94e93e1b69d0b735c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedItemCode: 10032
 --- !u!1001 &1102322237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27933,6 +27947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equippedItemSpriteRenderer: {fileID: 810560372}
+  plantSeedAction: {fileID: 1098528991}
 --- !u!61 &1117205238
 BoxCollider2D:
   m_ObjectHideFlags: 0

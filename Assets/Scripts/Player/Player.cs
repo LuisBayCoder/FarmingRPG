@@ -72,6 +72,8 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private Character playerCharacter;
     private PlayerAttack playerAttack;
+
+    [SerializeField] private PlantSeedAction plantSeedAction;
     protected override void Awake()
     {
         base.Awake();
@@ -397,6 +399,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Process if we have cropdetails for the seed
         if (GridPropertiesManager.Instance.GetCropDetails(itemDetails.itemCode) != null)
         {
+            
             // Update grid properties with seed details
             gridPropertyDetails.seedItemCode = itemDetails.itemCode;
             gridPropertyDetails.growthDays = 0;
@@ -409,6 +412,9 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
             // Make planting sound
             AudioManager.Instance.PlaySound(SoundName.effectPlantingSound);
+            
+            // Call plant seed action
+            plantSeedAction.PerformAction();
         }
     }
     private void ProcessPlayerClickInputCommodity(ItemDetails itemDetails)
