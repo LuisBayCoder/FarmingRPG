@@ -149,12 +149,19 @@ public class Crop : MonoBehaviour
         }
         Debug.Log("'Harvested' animation state reached. Proceeding to harvest actions.");
         HarvestActions(cropDetails, gridPropertyDetails);
+
     }
 
     private void HarvestActions(CropDetails cropDetails, GridPropertyDetails gridPropertyDetails)
     {
         Debug.Log("HarvestActions called");
         SpawnHarvestedItems(cropDetails);
+        if (cropDetails.isActionItem && cropDetails.actionItemPrefab != null)
+        {
+            //instantiate action at random position around the crop position
+            Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f), 0f);
+            Instantiate(cropDetails.actionItemPrefab, spawnPosition, Quaternion.identity);
+        }
 
         // Does this crop transform into another crop
         if (cropDetails.harvestedTransformItemCode > 0)

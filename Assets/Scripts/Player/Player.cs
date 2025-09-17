@@ -655,6 +655,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Play sound
         AudioManager.Instance.PlaySound(SoundName.effectBasket);
 
+
         StartCoroutine(CollectInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection, gridCursor.CursorPositionIsValid));
     }
 
