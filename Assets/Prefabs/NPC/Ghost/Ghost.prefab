@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 9113533681968329604}
   - component: {fileID: 9113533681968329605}
   - component: {fileID: 9113533682730530186}
+  - component: {fileID: 986580384348139586}
   m_Layer: 6
   m_Name: Ghost
   m_TagString: Enemy
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9113533681968329609}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.76, y: -5.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -110,8 +111,7 @@ SpriteRenderer:
   m_SortingLayerID: -1897448895
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4209753179760746833, guid: 6fadeb53dd9679d4c84f5e9c581ea5c1,
-    type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,7 +119,7 @@ SpriteRenderer:
   m_Size: {x: 1.28125, y: 1.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!95 &9113533681968329615
@@ -309,6 +309,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyCode: 10004
   enemyList: {fileID: 11400000, guid: eea0ca588b0b04b409aaf0eac3f05d12, type: 2}
+--- !u!114 &986580384348139586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113533681968329609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36aadd32d476f444f84c4c5fb384ecf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9113533682997165913
 GameObject:
   m_ObjectHideFlags: 0
