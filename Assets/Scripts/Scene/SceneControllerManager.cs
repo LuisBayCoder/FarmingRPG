@@ -165,4 +165,19 @@ public class SceneControllerManager : SingletonMonobehaviour<SceneControllerMana
     {
         yield return StartCoroutine(Fade(0f));
     }
+
+    public SceneName GetCurrentScene()
+    {
+        string activeSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        // Try to parse the scene name to the SceneName enum
+        if (System.Enum.TryParse<SceneName>(activeSceneName, out var sceneEnum))
+        {
+            return sceneEnum;
+        }
+        else
+        {
+            Debug.LogWarning($"Scene '{activeSceneName}' not found in SceneName enum. Returning default.");
+            return startingSceneName; // or SceneName.Scene1_Farm as a fallback
+        }
+    }
 }

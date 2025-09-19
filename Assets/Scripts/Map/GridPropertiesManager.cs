@@ -799,4 +799,19 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
         // Display grid property details to reflect changed values
         DisplayGridPropertyDetails();
     }
+
+    /// <summary>
+    /// Returns the world position for the given grid coordinates.
+    /// </summary>
+    public Vector3 GetWorldPosition(int gridX, int gridY)
+    {
+        if (grid == null)
+        {
+            grid = GameObject.FindObjectOfType<Grid>();
+        }
+        Vector3 worldPos = grid.CellToWorld(new Vector3Int(gridX, gridY, 0));
+        // Center the position within the cell (optional, for 2D tilemaps)
+        worldPos += new Vector3(Settings.gridCellSize / 2f, 0f, 0f);
+        return worldPos;
+    }
 }
