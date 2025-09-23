@@ -399,6 +399,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Process if we have cropdetails for the seed
         if (GridPropertiesManager.Instance.GetCropDetails(itemDetails.itemCode) != null)
         {
+            
             // Update grid properties with seed details
             gridPropertyDetails.seedItemCode = itemDetails.itemCode;
             gridPropertyDetails.growthDays = 0;
@@ -412,11 +413,9 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             // Make planting sound
             AudioManager.Instance.PlaySound(SoundName.effectPlantingSound);
 
-            // Get the world position of the planted seed
-            Vector3 seedWorldPosition = GridPropertiesManager.Instance.GetWorldPosition(gridPropertyDetails.gridX, gridPropertyDetails.gridY);
-
-            // Call plant seed action with position
-            plantSeedAction.PerformAction(seedWorldPosition);
+            // Pass seed position and item code
+            Vector3 seedPosition = GridPropertiesManager.Instance.GetWorldPosition(gridPropertyDetails.gridX, gridPropertyDetails.gridY);
+            plantSeedAction.PerformAction(seedPosition, itemDetails.itemCode);
         }
     }
     private void ProcessPlayerClickInputCommodity(ItemDetails itemDetails)

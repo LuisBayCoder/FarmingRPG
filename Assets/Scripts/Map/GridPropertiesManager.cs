@@ -800,18 +800,25 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
         DisplayGridPropertyDetails();
     }
 
-    /// <summary>
-    /// Returns the world position for the given grid coordinates.
-    /// </summary>
     public Vector3 GetWorldPosition(int gridX, int gridY)
     {
-        if (grid == null)
+        // Assuming each grid cell is 1 unit in size and origin is at (0,0)
+        // Adjust cell size or origin as needed for your game
+        float cellSize = 1f;
+        return new Vector3(gridX * cellSize, gridY * cellSize, 0f);
+    }
+
+    public SO_GridProperties GetActiveSceneGridProperties()
+    {
+        string activeSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        foreach (SO_GridProperties so_GridProperties in so_gridPropertiesArray)
         {
-            grid = GameObject.FindObjectOfType<Grid>();
+            if (so_GridProperties.sceneName.ToString() == activeSceneName)
+            {
+                return so_GridProperties;
+            }
         }
-        Vector3 worldPos = grid.CellToWorld(new Vector3Int(gridX, gridY, 0));
-        // Center the position within the cell (optional, for 2D tilemaps)
-        worldPos += new Vector3(Settings.gridCellSize / 2f, 0f, 0f);
-        return worldPos;
+        Debug.LogWarning($"No SO_GridProperties found for active scene: {activeSceneName}");
+        return null;
     }
 }
