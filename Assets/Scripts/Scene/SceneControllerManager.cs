@@ -11,7 +11,7 @@ public class SceneControllerManager : SingletonMonobehaviour<SceneControllerMana
     private bool isFading;
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private CanvasGroup faderCanvasGroup = null;
-    [SerializeField] private Image faderImage = null;
+    [SerializeField] private List<Image> faderImages = new List<Image>();
     public SceneName startingSceneName;
     [SerializeField] private List<SceneName> listNonStartingSceneNames =new List<SceneName>();
 
@@ -30,11 +30,19 @@ public class SceneControllerManager : SingletonMonobehaviour<SceneControllerMana
         // While the CanvasGroup hasn't reached the final alpha yet...
         while (!Mathf.Approximately(faderCanvasGroup.alpha, finalAlpha))
         {
-            // ... move the alpha towards it's target alpha.
-            faderCanvasGroup.alpha = Mathf.MoveTowards(faderCanvasGroup.alpha, finalAlpha,
-            fadeSpeed * Time.deltaTime);
+            faderCanvasGroup.alpha = Mathf.MoveTowards(faderCanvasGroup.alpha, finalAlpha, fadeSpeed * Time.deltaTime);
 
-            // Wait for a frame then continue.
+            // Set all images' alpha
+            foreach (var img in faderImages)
+            {
+                if (img != null)
+                {
+                    Color c = img.color;
+                    c.a = faderCanvasGroup.alpha;
+                    img.color = c;
+                }
+            }
+
             yield return null;
         }
 
@@ -99,7 +107,12 @@ public class SceneControllerManager : SingletonMonobehaviour<SceneControllerMana
     private IEnumerator Start()
     {
         // Set the initial alpha to start off with a black screen.
-        faderImage.color = new Color(0f, 0f, 0f, 1f);
+        foreach (var img in faderImages)
+        {
+            if (img != null)
+                img.color = new Color(0f, 0f, 0f, 1f);
+        }
+
         faderCanvasGroup.alpha = 1f;
 
         //pre load all other non-starting scenes to ensure all starting crops in other scenes are saved to the grid properties
