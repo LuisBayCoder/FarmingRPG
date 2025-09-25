@@ -1,0 +1,143 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using PixelCrushers.DialogueSystem;
+
+public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
+{
+
+    private bool _storeMenuOn = false;
+    //[SerializeField] private UIInventoryBar uiInventoryBar = null;
+    //[SerializeField] private PauseMenuInventoryManagement storeMenuInventoryManagement = null;
+    [Tooltip("Typically leave unticked so temporary Dialogue Managers don't unregister your functions.")]
+    public bool unregisterOnDisable = false;
+
+    [SerializeField] private GameObject storeMenu = null;
+    [SerializeField] private GameObject[] storeTabs = null;
+    [SerializeField] private Button[] storeButtons = null;
+
+    public bool StorageMenuOn { get => _storeMenuOn; set => _storeMenuOn = value; }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        storeMenu.SetActive(false);
+    }
+    
+    private void Update()
+    {
+        // Toggle pause menu if escape is pressed this a debug key
+         if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (StorageMenuOn)
+            {
+                DisabelStorageMenu();
+            }
+            else
+            {
+                EnableStorageMenu();
+            }
+        }
+    }
+
+    public void StoreMenu()
+    {
+        // Toggle pause menu if escape is pressed
+        if (StorageMenuOn)
+        {
+            DisabelStorageMenu();
+        }
+        else
+        {
+            EnableStorageMenu();
+        }
+    }
+
+
+    public void EnableStorageMenu()
+    {
+        // Destroy any currently dragged items
+        //uiInventoryBar.DestroyCurrentlyDraggedItems();
+
+        // Clear currently selected items
+        //uiInventoryBar.ClearCurrentlySelectedItems();
+
+        StorageMenuOn = true;
+        Player.Instance.PlayerInputIsDisabled = true;
+        Time.timeScale = 0;
+        storeMenu.SetActive(true);
+
+        // Trigger garbage collector
+        System.GC.Collect();
+
+        // Highlight selected button
+        HighlightButtonForSelectedTab();
+    }
+
+    public void DisabelStorageMenu()
+    {
+        // Destroy any currently dragged items
+        //storeMenuInventoryManagement.DestroyCurrentlyDraggedItems();
+
+        StorageMenuOn = false;
+        Player.Instance.PlayerInputIsDisabled = false;
+        Time.timeScale = 1;
+        storeMenu.SetActive(false);
+    }
+
+    private void HighlightButtonForSelectedTab()
+    {
+        for (int i = 0; i < storeTabs.Length; i++)
+        {
+            if (storeTabs[i].activeSelf)
+            {
+                SetButtonColorToActive(storeButtons[i]);
+            }
+
+            else
+            {
+                SetButtonColorToInactive(storeButtons[i]);
+            }
+        }
+    }
+
+    private void SetButtonColorToActive(Button button)
+    {
+        ColorBlock colors = button.colors;
+
+        colors.normalColor = colors.pressedColor;
+
+        button.colors = colors;
+
+    }
+
+    private void SetButtonColorToInactive(Button button)
+    {
+        ColorBlock colors = button.colors;
+
+        colors.normalColor = colors.disabledColor;
+
+        button.colors = colors;
+
+    }
+
+    public void SwitchPauseMenuTab(int tabNum)
+    {
+        for (int i = 0; i < storeTabs.Length; i++)
+        {
+            if (i != tabNum)
+            {
+                storeTabs[i].SetActive(false);
+            }
+            else
+            {
+                storeTabs[i].SetActive(true);
+
+            }
+        }
+
+        HighlightButtonForSelectedTab();
+    }
+}
