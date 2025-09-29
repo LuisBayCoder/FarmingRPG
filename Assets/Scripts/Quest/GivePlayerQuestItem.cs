@@ -5,28 +5,40 @@ public class GivePlayerQuestItem : MonoBehaviour
 {
 
     private int pendingItemCode = -1;
-
-    // Call this instead of GiveQuestItem directly when paused
-    public void QueueQuestItem(int itemCode)
+    private InventoryLocation pendingInventoryLocation;
+    
+    // call the two methods below from another script to queue the item and inventory location
+    public void QueueQuestInventoryLocation(string inventoryLocation)
     {
-        pendingItemCode = itemCode;
+        // Convert string to InventoryLocation enum
+        InventoryLocation inventoryLocationEnum;
+        if (!System.Enum.TryParse(inventoryLocation, out inventoryLocationEnum))
+        {
+            Debug.LogError($"Invalid inventory location: {inventoryLocation}");
+            return;
+        }
+        pendingInventoryLocation = inventoryLocationEnum;
     }
+    public void QueueQuestItem(int itemCode)
+        {
+            pendingItemCode = itemCode;
+        }
 
+    // Call this method when the conversation ends
     public void OnConversationEnd()
     {
-        if (pendingItemCode != -1)
+        if (pendingItemCode != -1 && InventoryManager.Instance != null)
         {
-            GiveQuestItem(pendingItemCode);
+            GiveQuestItem(pendingInventoryLocation, pendingItemCode);
             pendingItemCode = -1;
         }
     }
 
     //method to give player quest item when called from another script
     //The game is paused when talking to npcs, so this method needs to be called after the game is unpaused
-    //Is there a way to call this method after the game is unpaused?
-    public void GiveQuestItem(int itemCode)
+    public void GiveQuestItem(InventoryLocation inventoryLocation, int itemCode)
     {
-        InventoryManager.Instance.AddItem(InventoryLocation.player, itemCode);
-        Debug.Log($"Quest item with code {itemCode} has been given to the player.");
+        InventoryManager.Instance.AddItem(inventoryLocation, itemCode);
+        Debug.Log($"Quest item with code {itemCode} has been given to the {inventoryLocation}.");
     }
 }

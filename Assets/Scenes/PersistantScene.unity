@@ -5563,6 +5563,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - guid: 97bf5a38-e5e4-41a7-a4d0-d9abe6f33697
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1098528990}
+          m_TargetAssemblyTypeName: GivePlayerQuestItem, Assembly-CSharp
+          m_MethodName: QueueQuestItem
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 10033
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &178380853
 Transform:
   m_ObjectHideFlags: 0
@@ -28021,7 +28037,6 @@ GameObject:
   - component: {fileID: 1117205247}
   - component: {fileID: 1117205249}
   - component: {fileID: 1117205242}
-  - component: {fileID: 1117205243}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -28243,18 +28258,6 @@ MonoBehaviour:
   m_onlyRememberHandwrittenQuests: 0
   m_compressCompletedProcgenQuests: 0
   m_onlyTrackOneQuestAtATime: 0
---- !u!114 &1117205243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117205232}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d569343734dbf0c4ab1fc49d58ca66c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1117205244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33425,7 +33428,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.779, y: 1}
+    m_SensorSize: {x: 1.7773539, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
