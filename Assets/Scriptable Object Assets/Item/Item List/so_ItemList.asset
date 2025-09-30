@@ -778,10 +778,10 @@ MonoBehaviour:
     diagramImage: {fileID: 0}
   - itemCode: 10033
     itemType: 13
-    itemDescription: House Keys
+    itemDescription: House Key
     itemSprite: {fileID: -7532192510057996967, guid: f5f7cc9cbdc3073438b5760016beed7d,
       type: 3}
-    itemLongDescription: Keys to the house
+    itemLongDescription: Key to the house
     itemUseGridRadius: 0
     itemUseRadius: 0
     isStartingItem: 0
@@ -840,6 +840,30 @@ MonoBehaviour:
     damageAmount: 0
     staminaAmount: 0
     itemCost: 100
+    resizable: 0
+    orderInLayer: 0
+    scaleFactor: 1
+    isNotTrigger: 0
+    isQuestItem: 0
+    questCountName: 
+    diagramImage: {fileID: 0}
+  - itemCode: 10036
+    itemType: 13
+    itemDescription: Barn Key
+    itemSprite: {fileID: 5847717181852861539, guid: f5f7cc9cbdc3073438b5760016beed7d,
+      type: 3}
+    itemLongDescription: 'Key to the barn. '
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 1
+    canBeDropped: 0
+    canBeEaten: 0
+    canBeCarried: 1
+    isWeapon: 0
+    damageAmount: 0
+    staminaAmount: 0
+    itemCost: 0
     resizable: 0
     orderInLayer: 0
     scaleFactor: 1
