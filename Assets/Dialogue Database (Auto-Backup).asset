@@ -4089,6 +4089,12 @@ MonoBehaviour:
         destinationDialogueID: 1
         isConnector: 0
         priority: 2
+      - originConversationID: 3
+        originDialogueID: 0
+        destinationConversationID: 3
+        destinationDialogueID: 17
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -4318,7 +4324,7 @@ MonoBehaviour:
       - originConversationID: 3
         originDialogueID: 4
         destinationConversationID: 3
-        destinationDialogueID: 17
+        destinationDialogueID: 16
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -4555,7 +4561,7 @@ MonoBehaviour:
       - originConversationID: 3
         originDialogueID: 8
         destinationConversationID: 3
-        destinationDialogueID: 13
+        destinationDialogueID: 16
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -4610,7 +4616,7 @@ MonoBehaviour:
       - originConversationID: 3
         originDialogueID: 9
         destinationConversationID: 3
-        destinationDialogueID: 15
+        destinationDialogueID: 16
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -4722,7 +4728,7 @@ MonoBehaviour:
       - originConversationID: 3
         originDialogueID: 11
         destinationConversationID: 3
-        destinationDialogueID: 14
+        destinationDialogueID: 16
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -4733,7 +4739,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 706.35565
-        y: 398.70728
+        y: 404.18674
         width: 160
         height: 30
     - id: 12
@@ -4793,187 +4799,41 @@ MonoBehaviour:
         y: 267.2003
         width: 160
         height: 30
-    - id: 13
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: 
-      - title: Description
-        value: 
-        type: 0
-        typeString: 
-      - title: Actor
-        value: 3
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Dialogue Text
-        value: "Here\u2014take this. (gives Barn Key)\nThe barn hides a secret path.
-          Follow it, and you will find where the Ancient\nOne stirs."
-        type: 0
-        typeString: 
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: 
-      conversationID: 3
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks: []
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 482.55817
-        y: 455.2345
-        width: 160
-        height: 30
-    - id: 14
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: 
-      - title: Description
-        value: 
-        type: 0
-        typeString: 
-      - title: Actor
-        value: 3
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Dialogue Text
-        value: "Here\u2014take this. (gives Barn Key)\nThe barn hides a secret path.
-          Follow it, and you will find where the Ancient One stirs."
-        type: 0
-        typeString: 
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: 
-      conversationID: 3
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks: []
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 706.35565
-        y: 448.70728
-        width: 160
-        height: 30
-    - id: 15
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: 
-      - title: Description
-        value: 
-        type: 0
-        typeString: 
-      - title: Actor
-        value: 3
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Dialogue Text
-        value: "Here\u2014take this. (gives Barn Key)\nThe barn hides a secret path.
-          Follow it, and you will find where the Ancient\nOne stirs."
-        type: 0
-        typeString: 
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: 
-      conversationID: 3
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks: []
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 277.94656
-        y: 388.48
-        width: 160
-        height: 30
     - id: 16
       fields:
       - title: Title
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
-        value: 1
+        value: 3
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 3
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: "Here\u2014take this. (gives Barn Key)\nThe barn hides a secret path.
           Follow it, and you will find where the Ancient\nOne stirs."
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
+      - title: EventGuid
+        value: 97bf5a38-e5e4-41a7-a4d0-d9abe6f33697
+        type: 0
+        typeString: CustomFieldType_Text
       conversationID: 3
       isRoot: 0
       isGroup: 0
@@ -4989,8 +4849,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1
-        y: 317.2003
+        x: 130.51932
+        y: 496.59692
         width: 160
         height: 30
     - id: 17
@@ -5004,7 +4864,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 3
+        value: 2
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -5016,8 +4876,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Here\u2014take this. (gives Barn Key)\nThe barn hides a secret path.
-          Follow it, and you will find where the Ancient\nOne stirs."
+        value: 
         type: 0
         typeString: 
       - title: Sequence
@@ -5039,13 +4898,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 238.9231
-        y: 262.86813
+        x: 160
+        y: 80
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.7900002
+    canvasScrollPosition: {x: 0, y: 34.61521}
+    canvasZoom: 0.6100003
   syncInfo:
     syncActors: 0
     syncItems: 0

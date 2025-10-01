@@ -5591,6 +5591,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1810942466}
+          m_TargetAssemblyTypeName: DialogueOnConversationEnd, Assembly-CSharp
+          m_MethodName: TurnOnFadeOut
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &178380853
 Transform:
   m_ObjectHideFlags: 0
@@ -33440,7 +33452,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7798982, y: 1}
+    m_SensorSize: {x: 1.7776245, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -48115,6 +48127,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 1810942466}
+          m_TargetAssemblyTypeName: DialogueOnConversationEnd, Assembly-CSharp
+          m_MethodName: TriggerFadeOut
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
     runOnConversationEndEventsAtEndOfFrame: 0
     onConversationCancelled:
       m_PersistentCalls:
@@ -48201,6 +48225,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unregisterOnDisable: 0
+--- !u!114 &1810942466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810942462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f688532f9229c4a85057547863afdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1821181099 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6214689970570646557, guid: ebc611cd660de9f419d9a413ec08b7f0,

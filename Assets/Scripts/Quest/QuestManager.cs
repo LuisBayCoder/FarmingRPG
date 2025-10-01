@@ -137,7 +137,5 @@ public class QuestManager : MonoBehaviour
         // You can add additional logic here if needed
         MessageSystem.SendMessage(null, "StartQuest", questName);
     }
-    
-    
 }
 
