@@ -16,5 +16,4 @@ public class StatusBar : MonoBehaviour
 
         text.text = max.ToString() + "/" + curr.ToString();
     }
-
 }
