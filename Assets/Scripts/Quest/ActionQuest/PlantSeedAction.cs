@@ -7,6 +7,7 @@ public class PlantSeedAction : MonoBehaviour
     [SerializeField] private int seedItemCode;
     [SerializeField] private GameObject enemyPrefab; // Prefab of the enemy to spawn
     [SerializeField] private float spawnInterval = 5f; // Time interval between spawns
+    [SerializeField] private MadnessStatus madnessStatus; // Amount to increase madness
 
     public void PerformAction(Vector3 seedPosition, int seedItemCode)
     {
@@ -20,6 +21,7 @@ public class PlantSeedAction : MonoBehaviour
                 Debug.Log($"Planting seed: {itemDetails.itemDescription}");
                 // Add your planting logic here, using the position
                 StartCoroutine(SpawnEnemiesCoroutine(seedPosition));
+                IncreaseMadness(10); // Increase madness by 10 when planting a seed 
             }
             else
             {
@@ -71,5 +73,10 @@ public class PlantSeedAction : MonoBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
         }
+    }
+    private void IncreaseMadness(int amount)
+    {
+        // Assuming there's a MadnessManager that handles madness levels
+        madnessStatus.AddMadness(amount);
     }
 }

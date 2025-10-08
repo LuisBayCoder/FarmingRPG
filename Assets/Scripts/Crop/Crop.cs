@@ -144,17 +144,17 @@ public class Crop : MonoBehaviour
         Debug.Log("ProcessHarvestActionsAfterAnimation coroutine started.");
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Harvested"))
         {
-            Debug.Log("Waiting for 'Harvested' animation state...");
+            //Debug.Log("Waiting for 'Harvested' animation state...");
             yield return null;
         }
-        Debug.Log("'Harvested' animation state reached. Proceeding to harvest actions.");
+        //Debug.Log("'Harvested' animation state reached. Proceeding to harvest actions.");
         HarvestActions(cropDetails, gridPropertyDetails);
 
     }
 
     private void HarvestActions(CropDetails cropDetails, GridPropertyDetails gridPropertyDetails)
     {
-        Debug.Log("HarvestActions called");
+        //Debug.Log("HarvestActions called");
         SpawnHarvestedItems(cropDetails);
         if (cropDetails.isActionItem && cropDetails.actionItemPrefab != null)
         {
@@ -162,7 +162,15 @@ public class Crop : MonoBehaviour
             Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f), 0f);
             Instantiate(cropDetails.actionItemPrefab, spawnPosition, Quaternion.identity);
         }
-
+        // Increase madness on harvest
+        if (cropDetails.madnessIncreaseOnHarvest > 0)
+        {
+            MadnessStatus madnessStatus = FindObjectOfType<MadnessStatus>();
+            if (madnessStatus != null)
+            {
+                madnessStatus.AddMadness(cropDetails.madnessIncreaseOnHarvest);
+            }
+        }
         // Does this crop transform into another crop
         if (cropDetails.harvestedTransformItemCode > 0)
         {

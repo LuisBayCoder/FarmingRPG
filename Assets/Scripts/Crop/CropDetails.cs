@@ -18,6 +18,7 @@ public class CropDetails
     public bool isHarvestActionEffect = false;
     public bool spawnCropProducedAtPlayerPosition;
     public bool isActionItem;
+    public int madnessIncreaseOnHarvest = 0;
     public GameObject actionItemPrefab;
     public HarvestActionEffect harvestActionEffect;
     public SoundName harvestSound;

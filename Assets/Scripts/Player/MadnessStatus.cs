@@ -27,7 +27,7 @@ public class MadnessStatus : MonoBehaviour
         }
     }
 
-    void AddMadness(int amount)
+    public void AddMadness(int amount)
     {
         currentMadness += amount;
         currentMadness = Mathf.Clamp(currentMadness, 0, maxMadness);
