@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PixelCrushers;
+using PixelCrushers.DialogueSystem;
 
 
 //This will only work with "Get" message used in Quest Machine.
@@ -13,15 +14,14 @@ public class CheckActionsBeforeQuest : MonoBehaviour
     {
         // I need to add a delay before sending the message to ensure the inventory is updated
         StartCoroutine(InventoryCheckWithDelay(messageArgs));
-        // Retrieve the item name from the message parameter
-       
+        // Retrieve the item name from the message parameter   
     }
 
     private IEnumerator InventoryCheckWithDelay(string messageArgs)
     {
         // Wait for a short duration to ensure the inventory is updated
         yield return new WaitForSeconds(2f);
-         string questItemName = messageArgs;
+        string questItemName = messageArgs;
         Debug.Log($"Quest started! Item to pick up: {questItemName}");
 
         // Check how many of this item the player already has
@@ -153,4 +153,19 @@ public class CheckActionsBeforeQuest : MonoBehaviour
             InventoryCheck("Cow Skulls"); // Replace with the actual item name you want to check
         }
     }
+    public void CheckIfPlayerHasItem(string itemDescription)
+    {
+        bool hasItem = InventoryManager.Instance.PlayerHasItem(itemDescription);
+        Debug.Log($"Does player have item with code '{itemDescription}': {hasItem}");
+        // You can send this information to Quest Machine or use it as needed
+        if (hasItem)
+        {
+            DialogueLua.SetItemField(itemDescription, "Is Item", true); // send is true if the player has the item
+        }
+        else
+        {
+            DialogueLua.SetItemField(itemDescription, "Is Item", false); // send is false if the player does not have the item
+        }
+    }
+
 }

@@ -5603,6 +5603,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - guid: f4da2b55-2e70-4094-a2d9-840bdceed530
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 886083113}
+          m_TargetAssemblyTypeName: CheckActionsBeforeQuest, Assembly-CSharp
+          m_MethodName: CheckIfPlayerHasItem
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Lumenfruit
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &178380853
 Transform:
   m_ObjectHideFlags: 0
@@ -33429,6 +33445,11 @@ PrefabInstance:
       propertyPath: trigger
       value: 32
       objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154424, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: conversation
+      value: New Conversation 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154425, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: m_IsTrigger
@@ -33500,7 +33521,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7763468, y: 1}
+    m_SensorSize: {x: 1.7780105, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

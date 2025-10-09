@@ -449,59 +449,75 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>, ISavea
         selectedInventoryItem[(int)inventoryLocation] = itemCode;
     }
 
-public Dictionary<string, int> GetAllItems()  //I will keep this for now I will delete if not needed.
-{
-    Dictionary<string, int> result = new Dictionary<string, int>();
-
-    foreach (var inventoryList in inventoryLists)
+    public Dictionary<string, int> GetAllItems()  //I will keep this for now I will delete if not needed.
     {
-        foreach (var item in inventoryList)
-        {
-            // Check if the item quantity is greater than 0
-            if (item.itemQuantity > 0)
-            {
-                // Retrieve ItemDetails using the itemCode
-                if (itemDetailsDictionary.TryGetValue(item.itemCode, out ItemDetails itemDetails))
-                {
-                    string itemName = itemDetails.itemDescription; // Use itemDescription as the name
+        Dictionary<string, int> result = new Dictionary<string, int>();
 
-                    if (result.ContainsKey(itemName))
+        foreach (var inventoryList in inventoryLists)
+        {
+            foreach (var item in inventoryList)
+            {
+                // Check if the item quantity is greater than 0
+                if (item.itemQuantity > 0)
+                {
+                    // Retrieve ItemDetails using the itemCode
+                    if (itemDetailsDictionary.TryGetValue(item.itemCode, out ItemDetails itemDetails))
                     {
-                        result[itemName] += item.itemQuantity;
-                    }
-                    else
-                    {
-                        result[itemName] = item.itemQuantity;
+                        string itemName = itemDetails.itemDescription; // Use itemDescription as the name
+
+                        if (result.ContainsKey(itemName))
+                        {
+                            result[itemName] += item.itemQuantity;
+                        }
+                        else
+                        {
+                            result[itemName] = item.itemQuantity;
+                        }
                     }
                 }
             }
         }
+
+        return result;
     }
 
-    return result;
-}
-    
-        /// <summary>
-        /// Get the quantity of an item by its name from all inventory lists.
-        /// </summary>
-        /// <param name="itemName">The name of the item.</param>
-        /// <returns>The quantity of the item.</returns>
-        /// <get item by item description>
-public int GetItemQuantityByName(string itemName)
-{
-    // Call GetAllItems to get the dictionary of all items
-    Dictionary<string, int> allItems = GetAllItems();
-
-    // Check if the item exists in the dictionary
-    if (allItems.TryGetValue(itemName, out int quantity))
+    /// <summary>
+    /// Get the quantity of an item by its name from all inventory lists.
+    /// </summary>
+    /// <param name="itemName">The name of the item.</param>
+    /// <returns>The quantity of the item.</returns>
+    /// <get item by item description>
+    public int GetItemQuantityByName(string itemName)
     {
-        Debug.Log($"Item '{itemName}' found with quantity: {quantity}");
-        return quantity;
+        // Call GetAllItems to get the dictionary of all items
+        Dictionary<string, int> allItems = GetAllItems();
+
+        // Check if the item exists in the dictionary
+        if (allItems.TryGetValue(itemName, out int quantity))
+        {
+            Debug.Log($"Item '{itemName}' found with quantity: {quantity}");
+            return quantity;
+        }
+        Debug.Log($"Item '{itemName}' not found in inventory.");
+        // Return 0 if the item is not found
+        return 0;
     }
-    Debug.Log($"Item '{itemName}' not found in inventory.");
-    // Return 0 if the item is not found
-    return 0;
-}
+
+    //Check if the player has the item in the inventory by string name
+    public bool PlayerHasItem(string itemName)
+    {
+        List<InventoryItem> playerInventory = inventoryLists[(int)InventoryLocation.player];
+        foreach (var item in playerInventory)
+        {
+            if (itemDetailsDictionary.TryGetValue(item.itemCode, out ItemDetails itemDetails))
+            {
+                if (itemDetails.itemDescription == itemName && item.itemQuantity > 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false; // Item not found
+    }
 
 }
-
