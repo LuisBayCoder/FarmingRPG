@@ -167,5 +167,29 @@ public class CheckActionsBeforeQuest : MonoBehaviour
             DialogueLua.SetItemField(itemDescription, "Is Item", false); // send is false if the player does not have the item
         }
     }
-
+    // remove item from plalyer inventory by item description
+    public void RemoveItemFromInventory(string itemDescription)
+    {
+        // Find the item code by description
+        foreach (var kvp in InventoryManager.Instance.GetAllItems())
+        {
+            if (kvp.Key == itemDescription)
+            {
+                // Find the item code from itemDetailsDictionary
+                foreach (var itemDetail in InventoryManager.Instance.GetType()
+                    .GetField("itemDetailsDictionary", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                    .GetValue(InventoryManager.Instance) as Dictionary<int, ItemDetails>)
+                {
+                    if (itemDetail.Value.itemDescription == itemDescription)
+                    {
+                        int itemCode = itemDetail.Key;
+                        InventoryManager.Instance.RemoveItem(InventoryLocation.player, itemCode);
+                        Debug.Log($"Removed one '{itemDescription}' from player inventory.");
+                        return;
+                    }
+                }
+            }
+        }
+        Debug.LogWarning($"Item '{itemDescription}' not found in player inventory.");
+    }
 }

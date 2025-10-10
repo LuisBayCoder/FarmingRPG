@@ -5619,6 +5619,46 @@ MonoBehaviour:
             m_StringArgument: Lumenfruit
             m_BoolArgument: 0
           m_CallState: 2
+  - guid: 95e496cb-1917-485b-b1b4-2c6e22ecc198
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1117205243}
+          m_TargetAssemblyTypeName: MadnessStatus, Assembly-CSharp
+          m_MethodName: AddMadness
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 20
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1098528992}
+          m_TargetAssemblyTypeName: RemovePlayerQuestItem, Assembly-CSharp
+          m_MethodName: QueueItemForRemoval
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Lumenfruit
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1098528992}
+          m_TargetAssemblyTypeName: RemovePlayerQuestItem, Assembly-CSharp
+          m_MethodName: QueueItemToInstantiate
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Corn
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &178380853
 Transform:
   m_ObjectHideFlags: 0
@@ -27616,6 +27656,7 @@ GameObject:
   - component: {fileID: 1098528988}
   - component: {fileID: 1098528990}
   - component: {fileID: 1098528991}
+  - component: {fileID: 1098528992}
   m_Layer: 0
   m_Name: QuestManager
   m_TagString: Untagged
@@ -27684,6 +27725,18 @@ MonoBehaviour:
     type: 3}
   spawnInterval: 5
   madnessStatus: {fileID: 1117205243}
+--- !u!114 &1098528992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098528987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86769c48c9230b40a5b8b0972b44798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1102322237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33521,7 +33574,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7780105, y: 1}
+    m_SensorSize: {x: 1.7761021, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -48211,6 +48264,30 @@ MonoBehaviour:
         - m_Target: {fileID: 1810942466}
           m_TargetAssemblyTypeName: DialogueOnConversationEnd, Assembly-CSharp
           m_MethodName: TriggerFadeOut
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1098528992}
+          m_TargetAssemblyTypeName: RemovePlayerQuestItem, Assembly-CSharp
+          m_MethodName: RemoveItemFromInventory
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1098528992}
+          m_TargetAssemblyTypeName: RemovePlayerQuestItem, Assembly-CSharp
+          m_MethodName: InstantiateItemAtLocation
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
