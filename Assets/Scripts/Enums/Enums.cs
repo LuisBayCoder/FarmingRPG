@@ -165,9 +165,10 @@ public enum SoundName
     musicCalm1 = 2010
 }
 
-
 public enum ItemType
 {
+    //when adding new item types, ensure that the ItemTypeExtensions.GetItemTypesForSorting method is also updated
+    //or add to bottom and update the count value
     Seed,
     Commodity,
     Watering_tool,
@@ -178,7 +179,7 @@ public enum ItemType
     Collecting_tool,
     Reapable_scenary,
     Furniture,
-    Weapon,
+    Sword_Weapon,
     Note,
     QuestItem,
     Key,

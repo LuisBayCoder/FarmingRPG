@@ -315,6 +315,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 case ItemType.Breaking_tool:
                 case ItemType.Chopping_tool:
                 case ItemType.Reaping_tool:
+                case ItemType.Sword_Weapon:
                 case ItemType.Collecting_tool:
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -459,6 +460,10 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 case ItemType.Reaping_tool:
                     playerDirection = GetPlayerDirection(cursor.GetWorldPositionForCursor(), GetPlayerCentrePosition());
                     ReapInPlayerDirectionAtCursor(itemDetails, playerDirection);
+                    break;
+                case ItemType.Sword_Weapon:
+                    playerDirection = GetPlayerDirection(cursor.GetWorldPositionForCursor(), GetPlayerCentrePosition());
+                    SwordSwingInPlayerDirection(itemDetails, playerDirection);
                     break;
                 default:
                     break;
@@ -784,6 +789,26 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             switch (equippedItemDetails.itemType)
             {
                 case ItemType.Reaping_tool:
+                    if (playerDirection == Vector3Int.right)
+                    {
+                        isSwingingToolRight = true;
+                    }
+                    else if (playerDirection == Vector3Int.left)
+                    {
+                        isSwingingToolLeft = true;
+                    }
+                    else if (playerDirection == Vector3Int.up)
+                    {
+                        isSwingingToolUp = true;
+                    }
+                    else if (playerDirection == Vector3Int.down)
+                    {
+                        isSwingingToolDown = true;
+                    }
+                    break;
+
+                //need to switch the sprite to sword here
+                case ItemType.Sword_Weapon:
                     if (playerDirection == Vector3Int.right)
                     {
                         isSwingingToolRight = true;
@@ -1181,5 +1206,25 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         {
             Debug.Log("CursorOverItem: None");
         }
+    }
+
+    private void SwordSwingInPlayerDirection(ItemDetails itemDetails, Vector3Int playerDirection)
+    {
+        // Example: Play sword swing animation and detect hit
+        // TODO: Replace with your actual sword swing logic
+
+        // Play animation
+        // animator.SetTrigger("SwordSwing");
+
+        // Detect enemies in swing arc
+        // var hitEnemies = DetectEnemiesInDirection(playerDirection);
+
+        // Apply damage, effects, etc.
+        // foreach (var enemy in hitEnemies)
+        // {
+        //     enemy.TakeDamage(itemDetails.damage);
+        // }
+        StartCoroutine(ReapInPlayerDirectionAtCursorRoutine(itemDetails, playerDirection));
+
     }
 }

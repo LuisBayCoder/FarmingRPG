@@ -872,15 +872,15 @@ MonoBehaviour:
     questCountName: 
     diagramImage: {fileID: 0}
   - itemCode: 10037
-    itemType: 6
+    itemType: 10
     itemDescription: Cthulhu Sword
     itemSprite: {fileID: 21300000, guid: d0cf4403f02ad444dbc887f85492c7ed, type: 3}
     itemLongDescription: Sword 1
-    itemUseGridRadius: 0
-    itemUseRadius: 0
-    isStartingItem: 0
+    itemUseGridRadius: 1
+    itemUseRadius: 1.5
+    isStartingItem: 1
     canBePickedUp: 1
-    canBeDropped: 1
+    canBeDropped: 0
     canBeEaten: 0
     canBeCarried: 0
     isWeapon: 1

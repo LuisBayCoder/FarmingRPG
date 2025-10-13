@@ -255,7 +255,7 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: 
+      value: Lumenfruit
       type: 0
       typeString: CustomFieldType_Text
     - title: Is Item
@@ -1256,7 +1256,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 353.91623
-        y: 103.91121
+        y: 102.271866
         width: 160
         height: 30
     - id: 17
@@ -3785,8 +3785,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1281.7091, y: 213.93428}
-    canvasZoom: 0.70000035
+    canvasScrollPosition: {x: 1.1476746, y: 0}
+    canvasZoom: 0.61000043
   - id: 2
     fields:
     - title: Title
@@ -5088,6 +5088,10 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
+      - title: EventGuid
+        value: f4da2b55-2e70-4094-a2d9-840bdceed530
+        type: 0
+        typeString: 
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -5252,11 +5256,15 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: You don't have the required item.
+        value: Good you have the fruit.
         type: 0
         typeString: 
       - title: Sequence
         value: 
+        type: 0
+        typeString: 
+      - title: EventGuid
+        value: 95e496cb-1917-485b-b1b4-2c6e22ecc198
         type: 0
         typeString: 
       conversationID: 4
@@ -5267,7 +5275,7 @@ MonoBehaviour:
       falseConditionAction: Block
       conditionPriority: 2
       outgoingLinks: []
-      conditionsString: 
+      conditionsString: Item["Lumenfruit"].Is_Item == true
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -5301,7 +5309,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 
+        value: 'You don''t have the fruit. '
         type: 0
         typeString: 
       - title: Sequence
@@ -5323,12 +5331,12 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 202
+        x: 194
         y: 258
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 54}
+    canvasScrollPosition: {x: 0, y: 3}
     canvasZoom: 1
   syncInfo:
     syncActors: 0
