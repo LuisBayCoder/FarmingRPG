@@ -87,4 +87,9 @@ public class AnimationOverrides : MonoBehaviour
         // s1.Stop();
         // UnityEngine.Debug.Log("Time to apply character customisation : " + s1.Elapsed + "   elapsed seconds");
     }
+
+    public bool TryGetSOAnimationTypeByKey(string key, out SO_AnimationType soAnimationType)
+    {
+        return animationTypeDictionaryByCompositeAttributeKey.TryGetValue(key, out soAnimationType);
+    }
 }

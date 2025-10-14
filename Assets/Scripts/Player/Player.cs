@@ -56,6 +56,8 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     [Tooltip("Should be populated in the prefab with the equipped item sprite renderer")]
     [SerializeField] private SpriteRenderer equippedItemSpriteRenderer = null;
 
+    [SerializeField] private SpriteRenderer toolSpriteRenderer; // Assign this in the inspector
+
     // Player attributes that can be swapped
     private CharacterAttribute armsCharacterAttribute;
 
@@ -463,7 +465,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                     break;
                 case ItemType.Sword_Weapon:
                     playerDirection = GetPlayerDirection(cursor.GetWorldPositionForCursor(), GetPlayerCentrePosition());
-                    SwordSwingInPlayerDirection(itemDetails, playerDirection);
+                    SwordSwingInPlayerDirectionAtCursor(itemDetails, playerDirection);
                     break;
                 default:
                     break;
@@ -772,6 +774,54 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
 
         // Reap in player direction
+        UseToolInPlayerDirection(itemDetails, playerDirection);
+
+        yield return useToolAnimationPause;
+
+        PlayerInputIsDisabled = false;
+        playerToolUseDisabled = false;
+    }
+    private void SwordSwingInPlayerDirectionAtCursor(ItemDetails itemDetails, Vector3Int playerDirection)
+    {
+        StartCoroutine(SwordSwingInPlayerDirectionAtCursorRoutine(itemDetails, playerDirection));
+    }
+    private IEnumerator SwordSwingInPlayerDirectionAtCursorRoutine(ItemDetails itemDetails, Vector3Int playerDirection)
+    {
+        PlayerInputIsDisabled = true;
+        playerToolUseDisabled = true;
+
+        // 1. Set tool animation to scythe in override animation (for swing animation)
+        toolCharacterAttribute.partVariantType = PartVariantType.scythe;
+        characterAttributeCustomisationList.Clear();
+        characterAttributeCustomisationList.Add(toolCharacterAttribute);
+        animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
+
+        // 2. Set the tool sprite to the sword sprite
+        // Build the key for the sword sprite (not the scythe)
+        AnimationName swingAnimName = AnimationName.swingToolDown;
+        if (playerDirection == Vector3Int.right)
+            swingAnimName = AnimationName.swingToolRight;
+        else if (playerDirection == Vector3Int.left)
+            swingAnimName = AnimationName.swingToolLeft;
+        else if (playerDirection == Vector3Int.up)
+            swingAnimName = AnimationName.swingToolUp;
+
+        string key = CharacterPartAnimator.tool.ToString() +
+                     PartVariantColour.none.ToString() +
+                     PartVariantType.sword.ToString() +
+                     swingAnimName.ToString();
+
+        SO_AnimationType soAnimType;
+        if (animationOverrides.TryGetSOAnimationTypeByKey(key, out soAnimType))
+        {
+            if (toolSpriteRenderer != null && soAnimType.spriteVariant != null)
+            {
+                toolSpriteRenderer.sprite = soAnimType.spriteVariant;
+                toolSpriteRenderer.color = new Color(1f, 1f, 1f, 1f); // Ensure it's visible
+            }
+        }
+
+        // Play the swing animation (scythe) in player direction
         UseToolInPlayerDirection(itemDetails, playerDirection);
 
         yield return useToolAnimationPause;
@@ -1208,23 +1258,15 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
     }
 
-    private void SwordSwingInPlayerDirection(ItemDetails itemDetails, Vector3Int playerDirection)
+    /*private void SwordSwingInPlayerDirection(ItemDetails itemDetails, Vector3Int playerDirection)
     {
-        // Example: Play sword swing animation and detect hit
-        // TODO: Replace with your actual sword swing logic
+        // Set the tool sprite to the sword sprite
+        if (toolSpriteRenderer != null && itemDetails.itemSprite != null)
+        {
+            toolSpriteRenderer.sprite = itemDetails.itemSprite;
+            toolSpriteRenderer.color = new Color(1f, 1f, 1f, 1f); // Ensure it's visible
+        }
 
-        // Play animation
-        // animator.SetTrigger("SwordSwing");
-
-        // Detect enemies in swing arc
-        // var hitEnemies = DetectEnemiesInDirection(playerDirection);
-
-        // Apply damage, effects, etc.
-        // foreach (var enemy in hitEnemies)
-        // {
-        //     enemy.TakeDamage(itemDetails.damage);
-        // }
         StartCoroutine(ReapInPlayerDirectionAtCursorRoutine(itemDetails, playerDirection));
-
-    }
+    }*/
 }

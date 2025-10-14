@@ -12,5 +12,6 @@ public class SO_AnimationType : ScriptableObject
     public CharacterPartAnimator characterPart;
     public PartVariantColour partVariantColour;
     public PartVariantType partVariantType;
+    public Sprite spriteVariant;
 }
 
