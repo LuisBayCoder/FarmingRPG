@@ -60,7 +60,7 @@ public enum PartVariantType
     axe,
     scythe,
     wateringCan,
-    sword, // Added for sword
+    sword_1, // Added for sword
     count
 }
 public enum GridBoolProperty

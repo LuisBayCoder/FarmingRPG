@@ -790,14 +790,13 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
 
-        // 1. Set tool animation to scythe in override animation (for swing animation)
-        toolCharacterAttribute.partVariantType = PartVariantType.scythe;
+        // 1. Set tool animation to sword in override animation (for swing animation)
+        toolCharacterAttribute.partVariantType = PartVariantType.sword_1;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
 
         // 2. Set the tool sprite to the sword sprite
-        // Build the key for the sword sprite (not the scythe)
         AnimationName swingAnimName = AnimationName.swingToolDown;
         if (playerDirection == Vector3Int.right)
             swingAnimName = AnimationName.swingToolRight;
@@ -805,26 +804,27 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             swingAnimName = AnimationName.swingToolLeft;
         else if (playerDirection == Vector3Int.up)
             swingAnimName = AnimationName.swingToolUp;
-
+        else if (playerDirection == Vector3Int.down)
+            swingAnimName = AnimationName.swingToolDown;
         string key = CharacterPartAnimator.tool.ToString() +
                      PartVariantColour.none.ToString() +
-                     PartVariantType.sword.ToString() +
+                     PartVariantType.sword_1.ToString() +
                      swingAnimName.ToString();
 
-        SO_AnimationType soAnimType;
-        if (animationOverrides.TryGetSOAnimationTypeByKey(key, out soAnimType))
+        // Directly set the tool sprite to the sword sprite from itemDetails
+        if (toolSpriteRenderer != null && itemDetails.itemSprite != null)
         {
-            if (toolSpriteRenderer != null && soAnimType.spriteVariant != null)
-            {
-                toolSpriteRenderer.sprite = soAnimType.spriteVariant;
-                toolSpriteRenderer.color = new Color(1f, 1f, 1f, 1f); // Ensure it's visible
-            }
+            toolSpriteRenderer.sprite = itemDetails.itemSprite;
+            toolSpriteRenderer.color = new Color(1f, 1f, 1f, 1f); // Ensure it's visible
         }
 
         // Play the swing animation (scythe) in player direction
         UseToolInPlayerDirection(itemDetails, playerDirection);
 
         yield return useToolAnimationPause;
+
+        // Optionally reset the sprite to null or default after the animation
+        // toolSpriteRenderer.sprite = null;
 
         PlayerInputIsDisabled = false;
         playerToolUseDisabled = false;
