@@ -76,6 +76,11 @@ public class AnimationOverrides : MonoBehaviour
 
                         animsKeyValuePairList.Add(new KeyValuePair<AnimationClip, AnimationClip>(animationClip, swapAnimationClip));
                     }
+                    else
+                    {
+                        // DEBUG: log missing mapping
+                        UnityEngine.Debug.Log($"AnimationOverrides: no swap found for key='{key}' (baseClip='{animationClip.name}', baseAnimationName='{so_AnimationType.animationName}', attributePart='{characterAttribute.characterPart}', variant='{characterAttribute.partVariantType}', colour='{characterAttribute.partVariantColour}')");
+                    }
                 }
             }
 
