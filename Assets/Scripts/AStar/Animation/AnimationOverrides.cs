@@ -12,26 +12,53 @@ public class AnimationOverrides : MonoBehaviour
 
     private void Start()
     {
-        // Initialise animation type dictionary keyed by animation clip
+        // Initialise dictionaries safely
+        EnsureInitialized();
+    }
+
+     private void EnsureInitialized()
+    {
+        if (animationTypeDictionaryByAnimation != null && animationTypeDictionaryByCompositeAttributeKey != null)
+            return;
+
         animationTypeDictionaryByAnimation = new Dictionary<AnimationClip, SO_AnimationType>();
-
-        foreach (SO_AnimationType item in soAnimationTypeArray)
-        {
-            animationTypeDictionaryByAnimation.Add(item.animationClip, item);
-        }
-
-        // Initialise animation type dictionary keyed by string
         animationTypeDictionaryByCompositeAttributeKey = new Dictionary<string, SO_AnimationType>();
 
+        if (soAnimationTypeArray == null || soAnimationTypeArray.Length == 0)
+        {
+            UnityEngine.Debug.LogWarning("AnimationOverrides: soAnimationTypeArray is empty. Populate in inspector or load SOs at runtime.");
+            return;
+        }
+
         foreach (SO_AnimationType item in soAnimationTypeArray)
         {
+            if (item == null)
+                continue;
+
+            if (item.animationClip != null && !animationTypeDictionaryByAnimation.ContainsKey(item.animationClip))
+                animationTypeDictionaryByAnimation.Add(item.animationClip, item);
+
             string key = item.characterPart.ToString() + item.partVariantColour.ToString() + item.partVariantType.ToString() + item.animationName.ToString();
-            animationTypeDictionaryByCompositeAttributeKey.Add(key, item);
+            if (!animationTypeDictionaryByCompositeAttributeKey.ContainsKey(key))
+                animationTypeDictionaryByCompositeAttributeKey.Add(key, item);
+        }
+
+        // Optional debug: list available composite keys
+        foreach (var kv in animationTypeDictionaryByCompositeAttributeKey)
+        {
+            UnityEngine.Debug.Log($"AnimationOverrides: available key='{kv.Key}' -> SO='{kv.Value.name}' clip='{kv.Value.animationClip?.name}'");
         }
     }
     public void ApplyCharacterCustomisationParameters(List<CharacterAttribute> characterAttributesList)
     {
-        //Stopwatch s1 = Stopwatch.StartNew();
+        // Ensure dictionaries are ready
+        EnsureInitialized();
+
+        if (character == null)
+        {
+            UnityEngine.Debug.LogWarning("AnimationOverrides: 'character' GameObject reference is null. Cannot apply overrides.");
+            return;
+        }
 
         // Loop through all character attributes and set the animation override controller for each
         foreach (CharacterAttribute characterAttribute in characterAttributesList)
@@ -51,6 +78,18 @@ public class AnimationOverrides : MonoBehaviour
                     currentAnimator = animator;
                     break;
                 }
+            }
+
+            if (currentAnimator == null)
+            {
+                UnityEngine.Debug.LogWarning($"AnimationOverrides: animator '{animatorSOAssetName}' not found under character. Skipping attribute '{characterAttribute.characterPart}'.");
+                continue;
+            }
+
+            if (currentAnimator.runtimeAnimatorController == null)
+            {
+                UnityEngine.Debug.LogWarning($"AnimationOverrides: animator '{currentAnimator.name}' has no runtime controller. Skipping.");
+                continue;
             }
 
             // Get base current animations for animator
@@ -95,6 +134,7 @@ public class AnimationOverrides : MonoBehaviour
 
     public bool TryGetSOAnimationTypeByKey(string key, out SO_AnimationType soAnimationType)
     {
+        EnsureInitialized();
         return animationTypeDictionaryByCompositeAttributeKey.TryGetValue(key, out soAnimationType);
     }
 }
