@@ -4330,6 +4330,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 209d8112adf110143bb4a2b87a6a431d, type: 2}
   - {fileID: 11400000, guid: ea4dc5bc2f8c7be40a956e8c5c457749, type: 2}
   - {fileID: 11400000, guid: 682f076f92d170743a52b3f6fc117296, type: 2}
+  - {fileID: 11400000, guid: f0a447bdc4147874989df7a70c0648c0, type: 2}
+  - {fileID: 11400000, guid: 360a9db7bccf69a4f8f4027b8c0568e0, type: 2}
+  - {fileID: 11400000, guid: d669122b59886e245aff5c6c8701a0eb, type: 2}
+  - {fileID: 11400000, guid: c6809dfeb1fc1bf4180a5a543ce2f9c2, type: 2}
 --- !u!114 &136463592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23525,7 +23529,7 @@ SpriteRenderer:
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 89c46045b5f23d840b62099f6f1f6344, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -33575,7 +33579,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7772778, y: 1}
+    m_SensorSize: {x: 1.7797784, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
