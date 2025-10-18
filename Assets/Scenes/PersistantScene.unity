@@ -5653,7 +5653,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 1098528992}
           m_TargetAssemblyTypeName: RemovePlayerQuestItem, Assembly-CSharp
-          m_MethodName: QueueItemToInstantiate
+          m_MethodName: QueueItemToInstantiateB
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5661,6 +5661,18 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Cthulhu Sword
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1098528992}
+          m_TargetAssemblyTypeName: RemovePlayerQuestItem, Assembly-CSharp
+          m_MethodName: QueueItemToInstantiateA
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Underground Key
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!4 &178380853
@@ -23479,13 +23491,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934510260}
-  m_LocalRotation: {x: -0, y: -0, z: -0.8819801, w: 0.47128665}
-  m_LocalPosition: {x: 0.41, y: 0.25, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.72057927, w: 0.69337255}
+  m_LocalPosition: {x: 0.93, y: 1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1117205235}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -123.764}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -92.205}
 --- !u!212 &934510262
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23529,7 +23541,7 @@ SpriteRenderer:
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 89c46045b5f23d840b62099f6f1f6344, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -33579,7 +33591,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7797784, y: 1}
+    m_SensorSize: {x: 1.775974, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -48292,7 +48304,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 1098528992}
           m_TargetAssemblyTypeName: RemovePlayerQuestItem, Assembly-CSharp
-          m_MethodName: InstantiateItemAtLocation
+          m_MethodName: InstantiateTwoItemsAtLocations
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

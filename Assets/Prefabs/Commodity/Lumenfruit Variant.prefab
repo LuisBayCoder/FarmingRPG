@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 2368231176132901187, guid: de19c535bda56a44c986b6a113c55e99,
         type: 3}
       propertyPath: m_Name
-      value: Lumenfruit
+      value: Lumenfruit Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7013673085435037925, guid: de19c535bda56a44c986b6a113c55e99,
         type: 3}
@@ -26,12 +26,12 @@ PrefabInstance:
     - target: {fileID: 7013673085435037925, guid: de19c535bda56a44c986b6a113c55e99,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.4037147
+      value: 0.85912955
       objectReference: {fileID: 0}
     - target: {fileID: 7013673085435037925, guid: de19c535bda56a44c986b6a113c55e99,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4534016
+      value: -0.98918396
       objectReference: {fileID: 0}
     - target: {fileID: 7013673085435037925, guid: de19c535bda56a44c986b6a113c55e99,
         type: 3}
@@ -72,6 +72,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272054660082188348, guid: de19c535bda56a44c986b6a113c55e99,
+        type: 3}
+      propertyPath: _itemCode
+      value: 10035
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de19c535bda56a44c986b6a113c55e99, type: 3}
