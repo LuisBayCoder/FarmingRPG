@@ -5653,7 +5653,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 1098528992}
           m_TargetAssemblyTypeName: RemovePlayerQuestItem, Assembly-CSharp
-          m_MethodName: QueueItemToInstantiateB
+          m_MethodName: QueueItemToInstantiateA
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5665,7 +5665,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 1098528992}
           m_TargetAssemblyTypeName: RemovePlayerQuestItem, Assembly-CSharp
-          m_MethodName: QueueItemToInstantiateA
+          m_MethodName: QueueItemToInstantiateB
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -33591,7 +33591,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.775974, y: 1}
+    m_SensorSize: {x: 1.7783095, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
