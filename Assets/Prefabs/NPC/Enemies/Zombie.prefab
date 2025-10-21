@@ -90,7 +90,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 4.266667, y: 4.266667}
     newSize: {x: 1.28125, y: 1.1875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0d07a420c9b904a925842f4b0ab785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
+  maxHealth: 90
   _currentHealth: 0
   Message: Killed
   Parameter: Slimer
@@ -237,16 +237,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f9d98fc66f86643a9795c2a9205ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcCurrentScene: 3
+  npcCurrentScene: 0
   npcTargetScene: 0
   npcCurrentGridPosition: {x: 0, y: 0, z: 0}
   npcTargetGridPosition: {x: 0, y: 0, z: 0}
   npcTargetWorldPosition: {x: 0, y: 0, z: 0}
-  npcFacingDirectionAtDestination: 0
+  npcFacingDirectionAtDestination: 1
   npcNormalSpeed: 2
   npcIsMoving: 0
   npcTargetAnimationClip: {fileID: 0}
-  blankAnimation: {fileID: 7400000, guid: de73329f78eb6d645a9a70faf2bddfce, type: 2}
+  blankAnimation: {fileID: 7400000, guid: 881641df012c8d04daac22201e66b9d3, type: 2}
   boxCollider2D: {fileID: 0}
   spriteRenderer: {fileID: 0}
   npcActiveInScene: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   moveDistance: 0.5
   playerDetected: 0
   isInAttackRange: 1
-  npcCurrentScene: 3
+  npcCurrentScene: 0
   npcMovement: {fileID: 0}
   attackOffsetDown: {x: 0, y: 0}
   attackOffsetUp: {x: 0, y: 0}
