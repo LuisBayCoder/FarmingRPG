@@ -15,6 +15,11 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private bool isDebugMode = false; // Debug mode flag
     [SerializeField] private float roamDuration = 3f; // Duration of roaming before changing direction
     [SerializeField] private float attackPositionMoveSpeed = 5f; // Speed for moving to attack position
+    [SerializeField] private float attackDuration = 0.8f; // Time to pause movement when attacking
+
+    // runtime attack control
+    private bool attackTimerRunning = false;
+    private bool isPerformingAttack = false;
 
     private GameObject player; // Reference to the player GameObject
     //private Vector2Int playerGridPosition; // Player's grid position for pathfinding  
@@ -296,6 +301,8 @@ public class E_EnemyAI : MonoBehaviour
                 transform.position = targetAttackPosition; // Snap to exact position
                 isMovingToAttackPosition = false;
                 if (isDebugMode) Debug.Log("Enemy reached attack position");
+                // Start attack cooldown/timer once we've reached the attack position
+                StartCoroutine(AttackCooldownRoutine());
             }
         }
     }
@@ -380,19 +387,42 @@ public class E_EnemyAI : MonoBehaviour
 
             npcPath.ClearPath(); // Stop moving once the enemy attacks
 
-            // Choose a random attack position from the 4 child objects
-            if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0)
+            // Choose attack position based on relative position to the player
+            if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0 && playerTransform != null)
             {
-                int randomIndex = Random.Range(0, enemyAttackPosition.childCount);
+                // Determine direction from enemy to player
+                Vector2 dir = (playerTransform.position - transform.position).normalized;
 
-                // Move to attack position and set animation (now handles offset internally)
+                // Map direction to index: 0 = Down, 1 = Up, 2 = Right, 3 = Left
+                int chosenIndex = GetAttackIndexFromDirection(dir);
+
+                // If the child count is less than 4, clamp to available children
+                chosenIndex = Mathf.Clamp(chosenIndex, 0, enemyAttackPosition.childCount - 1);
+
+                // Move to attack position and set animation
                 isMovingToAttackPosition = true;
                 hasChosenAttackPosition = true; // Mark that we've chosen an attack position
 
-                // Set attack animation based on random index (this now also sets targetAttackPosition with offset)
-                SetAttackAnimationByIndex(randomIndex);
+                // Set attack animation based on computed index
+                SetAttackAnimationByIndex(chosenIndex);
 
-                if (isDebugMode) Debug.Log($"Enemy moving to attack position {randomIndex} with offset");
+                if (isDebugMode) Debug.Log($"Enemy moving to attack position {chosenIndex} based on dir {dir}");
+            }
+            else
+            {
+                // Fallback to previous random behaviour if something is missing
+                if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0)
+                {
+                    int randomIndex = Random.Range(0, enemyAttackPosition.childCount);
+                    isMovingToAttackPosition = true;
+                    hasChosenAttackPosition = true;
+                    SetAttackAnimationByIndex(randomIndex);
+                    if (isDebugMode) Debug.Log($"Fallback random attack position {randomIndex}");
+                }
+                else if (isDebugMode)
+                {
+                    Debug.LogWarning("No attack positions available on player object.");
+                }
             }
         }
     }
@@ -492,5 +522,52 @@ public class E_EnemyAI : MonoBehaviour
     public void AttackPlayerByAnimation()
     {
         player.GetComponent<Character>().TakeDamage(attackDamage);
+    }
+
+    // Coroutine that pauses movement while the attack animation plays, then resumes behaviour
+    private IEnumerator AttackCooldownRoutine()
+    {
+        if (attackTimerRunning) yield break;
+        attackTimerRunning = true;
+
+        // Ensure movement/pathing is stopped during attack
+        isPerformingAttack = true;
+        npcMovement.CancelNPCMovement();
+        npcPath.ClearPath();
+
+        if (animator != null)
+        {
+            animator.SetBool("isAttacking", true);
+        }
+
+        if (isDebugMode) Debug.Log($"Attack started - pausing movement for {attackDuration}s");
+        yield return new WaitForSeconds(attackDuration);
+
+        // End attack, reset animation flags and allow movement/pathfinding again
+        if (animator != null)
+        {
+            animator.SetBool("isAttacking", false);
+            ResetAttackAnimations();
+        }
+
+        hasChosenAttackPosition = false;
+        isPerformingAttack = false;
+        attackTimerRunning = false;
+
+        if (isDebugMode) Debug.Log("Attack ended - resuming behaviour");
+    }
+
+    // New helper to convert a direction vector to attack index
+    private int GetAttackIndexFromDirection(Vector2 dir)
+    {
+        // If horizontal component is dominant -> horizontal attack
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+        {
+            return dir.x > 0 ? 2 : 3; // right : left
+        }
+        else
+        {
+            return dir.y > 0 ? 1 : 0; // up : down
+        }
     }
 }
