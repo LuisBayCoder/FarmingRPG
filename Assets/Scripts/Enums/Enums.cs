@@ -91,7 +91,8 @@ public enum SceneName
     Scene4_Barn,
     Scene5_Store,
     Scene6_Cemetery,
-    Scene7_Underworld
+    Scene7_Underworld,
+    Scene8_WeirdCemetery
 }
 
 public enum Season
