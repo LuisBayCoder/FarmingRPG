@@ -13,10 +13,23 @@ public class RemovePlayerQuestItem : MonoBehaviour
     private string spawnTagA = "ItemSpawnPointA";
     private string spawnTagB = "ItemSpawnPointB";
 
+    [SerializeField] private UIInventoryBar uiBar;
+
     // in the dialogue system, call this method and pass the item description as a parameter to remove the item from player inventory
     public void QueueItemForRemoval(string itemCodeString)
     {
         this.itemCodeString = itemCodeString;
+        // Clear UI inventory slots so the UI reflects the removal
+        if (uiBar != null)
+        {
+            // Clear carried item selection and any highlights/drags
+            uiBar.ClearCurrentlySelectedItems();      // clears highlights and calls Player.ClearCarriedItem()
+            uiBar.DestroyCurrentlyDraggedItems();     // optional: remove any dragged ghosts
+        }
+        else
+        {
+            Debug.LogWarning("UIInventoryBar not found in scene.");
+        }
     }
 
     public void QueueItemToInstantiate(string itemToInstantiate)
