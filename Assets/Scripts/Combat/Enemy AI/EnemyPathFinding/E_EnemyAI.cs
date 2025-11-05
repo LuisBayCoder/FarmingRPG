@@ -16,10 +16,13 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private float roamDuration = 3f; // Duration of roaming before changing direction
     [SerializeField] private float attackPositionMoveSpeed = 5f; // Speed for moving to attack position
     [SerializeField] private float attackDuration = 0.8f; // Time to pause movement when attacking
+    [SerializeField] private float recoveryDuration = 0.5f; // Short pause after attack before resuming
+    [SerializeField] private float attackStopDistance = 0.8f; // Distance to stop from player before attacking
 
     // runtime attack control
     private bool attackTimerRunning = false;
     private bool isPerformingAttack = false;
+    private Coroutine attackCoroutine = null; // reference to the running attack coroutine
 
     private GameObject player; // Reference to the player GameObject
     //private Vector2Int playerGridPosition; // Player's grid position for pathfinding  
@@ -49,8 +52,11 @@ public class E_EnemyAI : MonoBehaviour
 
     private enum State
     {
+        Idle,
         Roaming,
         Chasing,
+        Attacking,
+        Recovering,
         Avoiding
     }
 
@@ -241,34 +247,113 @@ public class E_EnemyAI : MonoBehaviour
         // Check if player is within detection radius
         if (distanceToPlayer <= detectionRadius)
         {
-            if (isDebugMode) Debug.Log("Player detected within detection radius."); state = State.Chasing;
-            // Set playerDetected to true
+            if (isDebugMode) Debug.Log("Player detected within detection radius.");
+
+            // Always mark player detected
             playerDetected = true;
-            // If the enemy is within the max attack distance, stop updating the path
-            if (distanceToPlayer <= maxAttackRange)
+
+            // If currently attacking/recovering or already performing attack -> handle cancel when player moves out of attack range
+            if (state == State.Attacking || state == State.Recovering || isPerformingAttack || isMovingToAttackPosition)
+            {
+                // If the player moved outside the maximum attack range, cancel attack and resume chasing.
+                if (distanceToPlayer > maxAttackRange)
+                {
+                    if (isDebugMode) Debug.Log("Player moved out of max attack range - cancelling attack.");
+
+                    // Stop any running attack coroutine
+                    if (attackCoroutine != null)
+                    {
+                        StopCoroutine(attackCoroutine);
+                        attackCoroutine = null;
+                    }
+
+                    // Reset attack-related flags
+                    attackTimerRunning = false;
+                    isPerformingAttack = false;
+                    isMovingToAttackPosition = false;
+                    hasChosenAttackPosition = false;
+
+                    // Reset animator flags
+                    if (animator != null)
+                    {
+                        animator.SetBool("isAttacking", false);
+                        ResetAttackAnimations();
+                    }
+
+                    // Resume chasing
+                    state = State.Chasing;
+                    // update path right away
+                    UpdatePathToPlayer();
+                    return;
+                }
+
+                // While attacking/recovering keep movement cancelled so enemy doesn't jitter
+                if (npcMovement != null) npcMovement.CancelNPCMovement();
+                if (npcPath != null) npcPath.ClearPath();
+
+                // stay in current attack/recovery state
+                return;
+            }
+
+            // Not attacking/recovering -> normal chasing behavior
+            state = State.Chasing;
+
+            // If the enemy is within the configured stop distance, stop moving (but don't use this alone to decide "attack")
+            if (distanceToPlayer <= attackStopDistance)
             {
                 isInAttackRange = true;
-                targetPosition = playerTransform; // Set the target to the player's position
-                npcMovement.CancelNPCMovement(); // Stop moving once attacking
+                // Stop movement so enemy will remain at the stop distance
+                if (npcMovement != null) npcMovement.CancelNPCMovement();
+                if (npcPath != null) npcPath.ClearPath();
             }
             else
             {
                 isInAttackRange = false;
+                // Build/update path towards stop position near the player
+                UpdatePathToPlayer();
+            }
 
-                if (targetPosition == null || Vector3.Distance(transform.position, targetPosition.position) > maxAttackRange)
-                {
-                    UpdatePathToPlayer(); // Update the path to the player
-                }
+            // Trigger attack based on maxAttackRange (actual attack range), not just stop distance
+            if (distanceToPlayer <= maxAttackRange)
+            {
+                AttackPlayer();
+            }
+            else
+            {
+                AttackPlayerFalse();
             }
         }
         else
         {
             // Reset player detection when out of range
-            if (playerDetected == false) return;
+            if (!playerDetected) return;
             if (isDebugMode) Debug.Log("Player out of detection radius.");
             playerDetected = false;
             isInAttackRange = false;
             hasChosenAttackPosition = false; // Reset attack position flag when player leaves detection range
+
+            // Cancel any attack movement/flags and reset animations so the enemy doesn't remain "stuck" in Attacking
+            isMovingToAttackPosition = false;
+            isPerformingAttack = false;
+
+            // Stop any running attack coroutine
+            if (attackCoroutine != null)
+            {
+                StopCoroutine(attackCoroutine);
+                attackCoroutine = null;
+            }
+            attackTimerRunning = false;
+
+            targetPosition = null;
+            if (npcMovement != null) npcMovement.CancelNPCMovement();
+            if (npcPath != null) npcPath.ClearPath();
+
+            if (animator != null)
+            {
+                animator.SetBool("isAttacking", false);
+                ResetAttackAnimations();
+            }
+
             state = State.Roaming;
             StartCoroutine(RoamingRoutine());
         }
@@ -326,45 +411,28 @@ public class E_EnemyAI : MonoBehaviour
 
     private void UpdatePathToPlayer()
     {
-        // Exit if the enemy is in attack range
-        if (isInAttackRange)
-        {
-            return;
-        }
+        if (isInAttackRange) return;
 
         pathUpdateTimer -= Time.deltaTime;
+        if (pathUpdateTimer > 0f) return;
 
-        // Only update the path if the distance to the target is significant
-        if (pathUpdateTimer <= 0f)
-        {
-            float distanceToTarget = Vector3.Distance(transform.position, targetPosition != null ? targetPosition.position : playerTransform.position);
+        pathUpdateTimer = pathUpdateDelay;
 
+        // compute the position that is 'attackStopDistance' away from the player on the line from player -> enemy
+        Vector2 dir = ((Vector2)transform.position - (Vector2)playerTransform.position).normalized;
+        Vector2 stopPos = (Vector2)playerTransform.position + dir * attackStopDistance;
 
-            // Update the path only if the enemy is far from the target
-            if (distanceToTarget >= pathFindingStopDistance) // Adding a buffer
-            {
-                pathUpdateTimer = pathUpdateDelay; // Reset the timer
-                targetPosition = playerTransform; // Set the target to the player's position
+        Vector2Int gridTarget = new Vector2Int(
+            Mathf.RoundToInt(stopPos.x),
+            Mathf.RoundToInt(stopPos.y)
+        );
 
-                if (targetPosition != null)
-                {
-                    Vector2Int gridPosition = new Vector2Int(
-                        Mathf.RoundToInt(targetPosition.position.x),
-                        Mathf.RoundToInt(targetPosition.position.y)
-                    );
+        NPCScheduleEvent chaseEvent = new NPCScheduleEvent(
+            0, 0, 0, 0, Weather.none, Season.none, npcCurrentScene,
+            new GridCoordinate(gridTarget.x, gridTarget.y), null
+        );
 
-                    finishPosition = gridPosition;
-
-                    NPCScheduleEvent enemyChaseEvent = new NPCScheduleEvent(
-                        0, 0, 0, 0, Weather.none, Season.none, npcCurrentScene,
-                        new GridCoordinate(finishPosition.x, finishPosition.y), null
-                    );
-
-                    npcPath.BuildPath(enemyChaseEvent); // Build the path using A*
-                    if (isDebugMode) Debug.Log("Path to player updated." + finishPosition);
-                }
-            }
-        }
+        npcPath.BuildPath(chaseEvent);
     }
 
     // Trigger attack animation when the enemy is in range
@@ -373,6 +441,11 @@ public class E_EnemyAI : MonoBehaviour
         // Only choose attack position if we haven't already chosen one
         if (!hasChosenAttackPosition)
         {
+            // enter attacking state and stop movement/pathing
+            state = State.Attacking;
+            if (npcMovement != null) npcMovement.CancelNPCMovement();
+            if (npcPath != null) npcPath.ClearPath();
+
             if (animator != null)
             {
                 animator.SetBool("isAttacking", true); // Play attack animation
@@ -385,44 +458,44 @@ public class E_EnemyAI : MonoBehaviour
                 if (isDebugMode) Debug.LogError("Animator component is null.");
             }
 
-            npcPath.ClearPath(); // Stop moving once the enemy attacks
+            // If the enemy is already at/near the configured stop distance, do not attempt to move further onto the player.
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+            bool atStopDistance = distanceToPlayer <= attackStopDistance + 0.05f; // small tolerance
 
-            // Choose attack position based on relative position to the player
+            // Choose attack animation based on relative position to the player
             if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0 && playerTransform != null)
             {
-                // Determine direction from enemy to player
                 Vector2 dir = (playerTransform.position - transform.position).normalized;
-
-                // Map direction to index: 0 = Down, 1 = Up, 2 = Right, 3 = Left
                 int chosenIndex = GetAttackIndexFromDirection(dir);
-
-                // If the child count is less than 4, clamp to available children
                 chosenIndex = Mathf.Clamp(chosenIndex, 0, enemyAttackPosition.childCount - 1);
 
-                // Move to attack position and set animation
-                isMovingToAttackPosition = true;
-                hasChosenAttackPosition = true; // Mark that we've chosen an attack position
-
-                // Set attack animation based on computed index
-                SetAttackAnimationByIndex(chosenIndex);
-
-                if (isDebugMode) Debug.Log($"Enemy moving to attack position {chosenIndex} based on dir {dir}");
+                // If we're at the stop distance, play the directional attack animation in place
+                if (atStopDistance)
+                {
+                    hasChosenAttackPosition = true;
+                    SetAttackAnimationByIndex(chosenIndex);
+                    // start attack coroutine immediately (no movement)
+                    if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+                    attackCoroutine = StartCoroutine(AttackCooldownRoutine());
+                    if (isDebugMode) Debug.Log("Attacking in place at stop distance");
+                }
+                else
+                {
+                    // Move to the child attack position (fallback when we need to reposition first)
+                    isMovingToAttackPosition = true;
+                    hasChosenAttackPosition = true;
+                    SetAttackAnimationByIndex(chosenIndex);
+                    if (isDebugMode) Debug.Log($"Enemy moving to attack position {chosenIndex} based on dir {dir}");
+                }
             }
             else
             {
-                // Fallback to previous random behaviour if something is missing
-                if (enemyAttackPosition != null && enemyAttackPosition.childCount > 0)
-                {
-                    int randomIndex = Random.Range(0, enemyAttackPosition.childCount);
-                    isMovingToAttackPosition = true;
-                    hasChosenAttackPosition = true;
-                    SetAttackAnimationByIndex(randomIndex);
-                    if (isDebugMode) Debug.Log($"Fallback random attack position {randomIndex}");
-                }
-                else if (isDebugMode)
-                {
-                    Debug.LogWarning("No attack positions available on player object.");
-                }
+                // Fallback: if there are no child attack positions, do an in-place attack
+                hasChosenAttackPosition = true;
+                if (animator != null) animator.SetBool("isAttacking", true);
+                if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+                attackCoroutine = StartCoroutine(AttackCooldownRoutine());
+                if (isDebugMode) Debug.Log("Fallback attack in place (no child positions)");
             }
         }
     }
@@ -494,6 +567,11 @@ public class E_EnemyAI : MonoBehaviour
         {
             if (isDebugMode) Debug.LogError("Animator component is null.");
         }
+
+        // Return to chasing if player still detected, otherwise roaming
+        state = playerDetected ? State.Chasing : State.Roaming;
+        // Ensure moving-to-attack is cancelled
+        isMovingToAttackPosition = false;
     }
 
     // Visualize detection radius and attack range in the Scene view
@@ -532,8 +610,8 @@ public class E_EnemyAI : MonoBehaviour
 
         // Ensure movement/pathing is stopped during attack
         isPerformingAttack = true;
-        npcMovement.CancelNPCMovement();
-        npcPath.ClearPath();
+        if (npcMovement != null) npcMovement.CancelNPCMovement();
+        if (npcPath != null) npcPath.ClearPath();
 
         if (animator != null)
         {
@@ -552,8 +630,28 @@ public class E_EnemyAI : MonoBehaviour
 
         hasChosenAttackPosition = false;
         isPerformingAttack = false;
-        attackTimerRunning = false;
+        isMovingToAttackPosition = false;
 
+        // Enter a short recovery period after attack before resuming chase/roam
+        state = State.Recovering;
+        if (isDebugMode) Debug.Log($"Entering recovery for {recoveryDuration}s");
+        yield return new WaitForSeconds(recoveryDuration);
+
+        // Decide next state after recovery
+        if (playerDetected)
+        {
+            state = State.Chasing;
+            if (isDebugMode) Debug.Log("Recovery ended - switching to Chasing");
+        }
+        else
+        {
+            state = State.Roaming;
+            if (isDebugMode) Debug.Log("Recovery ended - switching to Roaming");
+            StartCoroutine(RoamingRoutine());
+        }
+
+        attackTimerRunning = false;
+        attackCoroutine = null;
         if (isDebugMode) Debug.Log("Attack ended - resuming behaviour");
     }
 
@@ -568,6 +666,17 @@ public class E_EnemyAI : MonoBehaviour
         else
         {
             return dir.y > 0 ? 1 : 0; // up : down
+        }
+    }
+    public void BuildPath(NPCScheduleEvent scheduleEvent)
+    {
+        if (npcPath != null)
+        {
+            npcPath.BuildPath(scheduleEvent);
+        }
+        else if (isDebugMode)
+        {
+            Debug.LogWarning("E_EnemyAI.BuildPath called but npcPath is null.");
         }
     }
 }
