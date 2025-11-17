@@ -33792,7 +33792,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7756598, y: 1}
+    m_SensorSize: {x: 1.7782738, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -45517,8 +45517,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1224762633}
     m_Modifications:
     - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
+      propertyPath: blankAnimation
+      value: 
+      objectReference: {fileID: 7400000, guid: 500fefed8113b4f7e8f2dc728631a63d, type: 2}
+    - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
       propertyPath: npcCurrentScene
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 799363438, guid: e3d56d9e8146d204987941fbc158912f, type: 3}
       propertyPath: childBoxCollider2D
@@ -45562,7 +45566,7 @@ PrefabInstance:
     - target: {fileID: 4156620909928231205, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.03
+      value: -2.03
       objectReference: {fileID: 0}
     - target: {fileID: 4156620909928231205, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
