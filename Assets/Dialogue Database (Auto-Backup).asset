@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 935899b62f48ae5498594680ed17d133, type: 3}
-  m_Name: Dialogue Database (Auto-Backup)
+  m_Name: Dialogue Database
   m_EditorClassIdentifier: 
   version: 
   author: 
@@ -5466,7 +5466,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: I like to come here to listen to my ancestors.
+        value: "Sorry\u2026 I didn\u2019t hear you come up. I\u2019m just\u2026 listening.
+          My ancestors are here. Sometimes I can still hear them speak."
         type: 0
         typeString: 
       - title: Sequence
@@ -5506,8 +5507,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 91
-        y: 105
+        x: 159.04124
+        y: 85.41237
         width: 160
         height: 30
     - id: 2
@@ -5561,8 +5562,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 35
-        y: 178
+        x: 41.185562
+        y: 228.51544
         width: 160
         height: 30
     - id: 3
@@ -5616,8 +5617,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 225
-        y: 180
+        x: 248.71133
+        y: 221.23712
         width: 160
         height: 30
     - id: 4
@@ -5679,7 +5680,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 37.938034
-        y: 247.56207
+        y: 279.52084
         width: 160
         height: 30
     - id: 5
@@ -5858,10 +5859,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: I don't know. I dreamt of the key to the mausoleum, and I found it
-          in my attic. It was under an old painting, hidden away. I didn't even know
-          it was there until I dreamt of it. But now that I have it, I'm afraid.
-          What if the voices are real? What if they're... trapped?
+        value: "I can\u2019t prove they\u2019re real. I only know they speak. They
+          told me about the key to the mausoleum\u2026 and then I found it, in my
+          attic. Under an old painting, tucked away like it was never meant to be
+          found. I didn\u2019t even know it was there until they told me. What\u2019s
+          inside that mausoleum? What did they lock away? What did my grandmother
+          hide? \u2026What if my brother is in there with them?"
         type: 0
         typeString: 
       - title: Sequence
@@ -5901,7 +5904,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 501.10254
+        x: 500.0036
         y: 216.79037
         width: 160
         height: 30
@@ -5977,7 +5980,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: You don't have to do it alone. I'll go with you.
+        value: "Tell me about your grandmother\u2026 and what happened to your brother."
         type: 0
         typeString: 
       - title: Sequence
@@ -6048,8 +6051,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 411.73166
-        y: 144.0244
+        x: 497.29865
+        y: 158.4574
         width: 160
         height: 30
     - id: 14
@@ -6075,8 +6078,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "If something\u2019s trapped in there, why does it call to you? What
-          does it want?"
+        value: "If something\u2019s trapped in there, why does it call to you? And
+          what does your grandmother have to do with your brother?"
         type: 0
         typeString: 
       - title: Sequence
@@ -6104,8 +6107,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 708.2454
-        y: 314.11182
+        x: 736.81683
+        y: 318.50745
         width: 160
         height: 30
     - id: 15
@@ -6432,7 +6435,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 20
+        destinationConversationID: 5
+        destinationDialogueID: 22
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -6481,13 +6490,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 5
-        originDialogueID: 21
-        destinationConversationID: 5
-        destinationDialogueID: 22
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -6496,7 +6499,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 1003.0908
-        y: 633.6995
+        y: 634.7985
         width: 160
         height: 30
     - id: 22
@@ -6542,6 +6545,74 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 22
+        destinationConversationID: 5
+        destinationDialogueID: 23
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 22
+        destinationConversationID: 5
+        destinationDialogueID: 24
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 22
+        destinationConversationID: 5
+        destinationDialogueID: 26
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 829.8158
+        y: 716.6892
+        width: 160
+        height: 30
+    - id: 23
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "You\u2019re saying your grandmother was in a cult. I don\u2019t have
+          time for this."
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
       userScript: 
@@ -6550,13 +6621,172 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1014.4311
-        y: 716.6892
+        x: 734.83136
+        y: 797.6049
+        width: 160
+        height: 30
+    - id: 24
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "If you want answers, hand me the key. I\u2019ll go in and see what\u2019s
+          really inside."
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 24
+        destinationConversationID: 5
+        destinationDialogueID: 25
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1117.3542
+        y: 801.1342
+        width: 160
+        height: 30
+    - id: 25
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "If you\u2019re willing\u2026 then take the key. Go in. If my brother
+          is trapped, you have to find a way to free him. But if my grandmother was
+          part of something dark, you need to be careful. you need to be ready for
+          whatever's waiting for you in there."
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1105.153
+        y: 873.6812
+        width: 160
+        height: 30
+    - id: 26
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "So your grandmother drew weird symbols and did midnight rituals\u2026
+          doesn\u2019t mean she summoned demons. You\u2019re jumping to cults and
+          conspiracies"
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 929.81573
+        y: 796.10095
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 568.0412, y: 405.70102}
-    canvasZoom: 0.97
+    canvasScrollPosition: {x: 476.30255, y: 659.43134}
+    canvasZoom: 0.85000014
   syncInfo:
     syncActors: 0
     syncItems: 0

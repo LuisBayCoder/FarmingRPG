@@ -33792,7 +33792,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7795858, y: 1}
+    m_SensorSize: {x: 1.776868, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -55165,6 +55165,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154424, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
+      propertyPath: conversation
+      value: Prescilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154424, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
       propertyPath: conversationActor
       value: 
       objectReference: {fileID: 1117205235}
@@ -55172,7 +55177,7 @@ PrefabInstance:
         type: 3}
       propertyPath: conversationConversant
       value: 
-      objectReference: {fileID: 799363436}
+      objectReference: {fileID: 1656735115}
     - target: {fileID: 8724088706476154427, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: m_Name
