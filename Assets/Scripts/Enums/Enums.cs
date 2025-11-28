@@ -1,4 +1,4 @@
-﻿
+
 public enum AnimationName
 {
     idleDown,
@@ -92,7 +92,8 @@ public enum SceneName
     Scene5_Store,
     Scene6_Cemetery,
     Scene7_Underworld,
-    Scene8_WeirdCemetery
+    Scene8_WeirdCemetery,
+    Scene9_Mausoleum
 }
 
 public enum Season

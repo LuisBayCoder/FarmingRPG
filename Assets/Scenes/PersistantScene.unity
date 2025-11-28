@@ -6805,6 +6805,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 76a056d93539e4a4391348ba2d00f471, type: 2}
   - {fileID: 11400000, guid: f2b94f4fc46283d4faa6fe30a0db99a6, type: 2}
   - {fileID: 11400000, guid: 9c50a0ec4231ce94db2e532d2d0fd536, type: 2}
+  - {fileID: 11400000, guid: 064f4fd8f00fdcc4bb916131a39fb9c4, type: 2}
   dugGround:
   - {fileID: 11400000, guid: f2af1bbfbc8020a4aa4ab287dfb1c012, type: 2}
   - {fileID: 11400000, guid: 5f12de48f0fdaa44c80000063e53c711, type: 2}
@@ -29420,7 +29421,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1580769084}
   startingSceneName: 0
-  listNonStartingSceneNames: 01000000020000000300000004000000050000000600000007000000
+  listNonStartingSceneNames: 0100000002000000030000000400000005000000060000000700000008000000
 --- !u!1001 &1149569021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33792,7 +33793,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.776868, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
