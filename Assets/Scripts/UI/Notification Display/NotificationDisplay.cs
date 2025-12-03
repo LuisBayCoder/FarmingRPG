@@ -20,7 +20,7 @@ public class NotificationDisplay : MonoBehaviour
 
     public void Show(string message)
     {
-        textUI.text = message;
+        textUI.text = "Received: " + message;
 
         if (routine != null)
             StopCoroutine(routine);

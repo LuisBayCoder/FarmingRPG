@@ -30,6 +30,18 @@ public class GivePlayerQuestItem : MonoBehaviour
         if (pendingItemCode != -1 && InventoryManager.Instance != null)
         {
             GiveQuestItem(pendingInventoryLocation, pendingItemCode);
+
+            // Get item details and show notification
+            ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(pendingItemCode);
+            if (itemDetails != null)
+            {
+                FindObjectOfType<NotificationDisplay>().Show(itemDetails.itemDescription);
+            }
+            else
+            {
+                Debug.LogWarning($"Item details not found for item code: {pendingItemCode}");
+            }
+
             pendingItemCode = -1;
         }
     }
