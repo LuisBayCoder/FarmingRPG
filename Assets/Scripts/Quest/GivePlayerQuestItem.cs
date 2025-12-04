@@ -35,7 +35,7 @@ public class GivePlayerQuestItem : MonoBehaviour
             ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(pendingItemCode);
             if (itemDetails != null)
             {
-                FindObjectOfType<NotificationDisplay>().Show(itemDetails.itemDescription);
+                FindObjectOfType<NotificationDisplay>().Show($"Received: {itemDetails.itemDescription}");
             }
             else
             {

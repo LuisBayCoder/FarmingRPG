@@ -13,6 +13,9 @@ public class RemovePlayerQuestItem : MonoBehaviour
     private string spawnTagA = "ItemSpawnPointA";
     private string spawnTagB = "ItemSpawnPointB";
 
+    // Track removed item for notification
+    private int removedItemCode = -1;
+
     [SerializeField] private UIInventoryBar uiBar;
 
     // in the dialogue system, call this method and pass the item description as a parameter to remove the item from player inventory
@@ -58,6 +61,26 @@ public class RemovePlayerQuestItem : MonoBehaviour
         if (!string.IsNullOrEmpty(tag)) spawnTagB = tag;
     }
 
+    // Call this method when the conversation ends
+    public void OnConversationEnd()
+    {
+        if (removedItemCode != -1 && InventoryManager.Instance != null)
+        {
+            // Get item details and show notification
+            ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(removedItemCode);
+            if (itemDetails != null)
+            {
+                FindObjectOfType<NotificationDisplay>().Show($"Removed: {itemDetails.itemDescription}");
+            }
+            else
+            {
+                Debug.LogWarning($"Item details not found for item code: {removedItemCode}");
+            }
+
+            removedItemCode = -1;
+        }
+    }
+
     // remove item from player inventory by item description
     // at the end of the conversation, call this method to remove the item from player inventory
     public void RemoveItemFromInventory()
@@ -82,6 +105,7 @@ public class RemovePlayerQuestItem : MonoBehaviour
                         int itemCode = itemDetail.Key;
                         InventoryManager.Instance.RemoveItem(InventoryLocation.player, itemCode);
                         Debug.Log($"Removed one '{itemCodeString}' from player inventory.");
+                        removedItemCode = itemCode; // Store for notification
                         itemCodeString = "";
                         return;
                     }
