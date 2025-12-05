@@ -50,6 +50,7 @@ public class SceneTeleportWithLock : MonoBehaviour
         {
             if (item.itemCode == requiredKeyItemCode && item.itemQuantity > 0)
             {
+                SendUIKeyNotification();
                 return true;
             }
         }
@@ -68,5 +69,18 @@ public class SceneTeleportWithLock : MonoBehaviour
     {
         // Implement the logic to show a UI message that the door is locked
         UIManager.Instance.EnableDoorIsLockedUI();
+    }
+    public void SendUIKeyNotification()
+    {
+        // Get item details for the required key
+        ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(requiredKeyItemCode);
+        if (itemDetails != null)
+        {
+            FindObjectOfType<NotificationDisplay>().Show($"Opened door with: {itemDetails.itemDescription}");
+        }
+        else
+        {
+            Debug.LogWarning($"Item details not found for item code: {requiredKeyItemCode}");
+        }
     }
 }
