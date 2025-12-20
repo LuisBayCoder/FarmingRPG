@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using PixelCrushers;
 using PixelCrushers.QuestMachine;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 
 public class QuestManager : MonoBehaviour
@@ -16,10 +16,10 @@ public class QuestManager : MonoBehaviour
 
     private int correctPlacements = 0;
     public int requiredCorrectPlacements = 3; // how many are needed to complete the puzzle
-    public Light2D spiralLight; // reference to the light that will increase in intensity
+    public UnityEngine.Rendering.Universal.Light2D spiralLight; // reference to the light that will increase in intensity
     public float lightIncreaseRate = 0.1f; // rate at which the light intensity increases
                                            //need an array of Light2D objects to turn off  
-    public Light2D[] lightsToTurnOff; // array of lights to turn off when the quest is complete
+    public UnityEngine.Rendering.Universal.Light2D[] lightsToTurnOff; // array of lights to turn off when the quest is complete
 
     public void RegisterCorrectPlacement(int amount)
     {
@@ -37,7 +37,7 @@ public class QuestManager : MonoBehaviour
     {
         Debug.Log("Puzzle complete! Opening door.");
         //I need to fidn the spiral by light by name of object
-        spiralLight = GameObject.Find("SpiralLight").GetComponent<Light2D>();
+        spiralLight = GameObject.Find("SpiralLight").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         if (spiralLight == null)
         {
             Debug.LogError("Spiral light not found in the scene. Please assign it in the QuestManager.");
@@ -88,17 +88,17 @@ public class QuestManager : MonoBehaviour
             QuestCompleted("Door", "Open"); // Send a message to the Quest Machine indicating the quest is completed
             // Find the lights to turn off by tag (including only active ones)
             GameObject[] lights = GameObject.FindGameObjectsWithTag("LightToTurnOff");
-            lightsToTurnOff = new Light2D[lights.Length];
+            lightsToTurnOff = new UnityEngine.Rendering.Universal.Light2D[lights.Length];
             for (int i = 0; i < lights.Length; i++)
             {
-                lightsToTurnOff[i] = lights[i].GetComponent<Light2D>();
+                lightsToTurnOff[i] = lights[i].GetComponent<UnityEngine.Rendering.Universal.Light2D>();
                 if (lightsToTurnOff[i] == null)
                 {
                     Debug.LogWarning("Light2D component not found on " + lights[i].name);
                 }
             }
 
-            foreach (Light2D light in lightsToTurnOff)
+            foreach (UnityEngine.Rendering.Universal.Light2D light in lightsToTurnOff)
             {
                 if (light != null)
                 {
