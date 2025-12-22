@@ -38,6 +38,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.35, y: 0.48, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,7 +97,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 1
 --- !u!95 &2670564388992249007
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,10 +110,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &2670564388992249006
 Rigidbody2D:
   serializedVersion: 4
@@ -225,8 +228,6 @@ MonoBehaviour:
   npcTargetWorldPosition: {x: 0, y: 0, z: 0}
   npcFacingDirectionAtDestination: 0
   npcNormalSpeed: 2
-  npcMinSpeed: 1
-  npcMaxSpeed: 3
   npcIsMoving: 0
   npcTargetAnimationClip: {fileID: 0}
   blankAnimation: {fileID: 7400000, guid: 75859cca4e254f34fa522f7f976a7ea0, type: 2}
@@ -249,17 +250,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRadius: 7.5
   minAttackDistance: 1.3
-  maxChaseRange: 0.3
+  maxAttackRange: 0.3
   pathFindingStopDistance: 1.75
   pathUpdateDelay: 0.5
   npcPath: {fileID: 2670564388992249046}
   attackDamage: 5
   isDebugMode: 0
+  roamDuration: 3
+  attackPositionMoveSpeed: 5
+  attackDuration: 0.8
+  recoveryDuration: 0.5
+  attackStopDistance: 0.8
   checkInterval: 2
   moveDistance: 0.5
   playerDetected: 0
   isInAttackRange: 1
   npcCurrentScene: 5
+  npcMovement: {fileID: 0}
+  attackOffsetDown: {x: 0, y: 0}
+  attackOffsetUp: {x: 0, y: 0}
+  attackOffsetRight: {x: 0, y: 0}
+  attackOffsetLeft: {x: 0, y: 0}
 --- !u!114 &2670564388992249043
 MonoBehaviour:
   m_ObjectHideFlags: 0
