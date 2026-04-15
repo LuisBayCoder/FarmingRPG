@@ -180,9 +180,9 @@ TextureImporter:
       name: RomanRuins 1_4
       rect:
         serializedVersion: 2
-        x: 282
+        x: 306
         y: 262
-        width: 144
+        width: 120
         height: 49
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -222,9 +222,9 @@ TextureImporter:
       name: RomanRuins 1_6
       rect:
         serializedVersion: 2
-        x: 41
+        x: 1
         y: 19
-        width: 220
+        width: 260
         height: 124
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -243,9 +243,9 @@ TextureImporter:
       name: RomanRuins 1_7
       rect:
         serializedVersion: 2
-        x: 315
+        x: 338
         y: 129
-        width: 90
+        width: 67
         height: 55
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -264,9 +264,9 @@ TextureImporter:
       name: RomanRuins 1_8
       rect:
         serializedVersion: 2
-        x: 318
+        x: 339
         y: 70
-        width: 104
+        width: 83
         height: 48
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -285,10 +285,10 @@ TextureImporter:
       name: RomanRuins 1_9
       rect:
         serializedVersion: 2
-        x: 331
+        x: 353
         y: 6
-        width: 62
-        height: 52
+        width: 68
+        height: 57
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,6 +298,27 @@ TextureImporter:
       bones: []
       spriteID: f173cfd18fcf9aa4282d5fb723fd61ab
       internalID: -1431052357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RomanRuins 1_10
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 99
+        width: 50
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e533cb441cef7b428d725ac082ef1c4
+      internalID: 284841646
       vertices: []
       indices: 
       edges: []
@@ -315,6 +336,7 @@ TextureImporter:
     nameFileIdTable:
       RomanRuins 1_0: -2012026128
       RomanRuins 1_1: 21999373
+      RomanRuins 1_10: 284841646
       RomanRuins 1_2: -1684249329
       RomanRuins 1_3: -1766110261
       RomanRuins 1_4: 138233830
