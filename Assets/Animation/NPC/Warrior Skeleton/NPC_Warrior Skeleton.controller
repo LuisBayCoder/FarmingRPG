@@ -41,7 +41,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 1
@@ -271,7 +271,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SlimerAttackRight
+  m_Name: SkeletonAttackLeft
   m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
@@ -285,7 +285,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 52a7d8c5a1e476f4d8afaf01a1c4bdfe, type: 2}
+  m_Motion: {fileID: 7400000, guid: bc7331f49f2951d478521c5fb589a3db, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1926,7 +1926,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ba9539109a9323345ac195a56cf9520b, type: 2}
+  m_Motion: {fileID: 7400000, guid: ecbfa58828fb5de48b8654b154c8147d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2051,7 +2051,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2c8ad6481c856b54baff787033b96e64, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2f97aab2c89850d408645366631e0a7b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

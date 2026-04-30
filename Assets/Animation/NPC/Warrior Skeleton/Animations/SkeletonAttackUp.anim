@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SkeletonWarriorWalkRight
+  m_Name: SkeletonAttackUp
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,15 +20,15 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 490719298, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
+      value: {fileID: -1155372552, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
     - time: 0.25
-      value: {fileID: -1084189252, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
+      value: {fileID: -472692415, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
     - time: 0.5
-      value: {fileID: -507695774, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
+      value: {fileID: 1519124539, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
     - time: 0.75
-      value: {fileID: -2003775965, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
+      value: {fileID: 2838093, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
     - time: 1
-      value: {fileID: -507695774, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
+      value: {fileID: 1911803616, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,11 +48,11 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 490719298, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
-    - {fileID: -1084189252, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
-    - {fileID: -507695774, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
-    - {fileID: -2003775965, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
-    - {fileID: -507695774, guid: 509f49608f4a00d4ea596fa8246931c6, type: 3}
+    - {fileID: -1155372552, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
+    - {fileID: -472692415, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
+    - {fileID: 1519124539, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
+    - {fileID: 2838093, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
+    - {fileID: 1911803616, guid: dc55ee54b9525a649bf0d9a8b778b535, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -77,4 +77,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.5
+    functionName: AttackPlayerByAnimation
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
