@@ -54,6 +54,17 @@ public class E_EnemyAI : MonoBehaviour
     private Vector3 previousFramePosition;
     private Vector2 lastWalkingDirection = Vector2.zero;
     private int lockedAttackIndex = -1;
+    private AttackAxis lockedAttackAxis = AttackAxis.None;
+    private Grid sceneGrid;
+    private float sideDebugLogTimer = 0f;
+    private const float SideDebugLogInterval = 0.25f;
+
+    private enum AttackAxis
+    {
+        None,
+        Horizontal,
+        Vertical
+    }
 
     [SerializeField] private NPCMovement npcMovement; // Reference to the NPCMovement script
 
@@ -118,6 +129,8 @@ public class E_EnemyAI : MonoBehaviour
         npcPath = GetComponent<NPCPath>();
 
         animator.SetBool("isAttacking", false); // Ensure attack animation is not playing at start
+
+        sceneGrid = FindObjectOfType<Grid>();
 
         StartResetAnimation();
 
@@ -278,6 +291,25 @@ public class E_EnemyAI : MonoBehaviour
             // Always mark player detected
             playerDetected = true;
 
+            if (lockedAttackAxis == AttackAxis.None)
+            {
+                Vector2 initialOffset = (Vector2)transform.position - (Vector2)playerTransform.position;
+                lockedAttackAxis = Mathf.Abs(initialOffset.x) >= Mathf.Abs(initialOffset.y)
+                    ? AttackAxis.Horizontal
+                    : AttackAxis.Vertical;
+
+                if (isDebugMode) Debug.Log($"[EnemyAI] Locked attack axis {lockedAttackAxis}");
+            }
+
+            // Keep preferred attack side updated while chasing.
+            // This avoids committing too early from a noisy initial detection offset.
+            if (!isInAttackRange && !hasChosenAttackPosition)
+            {
+                lockedAttackIndex = GetAttackIndexFromRelativePlayerSide();
+            }
+
+            LogAttackSideDebug(distanceToPlayer);
+
             // If currently attacking/recovering or already performing attack -> handle cancel when player moves out of attack range
             if (state == State.Attacking || state == State.Recovering || isPerformingAttack || isMovingToAttackPosition)
             {
@@ -299,6 +331,7 @@ public class E_EnemyAI : MonoBehaviour
                     isMovingToAttackPosition = false;
                     hasChosenAttackPosition = false;
                     lockedAttackIndex = -1;
+                    lockedAttackAxis = AttackAxis.None;
 
                     // Reset animator flags
                     if (animator != null)
@@ -332,8 +365,7 @@ public class E_EnemyAI : MonoBehaviour
             state = State.Chasing;
 
             float distanceToAttackTarget = float.MaxValue;
-            int chaseAttackIndex = GetAttackIndexFromRelativePlayerSide();
-            if (TryGetAttackTargetWorldPosition(chaseAttackIndex, out Vector3 attackTargetWorldPos))
+            if (TryGetAttackTargetWorldPosition(lockedAttackIndex, out Vector3 attackTargetWorldPos))
             {
                 distanceToAttackTarget = Vector3.Distance(transform.position, attackTargetWorldPos);
             }
@@ -342,6 +374,12 @@ public class E_EnemyAI : MonoBehaviour
             if (distanceToAttackTarget <= attackMarkerArrivalDistance)
             {
                 isInAttackRange = true;
+
+                if (lockedAttackIndex < 0)
+                {
+                    lockedAttackIndex = GetAttackIndexFromRelativePlayerSide();
+                }
+
                 // Stop movement so enemy will remain at the selected attack side.
                 if (npcMovement != null) npcMovement.CancelNPCMovement();
                 if (npcPath != null) npcPath.ClearPath();
@@ -372,6 +410,7 @@ public class E_EnemyAI : MonoBehaviour
             isInAttackRange = false;
             hasChosenAttackPosition = false; // Reset attack position flag when player leaves detection range
             lockedAttackIndex = -1;
+            lockedAttackAxis = AttackAxis.None;
 
             // Cancel any attack movement/flags and reset animations so the enemy doesn't remain "stuck" in Attacking
             isMovingToAttackPosition = false;
@@ -433,6 +472,19 @@ public class E_EnemyAI : MonoBehaviour
             transform.position = targetAttackPosition; // Snap to exact position
             isMovingToAttackPosition = false;
             if (isDebugMode) Debug.Log("Enemy reached attack position");
+
+            if (lockedAttackIndex >= 0)
+            {
+                SetAttackAnimationByIndex(lockedAttackIndex);
+                if (isDebugMode) Debug.Log($"[EnemyAI] Re-applying attack direction at marker. index={lockedAttackIndex}");
+            }
+
+            if (animator != null)
+            {
+                animator.SetBool("isAttacking", false);
+                animator.SetBool("isAttacking", true);
+            }
+
             // Start attack cooldown/timer once we've reached the attack position
             StartCoroutine(AttackCooldownRoutine());
         }
@@ -464,19 +516,25 @@ public class E_EnemyAI : MonoBehaviour
 
         pathUpdateTimer = pathUpdateDelay;
 
-        int chaseAttackIndex = GetAttackIndexFromRelativePlayerSide();
-
-        if (TryGetAttackTargetWorldPosition(chaseAttackIndex, out Vector3 attackTargetWorldPos))
+        if (lockedAttackIndex < 0)
         {
-            Vector2Int markerGridTarget = new Vector2Int(
-                Mathf.RoundToInt(attackTargetWorldPos.x),
-                Mathf.RoundToInt(attackTargetWorldPos.y)
-            );
+            lockedAttackIndex = GetAttackIndexFromRelativePlayerSide();
+        }
+
+        if (TryGetAttackTargetWorldPosition(lockedAttackIndex, out Vector3 attackTargetWorldPos))
+        {
+            Vector2Int markerGridTarget = GetGridTargetFromWorld(attackTargetWorldPos);
+            markerGridTarget = AlignGridTargetToAttackAxis(lockedAttackIndex, markerGridTarget);
 
             NPCScheduleEvent markerChaseEvent = new NPCScheduleEvent(
                 0, 0, 0, 0, Weather.none, Season.none, npcCurrentScene,
                 new GridCoordinate(markerGridTarget.x, markerGridTarget.y), null
             );
+
+            if (isDebugMode)
+            {
+                Debug.Log($"[EnemyAI] Pathing to attack index {lockedAttackIndex} world {attackTargetWorldPos} grid {markerGridTarget}");
+            }
 
             npcPath.BuildPath(markerChaseEvent);
             return;
@@ -512,8 +570,9 @@ public class E_EnemyAI : MonoBehaviour
 
             if (animator != null)
             {
-                animator.SetBool("isAttacking", true); // Play attack animation
-                if (isDebugMode) Debug.Log("Setting isAttacking to true");
+                // Reset first; direction is applied below before enabling isAttacking.
+                animator.SetBool("isAttacking", false);
+                ResetAttackAnimations();
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
                 if (isDebugMode) Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
             }
@@ -527,8 +586,15 @@ public class E_EnemyAI : MonoBehaviour
             {
                 Vector2 dir = (playerTransform.position - transform.position).normalized;
                 int chosenIndex = lockedAttackIndex >= 0 ? lockedAttackIndex : GetAttackIndexFromRelativePlayerSide();
+                if (isDebugMode) Debug.Log($"[EnemyAI] Attacking with side index {chosenIndex}");
                 lockedAttackIndex = chosenIndex;
                 SetAttackAnimationByIndex(chosenIndex);
+                if (animator != null)
+                {
+                    // Defer entering attack state until we are at the marker.
+                    animator.SetBool("isAttacking", false);
+                    if (isDebugMode) Debug.Log("Deferring isAttacking until marker is reached");
+                }
 
                 // Move to the chosen attack marker unless already close enough to it.
                 float distanceToAttackPosition = Vector3.Distance(transform.position, targetAttackPosition);
@@ -554,7 +620,11 @@ public class E_EnemyAI : MonoBehaviour
             {
                 // Fallback: if there are no child attack positions, do an in-place attack
                 hasChosenAttackPosition = true;
-                if (animator != null) animator.SetBool("isAttacking", true);
+                if (animator != null)
+                {
+                    ResetAttackAnimations();
+                    animator.SetBool("isAttacking", true);
+                }
                 if (attackCoroutine != null) StopCoroutine(attackCoroutine);
                 attackCoroutine = StartCoroutine(AttackCooldownRoutine());
                 if (isDebugMode) Debug.Log("Fallback attack in place (no child positions)");
@@ -584,23 +654,23 @@ public class E_EnemyAI : MonoBehaviour
         {
             case 0: // Down attack
                 animator.SetBool("isAttackingDown", true);
-                targetAttackPosition = basePosition + (Vector3)attackOffsetDown;
-                if (isDebugMode) Debug.Log("Setting attack animation: Down with offset: " + attackOffsetDown);
+                targetAttackPosition = basePosition;
+                if (isDebugMode) Debug.Log("Setting attack animation: Down");
                 break;
             case 1: // Up attack
                 animator.SetBool("isAttackingUp", true);
-                targetAttackPosition = basePosition + (Vector3)attackOffsetUp;
-                if (isDebugMode) Debug.Log("Setting attack animation: Up with offset: " + attackOffsetUp);
+                targetAttackPosition = basePosition;
+                if (isDebugMode) Debug.Log("Setting attack animation: Up");
                 break;
             case 2: // Right attack
                 animator.SetBool("isAttackingRight", true);
-                targetAttackPosition = basePosition + (Vector3)attackOffsetRight;
-                if (isDebugMode) Debug.Log("Setting attack animation: Right with offset: " + attackOffsetRight);
+                targetAttackPosition = basePosition;
+                if (isDebugMode) Debug.Log("Setting attack animation: Right");
                 break;
             case 3: // Left attack
                 animator.SetBool("isAttackingLeft", true);
-                targetAttackPosition = basePosition + (Vector3)attackOffsetLeft;
-                if (isDebugMode) Debug.Log("Setting attack animation: Left with offset: " + attackOffsetLeft);
+                targetAttackPosition = basePosition;
+                if (isDebugMode) Debug.Log("Setting attack animation: Left");
                 break;
             default:
                 targetAttackPosition = basePosition; // No offset for invalid index
@@ -675,23 +745,42 @@ public class E_EnemyAI : MonoBehaviour
     {
         if (player == null) return null;
 
-        // First look for marker directly under player.
-        Transform marker = player.transform.Find(markerName);
-        if (marker != null) return marker;
+        // Search entire player hierarchy recursively so markers can be nested anywhere.
+        Transform marker = FindDeepChild(player.transform, markerName);
 
-        // Then look in legacy container if it exists.
-        Transform legacyContainer = player.transform.Find("EnemyAttackPosition");
-        if (legacyContainer != null)
+        if (marker != null)
         {
-            marker = legacyContainer.Find(markerName);
+            Debug.Log($"[EnemyAI] Found attack marker '{markerName}' at {marker.position} (path: {GetTransformPath(marker)})");
         }
-
-        if (marker == null && isDebugMode)
+        else
         {
-            Debug.LogWarning($"Missing attack marker '{markerName}' on player.");
+            Debug.LogWarning($"[EnemyAI] Attack marker '{markerName}' NOT found anywhere under player '{player.name}'. Enemy will use legacy fallback and may always approach from top.");
         }
 
         return marker;
+    }
+
+    private Transform FindDeepChild(Transform parent, string childName)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == childName) return child;
+            Transform found = FindDeepChild(child, childName);
+            if (found != null) return found;
+        }
+        return null;
+    }
+
+    private string GetTransformPath(Transform t)
+    {
+        string path = t.name;
+        Transform current = t.parent;
+        while (current != null)
+        {
+            path = current.name + "/" + path;
+            current = current.parent;
+        }
+        return path;
     }
 
     private Transform GetAttackPositionTransform(int attackIndex)
@@ -758,6 +847,12 @@ public class E_EnemyAI : MonoBehaviour
 
         if (animator != null)
         {
+            // Re-apply locked direction just before entering attack state to avoid Animator defaulting.
+            if (lockedAttackIndex >= 0)
+            {
+                SetAttackAnimationByIndex(lockedAttackIndex);
+            }
+
             animator.SetBool("isAttacking", true);
         }
 
@@ -863,10 +958,87 @@ public class E_EnemyAI : MonoBehaviour
         return sideOffset.y > 0f ? 0 : 1;
     }
 
+    private int GetClosestAttackIndexToEnemy()
+    {
+        int closestIndex = -1;
+        float closestSqrDistance = float.MaxValue;
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (!TryGetAttackTargetWorldPosition(i, out Vector3 markerWorldPos)) continue;
+
+            float sqrDistance = ((Vector2)(transform.position - markerWorldPos)).sqrMagnitude;
+            if (sqrDistance < closestSqrDistance)
+            {
+                closestSqrDistance = sqrDistance;
+                closestIndex = i;
+            }
+        }
+
+        if (closestIndex >= 0)
+        {
+            return closestIndex;
+        }
+
+        return GetAttackIndexFromRelativePlayerSide();
+    }
+
+    private Vector2Int GetGridTargetFromWorld(Vector3 worldPosition)
+    {
+        if (sceneGrid == null)
+        {
+            sceneGrid = FindObjectOfType<Grid>();
+        }
+
+        if (sceneGrid != null)
+        {
+            Vector3Int gridCell = sceneGrid.WorldToCell(worldPosition);
+            return new Vector2Int(gridCell.x, gridCell.y);
+        }
+
+        return new Vector2Int(Mathf.RoundToInt(worldPosition.x), Mathf.RoundToInt(worldPosition.y));
+    }
+
+    private Vector2Int AlignGridTargetToAttackAxis(int attackIndex, Vector2Int markerGridTarget)
+    {
+        if (playerTransform == null)
+        {
+            return markerGridTarget;
+        }
+
+        Vector2Int playerGridTarget = GetGridTargetFromWorld(playerTransform.position);
+
+        // Keep side attacks on player's row and vertical attacks on player's column.
+        if (attackIndex == 2 || attackIndex == 3)
+        {
+            markerGridTarget.y = playerGridTarget.y;
+        }
+        else if (attackIndex == 0 || attackIndex == 1)
+        {
+            markerGridTarget.x = playerGridTarget.x;
+        }
+
+        return markerGridTarget;
+    }
+
     private int GetAttackIndexFromRelativePlayerSide()
     {
         Vector2 sideOffset = (Vector2)transform.position - (Vector2)playerTransform.position;
-        if (Mathf.Abs(sideOffset.x) >= Mathf.Abs(sideOffset.y))
+        float absSideX = Mathf.Abs(sideOffset.x);
+        float absSideY = Mathf.Abs(sideOffset.y);
+
+        if (lockedAttackAxis == AttackAxis.Horizontal)
+        {
+            return sideOffset.x < 0f ? 2 : 3;
+        }
+
+        if (lockedAttackAxis == AttackAxis.Vertical)
+        {
+            return sideOffset.y > 0f ? 0 : 1;
+        }
+
+        // Slight horizontal bias avoids switching to top/bottom when near player center.
+        if (absSideX >= absSideY * 0.7f)
         {
             return sideOffset.x < 0f ? 2 : 3;
         }
@@ -888,16 +1060,16 @@ public class E_EnemyAI : MonoBehaviour
         switch (attackIndex)
         {
             case 0:
-                worldPosition = basePosition + (Vector3)attackOffsetDown;
+                worldPosition = basePosition;
                 return true;
             case 1:
-                worldPosition = basePosition + (Vector3)attackOffsetUp;
+                worldPosition = basePosition;
                 return true;
             case 2:
-                worldPosition = basePosition + (Vector3)attackOffsetRight;
+                worldPosition = basePosition;
                 return true;
             case 3:
-                worldPosition = basePosition + (Vector3)attackOffsetLeft;
+                worldPosition = basePosition;
                 return true;
             default:
                 worldPosition = basePosition;
@@ -948,6 +1120,19 @@ public class E_EnemyAI : MonoBehaviour
         }
 
         previousFramePosition = transform.position;
+    }
+
+    private void LogAttackSideDebug(float distanceToPlayer)
+    {
+        if (!isDebugMode || playerTransform == null) return;
+
+        sideDebugLogTimer -= Time.deltaTime;
+        if (sideDebugLogTimer > 0f) return;
+
+        sideDebugLogTimer = SideDebugLogInterval;
+
+        Vector2 sideOffset = (Vector2)transform.position - (Vector2)playerTransform.position;
+        Debug.Log($"[EnemyAI SideDebug] lock={lockedAttackIndex} walkDir={lastWalkingDirection} sideOffset={sideOffset} inRange={isInAttackRange} dPlayer={distanceToPlayer:F2}");
     }
     public void BuildPath(NPCScheduleEvent scheduleEvent)
     {
