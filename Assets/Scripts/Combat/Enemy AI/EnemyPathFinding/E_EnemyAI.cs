@@ -313,8 +313,11 @@ public class E_EnemyAI : MonoBehaviour
             // If currently attacking/recovering or already performing attack -> handle cancel when player moves out of attack range
             if (state == State.Attacking || state == State.Recovering || isPerformingAttack || isMovingToAttackPosition)
             {
-                // If the player moved outside the maximum attack range, cancel attack and resume chasing.
-                if (distanceToPlayer > attackExitRange)
+                // If we are still repositioning (not yet swinging), allow cancel when target leaves range.
+                // Once attack is actively playing, do not interrupt mid-swing.
+                bool canCancelCurrentAttack = !isPerformingAttack && !attackTimerRunning;
+
+                if (canCancelCurrentAttack && distanceToPlayer > attackExitRange)
                 {
                     if (isDebugMode) Debug.Log("Player moved outside attack exit range - cancelling attack.");
 
@@ -473,17 +476,7 @@ public class E_EnemyAI : MonoBehaviour
             isMovingToAttackPosition = false;
             if (isDebugMode) Debug.Log("Enemy reached attack position");
 
-            if (lockedAttackIndex >= 0)
-            {
-                SetAttackAnimationByIndex(lockedAttackIndex);
-                if (isDebugMode) Debug.Log($"[EnemyAI] Re-applying attack direction at marker. index={lockedAttackIndex}");
-            }
-
-            if (animator != null)
-            {
-                animator.SetBool("isAttacking", false);
-                animator.SetBool("isAttacking", true);
-            }
+            BeginAttackAnimation();
 
             // Start attack cooldown/timer once we've reached the attack position
             StartCoroutine(AttackCooldownRoutine());
@@ -570,8 +563,6 @@ public class E_EnemyAI : MonoBehaviour
 
             if (animator != null)
             {
-                // Reset first; direction is applied below before enabling isAttacking.
-                animator.SetBool("isAttacking", false);
                 ResetAttackAnimations();
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
                 if (isDebugMode) Debug.Log("Animator state: " + GetStateNameFromHash(stateInfo.fullPathHash));
@@ -591,8 +582,6 @@ public class E_EnemyAI : MonoBehaviour
                 SetAttackAnimationByIndex(chosenIndex);
                 if (animator != null)
                 {
-                    // Defer entering attack state until we are at the marker.
-                    animator.SetBool("isAttacking", false);
                     if (isDebugMode) Debug.Log("Deferring isAttacking until marker is reached");
                 }
 
@@ -694,6 +683,17 @@ public class E_EnemyAI : MonoBehaviour
         // Don't force-reset attack while we're already in a committed attack/recovery flow.
         if (isPerformingAttack || isMovingToAttackPosition || attackTimerRunning || state == State.Recovering)
         {
+            return;
+        }
+
+        // If the enemy is still holding the correct attack position beside the player,
+        // keep the attack state latched instead of flicking off for one frame.
+        if (ShouldHoldAttackAnimation())
+        {
+            if (animator != null)
+            {
+                animator.SetBool("isAttacking", true);
+            }
             return;
         }
 
@@ -847,24 +847,15 @@ public class E_EnemyAI : MonoBehaviour
 
         if (animator != null)
         {
-            // Re-apply locked direction just before entering attack state to avoid Animator defaulting.
-            if (lockedAttackIndex >= 0)
-            {
-                SetAttackAnimationByIndex(lockedAttackIndex);
-            }
-
-            animator.SetBool("isAttacking", true);
+            BeginAttackAnimation();
         }
 
-        if (isDebugMode) Debug.Log($"Attack started - pausing movement for {attackDuration}s");
-        yield return new WaitForSeconds(attackDuration);
+        // Let animator process the transition, then resolve clip-driven duration.
+        yield return null;
 
-        // End attack, reset animation flags and allow movement/pathfinding again
-        if (animator != null)
-        {
-            animator.SetBool("isAttacking", false);
-            ResetAttackAnimations();
-        }
+        float resolvedAttackDuration = Mathf.Max(attackDuration, GetCurrentAttackClipDuration());
+        if (isDebugMode) Debug.Log($"Attack started - pausing movement for {resolvedAttackDuration:F2}s");
+        yield return new WaitForSeconds(resolvedAttackDuration);
 
         hasChosenAttackPosition = false;
         isPerformingAttack = false;
@@ -888,9 +879,72 @@ public class E_EnemyAI : MonoBehaviour
             StartCoroutine(RoamingRoutine());
         }
 
+        bool shouldHoldAttackAnimation = ShouldHoldAttackAnimation();
+        if (animator != null && !shouldHoldAttackAnimation)
+        {
+            animator.SetBool("isAttacking", false);
+            ResetAttackAnimations();
+        }
+
         attackTimerRunning = false;
         attackCoroutine = null;
         if (isDebugMode) Debug.Log("Attack ended - resuming behaviour");
+    }
+
+    private float GetCurrentAttackClipDuration()
+    {
+        if (animator == null)
+        {
+            return attackDuration;
+        }
+
+        AnimatorClipInfo[] clips = animator.GetCurrentAnimatorClipInfo(0);
+        if (clips != null && clips.Length > 0 && clips[0].clip != null)
+        {
+            float speed = Mathf.Abs(animator.speed);
+            if (speed < 0.01f)
+            {
+                speed = 1f;
+            }
+
+            return clips[0].clip.length / speed;
+        }
+
+        return attackDuration;
+    }
+
+    private void BeginAttackAnimation()
+    {
+        if (animator == null)
+        {
+            return;
+        }
+
+        // Clear locomotion/idle parameters so they can't override the attack state.
+        ResetMovementAnimation();
+
+        if (lockedAttackIndex >= 0)
+        {
+            SetAttackAnimationByIndex(lockedAttackIndex);
+            if (isDebugMode) Debug.Log($"[EnemyAI] Applying attack direction at swing start. index={lockedAttackIndex}");
+        }
+
+        animator.SetBool("isAttacking", true);
+    }
+
+    private bool ShouldHoldAttackAnimation()
+    {
+        if (!playerDetected || lockedAttackIndex < 0)
+        {
+            return false;
+        }
+
+        if (!TryGetAttackTargetWorldPosition(lockedAttackIndex, out Vector3 attackTargetWorldPos))
+        {
+            return false;
+        }
+
+        return Vector3.Distance(transform.position, attackTargetWorldPos) <= attackMarkerArrivalDistance + 0.05f;
     }
 
     // New helper to convert a direction vector to attack index
