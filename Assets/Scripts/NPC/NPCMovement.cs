@@ -105,6 +105,11 @@ public class NPCMovement : MonoBehaviour
     {
         if (sceneLoaded && !paused)
         {
+            if (IsCombatAnimationActive())
+            {
+                return;
+            }
+
             if (!npcIsMoving)
             {
                 npcCurrentGridPosition = GetGridPosition(transform.position);
@@ -158,6 +163,20 @@ public class NPCMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    private bool IsCombatAnimationActive()
+    {
+        if (animator == null)
+        {
+            return false;
+        }
+
+        return animator.GetBool("isAttacking")
+            || animator.GetBool("isAttackingUp")
+            || animator.GetBool("isAttackingDown")
+            || animator.GetBool("isAttackingLeft")
+            || animator.GetBool("isAttackingRight");
     }
 
     public void SetScheduleEventDetails(NPCScheduleEvent npcScheduleEvent)
