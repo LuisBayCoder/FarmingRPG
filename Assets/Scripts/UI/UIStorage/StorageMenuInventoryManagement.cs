@@ -20,7 +20,7 @@ public class StorageMenuInventoryManagement : MonoBehaviour
         if (StorageInventoryManager.Instance != null)
         {
             Debug.Log("StorageMenuInventoryManagement OnEnable");
-            PopulateStorageInventory(InventoryLocation.storage, StorageInventoryManager.Instance.inventoryLists[(int)InventoryLocation.storage]);
+            PopulateStorageInventory(InventoryLocation.storage, StorageInventoryManager.Instance.GetActiveChestInventory());
         }
         else
         {
@@ -46,8 +46,10 @@ public class StorageMenuInventoryManagement : MonoBehaviour
 
     public void DestroyCurrentlyDraggedItems()
     {
+        List<InventoryItem> activeChestInventory = StorageInventoryManager.Instance.GetActiveChestInventory();
+
         // loop through all player inventory items
-        for (int i = 0; i < StorageInventoryManager.Instance.inventoryLists[(int)InventoryLocation.storage].Count; i++)
+        for (int i = 0; i < activeChestInventory.Count && i < inventoryManagementSlot.Length; i++)
         {
             if (inventoryManagementSlot[i].draggedItem != null)
             {
@@ -63,8 +65,13 @@ public class StorageMenuInventoryManagement : MonoBehaviour
         {
             InitialiseInventoryManagementSlots();
 
+            if (playerInventoryList == null)
+            {
+                return;
+            }
+
             // loop through all player inventory items
-            for (int i = 0; i < StorageInventoryManager.Instance.inventoryLists[(int)InventoryLocation.storage].Count; i++)
+            for (int i = 0; i < playerInventoryList.Count && i < inventoryManagementSlot.Length; i++)
             {
                 // Get inventory item details
                 inventoryManagementSlot[i].itemDetails = StorageInventoryManager.Instance.GetItemDetails(playerInventoryList[i].itemCode);

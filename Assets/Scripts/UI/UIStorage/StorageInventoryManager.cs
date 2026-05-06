@@ -3,6 +3,26 @@ using UnityEngine;
 
 public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryManager>, ISaveable
 {
+    [System.Serializable]
+    private class ChestInventorySaveEntry
+    {
+        public string chestId;
+        public bool isInitialized;
+        public List<InventoryItem> items;
+    }
+
+    [System.Serializable]
+    private class ChestInventorySaveCollection
+    {
+        public List<ChestInventorySaveEntry> entries;
+    }
+
+    private class ChestInventoryData
+    {
+        public bool isInitialized;
+        public List<InventoryItem> items = new List<InventoryItem>();
+    }
+
     private UIInventoryBar inventoryBar;
 
     private Dictionary<int, ItemDetails> itemDetailsDictionary;
@@ -14,6 +34,9 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
     [HideInInspector] public int[] inventoryListCapacityIntArray; // the index of the array is the inventory list (from the InventoryLocation enum), and the value is the capacity of that inventory list
 
     [SerializeField] private SO_ItemList itemList = null;
+
+    private readonly Dictionary<string, ChestInventoryData> chestInventoryDictionary = new Dictionary<string, ChestInventoryData>();
+    private string activeChestId = string.Empty;
 
     private string _iSaveableUniqueID;
     public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
@@ -78,6 +101,62 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
         inventoryListCapacityIntArray[(int)InventoryLocation.player] = Settings.playerInitialInventoryCapacity;
     }
 
+    public string ActiveChestId => activeChestId;
+
+    public void SetActiveChest(string chestId)
+    {
+        if (string.IsNullOrWhiteSpace(chestId))
+        {
+            Debug.LogWarning("SetActiveChest called with an empty chest ID.");
+            return;
+        }
+
+        activeChestId = chestId;
+        GetOrCreateChestInventoryData(activeChestId);
+        EventHandler.CallInventoryUpdatedEvent(InventoryLocation.storage, GetActiveChestInventory());
+    }
+
+    public List<InventoryItem> GetActiveChestInventory()
+    {
+        if (!string.IsNullOrWhiteSpace(activeChestId))
+        {
+            return GetOrCreateChestInventoryData(activeChestId).items;
+        }
+
+        return inventoryLists[(int)InventoryLocation.storage];
+    }
+
+    public bool IsChestInitialized(string chestId)
+    {
+        if (string.IsNullOrWhiteSpace(chestId))
+        {
+            return false;
+        }
+
+        return GetOrCreateChestInventoryData(chestId).isInitialized;
+    }
+
+    public void MarkChestInitialized(string chestId)
+    {
+        if (string.IsNullOrWhiteSpace(chestId))
+        {
+            return;
+        }
+
+        GetOrCreateChestInventoryData(chestId).isInitialized = true;
+    }
+
+    private ChestInventoryData GetOrCreateChestInventoryData(string chestId)
+    {
+        if (!chestInventoryDictionary.TryGetValue(chestId, out ChestInventoryData chestInventoryData))
+        {
+            chestInventoryData = new ChestInventoryData();
+            chestInventoryDictionary.Add(chestId, chestInventoryData);
+        }
+
+        return chestInventoryData;
+    }
+
     
     // Method to add an item to the store inventory
     public void AddItem(InventoryLocation location, InventoryItem item)
@@ -120,10 +199,10 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
     public void AddItem(InventoryLocation inventoryLocation, Item item)
     {
         int itemCode = item.ItemCode;
-        List<InventoryItem> inventoryList = inventoryLists[(int)inventoryLocation];
+        List<InventoryItem> inventoryList = GetInventoryList(inventoryLocation);
 
         // Check if inventory already contains the item
-        int itemPosition = FindItemInInventory(inventoryLocation, itemCode);
+        int itemPosition = FindItemInInventoryList(inventoryList, itemCode);
 
         if (itemPosition != -1)
         {
@@ -135,7 +214,7 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
         }
 
         //  Send event that inventory has been updated
-        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
+        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryList);
     }
 
     /// <summary>
@@ -143,10 +222,10 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
     /// </summary>
     public void AddItem(InventoryLocation inventoryLocation, int itemCode)
     {
-        List<InventoryItem> inventoryList = inventoryLists[(int)inventoryLocation];
+        List<InventoryItem> inventoryList = GetInventoryList(inventoryLocation);
 
         // Check if inventory already contains the item
-        int itemPosition = FindItemInInventory(inventoryLocation, itemCode);
+        int itemPosition = FindItemInInventoryList(inventoryList, itemCode);
 
         if (itemPosition != -1)
         {
@@ -158,7 +237,7 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
         }
 
         //  Send event that inventory has been updated
-        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
+        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryList);
     }
 
 
@@ -231,7 +310,17 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
     /// </summary>
     public int FindItemInInventory(InventoryLocation inventoryLocation, int itemCode)
     {
-        List<InventoryItem> inventoryList = inventoryLists[(int)inventoryLocation];
+        List<InventoryItem> inventoryList = GetInventoryList(inventoryLocation);
+
+        return FindItemInInventoryList(inventoryList, itemCode);
+    }
+
+    private int FindItemInInventoryList(List<InventoryItem> inventoryList, int itemCode)
+    {
+        if (inventoryList == null)
+        {
+            return -1;
+        }
 
         for (int i = 0; i < inventoryList.Count; i++)
         {
@@ -242,6 +331,16 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
         }
 
         return -1;
+    }
+
+    private List<InventoryItem> GetInventoryList(InventoryLocation inventoryLocation)
+    {
+        if (inventoryLocation == InventoryLocation.storage)
+        {
+            return GetActiveChestInventory();
+        }
+
+        return inventoryLists[(int)inventoryLocation];
     }
 
     /// <summary>
@@ -356,6 +455,10 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
         sceneSave.intArrayDictionary = new Dictionary<string, int[]>();
         sceneSave.intArrayDictionary.Add("inventoryListCapacityArray", inventoryListCapacityIntArray);
 
+        // Add serialized per-chest inventories
+        sceneSave.stringDictionary = new Dictionary<string, string>();
+        sceneSave.stringDictionary.Add("chestInventoriesJson", SerializeChestInventories());
+
         // Add scene save for gameobject
         GameObjectSave.sceneData.Add(Settings.PersistentScene, sceneSave);
 
@@ -390,6 +493,11 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
                     inventoryBar.ClearHighlightOnInventorySlots();
                 }
 
+                if (sceneSave.stringDictionary != null && sceneSave.stringDictionary.TryGetValue("chestInventoriesJson", out string chestInventoriesJson))
+                {
+                    DeserializeChestInventories(chestInventoriesJson);
+                }
+
                 // int array dictionary exists for scene
                 if (sceneSave.intArrayDictionary != null && sceneSave.intArrayDictionary.TryGetValue("inventoryListCapacityArray", out int[] inventoryCapacityArray))
                 {
@@ -418,10 +526,10 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
     /// </summary>
     public void RemoveItem(InventoryLocation inventoryLocation, int itemCode)
     {
-        List<InventoryItem> inventoryList = inventoryLists[(int)inventoryLocation];
+        List<InventoryItem> inventoryList = GetInventoryList(inventoryLocation);
 
         // Check if inventory already contains the item
-        int itemPosition = FindItemInInventory(inventoryLocation, itemCode);
+        int itemPosition = FindItemInInventoryList(inventoryList, itemCode);
 
         if (itemPosition != -1)
         {
@@ -429,7 +537,7 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
         }
 
         //  Send event that inventory has been updated
-        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
+        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryList);
 
     }
 
@@ -457,6 +565,59 @@ public class StorageInventoryManager : SingletonMonobehaviour<StorageInventoryMa
     public void SetSelectedInventoryItem(InventoryLocation inventoryLocation, int itemCode)
     {
         selectedInventoryItem[(int)inventoryLocation] = itemCode;
+    }
+
+    private string SerializeChestInventories()
+    {
+        ChestInventorySaveCollection collection = new ChestInventorySaveCollection
+        {
+            entries = new List<ChestInventorySaveEntry>()
+        };
+
+        foreach (KeyValuePair<string, ChestInventoryData> kvp in chestInventoryDictionary)
+        {
+            collection.entries.Add(new ChestInventorySaveEntry
+            {
+                chestId = kvp.Key,
+                isInitialized = kvp.Value.isInitialized,
+                items = new List<InventoryItem>(kvp.Value.items)
+            });
+        }
+
+        return JsonUtility.ToJson(collection);
+    }
+
+    private void DeserializeChestInventories(string json)
+    {
+        chestInventoryDictionary.Clear();
+
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return;
+        }
+
+        ChestInventorySaveCollection collection = JsonUtility.FromJson<ChestInventorySaveCollection>(json);
+
+        if (collection == null || collection.entries == null)
+        {
+            return;
+        }
+
+        foreach (ChestInventorySaveEntry entry in collection.entries)
+        {
+            if (entry == null || string.IsNullOrWhiteSpace(entry.chestId))
+            {
+                continue;
+            }
+
+            ChestInventoryData data = new ChestInventoryData
+            {
+                isInitialized = entry.isInitialized,
+                items = entry.items ?? new List<InventoryItem>()
+            };
+
+            chestInventoryDictionary[entry.chestId] = data;
+        }
     }
 
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using PixelCrushers.DialogueSystem;
@@ -16,6 +17,8 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
     [SerializeField] private GameObject storeMenu = null;
     [SerializeField] private GameObject[] storeTabs = null;
     [SerializeField] private Button[] storeButtons = null;
+    [SerializeField] private TMP_Text activeChestNameText = null;
+    [SerializeField] private string chestNamePrefix = "Chest: ";
 
     public bool StorageMenuOn { get => _storeMenuOn; set => _storeMenuOn = value; }
 
@@ -74,6 +77,8 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
 
         // Highlight selected button
         HighlightButtonForSelectedTab();
+
+        RefreshActiveChestNameText();
     }
 
     public void DisabelStorageMenu()
@@ -139,5 +144,39 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
         }
 
         HighlightButtonForSelectedTab();
+    }
+
+    public void SetActiveChestName(string chestDisplayName)
+    {
+        if (activeChestNameText == null)
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(chestDisplayName))
+        {
+            chestDisplayName = "Storage";
+        }
+
+        activeChestNameText.text = chestNamePrefix + chestDisplayName;
+    }
+
+    private void RefreshActiveChestNameText()
+    {
+        if (activeChestNameText == null)
+        {
+            return;
+        }
+
+        if (StorageInventoryManager.Instance == null)
+        {
+            return;
+        }
+
+        string activeChestId = StorageInventoryManager.Instance.ActiveChestId;
+        if (string.IsNullOrWhiteSpace(activeChestId))
+        {
+            activeChestNameText.text = chestNamePrefix + "Storage";
+        }
     }
 }
