@@ -9,6 +9,7 @@ public class LootChest : MonoBehaviour
 
     [Header("Display")]
     [SerializeField] private string chestDisplayName = "";
+    [SerializeField] private bool includeChestPrefixInLabel = true;
 
     [Header("Initial Chest Loot")]
     [SerializeField] private bool addStarterItemsOnFirstOpen = true;
@@ -81,7 +82,7 @@ public class LootChest : MonoBehaviour
         }
 
         StorageInventoryManager.Instance.SetActiveChest(chestId);
-        StorageUIManager.Instance.SetActiveChestName(chestDisplayName);
+        StorageUIManager.Instance.SetActiveChestName(GetDisplayNameWithoutPrefix(chestDisplayName), includeChestPrefixInLabel);
 
         if (addStarterItemsOnFirstOpen)
         {
@@ -124,5 +125,27 @@ public class LootChest : MonoBehaviour
         int py = Mathf.RoundToInt(position.y * 100f);
         int pz = Mathf.RoundToInt(position.z * 100f);
         return gameObject.scene.name + "_" + gameObject.name + "_" + px + "_" + py + "_" + pz;
+    }
+
+    private string GetDisplayNameWithoutPrefix(string rawDisplayName)
+    {
+        if (string.IsNullOrWhiteSpace(rawDisplayName))
+        {
+            return "Storage";
+        }
+
+        string trimmedDisplayName = rawDisplayName.Trim();
+
+        if (trimmedDisplayName.StartsWith("Chest:", System.StringComparison.OrdinalIgnoreCase))
+        {
+            return trimmedDisplayName.Substring("Chest:".Length).Trim();
+        }
+
+        if (trimmedDisplayName.StartsWith("Chest ", System.StringComparison.OrdinalIgnoreCase))
+        {
+            return trimmedDisplayName.Substring("Chest ".Length).Trim();
+        }
+
+        return trimmedDisplayName;
     }
 }

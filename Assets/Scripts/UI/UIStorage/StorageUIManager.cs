@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using PixelCrushers.DialogueSystem;
 
 public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
 {
-
     private bool _storeMenuOn = false;
     //[SerializeField] private UIInventoryBar uiInventoryBar = null;
     //[SerializeField] private PauseMenuInventoryManagement storeMenuInventoryManagement = null;
@@ -19,6 +15,9 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
     [SerializeField] private Button[] storeButtons = null;
     [SerializeField] private TMP_Text activeChestNameText = null;
     [SerializeField] private string chestNamePrefix = "Chest: ";
+    [SerializeField] private bool forceTwoLineCenteredChestLabel = true;
+
+    private bool currentLabelIncludesPrefix = true;
 
     public bool StorageMenuOn { get => _storeMenuOn; set => _storeMenuOn = value; }
 
@@ -27,27 +26,26 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
         base.Awake();
 
         storeMenu.SetActive(false);
+        ConfigureChestNameText();
     }
     
     private void Update()
     {
         // Toggle pause menu if escape is pressed this a debug key
-         if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            if (StorageMenuOn)
-            {
-                DisabelStorageMenu();
-            }
-            else
-            {
-                EnableStorageMenu();
-            }
+            ToggleStorageMenu();
         }
     }
 
     public void StoreMenu()
     {
         // Toggle pause menu if escape is pressed
+        ToggleStorageMenu();
+    }
+
+    private void ToggleStorageMenu()
+    {
         if (StorageMenuOn)
         {
             DisabelStorageMenu();
@@ -111,21 +109,15 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
     private void SetButtonColorToActive(Button button)
     {
         ColorBlock colors = button.colors;
-
         colors.normalColor = colors.pressedColor;
-
         button.colors = colors;
-
     }
 
     private void SetButtonColorToInactive(Button button)
     {
         ColorBlock colors = button.colors;
-
         colors.normalColor = colors.disabledColor;
-
         button.colors = colors;
-
     }
 
     public void SwitchPauseMenuTab(int tabNum)
@@ -148,17 +140,26 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
 
     public void SetActiveChestName(string chestDisplayName)
     {
+        SetActiveChestName(chestDisplayName, true);
+    }
+
+    public void SetActiveChestName(string chestDisplayName, bool includePrefix)
+    {
         if (activeChestNameText == null)
         {
             return;
         }
+
+        currentLabelIncludesPrefix = includePrefix;
+
+        ConfigureChestNameText(includePrefix);
 
         if (string.IsNullOrWhiteSpace(chestDisplayName))
         {
             chestDisplayName = "Storage";
         }
 
-        activeChestNameText.text = chestNamePrefix + chestDisplayName;
+        activeChestNameText.text = BuildChestLabel(chestDisplayName, includePrefix);
     }
 
     private void RefreshActiveChestNameText()
@@ -168,6 +169,8 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
             return;
         }
 
+        ConfigureChestNameText(currentLabelIncludesPrefix);
+
         if (StorageInventoryManager.Instance == null)
         {
             return;
@@ -176,7 +179,39 @@ public class StorageUIManager : SingletonMonobehaviour<StorageUIManager>
         string activeChestId = StorageInventoryManager.Instance.ActiveChestId;
         if (string.IsNullOrWhiteSpace(activeChestId))
         {
-            activeChestNameText.text = chestNamePrefix + "Storage";
+            activeChestNameText.text = BuildChestLabel("Storage", currentLabelIncludesPrefix);
         }
+    }
+
+    private string BuildChestLabel(string chestDisplayName, bool includePrefix)
+    {
+        if (!includePrefix)
+        {
+            return $"<align=\"center\">{chestDisplayName}</align>";
+        }
+
+        if (forceTwoLineCenteredChestLabel)
+        {
+            return $"<align=\"center\">{chestNamePrefix}\n{chestDisplayName}</align>";
+        }
+
+        return $"<align=\"center\">{chestNamePrefix}{chestDisplayName}</align>";
+    }
+
+    private void ConfigureChestNameText()
+    {
+        ConfigureChestNameText(true);
+    }
+
+    private void ConfigureChestNameText(bool includePrefix)
+    {
+        if (activeChestNameText == null)
+        {
+            return;
+        }
+
+        activeChestNameText.richText = true;
+        activeChestNameText.alignment = includePrefix ? TextAlignmentOptions.Top : TextAlignmentOptions.Center;
+        activeChestNameText.enableWordWrapping = includePrefix;
     }
 }

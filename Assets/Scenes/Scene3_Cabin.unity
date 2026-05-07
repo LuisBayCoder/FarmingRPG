@@ -8752,8 +8752,40 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cabinet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7691529595459505163, guid: 34e3ff00ea7df64428440b1209407b7e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 34e3ff00ea7df64428440b1209407b7e, type: 3}
+--- !u!1 &7691529594034526996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7691529595459505158, guid: 34e3ff00ea7df64428440b1209407b7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7691529594034526995}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7691529594034526997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691529594034526996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a7bb7a72759ae419d68275fab42e92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openOnTriggerEnter: 1
+  interactKey: 101
+  chestDisplayName: Cabinet
+  includeChestPrefixInLabel: 0
+  addStarterItemsOnFirstOpen: 1
+  chestId: CabinCabinet
+  starterItems:
+  - itemCode: 10004
+    itemQuantity: 1
+  - itemCode: 10003
+    itemQuantity: 1
+  - itemCode: 10012
+    itemQuantity: 1
 --- !u!1 &7815882822262402352
 GameObject:
   m_ObjectHideFlags: 0
