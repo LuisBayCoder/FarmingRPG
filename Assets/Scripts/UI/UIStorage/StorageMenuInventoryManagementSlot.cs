@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class StorageMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    private const int DefaultGoldCoinValue = 1;
+
     public Image storeInventoryManagementSlotImage;
     public TextMeshProUGUI textMeshProUGUI;
     [SerializeField] private StorageMenuInventoryManagement inventoryManagement = null;
@@ -136,10 +138,28 @@ public class StorageMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandl
         // Access the singleton instance of InventoryManager for player inventory
         InventoryManager inventoryManager = InventoryManager.Instance;
 
-        // Add the item to the player's inventory
+        bool isGoldCoin = itemCode == (int)ItemCode.GoldCoin || itemDetails.itemType == ItemType.GoldCoin;
+
+        // Add the item to the player's inventory (or convert Gold Coin loot into player currency)
         if (inventoryManager != null)
         {
-            inventoryManager.AddItem(InventoryLocation.player, itemCode);    
+            if (isGoldCoin)
+            {
+                int coinAmount = Mathf.Max(DefaultGoldCoinValue, itemDetails.itemCost);
+
+                if (CoinManager.Instance != null)
+                {
+                    CoinManager.Instance.AddCoins(coinAmount);
+                }
+                else
+                {
+                    Debug.LogWarning("CoinManager not found. Gold Coin loot could not be added.");
+                }
+            }
+            else
+            {
+                inventoryManager.AddItem(InventoryLocation.player, itemCode);
+            }
         }
         
         // Remove the item from the storage inventory - FIXED

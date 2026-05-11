@@ -187,8 +187,14 @@ public enum ItemType
     Note,
     QuestItem,
     Key,
+    GoldCoin,
     none,
     count
+}
+
+public enum ItemCode
+{
+    GoldCoin = 10040
 }
 
 public enum Facing

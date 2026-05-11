@@ -4,6 +4,8 @@ using PixelCrushers;
 
 public class ItemPickUp : MonoBehaviour
 {
+    private const int DefaultGoldCoinValue = 1;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Item item = collision.GetComponent<Item>();
@@ -16,7 +18,24 @@ public class ItemPickUp : MonoBehaviour
             // if item can be picked up
             if (itemDetails.canBePickedUp == true)
             {
-                if(itemDetails.itemType != ItemType.Key)
+                bool isGoldCoin = item.ItemCode == (int)ItemCode.GoldCoin || itemDetails.itemType == ItemType.GoldCoin;
+
+                if (isGoldCoin)
+                {
+                    int coinAmount = Mathf.Max(DefaultGoldCoinValue, itemDetails.itemCost);
+
+                    if (CoinManager.Instance != null)
+                    {
+                        CoinManager.Instance.AddCoins(coinAmount);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("CoinManager not found. Gold Coin pickup could not be added.");
+                    }
+
+                    Destroy(collision.gameObject);
+                }
+                else if(itemDetails.itemType != ItemType.Key)
                 {
                     // Add item to inventory
                     InventoryManager.Instance.AddItem(InventoryLocation.player, item, collision.gameObject);

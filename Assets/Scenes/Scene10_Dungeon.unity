@@ -152753,7 +152753,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 86
-      m_TileSpriteIndex: 23
+      m_TileSpriteIndex: 197
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -152763,7 +152763,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 81
-      m_TileSpriteIndex: 22
+      m_TileSpriteIndex: 195
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -152853,7 +152853,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 80
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 23
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -152863,7 +152863,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 79
-      m_TileSpriteIndex: 20
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -153233,7 +153233,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 40
-      m_TileSpriteIndex: 19
+      m_TileSpriteIndex: 21
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -153873,7 +153873,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 21
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 20
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -177704,6 +177704,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 1137973691, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
   - m_RefCount: 1
@@ -177712,10 +177716,6 @@ Tilemap:
     m_Data: {fileID: 2074460427, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 454397738, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -669419880, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 1686297375, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -1652488521, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
   - m_RefCount: 2
@@ -178058,12 +178058,12 @@ Tilemap:
     m_Data: {fileID: 1123485434, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1602481246, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -669419880, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 48803278, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1686297375, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1531390375, guid: 307897ca8cc848448bbfd5a867eaeef1, type: 3}
   - m_RefCount: 1
@@ -195138,10 +195138,14 @@ MonoBehaviour:
   openOnTriggerEnter: 1
   interactKey: 101
   chestDisplayName: Coffin
-  includeChestPrefixInLabel: 1
+  includeChestPrefixInLabel: 0
   addStarterItemsOnFirstOpen: 1
   chestId: CoffinDungeonRoman_0
-  starterItems: []
+  starterItems:
+  - itemCode: 10039
+    itemQuantity: 1
+  - itemCode: 10040
+    itemQuantity: 5
 --- !u!1 &7454469104240066117 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6937452428855592956, guid: 90dbec85239e5b74682918555c43ecf4,
@@ -195163,10 +195167,12 @@ MonoBehaviour:
   openOnTriggerEnter: 1
   interactKey: 101
   chestDisplayName: Coffin
-  includeChestPrefixInLabel: 1
+  includeChestPrefixInLabel: 0
   addStarterItemsOnFirstOpen: 1
   chestId: CoffinDungeonRoman_1
-  starterItems: []
+  starterItems:
+  - itemCode: 10039
+    itemQuantity: 1
 --- !u!1 &7454469104425413891 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7474873393035074890, guid: 76a5039ec9b942a4db0b198c59832b16,
@@ -195188,10 +195194,14 @@ MonoBehaviour:
   openOnTriggerEnter: 1
   interactKey: 101
   chestDisplayName: Coffin
-  includeChestPrefixInLabel: 1
+  includeChestPrefixInLabel: 0
   addStarterItemsOnFirstOpen: 1
   chestId: CoffinDungeonRoman_2
-  starterItems: []
+  starterItems:
+  - itemCode: 10039
+    itemQuantity: 1
+  - itemCode: 10040
+    itemQuantity: 7
 --- !u!1 &7454469105447000282 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1821368940436197334, guid: cb20d93c8af25e948a9b1de846d0b595,
@@ -195213,10 +195223,14 @@ MonoBehaviour:
   openOnTriggerEnter: 1
   interactKey: 101
   chestDisplayName: Coffin
-  includeChestPrefixInLabel: 1
+  includeChestPrefixInLabel: 0
   addStarterItemsOnFirstOpen: 1
   chestId: CoffinDungeonRoman_3
-  starterItems: []
+  starterItems:
+  - itemCode: 10039
+    itemQuantity: 1
+  - itemCode: 10040
+    itemQuantity: 10
 --- !u!1 &7466799852457335932
 GameObject:
   m_ObjectHideFlags: 0
