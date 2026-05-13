@@ -165,6 +165,7 @@ public enum SoundName
     ambientCountryside1 = 1000,
     ambientCountryside2 = 1010,
     ambientIndoors1 = 1020,
+    ambientDungeon1 = 1030,
     musicCalm3 = 2000,
     musicCalm1 = 2010
 }

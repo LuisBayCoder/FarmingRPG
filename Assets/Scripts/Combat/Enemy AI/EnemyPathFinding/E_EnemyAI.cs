@@ -14,6 +14,8 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private bool isDebugMode = false; // Debug mode flag
     [SerializeField] private float roamDuration = 3f; // Duration of roaming before changing direction
+    [SerializeField] private Transform[] patrolPoints; // Patrol waypoints used while roaming
+    [SerializeField] private float patrolArrivalDistance = 0.15f; // Distance that counts as arriving at a patrol point
     [SerializeField] private float attackPositionMoveSpeed = 5f; // Speed for moving to attack position
     [SerializeField] private float attackDuration = 0.8f; // Time to pause movement when attacking
     [SerializeField] private float recoveryDuration = 0.5f; // Short pause after attack before resuming
@@ -58,6 +60,9 @@ public class E_EnemyAI : MonoBehaviour
     private Grid sceneGrid;
     private float sideDebugLogTimer = 0f;
     private const float SideDebugLogInterval = 0.25f;
+    private int patrolPointIndex = 0;
+    private int patrolDirection = 1;
+    private float patrolPauseTimer = 0f;
 
     private enum AttackAxis
     {
@@ -148,6 +153,7 @@ public class E_EnemyAI : MonoBehaviour
         ResetMovementAnimation(); // Reset all movement animations
 
         state = State.Roaming; // Set initial state to Roaming
+        InitializePatrolState();
 
         StartCoroutine(RoamingRoutine());
     }
@@ -212,20 +218,101 @@ public class E_EnemyAI : MonoBehaviour
                 continue;
             }
 
-            Vector2 roamPosition = GetRoamingPosition();
+            if (patrolPauseTimer > 0f)
+            {
+                patrolPauseTimer -= Time.deltaTime;
+                enemyPathfinding.MoveTo(Vector2.zero);
+                yield return null;
+                continue;
+            }
 
-            // Determine and set movement direction before moving
-            SetMovementAnimation(roamPosition);
+            Vector2 patrolDirectionVector = GetPatrolDirection();
+            if (patrolDirectionVector.sqrMagnitude > 0.0001f)
+            {
+                // Determine and set movement direction before moving.
+                SetMovementAnimation(patrolDirectionVector);
+            }
+            else
+            {
+                ResetMovementAnimation();
+            }
 
-            enemyPathfinding.MoveTo(roamPosition);
-            // Wait for a short duration to simulate roaming between roamDuration and 2f
-            yield return new WaitForSeconds(Random.Range(roamDuration, 2f));
+            enemyPathfinding.MoveTo(patrolDirectionVector);
+            yield return null;
         }
     }
 
-    private Vector2 GetRoamingPosition()
+    private void InitializePatrolState()
     {
-        return new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1f)).normalized;
+        patrolPointIndex = 0;
+        patrolDirection = 1;
+        patrolPauseTimer = 0f;
+
+        if (patrolPoints == null || patrolPoints.Length == 0)
+        {
+            return;
+        }
+
+        // Start from the closest valid patrol point so enemies don't snap direction oddly on scene load.
+        int closestIndex = -1;
+        float closestSqrDistance = float.MaxValue;
+        for (int i = 0; i < patrolPoints.Length; i++)
+        {
+            if (patrolPoints[i] == null) continue;
+
+            float sqrDistance = ((Vector2)(patrolPoints[i].position - transform.position)).sqrMagnitude;
+            if (sqrDistance < closestSqrDistance)
+            {
+                closestSqrDistance = sqrDistance;
+                closestIndex = i;
+            }
+        }
+
+        patrolPointIndex = closestIndex >= 0 ? closestIndex : 0;
+    }
+
+    private Vector2 GetPatrolDirection()
+    {
+        if (patrolPoints == null || patrolPoints.Length == 0)
+        {
+            return Vector2.zero;
+        }
+
+        if (patrolPoints.Length == 1 || patrolPoints[patrolPointIndex] == null)
+        {
+            return ((Vector2)patrolPoints[0].position - (Vector2)transform.position).normalized;
+        }
+
+        Vector2 toTarget = (Vector2)patrolPoints[patrolPointIndex].position - (Vector2)transform.position;
+        if (toTarget.magnitude <= patrolArrivalDistance)
+        {
+            AdvancePatrolPoint();
+            patrolPauseTimer = Mathf.Max(0f, roamDuration);
+            return Vector2.zero;
+        }
+
+        return toTarget.normalized;
+    }
+
+    private void AdvancePatrolPoint()
+    {
+        if (patrolPoints == null || patrolPoints.Length <= 1)
+        {
+            return;
+        }
+
+        patrolPointIndex += patrolDirection;
+
+        if (patrolPointIndex >= patrolPoints.Length)
+        {
+            patrolPointIndex = patrolPoints.Length - 2;
+            patrolDirection = -1;
+        }
+        else if (patrolPointIndex < 0)
+        {
+            patrolPointIndex = 1;
+            patrolDirection = 1;
+        }
     }
 
     // New method to handle movement animation based on direction
