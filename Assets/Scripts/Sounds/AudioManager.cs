@@ -106,9 +106,13 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
 
     private IEnumerator PlaySceneSoundsRoutine(float musicPlaySeconds, SoundItem musicSoundItem, SoundItem ambientSoundItem)
     {
+        // Stop any currently playing music
+        gameMusicAudioSource.Stop();
+        ambientSoundAudioSource.Stop();
 
         if (musicSoundItem != null && ambientSoundItem != null)
         {
+            // Both music and ambient - play both in sequence
             // Start with ambient sound
             PlayAmbientSoundClip(ambientSoundItem, 0f);
 
@@ -124,6 +128,17 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
             // Play ambient sound clip
             PlayAmbientSoundClip(ambientSoundItem, musicTransitionSecs);
         }
+        else if (musicSoundItem != null && ambientSoundItem == null)
+        {
+            // Only music - play just music
+            PlayMusicSoundClip(musicSoundItem, 0f);
+        }
+        else if (musicSoundItem == null && ambientSoundItem != null)
+        {
+            // Only ambient - play just ambient
+            PlayAmbientSoundClip(ambientSoundItem, 0f);
+        }
+        // If both are null, do nothing (no sounds for this scene)
     }
 
     private void PlayMusicSoundClip(SoundItem musicSoundItem, float transitionTimeSeconds)
