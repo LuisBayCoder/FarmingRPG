@@ -1,0 +1,1621 @@
+version=1
+
+# This file caches language service data to improve the performance of C# Dev Kit.
+# It is not intended for manual editing. It can safely be deleted and will be
+# regenerated automatically. For more information, see https://aka.ms/lscache
+#
+# To control where cache files are stored, use the following VS Code setting:
+#   "dotnet.projectsystem.cacheInProjectFolder": true
+
+[project]
+language=C#
+primary
+lastDtbSucceeded
+
+[properties]
+AssemblyName=Assembly-CSharp-firstpass
+CommandLineArgsForDesignTimeEvaluation=-langversion:9.0 -define:UNITY_2021_3_45;UNITY_2021_3;UNITY_2021;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TMP_PRESENT;USE_ARCWEAVE;USE_YARN;USE_YARN2;USE_PHYSICS2D;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER
+CompilerGeneratedFilesOutputPath=
+MaxSupportedLangVersion=8.0
+ProjectAssetsFile=<PATH>Temp/obj/Debug/Assembly-CSharp-firstpass/project.assets.json
+RootNamespace=
+RunAnalyzers=
+RunAnalyzersDuringLiveAnalysis=
+SolutionPath=<PATH>2D Farming RPG.sln
+TargetFrameworkIdentifier=.NETStandard
+TargetPath=<PATH>Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+TargetRefPath=
+TemporaryDependencyNodeTargetIdentifier=netstandard2.1
+
+[commandLineArguments]
+/noconfig
+/unsafe-
+/checked-
+/nowarn:0169,USG0001,1701,1702
+/fullpaths
+/nostdlib+
+/errorreport:prompt
+/warn:4
+/define:UNITY_2021_3_45;UNITY_2021_3;UNITY_2021;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TMP_PRESENT;USE_ARCWEAVE;USE_YARN;USE_YARN2;USE_PHYSICS2D;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;DEBUG;NETSTANDARD;NETSTANDARD2_1;NETSTANDARD1_0_OR_GREATER;NETSTANDARD1_1_OR_GREATER;NETSTANDARD1_2_OR_GREATER;NETSTANDARD1_3_OR_GREATER;NETSTANDARD1_4_OR_GREATER;NETSTANDARD1_5_OR_GREATER;NETSTANDARD1_6_OR_GREATER;NETSTANDARD2_0_OR_GREATER;NETSTANDARD2_1_OR_GREATER
+/highentropyva+
+/debug+
+/debug:full
+/filealign:512
+/optimize-
+/out:Temp\obj\Debug\Assembly-CSharp-firstpass\Assembly-CSharp-firstpass.dll
+/target:library
+/warnaserror-
+/utf8output
+/deterministic+
+/langversion:9.0
+/warnaserror+:NU1605
+
+[sourceFiles]
+Assets/Plugins/CafofoStudio/CaveAmbience/Scripts/
+ CaveAmbientMixer.cs
+ CaveAmbientPreset.cs
+Assets/Plugins/CafofoStudio/Scripts/
+ AmbienceMixer.cs
+ AmbientPreset.cs
+ ISoundSubElement.cs
+ ListExtensions.cs
+ SoundElement.cs
+ SoundSubElementLoop.cs
+ SoundSubElementSample.cs
+Assets/Plugins/Pixel Crushers/Common/Scripts/Message System/
+ DataSynchronizer.cs
+ IMessageHandler.cs
+ MessageArgs.cs
+ MessageEvents.cs
+ MessageSystem.cs
+ MessageSystemLogger.cs
+Assets/Plugins/Pixel Crushers/Common/Scripts/Misc/
+ AlwaysFaceCamera.cs
+ CheckPhysics2D.cs
+ ComponentUtility.cs
+ CoroutineUtility.cs
+ CursorControl.cs
+ DictionaryExtensions.cs
+ Dimension.cs
+ DontDestroyGameObject.cs
+ EnableOnStart.cs
+ GameObjectUtility.cs
+ GameTime.cs
+ HelpBoxAttribute.cs
+ InstantiatePrefabs.cs
+ ListExtensions.cs
+ LODManager.cs
+ MoreGizmos.cs
+ MorePhysics2D.cs
+ Pool.cs
+ RectExtensions.cs
+ RuntimeTypeUtility.cs
+ SafeConvert.cs
+ SceneNotifier.cs
+ ScriptableObjectUtility.cs
+Assets/Plugins/Pixel Crushers/Common/Scripts/Save System/Misc/
+ AutoSaveLoad.cs
+ SavedGameData.cs
+ SaveSystemEvents.cs
+ SaveSystemMethods.cs
+ SaveSystemTestMenu.cs
+ ScenePortal.cs
+ SceneValidationMode.cs
+Assets/Plugins/Pixel Crushers/Common/Scripts/Save System/Savers/
+ ActiveSaver.cs
+ AnimatorSaver.cs
+ DestructibleSaver.cs
+ EnabledSaver.cs
+ MultiActiveSaver.cs
+ MultiEnabledSaver.cs
+ PositionSaver.cs
+ Saver.cs
+Assets/Plugins/Pixel Crushers/Common/Scripts/Save System/
+ SaveSystem.cs
+ Serializers/Binary/
+  BinaryDataSerializer.cs
+  QuaternionSerializationSurrogate.cs
+  Vector3SerializationSurrogate.cs
+ Serializers/
+  DataSerializer.cs
+  JsonDataSerializer.cs
+ Spawning/
+  SpawnedObject.cs
+  SpawnedObjectList.cs
+  SpawnedObjectManager.cs
+ Storers/
+  DiskSavedGameDataStorer.cs
+  EncryptionUtility.cs
+  PlayerPrefsSavedGameDataStorer.cs
+  SavedGameDataStorer.cs
+ Transitions/
+  LoadingScreenProgressBar.cs
+  SceneTransitionManager.cs
+  StandardSceneTransitionManager.cs
+Assets/Plugins/Pixel Crushers/Common/Scripts/Text/
+ EncodingType.cs
+ GlobalTextTable.cs
+ StringAsset.cs
+ StringField.cs
+ StringFieldTextAreaAttribute.cs
+ TextTable.cs
+Assets/Plugins/Pixel Crushers/Common/Scripts/UI/
+ DeselectPreviousOnPointerEnter.cs
+ IEventSystemUser.cs
+ InputDeviceManager.cs
+ InputDeviceMethods.cs
+ KeepRectTransformOnscreen.cs
+ LocalizedFonts.cs
+ LocalizeUI.cs
+ SetEventSystem.cs
+ SetLocalizedFont.cs
+ ShowCursorWhileEnabled.cs
+ UIAnimatorMonitor.cs
+ UIButtonKeyTrigger.cs
+ UIDropdownField.cs
+ UIInputField.cs
+ UILocalizationManager.cs
+ UIPanel.cs
+ UIScrollbarEnabler.cs
+ UITextColor.cs
+ UITextField.cs
+ UIUtility.cs
+Assets/Plugins/Pixel Crushers/Common/Scripts/UnityEvents/
+ CollisionEvent.cs
+ DisappearEvent.cs
+ ParameterEvents.cs
+ TagMask.cs
+ TagMaskEvent.cs
+ TimedEvent.cs
+ TriggerEvent.cs
+Assets/Plugins/Pixel Crushers/Common/
+ Templates/SaverTemplate.cs
+ Wrappers/Message System/
+  DataSynchronizer.cs
+  MessageEvents.cs
+  MessageSystemLogger.cs
+ Wrappers/Misc/
+  AlwaysFaceCamera.cs
+  CheckPhysics2D.cs
+  DontDestroyGameObject.cs
+  EditorNote.cs
+  EnableOnStart.cs
+  InstantiatePrefabs.cs
+  LODManager.cs
+ Wrappers/Save System/Misc/
+  AutoSaveLoad.cs
+  SaveSystemEvents.cs
+  SaveSystemMethods.cs
+  SaveSystemTestMenu.cs
+  ScenePortal.cs
+ Wrappers/Save System/Savers/
+  ActiveSaver.cs
+  AnimatorSaver.cs
+  DestructibleSaver.cs
+  EnabledSaver.cs
+  MultiActiveSaver.cs
+  MultiEnabledSaver.cs
+  PositionSaver.cs
+ Wrappers/Save System/
+  SaveSystem.cs
+  Serializers/
+   Binary/BinaryDataSerializer.cs
+   JsonDataSerializer.cs
+  Spawning/
+   SpawnedObject.cs
+   SpawnedObjectList.cs
+   SpawnedObjectManager.cs
+  Storers/
+   DiskSavedGameDataStorer.cs
+   PlayerPrefsSavedGameDataStorer.cs
+  Transitions/
+   LoadingScreenProgressBar.cs
+   StandardSceneTransitionManager.cs
+ Wrappers/Text/
+  GlobalTextTable.cs
+  StringAsset.cs
+  TextTable.cs
+ Wrappers/UI/
+  DeselectPreviousOnPointerEnter.cs
+  InputDeviceManager.cs
+  InputDeviceMethods.cs
+  KeepRectTransformOnscreen.cs
+  LocalizedFonts.cs
+  LocalizeUI.cs
+  SetEventSystem.cs
+  SetLocalizedFont.cs
+  ShowCursorWhileEnabled.cs
+  UIButtonKeyTrigger.cs
+  UILocalizationManager.cs
+  UIPanel.cs
+  UIScrollbarEnabler.cs
+  UITextColor.cs
+ Wrappers/UnityEvents/
+  CollisionEvent.cs
+  DisappearEvent.cs
+  TimedEvent.cs
+  TriggerEvent.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Demo/Scenes/New Input System/
+ DemoInputControls.cs
+ DemoInputRegistration.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Demo Scripts/
+ DemoMenu.cs
+ DieOnTakeDamage.cs
+ NavigateOnMouseClick.cs
+ SimpleController.cs
+ SmoothCameraWithBumper.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Importers/Arcweave/
+ ArcweaveImporter.cs
+ ArcweaveLua.cs
+ ArcweaveProject.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Importers/Articy/
+ ArticyConverter.cs
+ ArticyData.cs
+ ArticyLuaFunctions.cs
+ ArticySchemaTools.cs
+ ArticyTools.cs
+ ConversionSetting.cs
+ ConversionSettings.cs
+ ConverterPrefs.cs
+ Schemas/Articy 1.4/
+  Articy_1_4_Tools.cs
+  XmlContentExport_FullProject_1_4.cs
+ Schemas/Articy 2.2/
+  Articy_2_2_Tools.cs
+  XmlContentExport_FullProject_2_2.cs
+ Schemas/Articy 2.4/
+  Articy_2_4_Tools.cs
+  XmlContentExport_FullProject_2_4.cs
+ Schemas/Articy 3.1/
+  Articy_3_1_Tools.cs
+  XmlContentExport_FullProject_3_1.cs
+ Schemas/Articy 4.0/
+  Articy_4_0_Tools.cs
+  XmlContentExport_FullProject_4_0.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Importers/
+ Aurora/NWNUtility.cs
+ Celtx/
+  CeltxData.cs
+  CeltxDataRaw.cs
+  CeltxFields.cs
+  CeltxToDialogueDatabase.cs
+ Celtx3/
+  CeltxCondition.cs
+  CeltxFields.cs
+  CeltxGem3ToDialogueDatabase.cs
+ Chat Mapper/ChatMapperUtility.cs
+ Twine/
+  TwineImporter.cs
+  TwineStory.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Lua/Lua Interpreter/Chunk/
+ Assignment.cs
+ BreakStmt.cs
+ Chunk.cs
+ DoStmt.cs
+ ExprStmt.cs
+ ForInStmt.cs
+ ForStmt.cs
+ Function.cs
+ IfStmt.cs
+ LocalFunc.cs
+ LocalVar.cs
+ RepeatStmt.cs
+ ReturnStmt.cs
+ Statement.cs
+ WhileStmt.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Lua/Lua Interpreter/Expr/
+ Access.cs
+ BaseExpr.cs
+ BoolLiteral.cs
+ Expr.cs
+ FunctionBody.cs
+ FunctionCall.cs
+ FunctionValue.cs
+ GroupExpr.cs
+ KeyAccess.cs
+ MethodCall.cs
+ NameAccess.cs
+ NilLiteral.cs
+ NumberLiteral.cs
+ Operation.cs
+ OperatorExpr.cs
+ OperTable.cs
+ PrimaryExpr.cs
+ StringLiteral.cs
+ TableConstructor.cs
+ Term.cs
+ VariableArg.cs
+ VarName.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Lua/Lua Interpreter/Extra/
+ LuaInterpreterExtensions.cs
+ Tuple.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Lua/Lua Interpreter/
+ LuaInterpreter.cs
+ LuaLibrary/
+  BaseLib.cs
+  FileLib.cs
+  IOLib.cs
+  MathLib.cs
+  OSLib.cs
+  StringLib.cs
+  TableLib.cs
+ LuaValue/
+  LuaBoolean.cs
+  LuaError.cs
+  LuaFunction.cs
+  LuaMethodFunction.cs
+  LuaMultiValue.cs
+  LuaNil.cs
+  LuaNumber.cs
+  LuaString.cs
+  LuaTable.cs
+  LuaUserdata.cs
+  LuaValue.cs
+ Parser/
+  Parser.cs
+  ParserInput.cs
+  Syntax/
+   Access.cs
+   Args.cs
+   Assignment.cs
+   BaseExpr.cs
+   BoolLiteral.cs
+   BreakStmt.cs
+   Chunk.cs
+   DoStmt.cs
+   ElseifBlock.cs
+   Expr.cs
+   ExprStmt.cs
+   Field.cs
+   ForInStmt.cs
+   ForStmt.cs
+   Function.cs
+   FunctionBody.cs
+   FunctionCall.cs
+   FunctionName.cs
+   FunctionValue.cs
+   GroupExpr.cs
+   IfStmt.cs
+   ItemValue.cs
+   KeyAccess.cs
+   KeyValue.cs
+   LocalFunc.cs
+   LocalVar.cs
+   MethodCall.cs
+   NameAccess.cs
+   NameValue.cs
+   NilLiteral.cs
+   NumberLiteral.cs
+   OperatorExpr.cs
+   ParamList.cs
+   PrimaryExpr.cs
+   RepeatStmt.cs
+   ReturnStmt.cs
+   Statement.cs
+   StringLiteral.cs
+   TableConstructor.cs
+   Term.cs
+   Var.cs
+   VariableArg.cs
+   VarName.cs
+   WhileStmt.cs
+  TextInput.cs
+  TextParserCommon.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Lua/Lua Utility/
+ CommonLibraryLua.cs
+ LuaConsole.cs
+ LuaWatchItem.cs
+ LuaWatchList.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Lua/Lua Wrapper/Lua Interpreter/
+ Lua.cs
+ LuaTableWrapper.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Lua/Lua Wrapper/NLua/
+ NLua_Lua.cs
+ NLua_LuaTableWrapper.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/Manager/
+ ActiveConversationRecord.cs
+ AssetBundleManager.cs
+ DialogueManager.cs
+ DialogueSystemController.cs
+ DialogueSystemEvents.cs
+ DialogueSystemMessages.cs
+ ExtraDatabases.cs
+ Localization.cs
+ LuaWatchers.cs
+ PersistentDataSettings.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/Actor/
+ ActorSubtitleColor.cs
+ DefaultCameraAngle.cs
+ DialogueActor.cs
+ Override/
+  OverrideDialogueUI.cs
+  OverrideDisplaySettings.cs
+  OverrideUIBase.cs
+ OverrideActorName.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/Controller/
+ BarkController.cs
+ ConversationController.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/Model/Data/
+ Actor.cs
+ Asset.cs
+ CharacterType.cs
+ Chat Mapper/
+  ChatMapperProject.cs
+  ChatMapperToDialogueDatabase.cs
+ ConditionPriority.cs
+ Conversation.cs
+ ConversationOverrideDisplaySettings.cs
+ DialogueDatabase.cs
+ DialogueEntry.cs
+ DialogueSystemFields.cs
+ DialogueSystemSceneEvents.cs
+ EmphasisSetting.cs
+ EntryGroup.cs
+ EntrytagFormat.cs
+ Field.cs
+ FieldType.cs
+ Item.cs
+ Link.cs
+ Location.cs
+ Utility/
+  CharacterTypeUtility.cs
+  ConditionPriorityUtility.cs
+  DatabaseMerger.cs
+  DatabaseUtility.cs
+  LinkUtility.cs
+  Template.cs
+ Variable.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/Model/Logic/DB/
+ DatabaseManager.cs
+ DatabaseResetOptions.cs
+ DialogueLua.cs
+ NLua_DialogueLua.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/Model/Logic/
+ Model/ConversationModel.cs
+ Shared/
+  CharacterInfo.cs
+  ConversationState.cs
+  Response.cs
+  Subtitle.cs
+ Text/
+  Emphasis.cs
+  FormattedText.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/Sequencer/Commands/
+ SequencerCommand.cs
+ SequencerCommandAnimation.cs
+ SequencerCommandAnimatorFloat.cs
+ SequencerCommandAnimatorLayer.cs
+ SequencerCommandAnimatorPlayWait.cs
+ SequencerCommandAudioWait.cs
+ SequencerCommandAudioWaitOnce.cs
+ SequencerCommandAudioWWW.cs
+ SequencerCommandCamera.cs
+ SequencerCommandDelay.cs
+ SequencerCommandFade.cs
+ SequencerCommandLiveCamera.cs
+ SequencerCommandLoadLevel.cs
+ SequencerCommandLookAt.cs
+ SequencerCommandMoveTo.cs
+ SequencerCommandQTE.cs
+ SequencerCommandSetTimeout.cs
+ SequencerCommandSwitchCamera.cs
+ SequencerCommandTextInput.cs
+ SequencerCommandVoice.cs
+ SequencerCommandWaitForMessage.cs
+ SequencerCommandZoom2D.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/Sequencer/
+ QueuedSequencerCommand.cs
+ SequenceParser.cs
+ Sequencer.cs
+ SequencerKeywords.cs
+ SequencerMessages.cs
+ SequencerShortcuts.cs
+ SequencerTools.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/View/Bark/
+ BarkDialogueUI.cs
+ BarkGroupManager.cs
+ BarkGroupMember.cs
+ IBarkUI.cs
+ TextlessBarkUI.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/View/Dialogue/
+ IDialogueUI.cs
+ ITextFieldUI.cs
+ ResponseButtonAlignment.cs
+ SelectedResponseEventArgs.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/MVC/View/Shared/
+ DisplaySettings.cs
+ InputTrigger.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Scripts/
+ MVC/View/View/ConversationView.cs
+ Options/Cinemachine/Sequencer Commands/
+  SequencerCommandCinemachinePriority.cs
+  SequencerCommandCinemachineTarget.cs
+  SequencerCommandCinemachineZoom.cs
+ Options/
+  Cinemachine/Triggers/CinemachineCameraPriorityOnDialogueEvent.cs
+  Timeline/Playables/Bark/
+   BarkBehaviour.cs
+   BarkClip.cs
+   BarkMixerBehaviour.cs
+   BarkTrack.cs
+  Timeline/Playables/Continue/
+   ContinueConversationBehaviour.cs
+   ContinueConversationClip.cs
+   ContinueConversationTrack.cs
+   ConversationContinueMixerBehaviour.cs
+  Timeline/Playables/Conversation/
+   ConversationMixerBehaviour.cs
+   ConversationTrack.cs
+   StartConversationBehaviour.cs
+   StartConversationClip.cs
+  Timeline/Playables/PlaySequence/
+   PlaySequenceBehaviour.cs
+   PlaySequenceClip.cs
+   PlaySequenceMixerBehaviour.cs
+   PlaySequenceTrack.cs
+  Timeline/Playables/QuestState/
+   QuestStateMixerBehaviour.cs
+   QuestStateTrack.cs
+   SetQuestStateBehaviour.cs
+   SetQuestStateClip.cs
+  Timeline/Playables/RunLua/
+   RunLuaBehaviour.cs
+   RunLuaClip.cs
+   RunLuaMixerBehaviour.cs
+   RunLuaTrack.cs
+  Timeline/Playables/ShowAlert/
+   AlertMixerBehaviour.cs
+   AlertTrack.cs
+   ShowAlertBehaviour.cs
+   ShowAlertClip.cs
+  Timeline/
+   Playables/Utility/PreviewUI.cs
+   Sequencer/SequencerCommandTimeline.cs
+   Triggers/TimelineTrigger.cs
+ Quests/
+  IncrementOnDestroy.cs
+  QuestGroupRecord.cs
+  QuestLog.cs
+  QuestLogWindow.cs
+  QuestLogWindowHotkey.cs
+  QuestState.cs
+  QuestStateDispatcher.cs
+  QuestStateIndicator.cs
+  QuestStateListener.cs
+ Save System/
+  ConversationStateSaver.cs
+  DialogueSystemSaver.cs
+  GameSaver.cs
+  LevelManager.cs
+  PersistentActiveData.cs
+  PersistentActiveDataMultiple.cs
+  PersistentDataManager.cs
+  PersistentDestructible.cs
+  PersistentPositionData.cs
+ Triggers/Interaction/
+  ProximitySelector.cs
+  SelectionDelegates.cs
+  Selector.cs
+  SelectorFollowTarget.cs
+  Usable.cs
+ Triggers/
+  RangeTrigger.cs
+  Triggers/
+   BarkOnIdle.cs
+   Condition.cs
+   ConditionObserver.cs
+   DialogueSystemTrigger.cs
+   DialogueSystemTriggerEvent.cs
+   Legacy/
+    AlertTrigger.cs
+    BarkStarter.cs
+    BarkTrigger.cs
+    ConversationStarter.cs
+    ConversationTrigger.cs
+    DialogueEventStarter.cs
+    DialogueTriggerEvent.cs
+    LuaTrigger.cs
+    PauseGameOnConversation.cs
+    QuestTrigger.cs
+    SequenceStarter.cs
+    SequenceTrigger.cs
+   OnEvent/
+    ActOnDialogueEvent.cs
+    BarkOnDialogueEvent.cs
+    DialogueEvent.cs
+    LuaOnDialogueEvent.cs
+    SendMessageOnDialogueEvent.cs
+    SetActiveOnDialogueEvent.cs
+    SetAnimationOnDialogueEvent.cs
+    SetAnimatorStateOnDialogueEvent.cs
+    SetComponentEnabledOnDialogueEvent.cs
+    SetEnabledOnDialogueEvent.cs
+    SetQuestStateOnDialogueEvent.cs
+    ShowCursorOnConversation.cs
+    StartConversationOnDialogueEvent.cs
+    StartSequenceOnDialogueEvent.cs
+    StopConversationIfTooFar.cs
+ UI/Abstract/
+  Bark/AbstractBarkUI.cs
+  Dialogue/
+   AbstractDialogueUI.cs
+   AbstractDialogueUIControls.cs
+   AbstractUIAlertControls.cs
+   AbstractUIControls.cs
+   AbstractUIQTEControls.cs
+   AbstractUIResponseMenuControls.cs
+   AbstractUIRoot.cs
+   AbstractUISubtitleControls.cs
+   CanvasDialogueUI.cs
+  Selector/AbstractUsableUI.cs
+ UI/Legacy/Bark/
+  UnityBarkUI.cs
+  UnityBarkUIOnGUI.cs
+ UI/Legacy/Dialogue/Controls/
+  UnityAlertControls.cs
+  UnityDialogueControls.cs
+  UnityDialogueUIControls.cs
+  UnityQTEControls.cs
+  UnityResponseMenuControls.cs
+  UnitySubtitleControls.cs
+  UnityUIRoot.cs
+ UI/Legacy/Dialogue/
+  UnityDialogueUI.cs
+  UnityTextFieldUI.cs
+ UI/Legacy/GUI Controls/Effects/
+  AudioEffect.cs
+  ContinueButtonFastForward.cs
+  FadeEffect.cs
+  FlashEffect.cs
+  GUIEffect.cs
+  GUIEffectTrigger.cs
+  SlideEffect.cs
+  TimerEffect.cs
+  TypewriterEffect.cs
+ UI/Legacy/GUI Controls/
+  GUIButton.cs
+  GUIControl.cs
+  GUIImage.cs
+  GUIImageParams.cs
+  GUILabel.cs
+  GUIProgressBar.cs
+  GUIRoot.cs
+  GUIScrollView.cs
+  GUITextField.cs
+  GUIVisibleControl.cs
+  GUIWindow.cs
+  ScaledRect/
+   ScaledRect.cs
+   ScaledRectAlignment.cs
+   ScaledValue.cs
+   ValueScale.cs
+  Tools/
+   AutoSize.cs
+   Fit.cs
+   ImageAnimation.cs
+   Navigation.cs
+   TextStyle.cs
+   UnityGUITools.cs
+ UI/Legacy/Quest/
+  QuestTracker.cs
+  UnityGUIQuestLogWindow.cs
+ UI/Standard/
+  Bark/StandardBarkUI.cs
+  Dialogue/
+   BringSubtitlePanelToFrontOnFocus.cs
+   IStandardDialogueUI.cs
+   Panel Numbers/
+    MenuPanelNumber.cs
+    PanelNumberUtility.cs
+    SubtitlePanelNumber.cs
+   SMS/SMSDialogueUI.cs
+   StandardDialogueUI.cs
+   StandardUIAlertControls.cs
+   StandardUIDialogueControls.cs
+   StandardUIInputField.cs
+   StandardUIMenuPanel.cs
+   StandardUIQTEControls.cs
+   StandardUIResponseButton.cs
+   StandardUIResponseMenuControls.cs
+   StandardUIRoot.cs
+   StandardUISubtitleControls.cs
+   StandardUISubtitlePanel.cs
+   StandardUITimer.cs
+  Effects/
+   StandardUIColorText.cs
+   StandardUIContinueButtonFastForward.cs
+   StandardUIIgnorePauseCodes.cs
+  Quest/Common/
+   StandardUIButtonTemplate.cs
+   StandardUIContainerTemplate.cs
+   StandardUIContentTemplate.cs
+   StandardUIFoldoutTemplate.cs
+   StandardUIInstancedContentManager.cs
+   StandardUITextTemplate.cs
+   StandardUIToggleTemplate.cs
+  Quest/
+   StandardUIQuestLogWindow.cs
+   StandardUIQuestTemplateAlternateDescriptions.cs
+   StandardUIQuestTitleButtonTemplate.cs
+   StandardUIQuestTracker.cs
+   StandardUIQuestTrackTemplate.cs
+  Selector/
+   SelectorUseStandardUIElements.cs
+   StandardUISelectorElements.cs
+   StandardUsableUI.cs
+ UI/
+  TextMesh/LocalizeTextMesh.cs
+  Unity UI/
+   Bark/UnityUIBarkUI.cs
+   Dialogue/
+    OverrideUnityUIDialogueControls.cs
+    Portraits/
+     AnimatedPortrait.cs
+     UseAnimatedPortraits.cs
+    UnityUIAlertControls.cs
+    UnityUIBarkSubtitleDialogueUI.cs
+    UnityUIDialogueControls.cs
+    UnityUIDialogueUI.cs
+    UnityUIQTEControls.cs
+    UnityUIResponseButton.cs
+    UnityUIResponseMenuControls.cs
+    UnityUIRoot.cs
+    UnityUISubtitleControls.cs
+    UnityUITextFieldUI.cs
+    UnityUITimer.cs
+   Effects/
+    LocalizeUIText.cs
+    UnityUIContinueButtonFastForward.cs
+    UpdateLocalizedUITexts.cs
+   Quest/
+    UnityUIQuestGroupTemplate.cs
+    UnityUIQuestLogWindow.cs
+    UnityUIQuestTemplate.cs
+    UnityUIQuestTemplateAlternateDescriptions.cs
+    UnityUIQuestTitle.cs
+    UnityUIQuestTracker.cs
+    UnityUIQuestTrackTemplate.cs
+   Selector/
+    UnityUISelectorDisplay.cs
+    UnityUISelectorElements.cs
+    UsableUnityUI.cs
+  Utility/
+   AbstractTypewriterEffect.cs
+   ConversationControl.cs
+   PreloadActorPortraits.cs
+   QueuedUIAlert.cs
+   TextMeshProTypewriterEffect.cs
+   TypewriterUtility.cs
+   UIAnimationTransitions.cs
+   UIAutonumberSettings.cs
+   UIButtonKeyTrigger.cs
+   UIShowHideController.cs
+   UITools.cs
+   UIVisibility.cs
+   UnityUIColorText.cs
+   UnityUIIgnorePauseCodes.cs
+   UnityUIScrollbarEnabler.cs
+   UnityUITypewriterEffect.cs
+ Utility/
+  AlwaysFaceCamera.cs
+  Attributes/
+   ActorPopupAttribute.cs
+   ConversationPopupAttribute.cs
+   DialogueEntryPopupAttribute.cs
+   DialogueSystemTriggerEventAttribute.cs
+   DialogueTriggerEventAttribute.cs
+   ItemPopupAttribute.cs
+   LocationPopupAttribute.cs
+   LuaConditionsWizardAttribute.cs
+   LuaScriptWizardAttribute.cs
+   QuestEntryPopupAttribute.cs
+   QuestPopupAttribute.cs
+   QuestStateAttribute.cs
+   VariablePopupAttribute.cs
+  BitMaskAttribute.cs
+  ConversationLogger.cs
+  ConversationPositionStack.cs
+  CustomLuaFunctionInfo.cs
+  DialogueDebug.cs
+  DialogueTime.cs
+  EncodingType.cs
+  LocalizedTextTable.cs
+  LuaNetworkCommands.cs
+  SequencerCommandGroupAttribute.cs
+  SymbolExtensions.cs
+  Toggle.cs
+  ToggleUtility.cs
+  Tools.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Templates/Scripts/
+ Aurora/TemplateNWScript.cs
+ PersistentDataTemplate.cs
+ SequencerCommandTemplate.cs
+ TemplateBarkUI.cs
+ TemplateCustomLua.cs
+ TemplateDialogueUI.cs
+ TemplateQuestLogWindow.cs
+ TemplateTextFieldUI.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Demo/
+ DemoMenu.cs
+ DieOnTakeDamage.cs
+ NavigateOnMouseClick.cs
+ SimpleController.cs
+ SmoothCameraWithBumper.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Deprecated/Legacy GUI/
+ AudioEffect.cs
+ ContinueButtonFastForward.cs
+ FadeEffect.cs
+ FlashEffect.cs
+ GUIButton.cs
+ GUIControl.cs
+ GUIImage.cs
+ GUILabel.cs
+ GUIProgressBar.cs
+ GUIRoot.cs
+ GUIScrollView.cs
+ GUITextField.cs
+ GUIVisibleControl.cs
+ GUIWindow.cs
+ SlideEffect.cs
+ TimerEffect.cs
+ TypewriterEffect.cs
+ UnityBarkUI.cs
+ UnityBarkUIOnGUI.cs
+ UnityDialogueUI.cs
+ UnityGUIQuestLogWindow.cs
+ UnityTextFieldUI.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Deprecated/
+ Localized Text/LocalizedTextTable.cs
+ Triggers/
+  AlertTrigger.cs
+  BarkOnDialogueEvent.cs
+  BarkTrigger.cs
+  ConversationTrigger.cs
+  LuaOnDialogueEvent.cs
+  LuaTrigger.cs
+  QuestTrigger.cs
+  SendMessageOnDialogueEvent.cs
+  SequenceTrigger.cs
+  SetActiveOnDialogueEvent.cs
+  SetAnimationOnDialogueEvent.cs
+  SetAnimatorStateOnDialogueEvent.cs
+  SetComponentEnabledOnDialogueEvent.cs
+  SetEnabledOnDialogueEvent.cs
+  SetQuestStateOnDialogueEvent.cs
+  ShowCursorOnConversation.cs
+  StartConversationOnDialogueEvent.cs
+  StartSequenceOnDialogueEvent.cs
+  StopConversationIfTooFar.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Importers/
+ Arcweave/ArcweaveLua.cs
+ Articy/ArticyLuaFunctions.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Manager/
+ DialogueSystemController.cs
+ DialogueSystemEvents.cs
+ ExtraDatabases.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/MVC/Actor/
+ ActorSubtitleColor.cs
+ BarkGroupManager.cs
+ BarkGroupMember.cs
+ DefaultCameraAngle.cs
+ DialogueActor.cs
+ Override/
+  OverrideDialogueUI.cs
+  OverrideDisplaySettings.cs
+ OverrideActorName.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/MVC/Model/
+ DialogueDatabase.cs
+ DialogueSystemSceneEvents.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/MVC/View/
+ BarkDialogueUI.cs
+ SequencerShortcuts.cs
+ TextlessBarkUI.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Options/
+ Cinemachine/CinemachineCameraPriorityOnDialogueEvent.cs
+ Timeline/TimelineTrigger.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Quests/
+ IncrementOnDestroy.cs
+ QuestLogWindowHotkey.cs
+ QuestStateIndicator.cs
+ QuestStateListener.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Save System/
+ ConversationStateSaver.cs
+ DialogueSystemSaver.cs
+ GameSaver.cs
+ LevelManager.cs
+ PersistentActiveData.cs
+ PersistentActiveDataMultiple.cs
+ PersistentDestructible.cs
+ PersistentPositionData.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Triggers/Interaction/
+ ProximitySelector.cs
+ Selector.cs
+ SelectorFollowTarget.cs
+ Usable.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Triggers/Trigger/
+ BarkOnIdle.cs
+ ConditionObserver.cs
+ DialogueSystemTrigger.cs
+ RangeTrigger.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/UI/Standard/
+ Bark/StandardBarkUI.cs
+ Dialogue/
+  BringSubtitlePanelToFrontOnFocus.cs
+  SMS/SMSDialogueUI.cs
+  StandardDialogueUI.cs
+  StandardUIInputField.cs
+  StandardUIMenuPanel.cs
+  StandardUIResponseButton.cs
+  StandardUISubtitlePanel.cs
+ Effects/
+  StandardUIColorText.cs
+  StandardUIContinueButtonFastForward.cs
+  StandardUIIgnorePauseCodes.cs
+ Quest/Common/
+  StandardUIButtonTemplate.cs
+  StandardUIFoldoutTemplate.cs
+  StandardUITextTemplate.cs
+  StandardUIToggleTemplate.cs
+ Quest/
+  StandardUIQuestLogWindow.cs
+  StandardUIQuestTitleButtonTemplate.cs
+  StandardUIQuestTracker.cs
+  StandardUIQuestTrackTemplate.cs
+ Selector/
+  SelectorUseStandardUIElements.cs
+  StandardUISelectorElements.cs
+  StandardUsableUI.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/UI/
+ TextMesh/LocalizeTextMesh.cs
+ Unity UI/
+  Bark/UnityUIBarkUI.cs
+  Dialogue/
+   OverrideUnityUIDialogueControls.cs
+   Portraits/
+    AnimatedPortrait.cs
+    UseAnimatedPortraits.cs
+   UnityUIBarkSubtitleDialogueUI.cs
+   UnityUIDialogueUI.cs
+   UnityUIResponseButton.cs
+   UnityUITextFieldUI.cs
+   UnityUITimer.cs
+  Effects/
+   LocalizeUIText.cs
+   UnityUIContinueButtonFastForward.cs
+   UpdateLocalizedUITexts.cs
+  Quest/
+   UnityUIQuestGroupTemplate.cs
+   UnityUIQuestLogWindow.cs
+   UnityUIQuestTemplate.cs
+   UnityUIQuestTemplateAlternateDescriptions.cs
+   UnityUIQuestTitle.cs
+   UnityUIQuestTracker.cs
+   UnityUIQuestTrackTemplate.cs
+  Selector/
+   UnityUISelectorDisplay.cs
+   UnityUISelectorElements.cs
+   UsableUnityUI.cs
+ Utility/
+  ConversationControl.cs
+  PreloadActorPortraits.cs
+  TextMeshProTypewriterEffect.cs
+  UIButtonKeyTrigger.cs
+  UnityUIColorText.cs
+  UnityUIIgnorePauseCodes.cs
+  UnityUIScrollbarEnabler.cs
+  UnityUITypewriterEffect.cs
+Assets/Plugins/Pixel Crushers/Dialogue System/Wrappers/Utility/
+ AlwaysFaceCamera.cs
+ CommonLibraryLua.cs
+ ConversationLogger.cs
+ ConversationPositionStack.cs
+ LuaConsole.cs
+ LuaNetworkCommands.cs
+Assets/Plugins/Pixel Crushers/Quest Machine/Demo/New Input System/
+ DemoInputActions.cs
+ DemoInputRegistration.cs
+Assets/Plugins/Pixel Crushers/Quest Machine/Demo/Scripts/
+ DemoInventory.cs
+ DemoItemCountQuestCondition.cs
+ DemoMenu.cs
+ DemoUpdateItemCounterQuestAction.cs
+ FollowXY.cs
+ PlayerController2D.cs
+ SortByY.cs
+ Targetable.cs
+Assets/Plugins/Pixel Crushers/Quest Machine/Scripts/
+ Quest Database/QuestDatabase.cs
+ Quest Generator/Data/Action/
+  Action.cs
+  ActionCompletion.cs
+  ActionEffect.cs
+  ActionRequirement.cs
+  ActionText.cs
+  Motive.cs
+  RequirementFunction/
+   FactionRequirementFunction.cs
+   RequirementFunction.cs
+ Quest Generator/Data/DomainType/
+  DomainSpecifier.cs
+  DomainType.cs
+ Quest Generator/Data/Drive/
+  Drive.cs
+  DriveValue.cs
+ Quest Generator/Data/EntityType/
+  EntitySpecifier.cs
+  EntityType.cs
+  PlayerEntityType.cs
+  RewardMultiplier.cs
+ Quest Generator/Data/
+  Faction/Faction.cs
+  UrgencyFunction/
+   DriveAlignmentUrgencyFunction.cs
+   FactionUrgencyFunction.cs
+   LiteralUrgencyFunction.cs
+   ThreatUrgencyFunction.cs
+   UrgencyFunction.cs
+  WorldModel/
+   Fact.cs
+   FactSpecifier.cs
+   UrgentFactSelectionCriterion.cs
+   WorldModel.cs
+ Quest Generator/MonoBehaviours/Planner/
+  DriveAlignmentMethod.cs
+  GoalFactSelection.cs
+  Plan.cs
+  PlanStep.cs
+  PlanToQuestBuilder.cs
+  QuestGenerator.cs
+ Quest Generator/MonoBehaviours/
+  QuestBuilder.cs
+  QuestDomain.cs
+  QuestEntity.cs
+  QuestGeneratorEntity.cs
+  Reward Systems/
+   MessageRewardSystem.cs
+   RewardSystem.cs
+   XPRewardSystem.cs
+  Savers/EntityTypeSaver.cs
+ Quest Machine/
+  CompletedQuestDialogueMode.cs
+  QuestMachine.cs
+  QuestMachineConfiguration.cs
+ Quest MonoBehaviours/Quest Interaction/
+  QuestControl.cs
+  SpawnedEntity.cs
+  Spawner.cs
+ Quest MonoBehaviours/Quest List/
+  BasicUIContent.cs
+  IdentifiableQuestListContainer.cs
+  QuestGiver.cs
+  QuestJournal.cs
+  QuestListContainer.cs
+  QuestListEvents.cs
+  QuestMachineID.cs
+ Quest UIs/Base/Quest Alert UI/
+  IQuestAlertUI.cs
+  IQuestAlertUIInspectorFieldAttribute.cs
+  QuestAlertDisplayer.cs
+ Quest UIs/Base/Quest Dialogue UI/
+  IQuestDialogueUI.cs
+  IQuestDialogueUIInspectorFieldAttribute.cs
+ Quest UIs/Base/Quest HUD/
+  IQuestHUD.cs
+  IQuestHUDInspectorFieldAttribute.cs
+ Quest UIs/Base/Quest Indicators/
+  QuestIndicatorManager.cs
+  QuestIndicatorSaver.cs
+  QuestIndicatorUI.cs
+ Quest UIs/Base/Quest Journal UI/
+  IQuestJournalUI.cs
+  IQuestJournalUIInspectorFieldAttribute.cs
+ Quest UIs/Unity UI/Unity UI Content Templates/
+  UnityUIBaseUI.cs
+  UnityUIButtonListTemplate.cs
+  UnityUIButtonTemplate.cs
+  UnityUIContainerTemplate.cs
+  UnityUIContentTemplate.cs
+  UnityUIFoldoutTemplate.cs
+  UnityUIIconListTemplate.cs
+  UnityUIIconTemplate.cs
+  UnityUIInstancedContentManager.cs
+  UnityUITextTemplate.cs
+  UnityUIToggleTemplate.cs
+ Quest UIs/Unity UI/
+  Unity UI Quest Alert UI/UnityUIQuestAlertUI.cs
+  Unity UI Quest Dialogue UI/UnityUIQuestDialogueUI.cs
+  Unity UI Quest HUD/UnityUIQuestHUD.cs
+  Unity UI Quest Journal UI/
+   UnityUIQuestJournalUI.cs
+   UnityUIQuestNameButtonTemplate.cs
+ Quest/Quest Condition Set/
+  ConditionCountMode.cs
+  QuestConditionSet.cs
+ Quest/Quest Content Set/
+  QuestAudioSourceIdentifier.cs
+  QuestContentCategory.cs
+  QuestContentSet.cs
+ Quest/Quest Counter/
+  QuestCounter.cs
+  QuestCounterMessageEvent.cs
+  QuestCounterParameterDelegate.cs
+  QuestCounterSetValueMode.cs
+  QuestCounterUpdateMode.cs
+  QuestNumber.cs
+ Quest/
+  Quest Indicator/QuestIndicatorState.cs
+  Quest Node/
+   QuestNode.cs
+   QuestNodeState.cs
+   QuestNodeType.cs
+  Quest Serialization/
+   QuestProxy.cs
+   QuestStateSerializer.cs
+  Quest State/
+   QuestState.cs
+   QuestStateInfo.cs
+  Quest Subasset/
+   IProxySerializationCallbackReceiver.cs
+   Quest Action/
+    ActivateGameObjectQuestAction.cs
+    AlertQuestAction.cs
+    AnimatorQuestAction.cs
+    AudioQuestAction.cs
+    ControlSpawnerQuestAction.cs
+    GiveQuestToQuesterQuestAction.cs
+    InstantiatePrefabQuestAction.cs
+    MessageQuestAction.cs
+    Quest Scene Events/
+     QuestMachineSceneEvents.cs
+     SceneEventQuestAction.cs
+    QuestAction.cs
+    SetCounterValueQuestAction.cs
+    SetIndicatorQuestAction.cs
+    SetQuestNodeStateQuestAction.cs
+    SetQuestStateQuestAction.cs
+    SetTrackingQuestAction.cs
+    UnityEventQuestAction.cs
+   Quest Condition/
+    CounterQuestCondition.cs
+    MessageQuestCondition.cs
+    ParentQuestCondition.cs
+    QuestCondition.cs
+    QuestNodeStateQuestCondition.cs
+    QuestStateQuestCondition.cs
+    TimerQuestCondition.cs
+   Quest Content/
+    AudioClipQuestContent.cs
+    BodyTextQuestContent.cs
+    ButtonQuestContent.cs
+    HeadingTextQuestContent.cs
+    IconQuestContent.cs
+    LinkQuestContent.cs
+    QuestContent.cs
+   QuestSubasset.cs
+  Quest.cs
+ Utility/
+  ByteData.cs
+  IQuestMachineID.cs
+  IQuestTimer.cs
+  MessageValue.cs
+  QuestJournalButton.cs
+  QuestMachineMessageEvents.cs
+  QuestMachineMessages.cs
+  QuestMachineTags.cs
+  QuestMessageParticipant.cs
+  QuestParameterDelegate.cs
+  QuestParticipantTextInfo.cs
+  QuestTimerManager.cs
+  StringFieldParameterDelegate.cs
+  TagDictionary.cs
+Assets/Plugins/Pixel Crushers/Quest Machine/Templates/
+ QuestActionTemplate.cs
+ QuestBuilderExample.cs
+ QuestConditionTemplate.cs
+ QuestContentTemplate.cs
+ RequirementFunctionTemplate.cs
+ RewardSystemTemplate.cs
+ UrgencyFunctionTemplate.cs
+Assets/Plugins/Pixel Crushers/Quest Machine/Third Party Support/Dialogue System Support/Scripts/
+ Bridge/DialogueSystemQuestMachineBridge.cs
+ Generator/
+  DialogueSystemActionConversationMap.cs
+  DialogueSystemActionConversationMapRecord.cs
+  DialogueSystemPlanToQuestBuilder.cs
+  DialogueSystemQuestGeneratorBridge.cs
+  QuestBuilderWithDialogueSystem.cs
+ Quest Actions/
+  BarkQuestAction.cs
+  LuaQuestAction.cs
+  LuaVariableQuestAction.cs
+  PlaySequenceQuestAction.cs
+  StartConversationQuestAction.cs
+ Quest Conditions/
+  LuaQuestCondition.cs
+  LuaVariableQuestCondition.cs
+  TimedCallbackManager.cs
+ Quest Content/
+  DialogueSystemConversationQuestContent.cs
+  DialogueSystemTextQuestContent.cs
+ Quest Giver/DialogueSystemQuestGiver.cs
+ Quest UIs/
+  Dialogue System Quest Alert UI/DialogueSystemQuestAlertUI.cs
+  Dialogue System Quest Dialogue UI/DialogueSystemQuestDialogueUI.cs
+ Sequencer Commands/SequencerCommandSpawner.cs
+Assets/Plugins/Pixel Crushers/Quest Machine/Wrappers/
+ Quest Database/QuestDatabase.cs
+ Quest Generator/Data/Action/
+  Action.cs
+  Requirement Function/FactionRequirementFunction.cs
+ Quest Generator/Data/
+  DomainType/DomainType.cs
+  Drive/Drive.cs
+  EntityType/
+   EntityType.cs
+   PlayerEntityType.cs
+  Faction/Faction.cs
+  Urgency Functions/
+   DriveAlignmentUrgencyFunction.cs
+   FactionUrgencyFunction.cs
+   LiteralUrgencyFunction.cs
+   ThreatUrgencyFunction.cs
+   UrgencyFunction.cs
+ Quest Generator/MonoBehaviours/
+  QuestDomain.cs
+  QuestEntity.cs
+  QuestGeneratorEntity.cs
+  Reward Systems/
+   MessageRewardSystem.cs
+   XPRewardSystem.cs
+  Savers/EntityTypeSaver.cs
+ Quest Machine/QuestMachineConfiguration.cs
+ Quest MonoBehaviours/Quest Interaction/
+  QuestControl.cs
+  SpawnedEntity.cs
+  Spawner.cs
+ Quest MonoBehaviours/Quest List/
+  QuestGiver.cs
+  QuestJournal.cs
+  QuestListContainer.cs
+  QuestListEvents.cs
+  QuestMachineID.cs
+ Quest UIs/Base/
+  Quest Alert UI/QuestAlertDisplayer.cs
+  Quest Indicators/
+   QuestIndicatorManager.cs
+   QuestIndicatorSaver.cs
+   QuestIndicatorUI.cs
+ Quest UIs/Unity UI/Unity UI Content Templates/
+  UnityUIButtonListTemplate.cs
+  UnityUIButtonTemplate.cs
+  UnityUIContainerTemplate.cs
+  UnityUIFoldoutTemplate.cs
+  UnityUIIconListTemplate.cs
+  UnityUIIconTemplate.cs
+  UnityUIQuestNameButtonTemplate.cs
+  UnityUITextTemplate.cs
+  UnityUIToggleTemplate.cs
+ Quest UIs/Unity UI/
+  Unity UI Quest Alert UI/UnityUIQuestAlertUI.cs
+  Unity UI Quest Dialogue UI/UnityUIQuestDialogueUI.cs
+  Unity UI Quest HUD/UnityUIQuestHUD.cs
+  Unity UI Quest Journal UI/UnityUIQuestJournalUI.cs
+ Quest/Quest Actions/
+  ActivateGameObjectQuestAction.cs
+  AlertQuestAction.cs
+  AnimatorQuestAction.cs
+  AudioQuestAction.cs
+  ControlSpawnerQuestAction.cs
+  GiveQuestToQuesterQuestAction.cs
+  InstantiatePrefabQuestAction.cs
+  MessageQuestAction.cs
+  QuestMachineSceneEvents.cs
+  SceneEventQuestAction.cs
+  SetCounterValueQuestAction.cs
+  SetIndicatorQuestAction.cs
+  SetQuestNodeStateQuestAction.cs
+  SetQuestStateQuestAction.cs
+  SetTrackingQuestAction.cs
+  UnityEventQuestAction.cs
+ Quest/Quest Conditions/
+  CounterQuestCondition.cs
+  MessageQuestCondition.cs
+  ParentQuestCondition.cs
+  QuestNodeStateQuestCondition.cs
+  QuestStateQuestCondition.cs
+  TimerQuestCondition.cs
+ Quest/Quest Content/
+  AudioClipQuestContent.cs
+  BodyTextQuestContent.cs
+  ButtonQuestContent.cs
+  HeadingTextQuestContent.cs
+  IconQuestContent.cs
+ Quest/Quest.cs
+ Utility/
+  QuestJournalButton.cs
+  QuestMachineMessageEvents.cs
+Temp/obj/Debug/Assembly-CSharp-firstpass/.NETStandard,Version=v2.1.AssemblyAttributes.cs
+
+[metadataReferences]
+../Unity/2021.3.45f2/Editor/Data/Managed/UnityEngine/
+ UnityEditor.CoreModule.dll
+ UnityEditor.DeviceSimulatorModule.dll
+ UnityEditor.DiagnosticsModule.dll
+ UnityEditor.dll
+ UnityEditor.GraphViewModule.dll
+ UnityEditor.PackageManagerUIModule.dll
+ UnityEditor.QuickSearchModule.dll
+ UnityEditor.SceneTemplateModule.dll
+ UnityEditor.TextCoreFontEngineModule.dll
+ UnityEditor.TextCoreTextEngineModule.dll
+ UnityEditor.UIBuilderModule.dll
+ UnityEditor.UIElementsModule.dll
+ UnityEditor.UIElementsSamplesModule.dll
+ UnityEditor.UIServiceModule.dll
+ UnityEditor.UnityConnectModule.dll
+ UnityEngine.AccessibilityModule.dll
+ UnityEngine.AIModule.dll
+ UnityEngine.AndroidJNIModule.dll
+ UnityEngine.AnimationModule.dll
+ UnityEngine.ARModule.dll
+ UnityEngine.AssetBundleModule.dll
+ UnityEngine.AudioModule.dll
+ UnityEngine.ClothModule.dll
+ UnityEngine.ClusterInputModule.dll
+ UnityEngine.ClusterRendererModule.dll
+ UnityEngine.CoreModule.dll
+ UnityEngine.CrashReportingModule.dll
+ UnityEngine.DirectorModule.dll
+ UnityEngine.dll
+ UnityEngine.DSPGraphModule.dll
+ UnityEngine.GameCenterModule.dll
+ UnityEngine.GIModule.dll
+ UnityEngine.GridModule.dll
+ UnityEngine.HotReloadModule.dll
+ UnityEngine.ImageConversionModule.dll
+ UnityEngine.IMGUIModule.dll
+ UnityEngine.InputLegacyModule.dll
+ UnityEngine.InputModule.dll
+ UnityEngine.JSONSerializeModule.dll
+ UnityEngine.LocalizationModule.dll
+ UnityEngine.ParticleSystemModule.dll
+ UnityEngine.PerformanceReportingModule.dll
+ UnityEngine.Physics2DModule.dll
+ UnityEngine.PhysicsModule.dll
+ UnityEngine.ProfilerModule.dll
+ UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll
+ UnityEngine.ScreenCaptureModule.dll
+ UnityEngine.SharedInternalsModule.dll
+ UnityEngine.SpriteMaskModule.dll
+ UnityEngine.SpriteShapeModule.dll
+ UnityEngine.StreamingModule.dll
+ UnityEngine.SubstanceModule.dll
+ UnityEngine.SubsystemsModule.dll
+ UnityEngine.TerrainModule.dll
+ UnityEngine.TerrainPhysicsModule.dll
+ UnityEngine.TextCoreFontEngineModule.dll
+ UnityEngine.TextCoreTextEngineModule.dll
+ UnityEngine.TextRenderingModule.dll
+ UnityEngine.TilemapModule.dll
+ UnityEngine.TLSModule.dll
+ UnityEngine.UIElementsModule.dll
+ UnityEngine.UIElementsNativeModule.dll
+ UnityEngine.UIModule.dll
+ UnityEngine.UmbraModule.dll
+ UnityEngine.UNETModule.dll
+ UnityEngine.UnityAnalyticsCommonModule.dll
+ UnityEngine.UnityAnalyticsModule.dll
+ UnityEngine.UnityConnectModule.dll
+ UnityEngine.UnityCurlModule.dll
+ UnityEngine.UnityTestProtocolModule.dll
+ UnityEngine.UnityWebRequestAssetBundleModule.dll
+ UnityEngine.UnityWebRequestAudioModule.dll
+ UnityEngine.UnityWebRequestModule.dll
+ UnityEngine.UnityWebRequestTextureModule.dll
+ UnityEngine.UnityWebRequestWWWModule.dll
+ UnityEngine.VehiclesModule.dll
+ UnityEngine.VFXModule.dll
+ UnityEngine.VideoModule.dll
+ UnityEngine.VirtualTexturingModule.dll
+ UnityEngine.VRModule.dll
+ UnityEngine.WindModule.dll
+ UnityEngine.XRModule.dll
+../Unity/2021.3.45f2/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/
+ Microsoft.Win32.Primitives.dll
+ netstandard.dll
+ System.AppContext.dll
+ System.Buffers.dll
+ System.Collections.Concurrent.dll
+ System.Collections.dll
+ System.Collections.NonGeneric.dll
+ System.Collections.Specialized.dll
+ System.ComponentModel.Annotations.dll
+ System.ComponentModel.dll
+ System.ComponentModel.EventBasedAsync.dll
+ System.ComponentModel.Primitives.dll
+ System.ComponentModel.TypeConverter.dll
+ System.Console.dll
+ System.Data.Common.dll
+ System.Diagnostics.Contracts.dll
+ System.Diagnostics.Debug.dll
+ System.Diagnostics.FileVersionInfo.dll
+ System.Diagnostics.Process.dll
+ System.Diagnostics.StackTrace.dll
+ System.Diagnostics.TextWriterTraceListener.dll
+ System.Diagnostics.Tools.dll
+ System.Diagnostics.TraceSource.dll
+ System.Drawing.Primitives.dll
+ System.Dynamic.Runtime.dll
+ System.Globalization.Calendars.dll
+ System.Globalization.dll
+ System.Globalization.Extensions.dll
+ System.IO.Compression.ZipFile.dll
+ System.IO.dll
+ System.IO.FileSystem.dll
+ System.IO.FileSystem.DriveInfo.dll
+ System.IO.FileSystem.Primitives.dll
+ System.IO.FileSystem.Watcher.dll
+ System.IO.IsolatedStorage.dll
+ System.IO.MemoryMappedFiles.dll
+ System.IO.Pipes.dll
+ System.IO.UnmanagedMemoryStream.dll
+ System.Linq.dll
+ System.Linq.Expressions.dll
+ System.Linq.Parallel.dll
+ System.Linq.Queryable.dll
+ System.Memory.dll
+ System.Net.Http.Rtc.dll
+ System.Net.NameResolution.dll
+ System.Net.NetworkInformation.dll
+ System.Net.Ping.dll
+ System.Net.Primitives.dll
+ System.Net.Requests.dll
+ System.Net.Security.dll
+ System.Net.Sockets.dll
+ System.Net.WebHeaderCollection.dll
+ System.Net.WebSockets.Client.dll
+ System.Net.WebSockets.dll
+ System.ObjectModel.dll
+ System.Reflection.DispatchProxy.dll
+ System.Reflection.dll
+ System.Reflection.Emit.dll
+ System.Reflection.Emit.ILGeneration.dll
+ System.Reflection.Emit.Lightweight.dll
+ System.Reflection.Extensions.dll
+ System.Reflection.Primitives.dll
+ System.Resources.Reader.dll
+ System.Resources.ResourceManager.dll
+ System.Resources.Writer.dll
+ System.Runtime.CompilerServices.VisualC.dll
+ System.Runtime.dll
+ System.Runtime.Extensions.dll
+ System.Runtime.Handles.dll
+ System.Runtime.InteropServices.dll
+ System.Runtime.InteropServices.RuntimeInformation.dll
+ System.Runtime.InteropServices.WindowsRuntime.dll
+ System.Runtime.Numerics.dll
+ System.Runtime.Serialization.Formatters.dll
+ System.Runtime.Serialization.Json.dll
+ System.Runtime.Serialization.Primitives.dll
+ System.Runtime.Serialization.Xml.dll
+ System.Security.Claims.dll
+ System.Security.Cryptography.Algorithms.dll
+ System.Security.Cryptography.Csp.dll
+ System.Security.Cryptography.Encoding.dll
+ System.Security.Cryptography.Primitives.dll
+ System.Security.Cryptography.X509Certificates.dll
+ System.Security.Principal.dll
+ System.Security.SecureString.dll
+ System.ServiceModel.Duplex.dll
+ System.ServiceModel.Http.dll
+ System.ServiceModel.NetTcp.dll
+ System.ServiceModel.Primitives.dll
+ System.ServiceModel.Security.dll
+ System.Text.Encoding.dll
+ System.Text.Encoding.Extensions.dll
+ System.Text.RegularExpressions.dll
+ System.Threading.dll
+ System.Threading.Overlapped.dll
+ System.Threading.Tasks.dll
+ System.Threading.Tasks.Extensions.dll
+ System.Threading.Tasks.Parallel.dll
+ System.Threading.Thread.dll
+ System.Threading.ThreadPool.dll
+ System.Threading.Timer.dll
+ System.ValueTuple.dll
+ System.Xml.ReaderWriter.dll
+ System.Xml.XDocument.dll
+ System.Xml.XmlDocument.dll
+ System.Xml.XmlSerializer.dll
+ System.Xml.XPath.dll
+ System.Xml.XPath.XDocument.dll
+../Unity/2021.3.45f2/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/
+ Microsoft.CSharp.dll
+ mscorlib.dll
+ System.ComponentModel.Composition.dll
+ System.Core.dll
+ System.Data.DataSetExtensions.dll
+ System.Data.dll
+ System.dll
+ System.Drawing.dll
+ System.IO.Compression.dll
+ System.IO.Compression.FileSystem.dll
+ System.Net.Http.dll
+ System.Numerics.dll
+ System.Numerics.Vectors.dll
+ System.Runtime.Serialization.dll
+ System.Transactions.dll
+ System.Xml.dll
+ System.Xml.Linq.dll
+Library/
+ PackageCache/com.unity.nuget.newtonsoft-json@3.2.2/Runtime/Newtonsoft.Json.dll
+ ScriptAssemblies/
+  Cinemachine.dll
+  com.unity.cinemachine.editor.dll
+  PPv2URPConverters.dll
+  PsdPlugin.dll
+  Unity.2D.Animation.Editor.dll
+  Unity.2D.Animation.Runtime.dll
+  Unity.2D.Common.Editor.dll
+  Unity.2D.Common.Runtime.dll
+  Unity.2D.IK.Editor.dll
+  Unity.2D.IK.Runtime.dll
+  Unity.2D.Path.Editor.dll
+  Unity.2D.PixelPerfect.dll
+  Unity.2D.PixelPerfect.Editor.dll
+  Unity.2D.Psdimporter.Editor.dll
+  Unity.2D.Sprite.Editor.dll
+  Unity.2D.SpriteShape.Editor.dll
+  Unity.2D.SpriteShape.Runtime.dll
+  Unity.2D.Tilemap.Editor.dll
+  Unity.Burst.dll
+  Unity.Burst.Editor.dll
+  Unity.InternalAPIEditorBridge.001.dll
+  Unity.InternalAPIEngineBridge.001.dll
+  Unity.Mathematics.dll
+  Unity.Mathematics.Editor.dll
+  Unity.PlasticSCM.Editor.dll
+  Unity.RenderPipeline.Universal.ShaderLibrary.dll
+  Unity.RenderPipelines.Core.Editor.dll
+  Unity.RenderPipelines.Core.Runtime.dll
+  Unity.RenderPipelines.Core.ShaderLibrary.dll
+  Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+  Unity.RenderPipelines.Universal.Editor.dll
+  Unity.RenderPipelines.Universal.Runtime.dll
+  Unity.RenderPipelines.Universal.Shaders.dll
+  Unity.Rider.Editor.dll
+  Unity.Searcher.Editor.dll
+  Unity.ShaderGraph.Editor.dll
+  Unity.Sysroot.Linux_x86_64.dll
+  Unity.SysrootPackage.Editor.dll
+  Unity.TextMeshPro.dll
+  Unity.TextMeshPro.Editor.dll
+  Unity.Timeline.dll
+  Unity.Timeline.Editor.dll
+  Unity.Toolchain.Win-x86_64-Linux-x86_64.dll
+  Unity.VisualStudio.Editor.dll
+  Unity.VSCode.Editor.dll
+  UnityEditor.UI.dll
+  UnityEngine.UI.dll
+Temp/bin/Debug/
+ Lofelt.NiceVibrations.Demo.dll
+ Lofelt.NiceVibrations.dll
+ Lofelt.NiceVibrations.Editor.dll
+ MoreMountains.Feedbacks.Authorizations.dll
+ MoreMountains.Feedbacks.Cinemachine.dll
+ MoreMountains.Feedbacks.dll
+ MoreMountains.Feedbacks.Editor.dll
+ MoreMountains.Feedbacks.HDRP.dll
+ MoreMountains.Feedbacks.MMTools.dll
+ MoreMountains.Feedbacks.NiceVibrations.dll
+ MoreMountains.Feedbacks.PostProcessing.dll
+ MoreMountains.Feedbacks.TextMeshPro.dll
+ MoreMountains.Feedbacks.URP.dll
+ MoreMountains.Tools.dll
+ MoreMountains.Tools.Editor.dll
+
+[analyzerReferences]
+C:/Users/geekd/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.2/Analyzers/Microsoft.Unity.Analyzers.dll
+
+[analyzerConfigFiles]
+Temp/obj/Debug/Assembly-CSharp-firstpass/Assembly-CSharp-firstpass.GeneratedMSBuildEditorConfig.editorconfig

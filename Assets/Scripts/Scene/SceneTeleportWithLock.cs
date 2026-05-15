@@ -13,7 +13,7 @@ public class SceneTeleportWithLock : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         Player player = collision.GetComponent<Player>();
-        
+
         if (player != null)
         {
             // Check if the player has the required key in keyring
