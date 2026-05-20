@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,18 @@ public class E_EnemyAI : MonoBehaviour
     [SerializeField] private float roamDuration = 3f; // Duration of roaming before changing direction
     [SerializeField] private Transform[] patrolPoints; // Patrol waypoints used while roaming
     [SerializeField] private float patrolArrivalDistance = 0.15f; // Distance that counts as arriving at a patrol point
+    [SerializeField] private bool avoidCrowdedPatrolPoints = true; // Prefer patrol points that are not occupied by other enemies
+    [SerializeField] private float patrolPointCrowdingRadius = 0.9f; // Radius used to detect crowding at a patrol point
+    [SerializeField] private Collider2D patrolAreaCollider = null; // Optional patrol/wake area bounds
+    [SerializeField] private bool autoDiscoverPatrolPointsInScene = true; // Rebind patrol points for cloned enemies
+    [SerializeField] private string checkpointParentObjectName = "EnemyCheckPoints_1"; // Parent object containing child checkpoints
+    [SerializeField] private string patrolPointTag = "EnemyPatrolPoint"; // Tag used to locate scene patrol points
+    [SerializeField] private float patrolPointSearchRadius = 8f; // Max distance to collect patrol points (<=0 means unlimited)
+    [SerializeField] private int maxDiscoveredPatrolPoints = 4; // Maximum points auto-loaded from scene
+    [SerializeField] private bool autoCreatePatrolPointsIfMissing = true; // Create local patrol points when scene references are missing
+    [SerializeField] private float fallbackPatrolHalfDistance = 1.5f; // Half-distance used for generated patrol points
+    [SerializeField] private bool useAStarForGeneratedPatrolPoints = true; // Generate fallback patrol endpoints from reachable A* cells
+    [SerializeField] private int generatedPatrolSearchCells = 6; // Maximum grid-cell distance for A* patrol generation
     [SerializeField] private float attackPositionMoveSpeed = 5f; // Speed for moving to attack position
     [SerializeField] private float attackDuration = 0.8f; // Time to pause movement when attacking
     [SerializeField] private float recoveryDuration = 0.5f; // Short pause after attack before resuming
@@ -63,6 +76,15 @@ public class E_EnemyAI : MonoBehaviour
     private int patrolPointIndex = 0;
     private int patrolDirection = 1;
     private float patrolPauseTimer = 0f;
+    private float patrolPathUpdateTimer = 0f;
+    private float lastPathRecalculationTime = -Mathf.Infinity;
+    [SerializeField] private float pathRecalculationCooldown = 2f; // Cooldown time for path recalculations
+    private Vector3 lastPatrolPosition;
+    private float patrolStuckTimer = 0f;
+    [SerializeField] private float patrolStuckTimeout = 5f;
+    private Transform fallbackPatrolRoot;
+    private Transform fallbackPatrolPointA;
+    private Transform fallbackPatrolPointB;
 
     private enum AttackAxis
     {
@@ -116,22 +138,14 @@ public class E_EnemyAI : MonoBehaviour
 
     private void Start()
     {
-        // Find player in the scene
-        player = GameObject.FindWithTag("Player");
-        // New explicit player-side attack markers (preferred)
-        attackFromLeft = FindAttackMarker("AttackFromLeft");
-        attackFromRight = FindAttackMarker("AttackFromRight");
-        attackFromUp = FindAttackMarker("AttackFromUp");
-        attackFromDown = FindAttackMarker("AttackFromDown");
-
-        // Legacy parent container fallback
-        enemyAttackPosition = player.transform.Find("EnemyAttackPosition");
-
-        playerTransform = player.transform;
-
-        GetComponent<NPCMovement>().EnemyAfterSceneLoad();
-
+        npcMovement = GetComponent<NPCMovement>();
         npcPath = GetComponent<NPCPath>();
+        TryResolvePlayerReferences();
+
+        if (npcMovement != null)
+        {
+            npcMovement.EnemyAfterSceneLoad();
+        }
 
         animator.SetBool("isAttacking", false); // Ensure attack animation is not playing at start
 
@@ -153,6 +167,7 @@ public class E_EnemyAI : MonoBehaviour
         ResetMovementAnimation(); // Reset all movement animations
 
         state = State.Roaming; // Set initial state to Roaming
+        EnsurePatrolPointsAvailable();
         InitializePatrolState();
 
         StartCoroutine(RoamingRoutine());
@@ -226,53 +241,211 @@ public class E_EnemyAI : MonoBehaviour
                 continue;
             }
 
-            Vector2 patrolDirectionVector = GetPatrolDirection();
-            if (patrolDirectionVector.sqrMagnitude > 0.0001f)
-            {
-                // Determine and set movement direction before moving.
-                SetMovementAnimation(patrolDirectionVector);
-            }
-            else
-            {
-                ResetMovementAnimation();
-            }
-
-            enemyPathfinding.MoveTo(patrolDirectionVector);
+            // Roaming: NPCMovement handles A* stepping and animation per step.
+            UpdatePathToPatrolPoint();
+            CheckPatrolStuck();
             yield return null;
         }
     }
 
     private void InitializePatrolState()
     {
+        EnsurePatrolPointsAvailable();
+
         patrolPointIndex = 0;
         patrolDirection = 1;
         patrolPauseTimer = 0f;
+        patrolPathUpdateTimer = 0f;
 
         if (patrolPoints == null || patrolPoints.Length == 0)
         {
             return;
         }
 
-        // Start from the closest valid patrol point so enemies don't snap direction oddly on scene load.
-        int closestIndex = -1;
-        float closestSqrDistance = float.MaxValue;
+        Vector2Int currentGrid = GetGridTargetFromWorld(transform.position);
+
+        // Start from the closest patrol point that is also on a different grid cell when possible.
+        int closestDifferentGridIndex = -1;
+        float closestDifferentGridSqrDistance = float.MaxValue;
+        int closestAnyIndex = -1;
+        float closestAnySqrDistance = float.MaxValue;
         for (int i = 0; i < patrolPoints.Length; i++)
         {
             if (patrolPoints[i] == null) continue;
 
             float sqrDistance = ((Vector2)(patrolPoints[i].position - transform.position)).sqrMagnitude;
-            if (sqrDistance < closestSqrDistance)
+            if (sqrDistance < closestAnySqrDistance)
             {
-                closestSqrDistance = sqrDistance;
-                closestIndex = i;
+                closestAnySqrDistance = sqrDistance;
+                closestAnyIndex = i;
+            }
+
+            Vector2Int patrolGrid = GetGridTargetFromWorld(patrolPoints[i].position);
+            if (patrolGrid != currentGrid && sqrDistance < closestDifferentGridSqrDistance)
+            {
+                closestDifferentGridSqrDistance = sqrDistance;
+                closestDifferentGridIndex = i;
             }
         }
 
-        patrolPointIndex = closestIndex >= 0 ? closestIndex : 0;
+        patrolPointIndex = closestDifferentGridIndex >= 0 ? closestDifferentGridIndex : (closestAnyIndex >= 0 ? closestAnyIndex : 0);
+        lastPatrolPosition = transform.position;
+        patrolStuckTimer = 0f;
+
+        // Desync path updates across enemies so groups do not replan on the same frame.
+        float desyncWindow = Mathf.Max(0f, pathRecalculationCooldown);
+        if (desyncWindow > 0f)
+        {
+            lastPathRecalculationTime = Time.time - Random.Range(0f, desyncWindow);
+        }
+        else
+        {
+            lastPathRecalculationTime = Time.time;
+        }
+    }
+
+    private void CheckPatrolStuck()
+    {
+        // If the enemy hasn't moved far enough within the timeout, cancel the current
+        // move step and force a path rebuild so it doesn't freeze against a corner.
+        if ((transform.position - lastPatrolPosition).sqrMagnitude > 0.01f)
+        {
+            lastPatrolPosition = transform.position;
+            patrolStuckTimer = 0f;
+            return;
+        }
+
+        patrolStuckTimer += Time.deltaTime;
+        if (patrolStuckTimer < Mathf.Max(0.5f, patrolStuckTimeout))
+        {
+            return;
+        }
+
+        // Stuck — cancel the blocked step and immediately rebuild from current position.
+        patrolStuckTimer = 0f;
+        lastPatrolPosition = transform.position;
+        if (npcMovement != null) npcMovement.CancelNPCMovement();
+        if (npcPath != null) npcPath.ClearPath();
+        patrolPathUpdateTimer = 0f; // Force immediate path recalc next frame.
+        // Keep current checkpoint target locked and try again.
+    }
+
+    private bool TrySelectReachableNextPatrolPoint(Vector2Int currentGrid)
+    {
+        if (patrolPoints == null || patrolPoints.Length <= 1)
+        {
+            return false;
+        }
+
+        int currentIndex = Mathf.Clamp(patrolPointIndex, 0, patrolPoints.Length - 1);
+        List<int> reachableIndices = new List<int>();
+
+        for (int i = 0; i < patrolPoints.Length; i++)
+        {
+            if (i == currentIndex || patrolPoints[i] == null)
+            {
+                continue;
+            }
+
+            Vector2Int candidateGrid = GetGridTargetFromWorld(GetPatrolPointWorldPosition(i));
+            if (candidateGrid == currentGrid)
+            {
+                continue;
+            }
+
+            int pathSteps = GetAStarPathSteps(currentGrid, candidateGrid);
+            if (pathSteps > 1)
+            {
+                reachableIndices.Add(i);
+            }
+        }
+
+        if (reachableIndices.Count == 0)
+        {
+            return false;
+        }
+
+        if (!avoidCrowdedPatrolPoints)
+        {
+            patrolPointIndex = reachableIndices[Random.Range(0, reachableIndices.Count)];
+            return true;
+        }
+
+        int lowestCrowdCount = int.MaxValue;
+        List<int> bestIndices = new List<int>();
+        float crowdRadius = Mathf.Max(0.1f, patrolPointCrowdingRadius);
+
+        for (int i = 0; i < reachableIndices.Count; i++)
+        {
+            int candidateIndex = reachableIndices[i];
+            int crowdCount = CountNearbyEnemiesAtPatrolPoint(candidateIndex, crowdRadius);
+
+            if (crowdCount < lowestCrowdCount)
+            {
+                lowestCrowdCount = crowdCount;
+                bestIndices.Clear();
+                bestIndices.Add(candidateIndex);
+            }
+            else if (crowdCount == lowestCrowdCount)
+            {
+                bestIndices.Add(candidateIndex);
+            }
+        }
+
+        List<int> pool = bestIndices.Count > 0 ? bestIndices : reachableIndices;
+        patrolPointIndex = pool[Random.Range(0, pool.Count)];
+        return true;
+    }
+
+    private int CountNearbyEnemiesAtPatrolPoint(int pointIndex, float radius)
+    {
+        if (patrolPoints == null || pointIndex < 0 || pointIndex >= patrolPoints.Length || patrolPoints[pointIndex] == null)
+        {
+            return 0;
+        }
+
+        Vector3 point = GetPatrolPointWorldPosition(pointIndex);
+        Collider2D[] overlaps = Physics2D.OverlapCircleAll(point, radius);
+        int count = 0;
+
+        for (int i = 0; i < overlaps.Length; i++)
+        {
+            Collider2D overlap = overlaps[i];
+            if (overlap == null)
+            {
+                continue;
+            }
+
+            if (overlap.transform == transform)
+            {
+                continue;
+            }
+
+            if (overlap.CompareTag("Enemy"))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private bool HasActiveAStarMovement()
+    {
+        if (npcMovement != null && npcMovement.npcIsMoving)
+        {
+            return true;
+        }
+
+        return npcPath != null
+            && npcPath.npcMovementStepStack != null
+            && npcPath.npcMovementStepStack.Count > 0;
     }
 
     private Vector2 GetPatrolDirection()
     {
+        EnsurePatrolPointsAvailable();
+
         if (patrolPoints == null || patrolPoints.Length == 0)
         {
             return Vector2.zero;
@@ -280,10 +453,12 @@ public class E_EnemyAI : MonoBehaviour
 
         if (patrolPoints.Length == 1 || patrolPoints[patrolPointIndex] == null)
         {
-            return ((Vector2)patrolPoints[0].position - (Vector2)transform.position).normalized;
+            Vector3 singlePointTarget = GetPatrolPointWorldPosition(0);
+            return ((Vector2)singlePointTarget - (Vector2)transform.position).normalized;
         }
 
-        Vector2 toTarget = (Vector2)patrolPoints[patrolPointIndex].position - (Vector2)transform.position;
+        Vector3 targetWorldPosition = GetPatrolPointWorldPosition(patrolPointIndex);
+        Vector2 toTarget = (Vector2)targetWorldPosition - (Vector2)transform.position;
         if (toTarget.magnitude <= patrolArrivalDistance)
         {
             AdvancePatrolPoint();
@@ -294,6 +469,102 @@ public class E_EnemyAI : MonoBehaviour
         return toTarget.normalized;
     }
 
+    private void UpdatePathToPatrolPoint()
+    {
+        EnsurePatrolPointsAvailable();
+
+        if (patrolPoints == null || patrolPoints.Length == 0)
+        {
+            if (npcPath != null) npcPath.ClearPath();
+            return;
+        }
+
+        int clampedPatrolIndex = Mathf.Clamp(patrolPointIndex, 0, patrolPoints.Length - 1);
+        Vector3 targetWorldPosition = GetPatrolPointWorldPosition(clampedPatrolIndex);
+        Vector2 toTarget = (Vector2)targetWorldPosition - (Vector2)transform.position;
+        Vector2Int currentGrid = GetGridTargetFromWorld(transform.position);
+        Vector2Int targetGrid = GetGridTargetFromWorld(targetWorldPosition);
+        bool hasActiveAStarMovement = HasActiveAStarMovement();
+
+        if (toTarget.magnitude <= patrolArrivalDistance)
+        {
+            // Do not switch patrol targets while an existing path step is still being consumed.
+            if (hasActiveAStarMovement)
+            {
+                return;
+            }
+
+            TrySelectReachableNextPatrolPoint(currentGrid);
+            patrolPauseTimer = Mathf.Max(0f, roamDuration);
+            if (npcPath != null) npcPath.ClearPath();
+            return;
+        }
+
+        // A* works on grid cells, so if we share a cell with the patrol point,
+        // finish the last short world-space approach before selecting a new target.
+        if (targetGrid == currentGrid)
+        {
+            if (hasActiveAStarMovement)
+            {
+                return;
+            }
+
+            if (npcMovement != null) npcMovement.CancelNPCMovement();
+            if (npcPath != null) npcPath.ClearPath();
+            if (enemyPathfinding != null)
+            {
+                enemyPathfinding.MoveTo(toTarget.sqrMagnitude > 0.0001f ? toTarget.normalized : Vector2.zero);
+            }
+            return;
+        }
+
+        if (enemyPathfinding != null)
+        {
+            enemyPathfinding.MoveTo(Vector2.zero);
+        }
+
+        // Keep the current destination locked until the current A* path is fully consumed.
+        if (hasActiveAStarMovement)
+        {
+            return;
+        }
+
+        // Throttle path recalculations
+        if (Time.time - lastPathRecalculationTime < pathRecalculationCooldown)
+        {
+            return;
+        }
+
+        lastPathRecalculationTime = Time.time;
+
+        Vector2Int finalTargetGrid = targetGrid;
+        int pathStepsToCurrentTarget = GetAStarPathSteps(currentGrid, finalTargetGrid);
+
+        if (pathStepsToCurrentTarget <= 1)
+        {
+            if (!TrySelectReachableNextPatrolPoint(currentGrid))
+            {
+                if (npcPath != null) npcPath.ClearPath();
+                return;
+            }
+
+            finalTargetGrid = GetGridTargetFromWorld(GetPatrolPointWorldPosition(patrolPointIndex));
+            pathStepsToCurrentTarget = GetAStarPathSteps(currentGrid, finalTargetGrid);
+            if (pathStepsToCurrentTarget <= 1)
+            {
+                if (npcPath != null) npcPath.ClearPath();
+                return;
+            }
+        }
+
+        NPCScheduleEvent patrolEvent = new NPCScheduleEvent(
+            0, 0, 0, 0, Weather.none, Season.none, npcCurrentScene,
+            new GridCoordinate(finalTargetGrid.x, finalTargetGrid.y), null
+        );
+
+        BuildPath(patrolEvent);
+    }
+
     private void AdvancePatrolPoint()
     {
         if (patrolPoints == null || patrolPoints.Length <= 1)
@@ -301,18 +572,32 @@ public class E_EnemyAI : MonoBehaviour
             return;
         }
 
-        patrolPointIndex += patrolDirection;
+        int currentIndex = Mathf.Clamp(patrolPointIndex, 0, patrolPoints.Length - 1);
+        List<int> validNextIndices = new List<int>();
 
-        if (patrolPointIndex >= patrolPoints.Length)
+        for (int i = 0; i < patrolPoints.Length; i++)
         {
-            patrolPointIndex = patrolPoints.Length - 2;
-            patrolDirection = -1;
+            if (patrolPoints[i] == null)
+            {
+                continue;
+            }
+
+            if (i == currentIndex)
+            {
+                continue;
+            }
+
+            validNextIndices.Add(i);
         }
-        else if (patrolPointIndex < 0)
+
+        if (validNextIndices.Count == 0)
         {
-            patrolPointIndex = 1;
-            patrolDirection = 1;
+            return;
         }
+
+        // Pick a random next checkpoint (not the current one).
+        // UpdatePathToPatrolPoint will validate it has a real multi-step path.
+        patrolPointIndex = validNextIndices[Random.Range(0, validNextIndices.Count)];
     }
 
     // New method to handle movement animation based on direction
@@ -362,6 +647,17 @@ public class E_EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (playerTransform == null)
+        {
+            TryResolvePlayerReferences();
+            if (playerTransform == null)
+            {
+                // Spawned clones can exist before player is created in a scene.
+                playerDetected = false;
+                return;
+            }
+        }
+
         TrackWalkingDirection();
         RecalculateAttackRanges();
 
@@ -828,6 +1124,515 @@ public class E_EnemyAI : MonoBehaviour
         attackExitRange = Mathf.Max(attackEnterRange + Mathf.Max(attackRangeExitBuffer, 0.05f), attackEnterRange * 1.2f);
     }
 
+    private bool TryResolvePlayerReferences()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
+
+        if (player == null)
+        {
+            playerTransform = null;
+            return false;
+        }
+
+        playerTransform = player.transform;
+
+        // New explicit player-side attack markers (preferred)
+        attackFromLeft = FindAttackMarker("AttackFromLeft");
+        attackFromRight = FindAttackMarker("AttackFromRight");
+        attackFromUp = FindAttackMarker("AttackFromUp");
+        attackFromDown = FindAttackMarker("AttackFromDown");
+
+        // Legacy parent container fallback
+        enemyAttackPosition = playerTransform.Find("EnemyAttackPosition");
+        return true;
+    }
+
+    private void EnsurePatrolPointsAvailable()
+    {
+        if (TryDiscoverPatrolPointsInScene())
+        {
+            return;
+        }
+
+        if (HasValidPatrolPoints())
+        {
+            return;
+        }
+
+        if (!autoCreatePatrolPointsIfMissing)
+        {
+            return;
+        }
+
+        if (fallbackPatrolRoot == null)
+        {
+            fallbackPatrolRoot = new GameObject("GeneratedPatrolPoints").transform;
+            fallbackPatrolRoot.SetParent(null, true);
+        }
+        else if (fallbackPatrolRoot.parent == transform)
+        {
+            fallbackPatrolRoot.SetParent(null, true);
+        }
+
+        if (fallbackPatrolPointA == null)
+        {
+            fallbackPatrolPointA = new GameObject("PointA").transform;
+            fallbackPatrolPointA.SetParent(fallbackPatrolRoot, false);
+        }
+
+        if (fallbackPatrolPointB == null)
+        {
+            fallbackPatrolPointB = new GameObject("PointB").transform;
+            fallbackPatrolPointB.SetParent(fallbackPatrolRoot, false);
+        }
+
+        Vector3 desiredA;
+        Vector3 desiredB;
+        bool generatedWithAStar = TryGeneratePatrolEndpointsWithAStar(out desiredA, out desiredB);
+
+        if (!generatedWithAStar)
+        {
+            float halfDistance = Mathf.Max(0.2f, fallbackPatrolHalfDistance);
+            desiredA = transform.position + (Vector3.left * halfDistance);
+            desiredB = transform.position + (Vector3.right * halfDistance);
+        }
+
+        fallbackPatrolPointA.position = ClampToPatrolArea(desiredA);
+        fallbackPatrolPointB.position = ClampToPatrolArea(desiredB);
+        patrolPoints = new Transform[] { fallbackPatrolPointA, fallbackPatrolPointB };
+    }
+
+    private bool TryDiscoverPatrolPointsInScene()
+    {
+        if (!autoDiscoverPatrolPointsInScene)
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(patrolPointTag))
+        {
+            return TryDiscoverPatrolPointsFromParentObject();
+        }
+
+        if (TryDiscoverPatrolPointsFromParentObject())
+        {
+            return true;
+        }
+
+        GameObject[] taggedPatrolObjects;
+        try
+        {
+            taggedPatrolObjects = GameObject.FindGameObjectsWithTag(patrolPointTag);
+        }
+        catch (UnityException)
+        {
+            if (isDebugMode)
+            {
+                Debug.LogWarning($"[EnemyAI] Patrol tag '{patrolPointTag}' does not exist. Skipping scene patrol discovery.");
+            }
+            return false;
+        }
+
+        if (taggedPatrolObjects == null || taggedPatrolObjects.Length == 0)
+        {
+            return false;
+        }
+
+        float searchRadiusSqr = patrolPointSearchRadius > 0f ? patrolPointSearchRadius * patrolPointSearchRadius : -1f;
+
+        List<Transform> candidatePoints = taggedPatrolObjects
+            .Where(o => o != null && o.scene == gameObject.scene)
+            .Select(o => o.transform)
+            .Where(t =>
+            {
+                if (t == null) return false;
+                if (searchRadiusSqr > 0f)
+                {
+                    float sqrDistance = ((Vector2)(t.position - transform.position)).sqrMagnitude;
+                    if (sqrDistance > searchRadiusSqr) return false;
+                }
+
+                if (patrolAreaCollider != null && !patrolAreaCollider.OverlapPoint(t.position))
+                {
+                    return false;
+                }
+
+                return true;
+            })
+            .ToList();
+
+        Transform[] discoveredPoints = SelectPatrolPointsForCoverage(candidatePoints);
+
+        if (discoveredPoints.Length < 2)
+        {
+            return false;
+        }
+
+        patrolPoints = discoveredPoints;
+        if (isDebugMode)
+        {
+            Debug.Log($"[EnemyAI] Auto-discovered {patrolPoints.Length} patrol points using tag '{patrolPointTag}'.");
+        }
+        return true;
+    }
+
+    private bool TryDiscoverPatrolPointsFromParentObject()
+    {
+        if (string.IsNullOrWhiteSpace(checkpointParentObjectName))
+        {
+            return false;
+        }
+
+        GameObject parentObject = GameObject.Find(checkpointParentObjectName);
+        if (parentObject == null || parentObject.scene != gameObject.scene)
+        {
+            return false;
+        }
+
+        List<Transform> candidatePoints = parentObject.transform
+            .Cast<Transform>()
+            .Where(t => t != null)
+            .Where(t =>
+            {
+                if (patrolAreaCollider != null && !patrolAreaCollider.OverlapPoint(t.position))
+                {
+                    return false;
+                }
+
+                return true;
+            })
+            .ToList();
+
+        Transform[] discoveredPoints = SelectPatrolPointsForCoverage(candidatePoints);
+
+        if (discoveredPoints.Length < 2)
+        {
+            return false;
+        }
+
+        patrolPoints = discoveredPoints;
+        if (isDebugMode)
+        {
+            Debug.Log($"[EnemyAI] Auto-discovered {patrolPoints.Length} patrol points from parent '{checkpointParentObjectName}'.");
+        }
+
+        return true;
+    }
+
+    private Transform[] SelectPatrolPointsForCoverage(List<Transform> candidatePoints)
+    {
+        if (candidatePoints == null || candidatePoints.Count == 0)
+        {
+            return new Transform[0];
+        }
+
+        int desiredCount = maxDiscoveredPatrolPoints <= 0
+            ? candidatePoints.Count
+            : Mathf.Clamp(maxDiscoveredPatrolPoints, 2, candidatePoints.Count);
+
+        if (desiredCount >= candidatePoints.Count)
+        {
+            return candidatePoints.ToArray();
+        }
+
+        // Seed near the enemy, then spread out to cover more of the patrol network.
+        List<Transform> selectedPoints = new List<Transform>(desiredCount);
+        Transform seedPoint = candidatePoints
+            .OrderBy(t => ((Vector2)(t.position - transform.position)).sqrMagnitude)
+            .FirstOrDefault();
+
+        if (seedPoint == null)
+        {
+            return new Transform[0];
+        }
+
+        selectedPoints.Add(seedPoint);
+
+        while (selectedPoints.Count < desiredCount)
+        {
+            Transform farthestPoint = null;
+            float farthestMinDistance = float.MinValue;
+
+            for (int i = 0; i < candidatePoints.Count; i++)
+            {
+                Transform candidate = candidatePoints[i];
+                if (candidate == null || selectedPoints.Contains(candidate))
+                {
+                    continue;
+                }
+
+                float minDistanceToSelected = float.MaxValue;
+                for (int j = 0; j < selectedPoints.Count; j++)
+                {
+                    float distance = ((Vector2)(candidate.position - selectedPoints[j].position)).sqrMagnitude;
+                    if (distance < minDistanceToSelected)
+                    {
+                        minDistanceToSelected = distance;
+                    }
+                }
+
+                if (minDistanceToSelected > farthestMinDistance)
+                {
+                    farthestMinDistance = minDistanceToSelected;
+                    farthestPoint = candidate;
+                }
+            }
+
+            if (farthestPoint == null)
+            {
+                break;
+            }
+
+            selectedPoints.Add(farthestPoint);
+        }
+
+        return selectedPoints.ToArray();
+    }
+
+    private Vector3 GetPatrolPointWorldPosition(int patrolIndex)
+    {
+        if (patrolPoints == null || patrolPoints.Length == 0)
+        {
+            return transform.position;
+        }
+
+        int clampedIndex = Mathf.Clamp(patrolIndex, 0, patrolPoints.Length - 1);
+        Transform point = patrolPoints[clampedIndex];
+        if (point == null)
+        {
+            return transform.position;
+        }
+
+        return ClampToPatrolArea(point.position);
+    }
+
+    private Vector3 ClampToPatrolArea(Vector3 worldPosition)
+    {
+        if (patrolAreaCollider == null)
+        {
+            return worldPosition;
+        }
+
+        Vector2 clampedPoint = patrolAreaCollider.ClosestPoint(worldPosition);
+        return new Vector3(clampedPoint.x, clampedPoint.y, worldPosition.z);
+    }
+
+    private bool HasValidPatrolPoints()
+    {
+        if (patrolPoints == null || patrolPoints.Length == 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < patrolPoints.Length; i++)
+        {
+            if (patrolPoints[i] != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool TryGeneratePatrolEndpointsWithAStar(out Vector3 pointA, out Vector3 pointB)
+    {
+        pointA = transform.position;
+        pointB = transform.position;
+
+        if (!useAStarForGeneratedPatrolPoints || NPCManager.Instance == null)
+        {
+            return false;
+        }
+
+        int maxCells = Mathf.Max(1, generatedPatrolSearchCells);
+        Vector2Int startGrid = GetGridTargetFromWorld(transform.position);
+
+        bool hasLeft = TryFindReachableInDirection(startGrid, Vector2Int.left, maxCells, out Vector2Int leftGrid, out int leftDistance);
+        bool hasRight = TryFindReachableInDirection(startGrid, Vector2Int.right, maxCells, out Vector2Int rightGrid, out int rightDistance);
+        bool hasUp = TryFindReachableInDirection(startGrid, Vector2Int.up, maxCells, out Vector2Int upGrid, out int upDistance);
+        bool hasDown = TryFindReachableInDirection(startGrid, Vector2Int.down, maxCells, out Vector2Int downGrid, out int downDistance);
+
+        bool hasHorizontalPair = hasLeft && hasRight;
+        bool hasVerticalPair = hasUp && hasDown;
+
+        if (hasHorizontalPair && (!hasVerticalPair || (leftDistance + rightDistance) >= (upDistance + downDistance)))
+        {
+            pointA = GridToWorldCenter(leftGrid);
+            pointB = GridToWorldCenter(rightGrid);
+            return true;
+        }
+
+        if (hasVerticalPair)
+        {
+            pointA = GridToWorldCenter(downGrid);
+            pointB = GridToWorldCenter(upGrid);
+            return true;
+        }
+
+        // If only one side is reachable, pair it with the start position.
+        if (hasLeft)
+        {
+            pointA = GridToWorldCenter(leftGrid);
+            pointB = GridToWorldCenter(startGrid);
+            return true;
+        }
+
+        if (hasRight)
+        {
+            pointA = GridToWorldCenter(startGrid);
+            pointB = GridToWorldCenter(rightGrid);
+            return true;
+        }
+
+        if (hasDown)
+        {
+            pointA = GridToWorldCenter(downGrid);
+            pointB = GridToWorldCenter(startGrid);
+            return true;
+        }
+
+        if (hasUp)
+        {
+            pointA = GridToWorldCenter(startGrid);
+            pointB = GridToWorldCenter(upGrid);
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryFindReachableInDirection(Vector2Int startGrid, Vector2Int direction, int maxCells, out Vector2Int bestGrid, out int bestDistance)
+    {
+        bestGrid = startGrid;
+        bestDistance = 0;
+
+        // Collect every valid candidate along with its actual A* path length.
+        List<Vector2Int> candidateCells = new List<Vector2Int>();
+        List<int> candidateSteps = new List<int>();
+
+        for (int step = 1; step <= maxCells; step++)
+        {
+            Vector2Int candidateGrid = startGrid + (direction * step);
+
+            if (!IsGridCellInCurrentSceneBounds(candidateGrid))
+                continue;
+
+            if (IsGridCellBlockedForNPC(candidateGrid))
+                continue;
+
+            Vector3 candidateWorld = GridToWorldCenter(candidateGrid);
+
+            if (patrolAreaCollider != null && !patrolAreaCollider.OverlapPoint(candidateWorld))
+                continue;
+
+            int pathSteps = GetAStarPathSteps(startGrid, candidateGrid);
+            if (pathSteps > 0)
+            {
+                candidateCells.Add(candidateGrid);
+                candidateSteps.Add(pathSteps);
+            }
+        }
+
+        if (candidateCells.Count == 0)
+            return false;
+
+        // Prefer candidates whose A* path is at least half of the longest found,
+        // so the chosen point is genuinely far rather than always the nearest cell.
+        int maxSteps = 0;
+        for (int i = 0; i < candidateSteps.Count; i++)
+            if (candidateSteps[i] > maxSteps) maxSteps = candidateSteps[i];
+
+        int minAcceptable = Mathf.Max(1, maxSteps / 2);
+
+        List<Vector2Int> preferred = new List<Vector2Int>();
+        List<int> preferredSteps = new List<int>();
+        for (int i = 0; i < candidateCells.Count; i++)
+        {
+            if (candidateSteps[i] >= minAcceptable)
+            {
+                preferred.Add(candidateCells[i]);
+                preferredSteps.Add(candidateSteps[i]);
+            }
+        }
+
+        // Fall back to all candidates if the preferred pool is empty.
+        List<Vector2Int> pool = preferred.Count > 0 ? preferred : candidateCells;
+        List<int> poolSteps = preferred.Count > 0 ? preferredSteps : candidateSteps;
+
+        int pick = Random.Range(0, pool.Count);
+        bestGrid = pool[pick];
+        bestDistance = poolSteps[pick];
+        return true;
+    }
+
+    // Returns the number of A* path steps from startGrid to targetGrid,
+    // or -1 if no path exists or the target is blocked.
+    private int GetAStarPathSteps(Vector2Int startGrid, Vector2Int targetGrid)
+    {
+        if (NPCManager.Instance == null)
+            return -1;
+
+        if (IsGridCellBlockedForNPC(targetGrid))
+            return -1;
+
+        Stack<NPCMovementStep> tempPath = new Stack<NPCMovementStep>();
+        bool found = NPCManager.Instance.BuildPath(npcCurrentScene, startGrid, targetGrid, tempPath);
+        return found ? tempPath.Count : -1;
+    }
+
+    private bool IsGridCellInCurrentSceneBounds(Vector2Int gridPosition)
+    {
+        if (GridPropertiesManager.Instance == null)
+        {
+            return true;
+        }
+
+        if (!GridPropertiesManager.Instance.GetGridDimensions(npcCurrentScene, out Vector2Int gridDimensions, out Vector2Int gridOrigin))
+        {
+            return true;
+        }
+
+        int maxX = gridOrigin.x + gridDimensions.x - 1;
+        int maxY = gridOrigin.y + gridDimensions.y - 1;
+        return gridPosition.x >= gridOrigin.x && gridPosition.x <= maxX && gridPosition.y >= gridOrigin.y && gridPosition.y <= maxY;
+    }
+
+    private bool IsGridCellBlockedForNPC(Vector2Int gridPosition)
+    {
+        if (GridPropertiesManager.Instance == null)
+        {
+            return false;
+        }
+
+        GridPropertyDetails details = GridPropertiesManager.Instance.GetGridPropertyDetails(gridPosition.x, gridPosition.y);
+        if (details == null)
+        {
+            // Treat missing grid data as blocked to avoid generating out-of-map patrol points.
+            return true;
+        }
+
+        return details.isNPCObstacle;
+    }
+
+    private Vector3 GridToWorldCenter(Vector2Int gridPosition)
+    {
+        if (sceneGrid == null)
+        {
+            sceneGrid = FindObjectOfType<Grid>();
+        }
+
+        if (sceneGrid != null)
+        {
+            return sceneGrid.GetCellCenterWorld(new Vector3Int(gridPosition.x, gridPosition.y, 0));
+        }
+
+        return new Vector3(gridPosition.x, gridPosition.y, transform.position.z);
+    }
+
     private Transform FindAttackMarker(string markerName)
     {
         if (player == null) return null;
@@ -918,7 +1723,16 @@ public class E_EnemyAI : MonoBehaviour
     }
     public void AttackPlayerByAnimation()
     {
-        player.GetComponent<Character>().TakeDamage(attackDamage);
+        if (player == null)
+        {
+            return;
+        }
+
+        Character targetCharacter = player.GetComponent<Character>();
+        if (targetCharacter != null)
+        {
+            targetCharacter.TakeDamage(attackDamage);
+        }
     }
 
     // Coroutine that pauses movement while the attack animation plays, then resumes behaviour

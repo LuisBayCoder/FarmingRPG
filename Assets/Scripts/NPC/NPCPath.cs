@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //[RequireComponent(typeof(NPCMovement))]
 public class NPCPath : MonoBehaviour
@@ -10,10 +12,19 @@ public class NPCPath : MonoBehaviour
     private NPCMovement npcMovement;
     public bool debugMode = false; // Set to true to show debug logs
 
+    [Header("Path Debug")]
+    [SerializeField] private bool drawAStarPathGizmos = true;
+    [SerializeField] private bool drawOnlyWhenSelected = false;
+    [SerializeField] private Color pathLineColor = new Color(0.2f, 1f, 1f, 0.95f);
+    [SerializeField] private Color pathNodeColor = new Color(1f, 0.9f, 0.2f, 0.95f);
+    [SerializeField] private float pathNodeRadius = 0.08f;
+
+    private Grid sceneGrid;
+
     private void Awake()
     {
         npcMovement = GetComponent<NPCMovement>();
-        
+
         //create a new stack of NPCMovementStep objects
         npcMovementStepStack = new Stack<NPCMovementStep>();
     }
@@ -160,5 +171,79 @@ public class NPCPath : MonoBehaviour
     public void Unpause()
     {
         npcMovement.Unpause();
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!drawOnlyWhenSelected)
+        {
+            DrawAStarPathGizmos();
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        DrawAStarPathGizmos();
+    }
+
+    private void DrawAStarPathGizmos()
+    {
+        if (!drawAStarPathGizmos || npcMovementStepStack == null || npcMovementStepStack.Count == 0)
+        {
+            return;
+        }
+
+        string activeSceneName = SceneManager.GetActiveScene().name;
+        List<NPCMovementStep> pathSteps = npcMovementStepStack.ToList();
+
+        Vector3 previousPoint = transform.position;
+        bool hasPreviousPoint = true;
+
+        Gizmos.color = pathLineColor;
+
+        for (int i = 0; i < pathSteps.Count; i++)
+        {
+            NPCMovementStep step = pathSteps[i];
+            if (step == null)
+            {
+                continue;
+            }
+
+            if (!string.Equals(step.sceneName.ToString(), activeSceneName, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            Vector3 stepWorldPosition = GridToWorld(step.gridCoordinate);
+
+            if (hasPreviousPoint)
+            {
+                Gizmos.DrawLine(previousPoint, stepWorldPosition);
+            }
+
+            Gizmos.color = pathNodeColor;
+            Gizmos.DrawSphere(stepWorldPosition, Mathf.Max(0.01f, pathNodeRadius));
+            Gizmos.color = pathLineColor;
+
+            previousPoint = stepWorldPosition;
+            hasPreviousPoint = true;
+        }
+    }
+
+    private Vector3 GridToWorld(Vector2Int gridCoordinate)
+    {
+        if (sceneGrid == null)
+        {
+            sceneGrid = FindObjectOfType<Grid>();
+        }
+
+        if (sceneGrid == null)
+        {
+            return new Vector3(gridCoordinate.x, gridCoordinate.y, transform.position.z);
+        }
+
+        Vector3 center = sceneGrid.GetCellCenterWorld(new Vector3Int(gridCoordinate.x, gridCoordinate.y, 0));
+        center.z = transform.position.z;
+        return center;
     }
 }

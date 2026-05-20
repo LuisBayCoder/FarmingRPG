@@ -7,6 +7,7 @@ public class SceneTeleportWithLock : MonoBehaviour
 {
     [SerializeField] private SceneName sceneNameGoto = SceneName.Scene1_Farm;
     [SerializeField] private Vector3 scenePositionGoto = new Vector3();
+    [ItemCodeDescription]
     [SerializeField] private int requiredKeyItemCode = 0; // Set this to the item code of the required key
     private Player player;
 

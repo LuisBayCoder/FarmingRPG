@@ -66,7 +66,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5334599558215543639}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.75, y: 2.9625087, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_ConstrainProportionsScale: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   npcTargetGridPosition: {x: 0, y: 0, z: 0}
   npcTargetWorldPosition: {x: 0, y: 0, z: 0}
   npcFacingDirectionAtDestination: 0
-  npcNormalSpeed: 2
+  npcNormalSpeed: 1
   npcIsMoving: 0
   npcTargetAnimationClip: {fileID: 0}
   blankAnimation: {fileID: 7400000, guid: 500fefed8113b4f7e8f2dc728631a63d, type: 2}
@@ -276,6 +276,10 @@ MonoBehaviour:
   attackDamage: 1
   isDebugMode: 1
   roamDuration: 3
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  patrolArrivalDistance: 0.15
   attackPositionMoveSpeed: 5
   attackDuration: 0.8
   recoveryDuration: 0.5
@@ -346,5 +350,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e497bf80e3ee5458b9afff07609151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCode: 10003
+  _enemyCode: 10006
   enemyList: {fileID: 11400000, guid: eea0ca588b0b04b409aaf0eac3f05d12, type: 2}
