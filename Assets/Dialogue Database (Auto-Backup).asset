@@ -3785,8 +3785,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1.1476746, y: 0}
-    canvasZoom: 0.61000043
+    canvasScrollPosition: {x: 55.112167, y: 1.1451817}
+    canvasZoom: 0.7300003
   - id: 2
     fields:
     - title: Title
@@ -5466,8 +5466,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Sorry\u2026 I didn\u2019t hear you come up. I\u2019m just\u2026 listening.
-          My ancestors are here. Sometimes I can still hear them speak."
+        value: "Oh\u2026 do I know you?"
         type: 0
         typeString: 
       - title: Sequence
@@ -5534,7 +5533,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: You listen to them? What do they say?
+        value: 'No, you don''t know me. '
         type: 0
         typeString: 
       - title: Sequence
@@ -5562,8 +5561,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 41.185562
-        y: 228.51544
+        x: 42.12674
+        y: 167.33896
         width: 160
         height: 30
     - id: 3
@@ -5589,7 +5588,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Are you certain these voices are real?
+        value: Maybe you were hoping you knew me.
         type: 0
         typeString: 
       - title: Sequence
@@ -5617,8 +5616,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 248.71133
-        y: 221.23712
+        x: 236.47607
+        y: 163.82538
         width: 160
         height: 30
     - id: 4
@@ -5679,8 +5678,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 37.938034
-        y: 279.52084
+        x: 36.05568
+        y: 248.46204
         width: 160
         height: 30
     - id: 5
@@ -5994,7 +5993,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 12
+        destinationConversationID: 5
+        destinationDialogueID: 15
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -6029,7 +6034,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "If they\u2019re speaking to you, maybe there\u2019s a reason."
+        value: What is this ugly land?
         type: 0
         typeString: 
       - title: Sequence
@@ -6177,8 +6182,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 868.03925
-        y: 385.7613
+        x: 698.6275
+        y: 383.40836
         width: 160
         height: 30
     - id: 16
@@ -6785,7 +6790,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 476.30255, y: 659.43134}
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 0.85000014
   syncInfo:
     syncActors: 0

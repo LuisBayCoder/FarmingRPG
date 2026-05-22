@@ -3785,8 +3785,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1.1476746, y: 0}
-    canvasZoom: 0.61000043
+    canvasScrollPosition: {x: 55.112167, y: 1.1451817}
+    canvasZoom: 0.7300003
   - id: 2
     fields:
     - title: Title
@@ -5466,8 +5466,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Sorry\u2026 I didn\u2019t hear you come up. I\u2019m just\u2026 listening.
-          My ancestors are here. Sometimes I can still hear them speak."
+        value: "Oh\u2026 do I know you?"
         type: 0
         typeString: 
       - title: Sequence
@@ -5534,7 +5533,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: You listen to them? What do they say?
+        value: 'No, you don''t know me. '
         type: 0
         typeString: 
       - title: Sequence
@@ -5562,8 +5561,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 41.185562
-        y: 228.51544
+        x: 42.12674
+        y: 167.33896
         width: 160
         height: 30
     - id: 3
@@ -5589,7 +5588,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Are you certain these voices are real?
+        value: Maybe you were hoping you knew me.
         type: 0
         typeString: 
       - title: Sequence
@@ -5617,8 +5616,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 248.71133
-        y: 221.23712
+        x: 236.47607
+        y: 163.82538
         width: 160
         height: 30
     - id: 4
@@ -5679,8 +5678,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 37.938034
-        y: 279.52084
+        x: 36.05568
+        y: 248.46204
         width: 160
         height: 30
     - id: 5
@@ -5859,12 +5858,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "I can\u2019t prove they\u2019re real. I only know they speak. They
-          told me about the key to the mausoleum\u2026 and then I found it, in my
-          attic. Under an old painting, tucked away like it was never meant to be
-          found. I didn\u2019t even know it was there until they told me. What\u2019s
-          inside that mausoleum? What did they lock away? What did my grandmother
-          hide? \u2026What if my brother is in there with them?"
+        value: "Perhaps.  \nAre you just a farmer, or are you brave enough to go
+          down inside the mausoleum? I have the key."
         type: 0
         typeString: 
       - title: Sequence
@@ -5904,8 +5899,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 500.0036
-        y: 216.79037
+        x: 390.82712
+        y: 224.3198
         width: 160
         height: 30
     - id: 11
@@ -5931,7 +5926,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: There's only one way to find out.
+        value: "I can handle it. But I want to know what I\u2019m walking into."
         type: 0
         typeString: 
       - title: Sequence
@@ -5953,8 +5948,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 358.2543
-        y: 308.77692
+        x: 354.48962
+        y: 306.89456
         width: 160
         height: 30
     - id: 12
@@ -5980,7 +5975,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Tell me about your grandmother\u2026 and what happened to your brother."
+        value: "What\u2019s in it for me?"
         type: 0
         typeString: 
       - title: Sequence
@@ -6008,8 +6003,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 536.7296
-        y: 315.6362
+        x: 534.8473
+        y: 309.98917
         width: 160
         height: 30
     - id: 13
@@ -6035,7 +6030,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "If they\u2019re speaking to you, maybe there\u2019s a reason."
+        value: What is this ugly land?
         type: 0
         typeString: 
       - title: Sequence
@@ -6084,8 +6079,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "If something\u2019s trapped in there, why does it call to you? And
-          what does your grandmother have to do with your brother?"
+        value: "I\u2019m not only a farmer. I\u2019m the reason graves stay closed."
         type: 0
         typeString: 
       - title: Sequence
@@ -6140,10 +6134,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'My brother he liked to visit cemeteries too. He''d spend hours among
-          the graves, listening to the stories they could tell. He disappeared one
-          day, when we were still children. My grandmother was taking care of him
-          while our parents were away. '
+        value: "Nothing.\nMost pretend they\u2019d do it for honor. \nYou can refuse,
+          and nothing changes.\nExcept maybe the next body taken might be yours when
+          you are sleeping.\n"
         type: 0
         typeString: 
       - title: Sequence
@@ -6183,8 +6176,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 698.6275
-        y: 383.40836
+        x: 571.5687
+        y: 389.05542
         width: 160
         height: 30
     - id: 16
@@ -6210,8 +6203,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "I\u2019m sorry about your brother, but I\u2019m not here for a family
-          history lesson."
+        value: So this is a threat or a job?
         type: 0
         typeString: 
       - title: Sequence
@@ -6233,8 +6225,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 684.5341
-        y: 462.56537
+        x: 517.00476
+        y: 465.38892
         width: 160
         height: 30
     - id: 17
@@ -6260,7 +6252,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Go on. What happened that day?
+        value: "Fine. I\u2019ll do it. But I want gold."
         type: 0
         typeString: 
       - title: Sequence
@@ -6288,8 +6280,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 887.62683
-        y: 466.68915
+        x: 724.80334
+        y: 453.51263
         width: 160
         height: 30
     - id: 18
@@ -6315,7 +6307,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Losing someone that young that\u2019s a pain that never really leaves."
+        value: "If something comes for me in my sleep\u2026 I\u2019ll be waiting."
         type: 0
         typeString: 
       - title: Sequence
@@ -6337,8 +6329,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1097.936
-        y: 452.25616
+        x: 945.4655
+        y: 457.9032
         width: 160
         height: 30
     - id: 19
@@ -6364,9 +6356,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'She used to visit this island, long before we were born. She''d tell
-          us stories of the island''s past, of the people who were buried here. She''d
-          say that the island was special. '
+        value: "Gold it is. Don\u2019t expect sympathy if you fail."
         type: 0
         typeString: 
       - title: Sequence
@@ -6400,8 +6390,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 884.53406
-        y: 531.1222
+        x: 739.59283
+        y: 522.6516
         width: 160
         height: 30
     - id: 20
@@ -6791,8 +6781,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 408.06726, y: 161.78436}
-    canvasZoom: 0.85000014
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 0.8200002
   syncInfo:
     syncActors: 0
     syncItems: 0
