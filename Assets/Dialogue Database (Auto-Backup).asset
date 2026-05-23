@@ -5561,8 +5561,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 42.12674
-        y: 167.33896
+        x: 38.839066
+        y: 161.8595
         width: 160
         height: 30
     - id: 3
@@ -5616,8 +5616,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 236.47607
-        y: 163.82538
+        x: 224.4213
+        y: 161.6336
         width: 160
         height: 30
     - id: 4
@@ -5858,12 +5858,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "I can\u2019t prove they\u2019re real. I only know they speak. They
-          told me about the key to the mausoleum\u2026 and then I found it, in my
-          attic. Under an old painting, tucked away like it was never meant to be
-          found. I didn\u2019t even know it was there until they told me. What\u2019s
-          inside that mausoleum? What did they lock away? What did my grandmother
-          hide? \u2026What if my brother is in there with them?"
+        value: "Perhaps.  \nTell me\u2026 are you brave?"
         type: 0
         typeString: 
       - title: Sequence
@@ -5881,19 +5876,19 @@ MonoBehaviour:
       - originConversationID: 5
         originDialogueID: 10
         destinationConversationID: 5
-        destinationDialogueID: 11
+        destinationDialogueID: 27
         isConnector: 0
         priority: 2
       - originConversationID: 5
         originDialogueID: 10
         destinationConversationID: 5
-        destinationDialogueID: 12
+        destinationDialogueID: 28
         isConnector: 0
         priority: 2
       - originConversationID: 5
         originDialogueID: 10
         destinationConversationID: 5
-        destinationDialogueID: 14
+        destinationDialogueID: 33
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -5903,8 +5898,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 500.0036
-        y: 216.79037
+        x: 475.3985
+        y: 222.03406
         width: 160
         height: 30
     - id: 11
@@ -5930,7 +5925,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: There's only one way to find out.
+        value: "I can handle it. But I want to know what I\u2019m walking into."
         type: 0
         typeString: 
       - title: Sequence
@@ -5952,8 +5947,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 358.2543
-        y: 308.77692
+        x: 481.2565
+        y: 665.6314
         width: 160
         height: 30
     - id: 12
@@ -5979,7 +5974,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Tell me about your grandmother\u2026 and what happened to your brother."
+        value: "What\u2019s in it for me?"
         type: 0
         typeString: 
       - title: Sequence
@@ -5993,13 +5988,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 5
-        originDialogueID: 12
-        destinationConversationID: 5
-        destinationDialogueID: 15
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -6007,8 +5996,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 536.7296
-        y: 315.6362
+        x: 674.03534
+        y: 663.7936
         width: 160
         height: 30
     - id: 13
@@ -6056,8 +6045,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 497.29865
-        y: 158.4574
+        x: 418.3945
+        y: 160.6492
         width: 160
         height: 30
     - id: 14
@@ -6083,8 +6072,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "If something\u2019s trapped in there, why does it call to you? And
-          what does your grandmother have to do with your brother?"
+        value: Name your price.
         type: 0
         typeString: 
       - title: Sequence
@@ -6102,7 +6090,7 @@ MonoBehaviour:
       - originConversationID: 5
         originDialogueID: 14
         destinationConversationID: 5
-        destinationDialogueID: 15
+        destinationDialogueID: 34
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -6112,8 +6100,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 736.81683
-        y: 318.50745
+        x: 541.08765
+        y: 454.59766
         width: 160
         height: 30
     - id: 15
@@ -6139,10 +6127,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'My brother he liked to visit cemeteries too. He''d spend hours among
-          the graves, listening to the stories they could tell. He disappeared one
-          day, when we were still children. My grandmother was taking care of him
-          while our parents were away. '
+        value: "Nothing.\nMost pretend they\u2019d do it for honor. \nYou can refuse,
+          and nothing changes.\nExcept maybe the next body taken might be yours when
+          you are sleeping.\n"
         type: 0
         typeString: 
       - title: Sequence
@@ -6182,8 +6169,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 698.6275
-        y: 383.40836
+        x: 869.8243
+        y: 712.45386
         width: 160
         height: 30
     - id: 16
@@ -6209,8 +6196,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "I\u2019m sorry about your brother, but I\u2019m not here for a family
-          history lesson."
+        value: So this is a threat or a job?
         type: 0
         typeString: 
       - title: Sequence
@@ -6232,8 +6218,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 684.5341
-        y: 462.56537
+        x: 637.15515
+        y: 719.915
         width: 160
         height: 30
     - id: 17
@@ -6259,7 +6245,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Go on. What happened that day?
+        value: "Fine. I\u2019ll do it. But I want gold."
         type: 0
         typeString: 
       - title: Sequence
@@ -6287,8 +6273,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 887.62683
-        y: 466.68915
+        x: 875.32965
+        y: 758.9863
         width: 160
         height: 30
     - id: 18
@@ -6314,7 +6300,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Losing someone that young that\u2019s a pain that never really leaves."
+        value: "If something comes for me in my sleep\u2026 I\u2019ll be waiting."
         type: 0
         typeString: 
       - title: Sequence
@@ -6336,8 +6322,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1097.936
-        y: 452.25616
+        x: 1104.9242
+        y: 721.72266
         width: 160
         height: 30
     - id: 19
@@ -6363,9 +6349,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'She used to visit this island, long before we were born. She''d tell
-          us stories of the island''s past, of the people who were buried here. She''d
-          say that the island was special. '
+        value: "Gold it is. Don\u2019t expect sympathy if you fail."
         type: 0
         typeString: 
       - title: Sequence
@@ -6399,8 +6383,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 884.53406
-        y: 531.1222
+        x: 868.5252
+        y: 819.0726
         width: 160
         height: 30
     - id: 20
@@ -6454,8 +6438,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 748.45154
-        y: 634.73047
+        x: 873.2936
+        y: 889.46735
         width: 160
         height: 30
     - id: 21
@@ -6503,8 +6487,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1003.0908
-        y: 634.7985
+        x: 1139.1511
+        y: 846.1369
         width: 160
         height: 30
     - id: 22
@@ -6576,8 +6560,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 829.8158
-        y: 716.6892
+        x: 877.60535
+        y: 970.7042
         width: 160
         height: 30
     - id: 23
@@ -6626,8 +6610,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 734.83136
-        y: 797.6049
+        x: 676.93665
+        y: 1047.0785
         width: 160
         height: 30
     - id: 24
@@ -6682,8 +6666,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1117.3542
-        y: 801.1342
+        x: 1133.1438
+        y: 890.6079
         width: 160
         height: 30
     - id: 25
@@ -6734,8 +6718,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1105.153
-        y: 873.6812
+        x: 1153.5739
+        y: 956.8392
         width: 160
         height: 30
     - id: 26
@@ -6785,13 +6769,498 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 929.81573
-        y: 796.10095
+        x: 923.49994
+        y: 1053.9956
+        width: 160
+        height: 30
+    - id: 27
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "I\u2019ve survived worse. That\u2019s all I can promise."
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 392.33087
+        y: 274.77084
+        width: 160
+        height: 30
+    - id: 28
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 'Brave men die like everyone else.
+
+          I prefer surviving.'
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 594.8571
+        y: 280.4852
+        width: 160
+        height: 30
+    - id: 29
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "Only the dead.\nThe mausoleum\u2026 folk say there are riches buried
+          inside, and passages leading somewhere older beneath it.\nI have the key.
+          You can have it, for a price.\n"
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 29
+        destinationConversationID: 5
+        destinationDialogueID: 14
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 29
+        destinationConversationID: 5
+        destinationDialogueID: 30
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 29
+        destinationConversationID: 5
+        destinationDialogueID: 31
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 688.5715
+        y: 363.08655
+        width: 160
+        height: 30
+    - id: 30
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: Depends. Are you part of the price?
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 735.90985
+        y: 456.21432
+        width: 160
+        height: 30
+    - id: 31
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 'An ancient tomb full of dead things and hidden riches?
+
+          What
+          could possibly go wrong?'
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 937.6842
+        y: 455.94376
+        width: 160
+        height: 30
+    - id: 32
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "Here. The key.\nThe dead have been restless for some time now.\nYou\u2019ll
+          want more than a hoe if you plan to come back out."
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 865.3882
+        y: 660.8683
+        width: 160
+        height: 30
+    - id: 33
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: That depends. How many things are trying to kill me?
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 33
+        destinationConversationID: 5
+        destinationDialogueID: 29
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 779.3983
+        y: 282.31976
+        width: 160
+        height: 30
+    - id: 34
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 'Five gold.
+
+          No bargaining.
+
+          No refunds.'
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 34
+        destinationConversationID: 5
+        destinationDialogueID: 35
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 742.23047
+        y: 516.02625
+        width: 160
+        height: 30
+    - id: 35
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 'Fine. Five gold.
+
+          Give me the key.'
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 621.0877
+        y: 567.1691
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.85000014
+    canvasScrollPosition: {x: 502.8573, y: 142.85718}
+    canvasZoom: 0.7000003
   syncInfo:
     syncActors: 0
     syncItems: 0
