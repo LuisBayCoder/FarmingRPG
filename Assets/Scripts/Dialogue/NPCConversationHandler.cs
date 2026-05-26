@@ -35,6 +35,9 @@ public class NPCConversationHandler : MonoBehaviour
         {
             npcMovement.Pause();
             inConverstion = true;
+            // Add coins to dialogue system variable based on player's inventory
+            int coinCount = InventoryManager.Instance.GetItemQuantityByName("Gold Coin");
+            AddCoins(coinCount);
         }
     }
 
@@ -59,8 +62,13 @@ public class NPCConversationHandler : MonoBehaviour
         {
             npcMovement.Unpause();
         }
-        
     }
+    // Method to add coins to the dialogue system variable
+    public void AddCoins(int amount)
+{
+    int coins = DialogueLua.GetVariable("Coins").asInt;
+    DialogueLua.SetVariable("Coins", coins + amount);
+}
 }
 
 
