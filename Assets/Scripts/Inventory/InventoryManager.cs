@@ -2,7 +2,12 @@
 using UnityEngine;
 
 public class InventoryManager : SingletonMonobehaviour<InventoryManager>, ISaveable
-{
+    {/// <summary>
+    /// Gets the quantity of an item in the player's inventory by its itemDescription (name).
+    /// </summary>
+    /// <param name="itemName">The itemDescription of the item.</param>
+    /// <returns>The quantity of the item in the player's inventory, or 0 if not found.</returns>
+
     private UIInventoryBar inventoryBar;
 
     private Dictionary<int, ItemDetails> itemDetailsDictionary;
@@ -518,6 +523,36 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>, ISavea
             }
         }
         return false; // Item not found
+    }
+    
+    public int GetPlayerItemQuantityByName(string itemName)
+    {
+        // Find the itemCode for the given itemDescription
+        int itemCode = -1;
+        foreach (var kvp in itemDetailsDictionary)
+        {
+            if (kvp.Value.itemDescription == itemName)
+            {
+                itemCode = kvp.Key;
+                break;
+            }
+        }
+        if (itemCode == -1)
+        {
+            Debug.LogWarning($"Item with name '{itemName}' not found in itemDetailsDictionary.");
+            return 0;
+        }
+
+        // Search the player's inventory for this itemCode
+        var playerInventory = inventoryLists[(int)InventoryLocation.player];
+        foreach (var item in playerInventory)
+        {
+            if (item.itemCode == itemCode)
+            {
+                return item.itemQuantity;
+            }
+        }
+        return 0;
     }
 
 }

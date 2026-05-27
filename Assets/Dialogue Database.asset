@@ -278,6 +278,20 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: 
+  - id: 2
+    fields:
+    - title: Name
+      value: PlayerCoins
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: 0
+      type: 1
+      typeString: CustomFieldType_Number
+    - title: Description
+      value: Player Gold Coins Amount
+      type: 0
+      typeString: 
   conversations:
   - id: 1
     fields:
@@ -5949,8 +5963,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 481.2565
-        y: 665.6314
+        x: 404.41446
+        y: 754.0524
         width: 160
         height: 30
     - id: 12
@@ -5998,8 +6012,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 674.03534
-        y: 663.7936
+        x: 574.0354
+        y: 778.5304
         width: 160
         height: 30
     - id: 13
@@ -6171,8 +6185,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 869.8243
-        y: 712.45386
+        x: 895.08746
+        y: 815.6117
         width: 160
         height: 30
     - id: 16
@@ -6220,8 +6234,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 637.15515
-        y: 719.915
+        x: 679.2604
+        y: 1005.1779
         width: 160
         height: 30
     - id: 17
@@ -6275,8 +6289,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 875.32965
-        y: 758.9863
+        x: 900.5928
+        y: 863.1968
         width: 160
         height: 30
     - id: 18
@@ -6324,8 +6338,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1104.9242
-        y: 721.72266
+        x: 1139.661
+        y: 906.9857
         width: 160
         height: 30
     - id: 19
@@ -6385,8 +6399,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 868.5252
-        y: 819.0726
+        x: 889.5778
+        y: 911.70416
         width: 160
         height: 30
     - id: 20
@@ -6440,8 +6454,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 873.2936
-        y: 889.46735
+        x: 884.87256
+        y: 952.6252
         width: 160
         height: 30
     - id: 21
@@ -6489,8 +6503,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1139.1511
-        y: 846.1369
+        x: 1147.5721
+        y: 956.66315
         width: 160
         height: 30
     - id: 22
@@ -6562,8 +6576,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 877.60535
-        y: 970.7042
+        x: 887.07904
+        y: 1002.2832
         width: 160
         height: 30
     - id: 23
@@ -6668,8 +6682,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1133.1438
-        y: 890.6079
+        x: 1144.7227
+        y: 1000.08154
         width: 160
         height: 30
     - id: 25
@@ -6720,8 +6734,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1153.5739
-        y: 956.8392
+        x: 1147.258
+        y: 1051.5759
         width: 160
         height: 30
     - id: 26
@@ -7097,8 +7111,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 865.3882
-        y: 660.8683
+        x: 605.3884
+        y: 825.0787
         width: 160
         height: 30
     - id: 33
@@ -7223,8 +7237,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 802.23047
-        y: 544.20807
+        x: 796.1545
+        y: 509.7777
         width: 160
         height: 30
     - id: 35
@@ -7232,11 +7246,11 @@ MonoBehaviour:
       - title: Title
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
         value: 1
         type: 5
@@ -7248,17 +7262,17 @@ MonoBehaviour:
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: 'Fine. Five gold.
 
           Give me the key.'
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       conversationID: 5
       isRoot: 0
       isGroup: 0
@@ -7266,16 +7280,28 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
-      conditionsString: 
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 35
+        destinationConversationID: 5
+        destinationDialogueID: 39
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 35
+        destinationConversationID: 5
+        destinationDialogueID: 40
+        isConnector: 0
+        priority: 2
+      conditionsString: Variable["PlayerCoins"] == 0
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 617.45135
-        y: 600.8055
+        x: 596.5187
+        y: 566.94806
         width: 160
         height: 30
     - id: 36
@@ -7316,7 +7342,19 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 36
+        destinationConversationID: 5
+        destinationDialogueID: 39
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 36
+        destinationConversationID: 5
+        destinationDialogueID: 40
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -7324,8 +7362,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 810.36035
-        y: 597.1691
+        x: 808.45496
+        y: 571.4929
         width: 160
         height: 30
     - id: 37
@@ -7368,7 +7406,19 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 37
+        destinationConversationID: 5
+        destinationDialogueID: 39
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 37
+        destinationConversationID: 5
+        destinationDialogueID: 40
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -7376,8 +7426,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1011.65906
-        y: 608.5198
+        x: 1014.9369
+        y: 563.4832
         width: 160
         height: 30
     - id: 38
@@ -7449,9 +7499,109 @@ MonoBehaviour:
         y: 344.20264
         width: 160
         height: 30
+    - id: 39
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "You don\u2019t have five gold.\nCome back when you do."
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: Variable["PlayerCoins"] < 5
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 853.3606
+        y: 658.0007
+        width: 160
+        height: 30
+    - id: 40
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 'Good.
+
+          The key is yours.'
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: Variable["PlayerCoins"] >= 5
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1149.1498
+        y: 658.0007
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.8800006
+    canvasScrollPosition: {x: 592.20734, y: 265.041}
+    canvasZoom: 0.7600006
   syncInfo:
     syncActors: 0
     syncItems: 0

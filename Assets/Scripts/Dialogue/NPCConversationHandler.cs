@@ -4,7 +4,7 @@ using PixelCrushers.DialogueSystem;
 public class NPCConversationHandler : MonoBehaviour
 {
     public NPCMovement npcMovement;
-    private bool inConverstion = false;
+    private bool inConversation = false;
 
     private void OnEnable()
     {
@@ -34,9 +34,11 @@ public class NPCConversationHandler : MonoBehaviour
         if (npcMovement != null)
         {
             npcMovement.Pause();
-            inConverstion = true;
-            // Add coins to dialogue system variable based on player's inventory
-            int coinCount = InventoryManager.Instance.GetItemQuantityByName("Gold Coin");
+            inConversation = true;
+
+            // Get coin count from CoinManager instead of inventory
+            int coinCount = CoinManager.Instance != null ? CoinManager.Instance.Coins : 0;
+            Debug.Log($"[DEBUG] Coin count from CoinManager: {coinCount}");
             AddCoins(coinCount);
         }
     }
@@ -47,7 +49,7 @@ public class NPCConversationHandler : MonoBehaviour
         if (npcMovement != null)
         {
             npcMovement.Unpause();
-            inConverstion = false;
+            inConversation = false;
         }
     }
 
@@ -58,7 +60,7 @@ public class NPCConversationHandler : MonoBehaviour
 
     public void UnPauseOnMouseOver()
     {
-        if (inConverstion == false)
+        if (inConversation == false)
         {
             npcMovement.Unpause();
         }
@@ -66,8 +68,9 @@ public class NPCConversationHandler : MonoBehaviour
     // Method to add coins to the dialogue system variable
     public void AddCoins(int amount)
 {
-    int coins = DialogueLua.GetVariable("Coins").asInt;
-    DialogueLua.SetVariable("Coins", coins + amount);
+    int coins = DialogueLua.GetVariable("PlayerCoins").asInt;
+    DialogueLua.SetVariable("PlayerCoins", coins + amount);
+    Debug.Log("Added " + amount + " coins to dialogue system variable. Total now: " + DialogueLua.GetVariable("PlayerCoins").asInt);
 }
 }
 
