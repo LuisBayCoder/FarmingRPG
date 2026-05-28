@@ -68,9 +68,10 @@ public class NPCConversationHandler : MonoBehaviour
     // Method to add coins to the dialogue system variable
     public void AddCoins(int amount)
 {
-    int coins = DialogueLua.GetVariable("PlayerCoins").asInt;
-    DialogueLua.SetVariable("PlayerCoins", coins + amount);
-    Debug.Log("Added " + amount + " coins to dialogue system variable. Total now: " + DialogueLua.GetVariable("PlayerCoins").asInt);
+    // Set Lua PlayerCoins variable to zero before adding
+    DialogueLua.SetVariable("PlayerCoins", 0);
+    DialogueLua.SetVariable("PlayerCoins", amount);
+    Debug.Log("Set PlayerCoins to zero and added " + amount + " coins to dialogue system variable. Total now: " + DialogueLua.GetVariable("PlayerCoins").asInt);
 }
 }
 

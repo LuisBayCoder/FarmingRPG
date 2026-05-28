@@ -36,6 +36,15 @@ public class CoinUI : MonoBehaviour
     // Update the coin display
     private void UpdateCoinDisplay(int newCoins)
     {
+
+        if (!gameObject.activeInHierarchy)
+        {
+            // If inactive, update instantly to avoid coroutine error when paused caused by dialgue system
+            currentDisplayedCoins = newCoins;
+            if (coinText != null)
+                coinText.text = currentDisplayedCoins.ToString();
+            return;
+        }
         if (countCoroutine != null)
         {
             StopCoroutine(countCoroutine); // Stop the previous coroutine if it's running

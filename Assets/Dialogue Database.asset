@@ -5872,9 +5872,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'Perhaps.
-
-          I was hoping for someone brave enough to be useful.'
+        value: Perhaps I was hoping for someone brave enough to be useful.
         type: 0
         typeString: 
       - title: Sequence
@@ -7293,7 +7291,7 @@ MonoBehaviour:
         destinationDialogueID: 40
         isConnector: 0
         priority: 2
-      conditionsString: Variable["PlayerCoins"] == 0
+      conditionsString: 
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -7580,6 +7578,10 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
+      - title: EventGuid
+        value: 
+        type: 0
+        typeString: 
       conversationID: 5
       isRoot: 0
       isGroup: 0
@@ -7589,18 +7591,18 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: Variable["PlayerCoins"] >= 5
-      userScript: 
+      userScript: RemoveCoins(5)
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1149.1498
+        x: 1049.1499
         y: 658.0007
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 592.20734, y: 265.041}
+    canvasScrollPosition: {x: 144.83966, y: 45.0412}
     canvasZoom: 0.7600006
   syncInfo:
     syncActors: 0
