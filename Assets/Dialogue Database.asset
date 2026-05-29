@@ -292,6 +292,20 @@ MonoBehaviour:
       value: Player Gold Coins Amount
       type: 0
       typeString: 
+  - id: 3
+    fields:
+    - title: Name
+      value: Mausoleum Key
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: -1
+      type: 6
+      typeString: CustomFieldType_Item
+    - title: Description
+      value: Key to the Mausoeum
+      type: 0
+      typeString: 
   conversations:
   - id: 1
     fields:
@@ -7591,7 +7605,10 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: Variable["PlayerCoins"] >= 5
-      userScript: RemoveCoins(5)
+      userScript: 'RemoveCoins(5);
+
+
+        GiveItem("Mausoleum Key", 1)'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -7602,7 +7619,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 144.83966, y: 45.0412}
+    canvasScrollPosition: {x: 572.20776, y: 215.56738}
     canvasZoom: 0.7600006
   syncInfo:
     syncActors: 0
