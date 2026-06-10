@@ -6100,7 +6100,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Name your price.
+        value: "Mountains of gold?\nAnd somehow no one\u2019s taken it yet?"
         type: 0
         typeString: 
       - title: Sequence
@@ -6118,7 +6118,7 @@ MonoBehaviour:
       - originConversationID: 5
         originDialogueID: 14
         destinationConversationID: 5
-        destinationDialogueID: 34
+        destinationDialogueID: 42
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -6128,8 +6128,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 541.08765
-        y: 454.59766
+        x: 457.92975
+        y: 435.6504
         width: 160
         height: 30
     - id: 15
@@ -6895,7 +6895,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 28
+        destinationConversationID: 5
+        destinationDialogueID: 41
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -6972,8 +6978,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 785.8441
-        y: 330.47293
+        x: 849.0021
+        y: 339.9466
         width: 160
         height: 30
     - id: 30
@@ -6999,7 +7005,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Depends. Are you part of the price?
+        value: Then hand me the key.
         type: 0
         typeString: 
       - title: Sequence
@@ -7013,7 +7019,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 30
+        destinationConversationID: 5
+        destinationDialogueID: 34
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -7021,8 +7033,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 736.819
-        y: 458.0325
+        x: 717.8716
+        y: 431.7167
         width: 160
         height: 30
     - id: 31
@@ -7065,7 +7077,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 31
+        destinationConversationID: 5
+        destinationDialogueID: 34
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -7073,8 +7091,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 937.6842
-        y: 455.94376
+        x: 938.7369
+        y: 431.73325
         width: 160
         height: 30
     - id: 32
@@ -7249,8 +7267,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 796.1545
-        y: 509.7777
+        x: 789.8387
+        y: 497.14612
         width: 160
         height: 30
     - id: 35
@@ -7312,8 +7330,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 596.5187
-        y: 566.94806
+        x: 563.8871
+        y: 576.42175
         width: 160
         height: 30
     - id: 36
@@ -7374,8 +7392,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 808.45496
-        y: 571.4929
+        x: 804.2445
+        y: 580.9666
         width: 160
         height: 30
     - id: 37
@@ -7507,8 +7525,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 405.85358
-        y: 344.20264
+        x: 427.95886
+        y: 339.9921
         width: 160
         height: 30
     - id: 39
@@ -7556,8 +7574,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 853.3606
-        y: 658.0007
+        x: 773.36066
+        y: 710.6324
         width: 160
         height: 30
     - id: 40
@@ -7614,12 +7632,151 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1049.1499
-        y: 658.0007
+        x: 1042.8342
+        y: 693.7901
+        width: 160
+        height: 30
+    - id: 41
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "Good.\nThe cautious tend to outlive the foolishly brave.\nThen I\u2019ll
+          tell you a secret.\nBuried deep beneath the mausoleum, the old folk say
+          there are mountains of gold.\nAnd I happen to have the key."
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 41
+        destinationConversationID: 5
+        destinationDialogueID: 14
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 41
+        destinationConversationID: 5
+        destinationDialogueID: 30
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 41
+        destinationConversationID: 5
+        destinationDialogueID: 31
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 640.1203
+        y: 334.69574
+        width: 160
+        height: 30
+    - id: 42
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: "You think you're the first to dream of that gold? No one has touched
+          it because no one had found a way down\u2026 until a few days ago. I found
+          a passage into the lower levels myself. I will grant you access for a mere
+          five gold. No bargaining. No refunds. Do we have a deal, hero?"
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 5
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 5
+        originDialogueID: 42
+        destinationConversationID: 5
+        destinationDialogueID: 35
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 42
+        destinationConversationID: 5
+        destinationDialogueID: 36
+        isConnector: 0
+        priority: 2
+      - originConversationID: 5
+        originDialogueID: 42
+        destinationConversationID: 5
+        destinationDialogueID: 37
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 472.6667
+        y: 500.3872
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 572.20776, y: 215.56738}
+    canvasScrollPosition: {x: 341.6817, y: 181.88306}
     canvasZoom: 0.7600006
   syncInfo:
     syncActors: 0
