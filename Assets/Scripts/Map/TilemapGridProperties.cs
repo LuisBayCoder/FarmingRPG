@@ -106,7 +106,7 @@ public class TilemapGridProperties : MonoBehaviour
     {        // Only populate in the editor
         if (!Application.IsPlaying(gameObject))
         {
-            Debug.Log("DISABLE PROPERTY TILEMAPS");
+            Debug.Log("DISABLE PROPERTY TILEMAP'S GRID PROPERTIES COMPONENT");
         }
     }
     private void RemoveObstacleColliders()
