@@ -95,7 +95,7 @@ public class Character : MonoBehaviour
         UpdateStaminaBar();
     }
 
-    public void FullRest(int amount)
+    public void FullRest()
     {
         stamina.SetToMax();
         UpdateStaminaBar();

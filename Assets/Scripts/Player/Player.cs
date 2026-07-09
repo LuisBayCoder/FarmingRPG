@@ -1030,6 +1030,11 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = false;
     }
 
+    public void RestPlayerFull()
+    {
+        playerCharacter.FullRest();
+    }
+
     public void ClearCarriedItem()
     {
         equippedItemSpriteRenderer.sprite = null;

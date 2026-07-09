@@ -415,6 +415,9 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         Player.Instance.DisablePlayerInput();
         yield return SceneControllerManager.Instance.FadeToBlackCoroutine();
 
+        // Restore player stamina
+        Player.Instance.RestPlayerFull();
+
         // Reset minutes and seconds first
         gameMinute = 0;
         gameSecond = 0;
@@ -463,6 +466,9 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         // Disable player input and fade to black at the beginning
         Player.Instance.DisablePlayerInput();
         yield return SceneControllerManager.Instance.FadeToBlackCoroutine();
+
+        // Restore player stamina
+        Player.Instance.RestPlayerFull();
 
         // Reset minutes and seconds first
         gameMinute = 0;
