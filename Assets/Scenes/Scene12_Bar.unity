@@ -122,6 +122,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &362641105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 362641106}
+  m_Layer: 0
+  m_Name: Crops
+  m_TagString: CropsParentTransform
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &362641106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362641105}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1300110113
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +226,7 @@ GameObject:
   - component: {fileID: 1952523234}
   m_Layer: 0
   m_Name: Enemies
-  m_TagString: Enemy
+  m_TagString: EnemiesParentTransform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -724,7 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50f4da210a7f934cad89bb31b87fefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridProperties: {fileID: 0}
+  gridProperties: {fileID: 11400000, guid: 7c6eb93e659108740b74cf134358788b, type: 2}
   gridBoolProperty: 1
 --- !u!483693784 &397162004966828553
 TilemapRenderer:
@@ -1373,10 +1404,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -16.348148, y: 24.069511}
-      - {x: -16.64917, y: -36.808247}
-      - {x: 64.38489, y: -36.93811}
-      - {x: 64.86419, y: 24.332172}
+    - - {x: 15.564709, y: 2.0886054}
+      - {x: 15.485538, y: -14.832246}
+      - {x: 32.43166, y: -14.850811}
+      - {x: 32.484245, y: 2.0939455}
 --- !u!1839735485 &1023032340807170031
 Tilemap:
   m_ObjectHideFlags: 0
@@ -53528,7 +53559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50f4da210a7f934cad89bb31b87fefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridProperties: {fileID: 0}
+  gridProperties: {fileID: 11400000, guid: 7c6eb93e659108740b74cf134358788b, type: 2}
   gridBoolProperty: 4
 --- !u!4 &3213477322055959020
 Transform:
@@ -101952,7 +101983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50f4da210a7f934cad89bb31b87fefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridProperties: {fileID: 0}
+  gridProperties: {fileID: 11400000, guid: 7c6eb93e659108740b74cf134358788b, type: 2}
   gridBoolProperty: 2
 --- !u!1 &3884321004218548523
 GameObject:
@@ -111914,7 +111945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50f4da210a7f934cad89bb31b87fefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridProperties: {fileID: 0}
+  gridProperties: {fileID: 11400000, guid: 7c6eb93e659108740b74cf134358788b, type: 2}
   gridBoolProperty: 3
 --- !u!483693784 &8056911156438512392
 TilemapRenderer:
@@ -112547,7 +112578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50f4da210a7f934cad89bb31b87fefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridProperties: {fileID: 0}
+  gridProperties: {fileID: 11400000, guid: 7c6eb93e659108740b74cf134358788b, type: 2}
   gridBoolProperty: 0
 --- !u!1 &8746866067149254161
 GameObject:

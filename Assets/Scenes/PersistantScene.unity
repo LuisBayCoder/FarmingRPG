@@ -6863,6 +6863,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 064f4fd8f00fdcc4bb916131a39fb9c4, type: 2}
   - {fileID: 11400000, guid: 56fb834059ca24140bc8a04cc12dfaef, type: 2}
   - {fileID: 11400000, guid: d6978d4cc7abf2d409de2c50cf7078ac, type: 2}
+  - {fileID: 11400000, guid: 7c6eb93e659108740b74cf134358788b, type: 2}
   dugGround:
   - {fileID: 11400000, guid: f2af1bbfbc8020a4aa4ab287dfb1c012, type: 2}
   - {fileID: 11400000, guid: 5f12de48f0fdaa44c80000063e53c711, type: 2}
@@ -13706,9 +13707,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.39865434
-    width: 0.710497
-    height: 0.7387103
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -29759,7 +29760,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1580769084}
   startingSceneName: 0
-  listNonStartingSceneNames: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+  listNonStartingSceneNames: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
 --- !u!1001 &1149569021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45851,6 +45852,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156620909928231201, guid: e3d56d9e8146d204987941fbc158912f,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156620909928231201, guid: e3d56d9e8146d204987941fbc158912f,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4156620909928231203, guid: e3d56d9e8146d204987941fbc158912f,
         type: 3}
