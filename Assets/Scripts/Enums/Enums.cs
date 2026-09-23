@@ -97,7 +97,7 @@ public enum SceneName
     Scene10_Dungeon,
     Scene11_Town,
     Scene12_Bar,
-    Scene13_OldFarm
+    Scene13_TheOldFarm
 }
 
 public enum Season
