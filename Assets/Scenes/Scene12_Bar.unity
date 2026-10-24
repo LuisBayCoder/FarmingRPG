@@ -1456,7 +1456,7 @@ GameObject:
   - component: {fileID: 1205545384}
   - component: {fileID: 1205545383}
   m_Layer: 0
-  m_Name: Farmer_Chi
+  m_Name: Farmer_Miller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2351,7 +2351,7 @@ PrefabInstance:
     - target: {fileID: 8724088706476154424, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: conversation
-      value: Prescilla
+      value: Arthur Miller
       objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154424, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
@@ -2363,10 +2363,30 @@ PrefabInstance:
       propertyPath: conversationConversant
       value: 
       objectReference: {fileID: 1205545382}
+    - target: {fileID: 8724088706476154425, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 4.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154425, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154425, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154425, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 1.33
+      objectReference: {fileID: 0}
     - target: {fileID: 8724088706476154427, guid: c962b046586e6044fa9f5b43d8a2c414,
         type: 3}
       propertyPath: m_Name
-      value: NPCChat
+      value: NPCChat_FarmerMiller
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c962b046586e6044fa9f5b43d8a2c414, type: 3}
@@ -2909,6 +2929,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NPCChat_MarcoRossi
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724088706476154427, guid: c962b046586e6044fa9f5b43d8a2c414,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c962b046586e6044fa9f5b43d8a2c414, type: 3}
