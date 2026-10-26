@@ -7958,8 +7958,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 76.8
-        y: 114.399994
+        x: 160.8506
+        y: 115.41264
         width: 160
         height: 30
     - id: 2
@@ -8520,7 +8520,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 31.392395, y: 278.48093}
+    canvasScrollPosition: {x: 0, y: 33.417725}
     canvasZoom: 0.79000014
   - id: 7
     fields:
@@ -8688,8 +8688,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 79.2
-        y: 110.399994
+        x: 77.55051
+        y: 93.0804
         width: 160
         height: 30
     - id: 2
@@ -8737,8 +8737,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 273.59998
-        y: 105.59999
+        x: 312.36285
+        y: 100.651535
         width: 160
         height: 30
     - id: 3
@@ -8899,7 +8899,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 7
+        originDialogueID: 5
+        destinationConversationID: 7
+        destinationDialogueID: 9
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -8907,8 +8913,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 55.999985
-        y: 277.19998
+        x: 58.399994
+        y: 274.8
         width: 160
         height: 30
     - id: 6
@@ -9009,9 +9015,64 @@ MonoBehaviour:
         y: 162.79997
         width: 160
         height: 30
+    - id: 9
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: "...You're not gonna leave me alone, are you? Fine. Go ahead if you've
+          got a death wish. Front door\u2019s bolted tight. That key gets you inside.
+          Head straight upstairs to my bedroom leaning in the corner behind the armoire
+          is my special rat wacker. Reinforced hickory wrapped in lead wire and barbed
+          fence bands. Built it myself. Just keep this straight: you don't go burning
+          down my house, and you don't touch a damn thing that isn't yours. Take
+          the wacker and try not to end up as vermin feed."
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 7
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 58.399994
+        y: 324.8
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 7.200012}
-    canvasZoom: 1
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 0.97
   syncInfo:
     syncActors: 0
     syncItems: 0
