@@ -6,6 +6,19 @@ public class NPCConversationHandler : MonoBehaviour
     public NPCMovement npcMovement;
     private bool inConversation = false;
 
+    private bool IsThisNpcConversation(Transform actor)
+    {
+        // Dialogue System can pass either this transform or a child transform as the actor.
+        if (actor != null && (actor == transform || actor.IsChildOf(transform)))
+        {
+            return true;
+        }
+
+        // Fallback to current conversant for cases where the actor event arg isn't this NPC root.
+        Transform conversant = DialogueManager.currentConversant;
+        return conversant != null && (conversant == transform || conversant.IsChildOf(transform));
+    }
+
     private void OnEnable()
     {
         if (DialogueManager.instance != null)
@@ -30,7 +43,12 @@ public class NPCConversationHandler : MonoBehaviour
 
     private void OnConversationStart(Transform actor)
     {
-        Debug.Log("Conversation Started");
+        if (!IsThisNpcConversation(actor))
+        {
+            return;
+        }
+
+        Debug.Log($"Conversation Started for {gameObject.name}");
         if (npcMovement != null)
         {
             npcMovement.Pause();
@@ -45,22 +63,31 @@ public class NPCConversationHandler : MonoBehaviour
 
     private void OnConversationEnd(Transform actor)
     {
-        Debug.Log("Conversation Ended");
+        if (!IsThisNpcConversation(actor))
+        {
+            return;
+        }
+
+        Debug.Log($"Conversation Ended for {gameObject.name}");
         if (npcMovement != null)
         {
             npcMovement.Unpause();
-            inConversation = false;
         }
+
+        inConversation = false;
     }
 
     public void PauseOnMouseOver()
     {
-        npcMovement.Pause();
+        if (npcMovement != null)
+        {
+            npcMovement.Pause();
+        }
     }
 
     public void UnPauseOnMouseOver()
     {
-        if (inConversation == false)
+        if (npcMovement != null && inConversation == false)
         {
             npcMovement.Unpause();
         }
