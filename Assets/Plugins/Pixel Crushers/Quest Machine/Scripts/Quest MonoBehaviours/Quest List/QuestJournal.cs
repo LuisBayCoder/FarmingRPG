@@ -196,11 +196,12 @@ namespace PixelCrushers.QuestMachine
         }
 
         /// <summary>
-        /// Toggle visibility of the journal.
+        /// Show the journal without closing it on a second click.
+        /// Use HideJournalUI() for an explicit close.
         /// </summary>
         public virtual void ToggleJournalUI()
         {
-            if (questJournalUI != null) questJournalUI.Toggle(this);
+            if (questJournalUI != null) questJournalUI.Show(this);
         }
 
         /// <summary>

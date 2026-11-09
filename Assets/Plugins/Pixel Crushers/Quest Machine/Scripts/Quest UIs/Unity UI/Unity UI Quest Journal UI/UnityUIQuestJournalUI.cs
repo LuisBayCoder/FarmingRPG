@@ -284,14 +284,9 @@ namespace PixelCrushers.QuestMachine
 
         public virtual void Toggle(QuestJournal questJournal)
         {
-            if (isVisible)
-            {
-                Hide();
-            }
-            else
-            {
-                Show(questJournal);
-            }
+            // Keep the journal open on repeated clicks. Use Hide() / HideJournalUI()
+            // for an explicit close; this tab should not be a true toggle.
+            Show(questJournal);
         }
 
         /// <summary>

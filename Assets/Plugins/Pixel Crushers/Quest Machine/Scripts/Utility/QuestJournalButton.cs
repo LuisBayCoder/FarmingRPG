@@ -12,17 +12,32 @@ namespace PixelCrushers.QuestMachine
     [AddComponentMenu("")] // Use wrapper.
     public class QuestJournalButton : MonoBehaviour
     {
+        [Tooltip("If enabled, the button toggles the journal open and closed. If disabled, the button only opens the journal and keeps it visible until another UI action closes it.")]
+        [SerializeField] private bool toggleJournalOnClick = false;
+
         public void ToggleJournalUI()
         {
             var journal = QuestMachine.GetQuestJournal();
             if (journal != null)
             {
-                journal.ToggleJournalUI();
+                if (toggleJournalOnClick)
+                {
+                    journal.ToggleJournalUI();
+                }
+                else
+                {
+                    journal.ShowJournalUI();
+                }
             }
             else
             {
                 if (Debug.isDebugBuild) Debug.LogWarning("Quest Machine: No Quest Journal found in scene. Cannot toggle journal UI.");
             }
+        }
+
+        public void SetToggleBehavior(bool shouldToggle)
+        {
+            toggleJournalOnClick = shouldToggle;
         }
 
         public void ShowJournalUI()
