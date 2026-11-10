@@ -287,9 +287,9 @@ MonoBehaviour:
   - id: 6
     fields:
     - title: Name
-      value: MoreThanRats
+      value: Investigate_Farm
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Pictures
       value: '[]'
       type: 3
@@ -297,19 +297,19 @@ MonoBehaviour:
     - title: Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Success Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Failure Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: State
       value: unassigned
       type: 0
-      typeString: 
+      typeString: CustomFieldType_QuestState
     - title: Is Item
       value: False
       type: 2
@@ -2783,7 +2783,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 5.72171
+        x: 4.1832504
         y: 345.1077
         width: 160
         height: 30
@@ -3879,8 +3879,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 35.080753, y: 90.738754}
-    canvasZoom: 0.6100004
+    canvasScrollPosition: {x: 0, y: 265.93365}
+    canvasZoom: 0.46000046
   - id: 2
     fields:
     - title: Title
@@ -7842,7 +7842,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 38.208893, y: 111.5195}
+    canvasScrollPosition: {x: 0, y: 80.47473}
     canvasZoom: 0.6700007
   - id: 6
     fields:
@@ -8106,8 +8106,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 206.40001
-        y: 208.4
+        x: 228.83904
+        y: 203.52197
         width: 160
         height: 30
     - id: 4
@@ -8170,8 +8170,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 206.40001
-        y: 258.4
+        x: 231.40001
+        y: 260.50366
         width: 160
         height: 30
     - id: 5
@@ -8626,7 +8626,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: GiveQuest("Player", "Investigate_Farm")
+      userScript: GiveQuest("Marco Rossi", "Investigate_Farm")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -8724,7 +8724,10 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: GiveQuest("Player", "Investigate_Farm")
+      userScript: 'GiveQuest("Marco Rossi", "Investigate_Farm");
+
+        SetQuestState("Investigate_Farm",
+        "active")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -8784,8 +8787,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 16.310715, y: 389.39426}
-    canvasZoom: 1.03
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 0.64000034
   - id: 7
     fields:
     - title: Title
@@ -9988,7 +9991,7 @@ MonoBehaviour:
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.6700003
+    canvasZoom: 0.6100004
   syncInfo:
     syncActors: 0
     syncItems: 0
