@@ -10910,18 +10910,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1117205242}
-        m_TargetAssemblyTypeName: PixelCrushers.QuestMachine.QuestJournal, Assembly-CSharp-firstpass
-        m_MethodName: ToggleJournalUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &385718096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13553,7 +13541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 506246556}
   - component: {fileID: 506246558}
-  - component: {fileID: 506246557}
+  - component: {fileID: 506246559}
   m_Layer: 0
   m_Name: Tab4Journal
   m_TagString: Untagged
@@ -13582,20 +13570,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &506246557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 506246555}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30199693c60642d4a9a5a2fe89b844f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerJournal: {fileID: 1117205242}
-  tabImages: []
 --- !u!114 &506246558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13613,6 +13587,49 @@ MonoBehaviour:
   AutoDestroyComponentAfterSet: 1
   GizmoPointSize: 0.05
   SetCenterOfMassButton: 0
+--- !u!114 &506246559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506246555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f135991ba5dda439c6f5a69f0cf3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onShowEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2056797088}
+        m_TargetAssemblyTypeName: PixelCrushers.QuestMachine.UnityUIBaseUI, Assembly-CSharp-firstpass
+        m_MethodName: Show
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHideEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2056797088}
+        m_TargetAssemblyTypeName: PixelCrushers.QuestMachine.UnityUIQuestJournalUI,
+          Assembly-CSharp-firstpass
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &513383304
 GameObject:
   m_ObjectHideFlags: 0
@@ -13753,10 +13770,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.09166667
-    y: 0
-    width: 0.8166667
-    height: 1.0005791
+    x: 0
+    y: 0.16407599
+    width: 0.99999994
+    height: 0.6709316
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -61432,8 +61449,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2056818642}
   m_HandleRect: {fileID: 2069964918}
   m_Direction: 2
-  m_Value: -0.0000013771464
-  m_Size: 0.8586734
+  m_Value: -0.0000071611576
+  m_Size: 0.8470959
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -64359,7 +64376,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2069958118}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99449354
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -68189,19 +68206,7 @@ MonoBehaviour:
       m_Calls: []
   onClose:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2056830784}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Close
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onClosed:
     m_PersistentCalls:
       m_Calls: []
@@ -70578,7 +70583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 27.70003}
+  m_AnchoredPosition: {x: 0, y: 27.70024}
   m_SizeDelta: {x: 0, y: 196}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &2069928980
@@ -71391,7 +71396,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1, y: -6}
+  m_AnchoredPosition: {x: -1, y: -5.9999847}
   m_SizeDelta: {x: -18, y: -32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &2069951182
@@ -71785,7 +71790,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0.000076293945}
   m_SizeDelta: {x: 0, y: 72}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &2069963330
@@ -72076,7 +72081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.49998474, y: -32.14998}
+  m_AnchoredPosition: {x: -0.5, y: -32.14998}
   m_SizeDelta: {x: -43, y: -93.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &2069975678
