@@ -11,6 +11,12 @@ public class CustomQuestJournalUI : MonoBehaviour
     [Header("Your Custom UI Elements")]
     // This list maps directly to the elements you drag into the Inspector
     [SerializeField] private List<Image> tabImages; 
+    private readonly List<Sprite> defaultTabSprites = new List<Sprite>();
+
+    private void Awake()
+    {
+        CacheDefaultTabSprites();
+    }
 
     void OnEnable()
     {
@@ -27,6 +33,7 @@ public class CustomQuestJournalUI : MonoBehaviour
         }
 
         if (playerJournal == null || tabImages == null || tabImages.Count == 0) return;
+        CacheDefaultTabSprites();
 
         // Get all quests currently assigned to the player
         List<Quest> activeQuests = playerJournal.questList;
@@ -46,8 +53,8 @@ public class CustomQuestJournalUI : MonoBehaviour
                 }
                 else
                 {
-                    // If quest has no icon, keep slot active but clear sprite or hide
-                    tabImages[i].gameObject.SetActive(false); 
+                    tabImages[i].sprite = i < defaultTabSprites.Count ? defaultTabSprites[i] : null;
+                    tabImages[i].gameObject.SetActive(true); 
                 }
             }
             else
@@ -55,6 +62,16 @@ public class CustomQuestJournalUI : MonoBehaviour
                 // Hide any extra UI buttons/slots if the player has fewer quests than slots
                 tabImages[i].gameObject.SetActive(false); 
             }
+        }
+    }
+
+    private void CacheDefaultTabSprites()
+    {
+        if (tabImages == null) return;
+        while (defaultTabSprites.Count < tabImages.Count)
+        {
+            var image = tabImages[defaultTabSprites.Count];
+            defaultTabSprites.Add(image != null ? image.sprite : null);
         }
     }
 }

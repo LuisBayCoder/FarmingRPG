@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3248544836499631742
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 285a0cf9c914ae847852a4a97a4c9fd0, type: 3}
-  m_Name: DialogueSystemConversationQuestContent
-  m_EditorClassIdentifier: 
-  m_contentID: -1
-  m_conversation: Marco Rossi
-  m_entryID: -1
 --- !u!114 &-2063008092628547697
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,7 +105,7 @@ MonoBehaviour:
   - m_actionList: []
     m_categorizedContentList:
     - m_contentList:
-      - {fileID: -3248544836499631742}
+      - {fileID: 7758998191345925947}
     - m_contentList: []
     - m_contentList: []
   - m_actionList: []
@@ -257,6 +242,24 @@ MonoBehaviour:
   m_contentID: -1
   m_bodyText:
     m_text: A Rumor of Ruin.
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+--- !u!114 &7758998191345925947
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ed0c4e68ee98946bb5016adda42373, type: 3}
+  m_Name: BodyTextQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_bodyText:
+    m_text: Speak with Miller about his farm and missing family.
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
