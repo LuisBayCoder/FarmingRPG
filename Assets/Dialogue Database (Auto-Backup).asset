@@ -9357,13 +9357,13 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 
+      userScript: SetQuestNodeState("Investigate_Farm", "Talk_To_Farmer", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 208.72968
+        x: 214.54785
         y: 403.04184
         width: 160
         height: 30
@@ -9875,7 +9875,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: SetQuestState("Investigate_Farm", "unassigned")
+      userScript: SetQuestNodeState("Investigate_Farm", "Talk_To_Farmer", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -9990,8 +9990,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 303.87064, y: 122.2901}
-    canvasZoom: 0.6700003
+    canvasScrollPosition: {x: 48.667835, y: 73.19742}
+    canvasZoom: 0.55000037
   syncInfo:
     syncActors: 0
     syncItems: 0

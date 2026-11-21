@@ -8626,7 +8626,12 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: GiveQuest("Marco Rossi", "Investigate_Farm")
+      userScript: 'GiveQuest("Marco Rossi", "Investigate_Farm");
+
+        SetQuestState("Investigate_Farm",
+        "active");
+
+        Variable["TalkedToMarco"] = true'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -8727,7 +8732,9 @@ MonoBehaviour:
       userScript: 'GiveQuest("Marco Rossi", "Investigate_Farm");
 
         SetQuestState("Investigate_Farm",
-        "active")'
+        "active");
+
+        Variable["TalkedToMarco"] = true'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -8787,7 +8794,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 164.22055}
+    canvasScrollPosition: {x: 0, y: 207.2056}
     canvasZoom: 0.6700003
   - id: 7
     fields:
@@ -9357,7 +9364,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: "SetQuestNodeState(\"Investigate_Farm\", \"Talk_To_Farmer\", \u201Cactive\u201D)"
+      userScript: SetQuestNodeState("Investigate_Farm", "Talk_To_Farmer", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -9875,7 +9882,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: "SetQuestNodeState(\"Investigate_Farm\", \"Talk_To_Farmer\", \u201Cactive\")"
+      userScript: SetQuestNodeState("Investigate_Farm", "Talk_To_Farmer", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -9990,8 +9997,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 48.667835, y: 73.19742}
-    canvasZoom: 0.55000037
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 0.4900004
   syncInfo:
     syncActors: 0
     syncItems: 0
