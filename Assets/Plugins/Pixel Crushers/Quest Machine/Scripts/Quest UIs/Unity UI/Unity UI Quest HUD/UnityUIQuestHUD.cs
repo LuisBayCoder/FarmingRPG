@@ -3,6 +3,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers.DialogueSystem;
 
 namespace PixelCrushers.QuestMachine
 {
@@ -186,6 +187,79 @@ namespace PixelCrushers.QuestMachine
         protected virtual void OnDisable()
         {
             m_refreshCoroutine = null;
+            if (DialogueManager.hasInstance)
+            {
+                DialogueManager.instance.conversationEnded -= OnConversationEnded;
+            }
+        }
+
+        protected virtual void OnEnable()
+        {
+            if (DialogueManager.hasInstance)
+            {
+                DialogueManager.instance.conversationEnded -= OnConversationEnded;
+                DialogueManager.instance.conversationEnded += OnConversationEnded;
+            }
+            StartCoroutine(RefreshWhenEnabled());
+        }
+
+        private void OnConversationEnded(Transform actor)
+        {
+            StartCoroutine(RefreshAfterConversation());
+        }
+
+        private IEnumerator RefreshAfterConversation()
+        {
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+
+            if (!isActiveAndEnabled) yield break;
+
+            var journal = QuestMachine.GetQuestJournal();
+            if (journal == null && questListContainer is QuestJournal)
+            {
+                journal = questListContainer as QuestJournal;
+            }
+            if (journal == null) yield break;
+
+            questListContainer = journal;
+            m_refreshCoroutine = null;
+            if (ShouldBeVisible())
+            {
+                if (uiPanel != null) uiPanel.Open();
+                RefreshNow();
+            }
+            else
+            {
+                MakeInvisible();
+            }
+        }
+
+        private IEnumerator RefreshWhenEnabled()
+        {
+            yield return null;
+            yield return new WaitForEndOfFrame();
+
+            if (!isActiveAndEnabled) yield break;
+
+            var journal = QuestMachine.GetQuestJournal();
+            if (journal == null)
+            {
+                journal = questListContainer as QuestJournal;
+            }
+            if (journal == null) yield break;
+
+            questListContainer = journal;
+            m_refreshCoroutine = null;
+            if (ShouldBeVisible())
+            {
+                if (uiPanel != null) uiPanel.Open();
+                RefreshNow();
+            }
+            else
+            {
+                MakeInvisible();
+            }
         }
 
         public virtual void SetVisibility(QuestListContainer questListContainer, bool value)
