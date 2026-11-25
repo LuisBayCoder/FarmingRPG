@@ -186,6 +186,13 @@ namespace PixelCrushers.DialogueSystem
 
         private void OnSelectedUsable(Usable usable)
         {
+            if (DialogueManager.isConversationActive)
+            {
+                this.usable = null;
+                usableUnityUI = null;
+                HideControls();
+                return;
+            }
             this.usable = usable;
             usableUnityUI = (usable != null) ? usable.GetComponentInChildren<UsableUnityUI>() : null;
             if (usableUnityUI != null)
@@ -261,6 +268,11 @@ namespace PixelCrushers.DialogueSystem
 
         public void Update()
         {
+            if (DialogueManager.isConversationActive)
+            {
+                HideControls();
+                return;
+            }
             if (usable != null)
             {
                 UpdateDisplay(IsUsableInRange());
@@ -269,12 +281,17 @@ namespace PixelCrushers.DialogueSystem
 
         public void OnConversationStart(Transform actor)
         {
+            usable = null;
+            usableUnityUI = null;
             HideControls();
         }
 
         public void OnConversationEnd(Transform actor)
         {
-            ShowControls();
+            if (!DialogueManager.isConversationActive)
+            {
+                ShowControls();
+            }
         }
 
         private void UpdateDisplay(bool inRange)

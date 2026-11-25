@@ -235,6 +235,11 @@ namespace PixelCrushers.DialogueSystem
         {
             // Exit if disabled or paused:
             if (!enabled || (Time.timeScale <= 0)) return;
+            if (DialogueManager.isConversationActive)
+            {
+                if (currentUsable != null) SetCurrentUsable(null);
+                return;
+            }
 
             // If the currentUsable went missing (was destroyed, deactivated, or we changed scene), tell listeners:
             if (toldListenersHaveUsable && (currentUsable == null || !currentUsable.enabled || !currentUsable.gameObject.activeInHierarchy))
@@ -374,7 +379,7 @@ namespace PixelCrushers.DialogueSystem
 
         protected virtual void CheckTriggerEnter(GameObject other)
         {
-            if (!enabled) return;
+            if (!enabled || DialogueManager.isConversationActive) return;
             Usable usable = other.GetComponent<Usable>();
             if (usable != null && usable.enabled)
             {
@@ -465,6 +470,7 @@ namespace PixelCrushers.DialogueSystem
         public virtual void OnGUI()
         {
             if (!enabled) return;
+            if (DialogueManager.isConversationActive) return;
             if (!useDefaultGUI) return;
             if (guiStyle == null && (Event.current.type == EventType.Repaint || currentUsable != null))
             {

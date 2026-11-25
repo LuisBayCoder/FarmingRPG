@@ -315,6 +315,11 @@ namespace PixelCrushers.DialogueSystem
         {
             // Exit if disabled or paused:
             if (!enabled || (Time.timeScale <= 0)) return;
+            if (DialogueManager.isConversationActive)
+            {
+                if (usable != null) DeselectTarget();
+                return;
+            }
 
             // Exit if there's no camera:
             if (UnityEngine.Camera.main == null) return;
@@ -654,6 +659,7 @@ namespace PixelCrushers.DialogueSystem
         public virtual void OnGUI()
         {
             if (!enabled) return;
+            if (DialogueManager.isConversationActive) return;
             if (!useDefaultGUI) return;
             if (guiStyle == null && (Event.current.type == EventType.Repaint || usable != null))
             {
